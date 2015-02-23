@@ -1,0 +1,19 @@
+#Ingore files
+*.bak
+*.bbl
+*.blg
+*.aux
+*.sav
+*.idx
+*.ilg
+*.lof
+*.lot
+*.blg
+*.sav
+*.synctex
+*.docx
+*.toc
+*.dvi
+*.tmp
+*.ind
+*.log

@@ -1,0 +1,77 @@
+\documentclass{wileySix}
+
+\usepackage{w-bookps}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Graphicx.sty for Including PostScript .eps files
+
+\usepackage{graphicx}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Change options here if you want:
+%%
+%% How many levels of section head would you like numbered?
+%% 0= no section numbers, 1= section, 2= subsection, 3= subsubsection
+%%==>>
+\setcounter{secnumdepth}{3}
+
+%% How many levels of section head would you like to appear in the
+%% Table of Contents?
+%% 0= chapter titles, 1= section titles, 2= subsection titles,
+%% 3= subsubsection titles.
+%%==>>
+\setcounter{tocdepth}{2}
+
+\begin{document}
+
+\booktitle{Towards SC-enabled high density highly miniaturized power LED drivers: A model-centric optimization framework}
+\subtitle{}
+
+\author{J. Delos Ayllón \\
+\affil{Philips Research}
+}
+
+
+\halftitlepage
+\titlepage
+%\maketitle
+
+\begin{copyrightpage}{2015}
+Title, etc
+\end{copyrightpage}
+
+\dedication{Family and friends}
+
+\pagenumbering{roman}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\contentsinbrief %optional
+\tableofcontents
+
+\acknowledgments
+Bla bla bla bla
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{introduction}
+%\introauthor{<name>}{<affil>}
+% Introduction text...
+% \end{introduction}
+
+
+%\begin{abstract}
+%\end{abstract}
+
+\pagenumbering{arabic}
+
+\include{0_intro}
+\include{1_scc_model}
+
+%\bibliographystyle{plain}
+%\bibliography{thesis}
+\end{document}
+
+

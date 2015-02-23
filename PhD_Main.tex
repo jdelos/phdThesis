@@ -1,0 +1,79 @@
+\documentclass{book}
+
+%\usepackage{w-bookps}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Graphicx.sty for Including PostScript .eps files
+
+\usepackage{graphicx}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{xfrac}
+\usepackage{float}
+\usepackage{psfrag}
+%\usepackage{circuitikz}
+%Enables Latex Example enviroment
+\usepackage{showexpl}
+%Circuit drawing packages
+\usepackage[siunitx]{circuitikz}
+\sisetup{load=derived} % loading \siemens
+
+%Ploting packages
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+
+\usepackage{framed}
+
+%Bibliography per chapter
+\usepackage[square,numbers]{natbib}
+%\usepackage{chapterbib}
+
+\begin{document}
+
+\title{Towards SC-enabled high density highly miniaturized power LED drivers: A model-centric optimization framework}
+
+
+\author{J. Delos Ayllón \\
+}
+
+
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\listoffigures
+\listoftables
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{introduction}
+%\introauthor{<name>}{<affil>}
+% Introduction text...
+% \end{introduction}
+
+
+%\begin{abstract}
+%\end{abstract}
+
+\pagenumbering{arabic}
+
+\include{0_intro}
+\label{ch:h_scc}
+\include{./1_modeling/11_chron_scc}
+\include{./1_modeling/12_scc_av_model}
+\include{./1_modeling/13_scc_dsg_opt}
+\include{./1_modeling/14_scc_dyn_ssa}
+\include{2_HSCC_arch}
+\include{21_dc_dc_exp}
+\include{22_ac_dc_exp}
+\include{3_gid2intg}
+
+%\bibliographystyle{plain}
+\bibliographystyle{plainnat}
+\bibliography{phd_bib}
+
+\end{document}
+
+
