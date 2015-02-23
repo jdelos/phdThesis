@@ -1,0 +1,374 @@
+<document type="ProfiCAD sxe" version="7.0">
+<fonts letter="140,0,0,0,Times New Roman,000000" text="120,0,0,0,Times New Roman,000000" type="120,0,0,0,Times New Roman,000000" refs="120,0,0,0,Times New Roman,000000" cross_refs="120,0,0,0,Times New Roman,000000"/>
+<PrintSettings PrinterName="" PaperSize="1" FormName="letter" SheetSizeX="289" SheetSizeY="202" WantsCustom="0" CustomSizeX="283" CustomSizeY="203"/>
+<tb use="1" h="0" v="0" name="C:\Users\Public\Documents\ProfiCAD Library\_TB\standard.ptb">
+<repo id="31322">
+<imgDesc lastGuid="e5a66eae-c93d-4083-90a8-8bbc64aa2cad" imgType="4">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</imgDesc>
+</repo>
+<layers current="0">
+<layer name="0" v="1">
+<rect left="-840" top="-200" right="840" bottom="200" op-lw="4"/>
+<text x="-829" y="-170" f="80,0,0,0,Tahoma,000000" al="2">Responsible dep.</text>
+<text x="-829" y="-114" f="90,1,0,0,Tahoma,000000" al="2">{dep}</text>
+<text x="-520" y="-170" f="80,0,0,0,Tahoma,000000" al="2">Technical reference</text>
+<text x="-520" y="-114" f="90,1,0,0,Tahoma,000000" al="2">{techRef}</text>
+<text x="-190" y="-170" f="80,0,0,0,Tahoma,000000" al="2">Created</text>
+<text x="-190" y="-114" f="90,1,0,0,Tahoma,000000" al="2">{author}</text>
+<text x="319" y="-170" f="80,0,0,0,Tahoma,000000" al="2">Approved</text>
+<text x="319" y="-114" f="90,1,0,0,Tahoma,000000" al="2">{approved}</text>
+<text x="-190" y="-48" f="80,0,0,0,Tahoma,000000" al="2">Document type</text>
+<text x="-190" y="8" f="90,1,0,0,Tahoma,000000" al="2">{docType}</text>
+<text x="319" y="-48" f="80,0,0,0,Tahoma,000000" al="2">Document status</text>
+<text x="319" y="8" f="90,1,0,0,Tahoma,000000" al="2">{docStatus}</text>
+<polyline op-lw="4" pts="-840,-80,840,-80,"/>
+<polyline op-lw="4" pts="-200,-200,-200,200,"/>
+<polyline op-lw="4" pts="-540,-200,-540,-80,"/>
+<polyline op-lw="4" pts="300,-200,300,200,"/>
+<polyline op-lw="4" pts="-200,40,840,40,"/>
+<text x="-190" y="70" f="80,0,0,0,Tahoma,000000" al="2">Title, supplementary title</text>
+<text x="-190" y="120" f="90,1,0,0,Tahoma,000000" al="2">{title}</text>
+<text x="-190" y="173" f="90,1,0,0,Tahoma,000000" al="2">{titleSup}</text>
+<text x="319" y="70" f="90,1,0,0,Tahoma,000000" al="2">{id}</text>
+<text x="717" y="173" f="90,1,0,0,Tahoma,000000" al="2">{sht}</text>
+<text x="710" y="70" f="90,1,0,0,Tahoma,000000" al="2">{rev}</text>
+<text x="590" y="70" f="80,0,0,0,Tahoma,000000" al="2">Rev.</text>
+<text x="319" y="126" f="80,0,0,0,Tahoma,000000" al="2">Date of issue</text>
+<text x="595" y="126" f="80,0,0,0,Tahoma,000000" al="2">Lang.</text>
+<text x="319" y="173" f="90,1,0,0,Tahoma,000000" al="2">{date}</text>
+<text x="591" y="173" f="90,1,0,0,Tahoma,000000" al="2">{lng}</text>
+<text x="726" y="126" f="80,0,0,0,Tahoma,000000" al="2">Sheet</text>
+<polyline op-lw="4" pts="300,100,840,100,"/>
+<polyline op-lw="4" pts="580,40,580,200,"/>
+<polyline op-lw="4" pts="700,100,700,200,"/>
+<img lastGuid="e5a66eae-c93d-4083-90a8-8bbc64aa2cad" preserveAspect="1" left="-810" top="-13" right="-240" bottom="135"/>
+</layer>
+</layers>
+</tb>
+<PageSettings bgColor="FFFFFF" pgsHor="1" pgsVer="1" pgsMrgn="0, 0, 0, 0" pageMargins="10, 10, 10, 10" zoom="100" frame="YES" rastr="20" showT="YES" showV="YES" includeMargins="NO"/>
+<RefGridSettings FieldSize="50"/>
+<NumberingWire Prefill="1" Digits="3" TypeRenumbering="0" ShowWireName="1" WireLabelDist_a="0" WireLabelDist_b="0" WireLabelDist_c="0"/>
+<summary author="" _pc="1" _file="Dickson_10_1_aux_out" date="03-09-2012" _path="J:\Docs\Publications\PhD Thesis\2 Topologies and Control\proficad\Dickson_10_1_aux_out.sxe"/>
+<BillColumns/>
+<repo id="23811">
+<ppd name="passive components\resistors (IEC)\tapped resistor.ppd" t="R" v="10k" n="IEC:2.1.2" m="" fG="" lG="39805bd2-8087-43f3-9817-2617f308dc82">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,30,-10,25,10,15,-10,5,10,-5,-10,-15,10,-25,0,-30,"/>
+<outlet x="0" y="30"/>
+<outlet x="0" y="-30"/>
+<outlet x="10" y="15"/>
+<outlet x="10" y="-5"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="passive components\inductors\air core.ppd" t="L" v="100mH" n="" m="" fG="191e7967-ad72-4c50-9609-643c3bcf9a84" lG="78fda929-30d8-47ac-bd30-0f4b9bb899d5">
+<layers current="0">
+<layer name="0" v="1">
+<polybezier pts="0,-40,20,-41,20,-19,0,-20,"/>
+<polybezier pts="0,-20,20,-21,20,1,0,0,"/>
+<polybezier pts="0,0,20,-1,20,21,0,20,"/>
+<outlet x="0" y="-40"/>
+<outlet x="0" y="40"/>
+<polybezier pts="0,20,20,19,20,41,0,40,"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="switchgear, controlgear and protective devices\make contacts\make contact without automatic return.ppd" t="Re" v="" n="ÈSN EN 60617: 07-06-02" m="" fG="125e70be-6809-48d5-a17c-283c36753af7" lG="4c434fe6-6dfa-41a6-98ee-a484a44aacd8">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,30,0,60,"/>
+<polyline pts="0,-60,0,-34,"/>
+<polyline pts="0,30,-30,-30,"/>
+<outlet x="0" y="-60"/>
+<outlet x="0" y="60"/>
+<ellipse left="-4" top="-34" right="4" bottom="-26"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="passive components\capacitors\capacitor.ppd" t="C" v="10k" n="" m="" fG="3fbd61fd-fc00-4eb8-872e-cd3da5b023bf" lG="3c3e597e-a91e-4b34-8520-0c5b3b7b4cc2">
+<layers current="0">
+<layer name="0" v="1">
+<polyline op-lw="4" pts="-18,-4,18,-4,"/>
+<polyline op-lw="4" pts="-18,4,18,4,"/>
+<outlet x="0" y="-4"/>
+<outlet x="0" y="4"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Semiconductors 2\diode.ppd" t="D" v="1N4007" n="EN 60617: 05-03-01" m="" fG="6087fe49-9c75-4d49-bbc1-f41506f9f45c" lG="83556bd4-7c91-4bfd-9e2e-0f1d744523a5">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="-20,0,20,0,"/>
+<polyline pts="-20,-20,-20,20,"/>
+<polyline pts="20,-20,20,20,"/>
+<polyline pts="-20,0,20,-20,"/>
+<polyline pts="-20,0,20,20,"/>
+<outlet x="-20" y="0"/>
+<outlet x="20" y="0"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\semiconductors and tubes\diodes\diode.ppd" t="D" v="1N4007" n="ČSN EN 60617: 05-03-01" m="" fG="6087fe49-9c75-4d49-bbc1-f41506f9f45c" lG="c055f947-5818-45fe-af90-d406955cc387">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="-20,0,20,0,"/>
+<polyline pts="-20,-20,-20,20,"/>
+<outlet x="-20" y="0"/>
+<outlet x="20" y="0"/>
+<polygon pts="-20,0,20,-20,20,20,"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Semiconductors 2\LED.ppd" t="D" v="HLMP7000" n="EN 60617: 05-03-02" m="" fG="7a93ae27-f900-4f7b-935c-e129f590cabe" lG="98d9e4b0-1db3-4990-9153-5f45bd70cb23">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="-20,0,20,0,"/>
+<polyline pts="-20,-20,-20,20,"/>
+<polyline pts="20,-20,20,20,"/>
+<polyline pts="-20,0,20,-20,"/>
+<polyline pts="-20,0,20,20,"/>
+<outlet x="-20" y="0"/>
+<outlet x="20" y="0"/>
+<polyline pts="13,-45,-5,-27,"/>
+<polyline pts="13,-45,2,-39,"/>
+<polyline pts="13,-45,7,-34,"/>
+<polyline pts="24,-35,6,-17,"/>
+<polyline pts="24,-35,18,-24,"/>
+<polyline pts="24,-35,14,-29,"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="passive components\inductors\choking coil.ppd" t="L" v="100mH" n="" m="" fG="7028ad04-a49c-458a-9df5-128b0d9f2ab3" lG="4223686c-3ed8-4ca9-b8aa-663d24c04ace">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,-30,0,-40,"/>
+<polyline pts="0,30,0,40,"/>
+<outlet x="0" y="-40"/>
+<outlet x="0" y="40"/>
+<rect left="-8" top="-30" right="8" bottom="30" op-fd="1" op-fc="0"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="passive components\capacitors\capacitor electrolytic.ppd" t="C" v="10k" n="" m="" fG="21914c9c-0116-4040-ba42-0245f783b845" lG="63bb643a-e219-46ce-b952-5af54085a702">
+<layers current="0">
+<layer name="0" v="1">
+<polyline op-lw="4" pts="-18,-4,18,-4,"/>
+<polyline op-lw="4" pts="-18,4,18,4,"/>
+<outlet x="0" y="-4"/>
+<outlet x="0" y="4"/>
+<polyline pts="-14,-14,-6,-14,"/>
+<polyline pts="-10,-18,-10,-10,"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="switchgear and protective devices (ANSI)\switches and contactors (IEC)\closing\NO form 3.ppd" t="k" v="" n="IEC:9.2" m="" fG="610e46e2-df89-45e3-8b5a-203dcd240d35" lG="d2ce5680-b98a-4e56-b449-74e14ce13167">
+<layers current="0">
+<layer name="0" v="1">
+<outlet x="-46" y="0"/>
+<outlet x="46" y="0"/>
+<polyline pts="-26,4,40,28,"/>
+<ellipse left="-46" top="-10" right="-26" bottom="10"/>
+<ellipse left="26" top="-10" right="46" bottom="10"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="relays and switches\switches\on-off switch.ppd" t="" v="" n="" m="" fG="37e61430-ab98-4acb-898a-7fdfa91597b1" lG="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-23" top="-3" right="-17" bottom="3"/>
+<polyline pts="20,-6,20,0,"/>
+<polyline op-lw="4" pts="-20,0,20,-20,"/>
+<outlet x="-20" y="0"/>
+<outlet x="20" y="0"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Construction elements\frame, chassis.ppd" t="" v="" n="" m="" fG="ae48d23f-2481-410d-8879-a1de0dfcb003" lG="9c1a9f71-c558-414c-b132-8559704c288d">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,-13,0,13,"/>
+<polyline op-lw="4" pts="-18,13,18,13,"/>
+<outlet x="0" y="-13"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Energy sources\ideal current source.ppd" t="" v="" n="EN 60617: 02-16-01" m="" fG="1aa1b801-e79f-4a87-bd25-e9313969ba62" lG="993aea52-9dd6-4ec4-8ab5-1c64e6915862">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-20" top="-20" right="20" bottom="20"/>
+<polyline pts="-20,0,20,0,"/>
+<outlet x="0" y="-20"/>
+<outlet x="0" y="20"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="others\arrow.ppd" t="b" v="" n="" m="" fG="92b18cba-3477-11d9-b3f3-b2e4a67c347f" lG="92b18cbb-3477-11d9-b3f3-b2e4a67c347f">
+<layers current="0">
+<layer name="0" v="1">
+<polyline op-lw="3" pts="0,-40,0,40,"/>
+<polyline op-lw="4" pts="0,-40,13,-10,"/>
+<polyline op-lw="4" pts="0,-40,-12,-10,"/>
+<outlet x="0" y="39"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Energy sources\ideal voltage source.ppd" t="" v="" n="EN 60617: 02-16-02" m="" fG="b0b9d177-2aa4-499d-a1ab-527ab2de1a02" lG="331a3bf5-68ce-47cb-a5ef-6db213084243">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-20" top="-20" right="20" bottom="20"/>
+<polyline pts="0,20,0,-20,"/>
+<outlet x="0" y="-20"/>
+<outlet x="0" y="20"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Construction elements\earth, ground.ppd" t="zem" v="" n="EN 60617: 02-15-01" m="" fG="f6a30821-bf73-4ea5-b975-c906d17a729c" lG="6bc1ed64-68b8-4f01-9546-108b4fd774c8">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,-20,0,0,"/>
+<polyline pts="-20,0,20,0,"/>
+<polyline pts="-14,7,14,7,"/>
+<polyline pts="-7,14,7,14,"/>
+<outlet x="0" y="-20"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Construction elements\equipotentionality.ppd" t="" v="" n="" m="" fG="338c42f0-6e8f-40ae-b1b5-13dddfaeb19f" lG="d395322c-4cef-4c0a-a26b-eed2532e4699">
+<layers current="0">
+<layer name="0" v="1">
+<polygon pts="0,30,-20,0,20,0,"/>
+<polyline pts="0,-20,0,0,"/>
+<outlet x="0" y="-20"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="passive components\resistors\resistor.ppd" t="R" v="10K" n="EN 60617: 04-01-01" m="" fG="28c7548c-a963-45ba-b852-59afda220b0d" lG="e7e3caa9-8e94-42c5-a935-c8aca8a09aff">
+<layers current="0">
+<layer name="0" v="1">
+<rect left="-8" top="-25" right="8" bottom="25"/>
+<outlet x="0" y="-25"/>
+<outlet x="0" y="25"/>
+</layer>
+</layers>
+</ppd>
+</repo>
+<pages current="0">
+<page name="1">
+<summary _potb="1" title="" _po="1" _pa="1" titleSup=""/>
+<layers current="1">
+<layer name="-1" v="1"/>
+<layer name="0" v="1">
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="880" y="410" t="2">
+<type x="820" y="410" al="2">S1</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="880" y="520" t="2">
+<type x="820" y="530" al="2">S2</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="880" y="650" t="2">
+<type x="820" y="650" al="2">S3</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="880" y="750" t="2">
+<type x="820" y="750" al="2">S4</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="880" y="850" t="2">
+<type x="820" y="850" al="2">S5</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="780" y="950" t="2">
+<type x="720" y="950" al="2">S6</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="1000" y="950" t="2">
+<type x="1010" y="950" al="2">S8</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="1000" y="1070" t="2">
+<type x="1020" y="1070" al="2">S9</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="780" y="1070" t="2">
+<type x="720" y="1080" al="2">S7</type>
+</elem>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="1080" y="730">
+<type x="995" y="740" al="2" v="1">C4</type>
+<value x="1105" y="750" al="2" v="1">330nF</value>
+</elem>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="690" y="850">
+<type x="605" y="820" al="2" v="1">C3</type>
+<value x="575" y="890" al="2" v="1">180nF</value>
+</elem>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="1080" y="890">
+<type x="1105" y="870" al="2" v="1">C2</type>
+<value x="1105" y="930" al="2" v="1">39nF</value>
+</elem>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="880" y="1020">
+<type x="885" y="980" al="2" v="1">C1</type>
+<value x="885" y="1060" al="2" v="1">39nF</value>
+</elem>
+<wire pts="880,430,880,500,"/>
+<wire pts="880,540,880,630,"/>
+<wire pts="880,670,880,730,"/>
+<wire pts="880,770,880,830,"/>
+<wire pts="1000,970,1000,1050,"/>
+<wire pts="780,1050,780,970,"/>
+<wire pts="690,584,690,846,"/>
+<wire pts="880,700,690,700," drop1="1" drop2="1"/>
+<wire pts="690,854,690,1000,780,1000," drop2="1"/>
+<wire pts="880,870,880,1016,"/>
+<wire pts="1080,734,1080,886,"/>
+<wire pts="1080,894,1080,1000,1000,1000," drop2="1"/>
+<wire pts="880,820,1080,820," drop1="1" drop2="1"/>
+<text x="901" y="410" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ1</text>
+<text x="901" y="650" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ1</text>
+<text x="901" y="850" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ1</text>
+<wire pts="780,930,780,900,880,900," drop2="1"/>
+<wire pts="880,900,1000,900,1000,930,"/>
+<text x="811" y="950" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ1</text>
+<text x="1021" y="1060" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ1</text>
+<text x="1041" y="950" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ2</text>
+<text x="811" y="1070" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ2</text>
+<text x="901" y="750" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ2</text>
+<text x="901" y="520" f="80,0,0,0,Lucida Sans Unicode,000000" l="1" al="9">Φ2</text>
+<elem lGuid="4223686c-3ed8-4ca9-b8aa-663d24c04ace" x="1370" y="700" t="6">
+<type x="1350" y="730" al="2" v="1">Lo</type>
+<value x="1325" y="660" al="2" v="1">1.6µH</value>
+</elem>
+<polyline op-at="5" pts="1860,740,1860,1100,"/>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="690" y="580">
+<type x="605" y="550" al="2" v="1">C5</type>
+<value x="575" y="620" al="2" v="1">220nF</value>
+</elem>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="1580" y="930">
+<type x="1525" y="890" al="2" v="1">Co</type>
+<value x="1625" y="950" al="2" v="1">47nF</value>
+</elem>
+<wire pts="1410,700,1580,700,1580,926,"/>
+<elem lGuid="331a3bf5-68ce-47cb-a5ef-6db213084243" x="439" y="739" t="4" sX="2.7727" sY="2.7727">
+<type x="447" y="680" al="2">2</type>
+<value x="325" y="740" al="2" v="1">vin</value>
+</elem>
+<elem lGuid="e7e3caa9-8e94-42c5-a935-c8aca8a09aff" x="1335" y="1016" sX="1.5000" sY="1.5000">
+<type x="1225" y="1010" al="2" v="1">Laux</type>
+<value x="1365" y="1050" al="2">10K</value>
+</elem>
+<text x="1911" y="940" f="120,0,0,0,Times New Roman,000000" l="1" al="9">vout</text>
+<wire pts="1335,979,1335,900,1000,900," drop2="1"/>
+<polyline op-at="5" pts="1380,940,1380,1100,"/>
+<text x="1451" y="1020" f="120,0,0,0,Times New Roman,000000" l="1" al="9">vaux</text>
+<wire pts="880,1024,880,1140," drop2="1"/>
+<wire pts="690,576,690,470,880,470,"/>
+<wire pts="439,684,439,320,880,320,880,390,"/>
+<wire pts="1080,726,1080,600,880,600," drop2="1"/>
+<elem lGuid="98d9e4b0-1db3-4990-9153-5f45bd70cb23" x="1760" y="937" h="1" t="2" sX="1.2885" sY="1.2766">
+<type x="1891" y="946" al="2">D1</type>
+<value x="1891" y="946" al="2">HLMP7000</value>
+</elem>
+<wire pts="780,1090,780,1140,880,1140," drop2="1"/>
+<wire pts="439,794,439,1140,780,1140," drop2="1"/>
+<wire pts="1580,700,1760,700,1760,912," drop1="1"/>
+<wire pts="1330,700,880,700," drop2="1"/>
+<wire pts="1335,1053,1335,1140," drop2="1"/>
+<wire pts="1580,934,1580,1140," drop2="1"/>
+<wire pts="1760,962,1760,1140,880,1140," drop2="1"/>
+<wire pts="1000,1090,1000,1140," drop2="1"/>
+</layer>
+</layers>
+</page>
+</pages>
+</document>

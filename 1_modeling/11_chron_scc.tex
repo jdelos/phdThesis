@@ -1,0 +1,88 @@
+\part[SCC for LED drivers]{Switched Capacitor Converters for LED drivers}
+\label{ch:h_scc}
+
+\chapter{Introduction}
+Switched Capacitor Converters (SCCs) are \emph{dc-dc} power circuits composed only by switches and capacitors that provide efficient voltage conversion. SCCs have been long known and utilized, initially for voltage multiplication and more recently for voltage regulation as well. Compared to inductor based power converters, the absence of magnetic elements makes them suitable for high density power systems and integrated solutions , such as Power-System-in-Package (PSiP) or Power-System-on-Chip (PSoC).
+
+
+The high level of miniaturization of these circuits has been the motivation to combine them with the growing necessities of the emerging Solid State Lighting (SSL) industry, where high miniaturized drivers close to the Light Emitting Diodes (LEDs) can enable new applications and solutions for the coming years. The paradigms of using SCC  to drive LEDs archiving high density, fiercely and current regulation are the motivation of the presented work and will be further discussed in the following chapters.
+\\
+
+\section{Switched Capacitors applications for LED driving}
+
+SCC for LED driving had an initial and  broad usage in the portable industry, where miniaturization and efficiency was a must. White-LEDs (W-LEDs) are widely applied for back-lighting Liquid Crystal Display (LCD) for portable devices such as laptops, mobile phones and tablets. The problem to adjust the battery levels to the forward voltage ($V_f$) of the LEDs could not be solved using just linear drivers, therefore switched capacitors were a simple solution to implement in an Integrated Circuit (IC) to boost the voltage above $V_f$ and then adjust the current by means of a linear regulator.
+
+There is a large portfolio of available ICs, designated as Charge-Pumps (CPs), for driving LEDs in portable devices  for instance  the \emph{MAX88779} \footnote{Maxim\textsuperscript{\textregistered} Charge Pump for Backlight/Flash/RGB LEDs with Safety Timer } or the \emph{MCP1252/3} \footnote{Microchip\textsuperscript{\textregistered} Low noise, Positive-Regulated Charge Pump}. These circuits  can drive withe, RGB or Flash LEDs from a Lithium-Ion battery only by adding a few external capacitors capacitors.  Generally these chips integrate an multi-target SCC with different conversion ratios (x1,x1.5,x2) along with a series current regulator for each LED branch a shown in the block diagram of the Fig. X . Different publications ~\cite{07Feng,09Wu,10Yin} proposed variations in the architectures that reduced the parasitic losses bringing the efficiency close to the theoretical limit defined by the linear regulator. The application of these circuits is limited for powers below a Watt and currents below a hundred of mile-Amperes and the theoretical efficiency is limited by the linear regulator.\\
+
+
+There are few relevant publications within the scope of Solid State Lighting targeting mains connected drivers. In 2008, K.H. Lee \emph{et al.} ~\cite{08Lee} presented a SC step-down converter composed of several cascaded Series-Parallel that supplied from rectified 220$V_{rms}$ an LED string of 75V at 15W. The load is directly supplied by the flying capacitors producing pulsating currents in the string and its average values is controlled modulating the frequency of the converter. The cascaded topology minimized the number of components (switched and capacitors) for the required conversion ration (fixed by the LED string).
+
+In 2012, M. Kline \emph{et al.} ~\cite{12Kline} proposed a isolated \emph{DC}/\emph{DC} converter that combined a SCC stage with series-LC resonant converter.  The SCC stage decreased  the rectified mains voltage, reducing the voltage stress in switches, capacitors and the elements of the resonant tank. The lower voltage stress allows a reduction in the volume of the passive components and the total area in the silicone. By controlling the frequency and the duty cycle of the SCC stage current through the LEDs can be regulated, resulting in a very efficient solution. In a recent publication they presented an implementation where power train and control where integrated in an stackable IC ~\cite{13Kline}.  \\
+
+The different applications show an increasing interest in using SCC for LED drivers. It is evident that the approach used in portable devices can no be further extended in for high powers and higher voltages. The use of a bear SCC can never satisfy the requirements of LED drivers due to the following facts:
+\begin{itemize}
+  \item Only provide voltage-to-voltage conversion
+  \item Fixed conversion ratios
+  \item Regulation is provided by series shunting.
+\end{itemize}
+These limitations combined with the abrupt characteristics I-V of the LEDs makes barely impossible to provide high efficient solutions with the single use of SCC. The converters would require to have a large number of conversion ratios with a very large granularity to avoid uncontrolled currents flowing through the LEDs.
+
+
+
+the only means of regulation out of the fixed conversion ratio is by dissipating power
+
+
+Therefore the SCC sta Actually the already existing publications targeting LED drivers combine the SCC stage with an inductive stage in order to provide a better integration of the switches and reducing the requirements of the magnetic passives. The research presented in this work aims to explore the possibilities of the SCC for LED drivers and the conducting path is based in the combination of the with inductors. The overall solution improves the power density and reduced form factor of the present solutions.
+
+
+\section{Hybrid Switched}
+
+
+
+\section[Chronological Vision of SCC]{A chronological vision of Switched Capacitor Converters}
+
+
+The first Switched Capacitor circuit was proposed in 1919 by Heinrich Greinacher. The Voltage Multiplier Rectifier
+multiplied the peak voltage of an AC supply to a DC voltage proportional to the number of stages.
+In 1932 J.D. Cockcroft and E.T.S. Walton used this circuit to generate very high voltage potentials,
+up to 800 kilovolts, for their particle accelerator ~\cite{30Cock}. Subsequently, this circuit become widely used in
+television sets to supply high voltage to the cathode ray tube ~\cite{70Buechel} and later it was used in space applications
+~\cite{86Weinberg}. D.L. Waidelich and J.S. Brugler made some contributions to determine equivalent series resistance
+~\cite{44Waidelich,71Brugler} and Brugler and L. Chua proposed a unified approach to generate and analyse new topologies
+~\cite{71Brugler,77Lin}.
+
+
+In 1976, J.F. Dickson ~\cite{76Dickson} introduced a modification of the Cockcroft-Walton circuit to enable the
+integration of a voltage multiplier in an MNOS non volatile memory IC. The so-called Dickson charge-pump boosted
+the DC supply voltage proportionally to the number of stages in the pump. At same time, the new circuit mitigated the effects
+of the integrated capacitor stray capacitances on the voltage gain and reduced the output impedance
+of the converter increasing the current throughput. After the Dickson charge-pump other topologies~\cite{09Seeman} have been reported, such as the series-parallel converter ~\cite{94Ngo,94Cheong}, which allowed rational conversion ratios. F. Ueno \textit{et al.} ~\cite{91Ueno} presented a SC converter with conversion ratios corresponding to Fibonacci series,$k=1,2,3,5,8,..$ ,achieving higher conversion ratios using fewer capacitors ~\cite{95Makowski,09Allasameh}.  F.L. Luo  ~\cite{02Luo,10Chang}
+proposed a topology cascading voltage doublers cells where the conversion ratio follows a quadratic relationship with the number
+ of cells, and J. A. Starzyk ~\cite{01Starzyk} reviewed the same concept with a multi-phase topology that can achieve the same gain with fewer capacitors.
+
+Two important concepts have been introduced to SC converters in order to reduce the current ripples and conduced Electromagnetic Interferences (EMI): These are the Interleaved SC converters, with reported implementations of 2-phase ~\cite{10Chang,07Chang,99Chung}, 16-phase ~\cite{09Breussegem} and 32-phase~\cite{10Le} and the Current Mode Charge-Pumps ~\cite{96Zhu,09Das} where the process of charge or discharge -or both- are controlled with a current source.
+
+Extending the possibilities of SC converters hybrid combinations of Inductor-Based (IB) converters have been also used to achieve large
+conversion ratios with tighter regulation. There are a large number of hybrid solutions where a SC cell is integrated into an inductor
+based converter ~\cite{05Axelrod,08Axelrod, 11Mayo,11Miranda,12Kline}. Lately, a couple of papers ~\cite{12Zhigang,11Dazhong} presented a
+Maximum Power Point Tracking (MPPT) converter for Photovoltaic (PV) cells employing a SC converter in parallel with an inductor based converter.
+In 2001 K.W.E. Cheng ~\cite{01Cheng} reported another hybrid solutions which made use of the inductive elements, in this case to limit the
+currents thought the capacitors, charging and discharging the capacitors with resonant transitions. The Resonant Switched Capacitors (RSC) converters,
+improved the converter efficiency when the converters operated in the SSL reducing at same time the current stress in the switches. Subsequently, many publications appeared ~\cite{05Lee,10Cao,11Gebben,07Shoyama} presenting applications and uses of this converter family.
+
+
+
+\section*{Power Levels and Integration}
+
+There are not intrinsic implications that limit the output power of a Switched Capacitor converter, but the boundary conditions. There are implementations ranging from tens of milliwatts to tens of kilowatts, where the difference only relies in the used technology. They can be classified in 3 groups: Fully integrated circuits, integrated circuits with external capacitors and discrete solutions.
+
+Full integrated converter are suitable for very lower power applications from some microwatts up to some tens of milliwatts. These solutions are implemented in standard processes (CMOS, BiCMOS or Bipolar) where the priority is in achieve an integrated solution rather than efficient. These converters have very poor efficiency up to 60\%, due to the low energy density and poor quality of the capacitors available in those processes. The second group overcomes this problem using external capacitors. These converters integrate the control and the power train in a single chip with a stadard CMOS process, offering  output power up to one watt and peak efficiencies of 95\%. In this case, the CMOS switches limit the converter efficiency and scalavility in power.
+The implementations with discrete components enable output powers up to kilowatts with peak efficiencies above 95\%. Discrete semiconductor switches can offer lower channel resitance and better switching characterisitcs, reducing ohmic resitance and enabeling higher switching frequencies.  \emph{ \color{red} Silicon power MOSFET are the dominant in discrete implementations, but recent publications used Galiun-Nitride HEMT switches ~\cite{11Scott,12Scott}}.
+
+The limiting factor of the output power of a SC converter is driven by the boundary conditions of the technology. Up to now, integrated SC converters designs have been covered addressing the problem with the standard process in VLSI, in order to have compact power conversion units at the lowest cost. The current technologies can easily improve the present solutions, for instance, a Power-System on Package (PSoC) integrating switches and capacitors would already reduce the series resistance of the pins and optimize the silicon die area of the present integrated converters with external capacitors. The current technologies offer the possibility to achieve integrated SC converters processing higher powers, but it would require to combine them in non-standard processes.
+
+\emph{\color{red} Missing refs!}
+
+
+%\bibliographystyle{plainnat}
+%\bibliography{phd_bib} 

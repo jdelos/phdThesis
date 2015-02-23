@@ -1,0 +1,175 @@
+
+\chapter[Advanced Modeling of SCC]{Advanced Modeling of Switched Capacitor Converters}
+
+\section{Introduction}
+
+\section{Single Output Converters}
+Switched Capacitor Converters has been always treated as a two-port converter with single input and a single output as shown in Fig.\ref{fig:two_port}. The input port is connected to a voltage source and the output port feeds the load. The SCC provides between input, $v_i$, and output, $v_o$, a voltage conversion, $m$,  that  steps up, steps down or/and inverts the polarity of the input voltage. Up to present all the circuit theory devoted SCCs is valid only for the two-port configuration, therefore this section is dedicated to revisit the classical concepts of single output SCC and to introduce new ones that enable a broader use of such converters.
+
+\begin{figure}[!h]
+\centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[scale=0.65]
+\draw
+    (1,0) to[short,o-]
+    (0,0) to[V = $V_{supply}$]
+    (0,3) to[short,-o]
+    (1,3) ;
+
+\draw
+    (2,3) --
+    (2.5,3)
+
+    (2,0) --
+    (2.5,0)
+
+    node[ocirc]  (IC)  at (2,0) {}
+    node[ocirc]  (I) at (2,3) {}
+    (I) to[open,v=$v_{i}$] (IC);
+
+
+\draw [thick]
+    (2.5,-0.5) --
+    (2.5,3.5)  --
+    (5.5,3.5)  --
+    (5.5,-0.5) --
+    (2.5,-0.5);
+
+\draw (4,2)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
+\draw
+    (5.5,3) -- (6,3)
+    (5.5,0) -- (6,0)
+    node[ocirc]  (O)  at (6,3) {}
+    node[ocirc]  (OC) at (6,0) {}
+    (O) to[open,v^<=$v_{o}$] (OC);
+
+\draw
+    (7,0) to[short,o-]
+    (8,0) to[ R= $Load$,mirror]
+    (8,3) to[short,-o]
+    (7,3) ;
+\end{circuitikz}
+\label{fig:two_port}
+\caption{General two port configuration of a Switched Capacitor Converter. }
+\end{figure}
+
+\subsection[Introducing H-SCC]{The Hybrid-SCC: Identifying Outputs in Switched Capacitor Converters}
+
+Two types of nodes can be identified in a Switched Capacitor Converter:
+\begin{itemize}
+  \item \emph{dc}-nodes % node $a$ in Fig. \ref{fig:dc_pwm_nodes}
+  \item \emph{pulsed width modulated}-nodes (\emph{pwm}-nodes) % node $b$ in Fig. \ref{fig:dc_pwm_nodes}
+\end{itemize}
+
+The \emph{dc}-nodes are the common used nodes to supply a \emph{dc} load. They provide a fixed voltage conversion defined by the topology with a low \emph{ac} ripple, and they always have connected a capacitor between the node and the ground by the so called \emph{dc}-capacitor as shown in the Fig. \ref{fig:dc_pwm_nodes}. Depending on the topology the number of \emph{dc}-nodes can vary between one or more, however topologies that reduce the number of \emph{dc}-capacitors ($C_{dc}$) trend to have a better utilization of the capacitors since \emph{dc}-capacitors do not contribute to transport charge \cite{SeemanPhD06}.
+
+\begin{figure}[!h]
+\centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[american voltages,scale=0.65]
+\draw
+        %Draw Switches
+        (0,0)  to[V=$V_{in}$]
+        (0,8)  --
+        (5,8)   to[switch=$\phi_1$]
+        (5,6)   to[switch=$\phi_2$]
+        (5,4)   to[switch=$\phi_1$]
+        (5,2)   to[switch=$\phi_2$]
+        (5,0)  --
+        (0,0)
+
+        (5,6) to[short,-o]
+        (8,6) node[anchor=west] {$b \rightarrow$  \emph{pwm}  node}
+
+        (5,4) to[short,-o]
+        (8,4) node[anchor=west] {$a \rightarrow$ \emph{dc} node}
+
+%Draw Capacitors
+        (5,2) --
+        (3,2) to[C=$C_{fly}$]
+        (3,6)--
+        (5,6)
+
+        (5,0) --
+        (7,0) to[C=$C_{dc}$,mirror]
+        (7,4)--
+        (5,4);
+ \draw (5,7) node[anchor=east]{$S_1$}
+       (5,5) node[anchor=east]{$S_2$}
+       (5,3) node[anchor=east]{$S_3$}
+       (5,1) node[anchor=east]{$S_4$} ;
+
+  \begin{scope}[xshift=13cm,yshift=0.2cm]
+  \draw [->] (-0.1,0) -- (5,0) node[anchor=west]{$t$};
+  \draw [->] (0,-0.1) -- (0,2.5) node[anchor=east]{$v_a$};
+  %\draw (0,-1) node[anchor=south]{0}
+%        (1.25,-1) node[anchor=south] {$T$}
+%        (2.5,-1)  node[anchor=south] {$2T$}
+%        (3.75,-1) node[anchor=south] {$3T$} ;
+
+  \draw [thick] (0,1) -- (0.75,0.75) -- (0.75,0.95) -- (1.25,0.80)
+                      -- (1.25,1)-- (2,0.75) -- (2,0.95) -- (2.5,0.80)
+                      -- (2.5,1)-- (3.25,0.75) -- (3.25,0.95) -- (3.75,0.80);
+
+  \draw [dashed] (0,0.875) -- (4,0.875) node[anchor=west]{$v_a$} ;
+  \end{scope}
+
+  \begin{scope}[xshift=13cm,yshift=4 cm]
+  \draw [->] (-0.1,0) -- (5,0) node[anchor=west]{$t$};
+  \draw [->] (0,-0.1) -- (0,2.5) node[anchor=east]{$v_b$};
+  %\draw (0,-1) node[anchor=south]{0}
+%        (1.25,-1) node[anchor=south] {$T$}
+%        (2.5,-1)  node[anchor=south] {$2T$}
+%        (3.75,-1) node[anchor=south] {$3T$} ;
+
+  \draw [thick] (0,2) -- (0.75,1.85) -- (0.75,1) -- (1.25,0.80) --
+                (1.25,2) -- (2,1.85) -- (2,1) -- (2.5,0.80) --
+                (2.5,2)-- (3.25,1.85) -- (3.25,1) -- (3.75,0.80);
+
+  \draw [dashed] (0,1.515) -- (4,1.515) node[anchor=west]{$v_b$} ;
+  \end{scope}
+
+\end{circuitikz}
+\caption {Nodes types in a SCC. Node $a$ is a \emph{dc}-node; its voltage, $v_a$ is plotted in the bottom graph. Node $b$ is a \emph{pwm}-node; its voltage, $v_b$, is plotted in the top graph.   }
+\label{fig:dc_pwm_nodes}
+\end{figure}
+
+The floating \emph{Pulsed Width Modulated}-nodes (\emph{pwm}-nodes) have been rarely used as outputs until recently a couple of publications \cite{Kumar12,Kline12} presented the advantages of using them. \emph{pwm}-nodes have been normally considered just internal to the converter, but actually the conversion possibilities of SCCs can be further exploited by using these nodes as outputs. \\
+
+
+\emph{pwm}-nodes are the nodes that connected with on terminal of a \emph{flying capacitor} ($C_{fly}$) and provide a  floating \emph{Pulsed-Width-Modulate} voltages with an added \emph{dc} offset of a fraction of the input voltage. The magnitudes are related to the SCC topology. The pulsated voltages can be filtered using an inductive-capacitive filter (\emph{LC}) allowing to supply \emph{dc} load with averaged voltage of the node. Actually the \emph{pwm} voltage at the node can be controlled adjusting the duty
+cycle of the SCC, enhancing the regulation capavilities of these outputs compared to the fixed value of the \emph{dc}-nodes.
+The switched capacitor converters that combine the \emph{pwm}-outputs with inductors will be referred in the rest of the book as
+\emph{Hybrid}-Switched Capacitor Converters (H-SCC).
+
+
+
+\subsection{The Output Impedance Model}
+\subsection{Identifying the source of losses in the charge transfer}
+\subsection{Re-formulating the charge flow analysis}
+\subsubsection[SSL Capacitor Charge Flow]{Slow Switching Limit: Re-defining the Capacitor Charge Flow Vectors}
+\subsubsection[FSL Switch Charge Flow]{Fast Switching Limit: Re-defining the Switch Charge Flow Vectors}
+
+\subsection{Load Model: Voltage Sink versus Current Sink}
+\subsection{Sensitivity of the inductor current ripple}
+
+\section{Multiple Output Converters}
+\subsection{The Output Trans-Resistance Model}
+\subsection{Obtaining the Trans-Resistance parameters with the charge flow analysis }
+
+\bibliographystyle{plainnat}
+\bibliography{phd_bib}
+
+
+
+
+\chapter[Optimization and Design]{Optimization and Design of Hybrid-Switched Capacitor Converters}
+\section{Introduction}
+\section{Study in the correlation of the design parameters and the Output Impedance}
+\section{Encapsulating the Switches and Capacitors area breakdown in an optimization procedure}
+\section{Insights towards a complete optimization}
+
+\chapter[Dynamic Study]{Dynamic Study of Hybrid-Switched Capacitor Converters}
+\section{Small Signal Analysis}
+
+

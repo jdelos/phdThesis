@@ -1,0 +1,403 @@
+<document type="ProfiCAD sxe" version="7.0">
+<fonts letter="80,0,1,0,Times New Roman,000000" text="80,0,0,0,Times New Roman,000000" type="80,0,1,0,Times New Roman,000000" refs="80,0,1,0,Times New Roman,000000" cross_refs="80,0,1,0,Times New Roman,000000"/>
+<PrintSettings PrinterName="" PaperSize="9" FormName="A4" SheetSizeX="289" SheetSizeY="202" WantsCustom="0" CustomSizeX="283" CustomSizeY="203"/>
+<tb use="1" h="0" v="0" name="C:\Users\Public\Documents\ProfiCAD Library\_TB\standard7.ptb">
+<repo id="24484">
+<imgDesc lastGuid="e5a66eae-c93d-4083-90a8-8bbc64aa2cad" imgType="4">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</imgDesc>
+</repo>
+<layers current="0">
+<layer name="0" v="1">
+<rect left="-840" top="-200" right="840" bottom="200" op-lw="4"/>
+<text x="-829" y="-170" f="80,0,0,0,Tahoma,000000" al="2">Responsible dep.</text>
+<text x="-829" y="-114" f="90,1,0,0,Tahoma,000000" al="2">{dep}</text>
+<text x="-520" y="-170" f="80,0,0,0,Tahoma,000000" al="2">Technical reference</text>
+<text x="-520" y="-114" f="90,1,0,0,Tahoma,000000" al="2">{techRef}</text>
+<text x="-190" y="-170" f="80,0,0,0,Tahoma,000000" al="2">Created</text>
+<text x="-190" y="-114" f="90,1,0,0,Tahoma,000000" al="2">{author}</text>
+<text x="319" y="-170" f="80,0,0,0,Tahoma,000000" al="2">Approved</text>
+<text x="319" y="-114" f="90,1,0,0,Tahoma,000000" al="2">{approved}</text>
+<text x="-190" y="-48" f="80,0,0,0,Tahoma,000000" al="2">Document type</text>
+<text x="-190" y="8" f="90,1,0,0,Tahoma,000000" al="2">{docType}</text>
+<text x="319" y="-48" f="80,0,0,0,Tahoma,000000" al="2">Document status</text>
+<text x="319" y="8" f="90,1,0,0,Tahoma,000000" al="2">{docStatus}</text>
+<polyline op-lw="4" pts="-840,-80,840,-80,"/>
+<polyline op-lw="4" pts="-200,-200,-200,200,"/>
+<polyline op-lw="4" pts="-540,-200,-540,-80,"/>
+<polyline op-lw="4" pts="300,-200,300,200,"/>
+<polyline op-lw="4" pts="-200,40,840,40,"/>
+<text x="-190" y="70" f="80,0,0,0,Tahoma,000000" al="2">Title, supplementary title</text>
+<text x="-190" y="120" f="90,1,0,0,Tahoma,000000" al="2">{title}</text>
+<text x="-190" y="173" f="90,1,0,0,Tahoma,000000" al="2">{titleSup}</text>
+<text x="319" y="70" f="90,1,0,0,Tahoma,000000" al="2">{id}</text>
+<text x="821" y="173" f="90,1,0,0,Tahoma,000000" al="6">{_po}/{_pc}</text>
+<text x="710" y="70" f="90,1,0,0,Tahoma,000000" al="2">{rev}</text>
+<text x="590" y="70" f="80,0,0,0,Tahoma,000000" al="2">Rev.</text>
+<text x="319" y="126" f="80,0,0,0,Tahoma,000000" al="2">Date of issue</text>
+<text x="595" y="126" f="80,0,0,0,Tahoma,000000" al="2">Lang.</text>
+<text x="319" y="173" f="90,1,0,0,Tahoma,000000" al="2">{date}</text>
+<text x="591" y="173" f="90,1,0,0,Tahoma,000000" al="2">{lng}</text>
+<text x="726" y="126" f="80,0,0,0,Tahoma,000000" al="2">Sheet</text>
+<polyline op-lw="4" pts="300,100,840,100,"/>
+<polyline op-lw="4" pts="580,40,580,200,"/>
+<polyline op-lw="4" pts="700,100,700,200,"/>
+<img lastGuid="e5a66eae-c93d-4083-90a8-8bbc64aa2cad" preserveAspect="1" left="-810" top="-13" right="-240" bottom="135"/>
+</layer>
+</layers>
+</tb>
+<PageSettings bgColor="FFFFFF" pgsHor="1" pgsVer="1" pgsMrgn="0, 0, 0, 0" pageMargins="10, 10, 10, 10" zoom="150" frame="YES" rastr="20" showT="YES" showV="YES" includeMargins="NO"/>
+<RefGridSettings FieldSize="50"/>
+<summary _pc="1" author="" _file="dickson_21_2_outputs" date="5/29/2013" _path="J:\Docs\EPE 2013\images\dickson_21_2_outputs.sxe"/>
+<BillColumns/>
+<repo id="27529">
+<ppd name="elektronics\passive components\inductors\air core.ppd" t="L" v="100mH" n="" m="" fG="191e7967-ad72-4c50-9609-643c3bcf9a84" lG="78fda929-30d8-47ac-bd30-0f4b9bb899d5">
+<layers current="0">
+<layer name="0" v="1">
+<polybezier pts="0,-40,20,-41,20,-19,0,-20,"/>
+<polybezier pts="0,-20,20,-21,20,1,0,0,"/>
+<polybezier pts="0,0,20,-1,20,21,0,20,"/>
+<outlet x="0" y="-40"/>
+<outlet x="0" y="40"/>
+<polybezier pts="0,20,20,19,20,41,0,40,"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\mechanical parts\construction elements\terminal.ppd" t="" v="" n="" m="" fG="6b78d699-2542-47fd-a146-a5205997bb18" lG="861c0839-b943-4827-9431-2de9d2f7b8f6">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-8" top="-8" right="8" bottom="8"/>
+<outlet x="-8" y="0"/>
+<outlet x="8" y="0"/>
+<outlet x="0" y="-8"/>
+<outlet x="0" y="8"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\semiconductors and tubes\transistors\switch_on.ppd" t="S" v="" n="60617:05-05-09" m="" fG="8f0630d5-8508-4789-ad72-4848e5cbb092" lG="1924c0b8-634b-4cdf-95e9-6e3b8e8be177">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,14,0,-34,"/>
+<polyline pts="0,-43,0,-53,"/>
+<outlet x="0" y="-55"/>
+<outlet x="0" y="34"/>
+<ellipse left="-4" top="-42" right="4" bottom="-34"/>
+<polyline pts="0,32,0,22,"/>
+<ellipse left="-4" top="14" right="4" bottom="22"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\semiconductors and tubes\transistors\switch_on.ppd" t="S" v="" n="60617:05-05-09" m="" fG="8f0630d5-8508-4789-ad72-4848e5cbb092" lG="003e5d6b-2727-471d-9aba-0998cf823a03">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,16,0,-16,"/>
+<polyline pts="0,-23,0,-33,"/>
+<outlet x="0" y="-35"/>
+<outlet x="0" y="34"/>
+<ellipse left="-3" top="-22" right="4" bottom="-16"/>
+<polyline pts="0,32,0,22,"/>
+<ellipse left="-3" top="16" right="4" bottom="22"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\sources\voltage.ppd" t="Vin" v="" n="" m="" fG="54dbb6d5-a857-4880-8405-ecd3880885dc" lG="4caf3a20-29a9-419c-8c49-9b425c0581a7">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-50" top="-50" right="50" bottom="50"/>
+<polyline pts="-10,-30,10,-30,"/>
+<polyline pts="-10,30,10,30,"/>
+<polyline pts="0,-20,0,-40,"/>
+<outlet x="0" y="-50"/>
+<outlet x="0" y="50"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\sources\voltage.ppd" t="" v="" n="" m="" fG="54dbb6d5-a857-4880-8405-ecd3880885dc" lG="2526000c-9071-47c9-9232-c77bf3826a51">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-50" top="-50" right="50" bottom="50"/>
+<polyline pts="-10,-30,10,-30,"/>
+<polyline pts="-10,30,10,30,"/>
+<polyline pts="0,-20,0,-40,"/>
+<outlet x="0" y="-50"/>
+<outlet x="0" y="50"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\passive components\resistors (ANSI)\tapped resistor.ppd" t="R" v="10k" n="IEC:2.1.2" m="" fG="" lG="39805bd2-8087-43f3-9817-2617f308dc82">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,30,-10,25,10,15,-10,5,10,-5,-10,-15,10,-25,0,-30,"/>
+<outlet x="0" y="30"/>
+<outlet x="0" y="-30"/>
+<outlet x="10" y="15"/>
+<outlet x="10" y="-5"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\sources\current.ppd" t="" v="" n="" m="" fG="54dbb6d5-a857-4880-8405-ecd3880885dc" lG="fa45d6d2-5965-4927-88ac-eddae51c0197">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-50" top="-50" right="50" bottom="50"/>
+<polyline op-at="6" pts="0,40,0,-40,"/>
+<outlet x="0" y="-50"/>
+<outlet x="0" y="50"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="passive components\resistors\resistor.ppd" t="R" v="10K" n="EN 60617: 04-01-01" m="" fG="28c7548c-a963-45ba-b852-59afda220b0d" lG="e7e3caa9-8e94-42c5-a935-c8aca8a09aff">
+<layers current="0">
+<layer name="0" v="1">
+<rect left="-8" top="-25" right="8" bottom="25"/>
+<outlet x="0" y="-25"/>
+<outlet x="0" y="25"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Construction elements\equipotentionality.ppd" t="" v="" n="" m="" fG="338c42f0-6e8f-40ae-b1b5-13dddfaeb19f" lG="d395322c-4cef-4c0a-a26b-eed2532e4699">
+<layers current="0">
+<layer name="0" v="1">
+<polygon pts="0,30,-20,0,20,0,"/>
+<polyline pts="0,-20,0,0,"/>
+<outlet x="0" y="-20"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Construction elements\earth, ground.ppd" t="zem" v="" n="EN 60617: 02-15-01" m="" fG="f6a30821-bf73-4ea5-b975-c906d17a729c" lG="6bc1ed64-68b8-4f01-9546-108b4fd774c8">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,-20,0,0,"/>
+<polyline pts="-20,0,20,0,"/>
+<polyline pts="-14,7,14,7,"/>
+<polyline pts="-7,14,7,14,"/>
+<outlet x="0" y="-20"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Energy sources\ideal voltage source.ppd" t="" v="" n="EN 60617: 02-16-02" m="" fG="b0b9d177-2aa4-499d-a1ab-527ab2de1a02" lG="331a3bf5-68ce-47cb-a5ef-6db213084243">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-20" top="-20" right="20" bottom="20"/>
+<polyline pts="0,20,0,-20,"/>
+<outlet x="0" y="-20"/>
+<outlet x="0" y="20"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="others\arrow.ppd" t="b" v="" n="" m="" fG="92b18cba-3477-11d9-b3f3-b2e4a67c347f" lG="92b18cbb-3477-11d9-b3f3-b2e4a67c347f">
+<layers current="0">
+<layer name="0" v="1">
+<polyline op-lw="3" pts="0,-40,0,40,"/>
+<polyline op-lw="4" pts="0,-40,13,-10,"/>
+<polyline op-lw="4" pts="0,-40,-12,-10,"/>
+<outlet x="0" y="39"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Energy sources\ideal current source.ppd" t="" v="" n="EN 60617: 02-16-01" m="" fG="1aa1b801-e79f-4a87-bd25-e9313969ba62" lG="993aea52-9dd6-4ec4-8ab5-1c64e6915862">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-20" top="-20" right="20" bottom="20"/>
+<polyline pts="-20,0,20,0,"/>
+<outlet x="0" y="-20"/>
+<outlet x="0" y="20"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Construction elements\frame, chassis.ppd" t="" v="" n="" m="" fG="ae48d23f-2481-410d-8879-a1de0dfcb003" lG="9c1a9f71-c558-414c-b132-8559704c288d">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,-13,0,13,"/>
+<polyline op-lw="4" pts="-18,13,18,13,"/>
+<outlet x="0" y="-13"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="relays and switches\switches\on-off switch.ppd" t="" v="" n="" m="" fG="37e61430-ab98-4acb-898a-7fdfa91597b1" lG="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-23" top="-3" right="-17" bottom="3"/>
+<polyline pts="20,-6,20,0,"/>
+<polyline op-lw="4" pts="-20,0,20,-20,"/>
+<outlet x="-20" y="0"/>
+<outlet x="20" y="0"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="switchgear and protective devices (ANSI)\switches and contactors (IEC)\closing\NO form 3.ppd" t="k" v="" n="IEC:9.2" m="" fG="610e46e2-df89-45e3-8b5a-203dcd240d35" lG="d2ce5680-b98a-4e56-b449-74e14ce13167">
+<layers current="0">
+<layer name="0" v="1">
+<outlet x="-46" y="0"/>
+<outlet x="46" y="0"/>
+<polyline pts="-26,4,40,28,"/>
+<ellipse left="-46" top="-10" right="-26" bottom="10"/>
+<ellipse left="26" top="-10" right="46" bottom="10"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="passive components\capacitors\capacitor electrolytic.ppd" t="C" v="10k" n="" m="" fG="21914c9c-0116-4040-ba42-0245f783b845" lG="63bb643a-e219-46ce-b952-5af54085a702">
+<layers current="0">
+<layer name="0" v="1">
+<polyline op-lw="4" pts="-18,-4,18,-4,"/>
+<polyline op-lw="4" pts="-18,4,18,4,"/>
+<outlet x="0" y="-4"/>
+<outlet x="0" y="4"/>
+<polyline pts="-14,-14,-6,-14,"/>
+<polyline pts="-10,-18,-10,-10,"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="passive components\inductors\choking coil.ppd" t="L" v="100mH" n="" m="" fG="7028ad04-a49c-458a-9df5-128b0d9f2ab3" lG="4223686c-3ed8-4ca9-b8aa-663d24c04ace">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,-30,0,-40,"/>
+<polyline pts="0,30,0,40,"/>
+<outlet x="0" y="-40"/>
+<outlet x="0" y="40"/>
+<rect left="-8" top="-30" right="8" bottom="30" op-fd="1" op-fc="0"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="Semiconductors 2\LED.ppd" t="D" v="HLMP7000" n="EN 60617: 05-03-02" m="" fG="7a93ae27-f900-4f7b-935c-e129f590cabe" lG="98d9e4b0-1db3-4990-9153-5f45bd70cb23">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="-20,0,20,0,"/>
+<polyline pts="-20,-20,-20,20,"/>
+<polyline pts="20,-20,20,20,"/>
+<polyline pts="-20,0,20,-20,"/>
+<polyline pts="-20,0,20,20,"/>
+<outlet x="-20" y="0"/>
+<outlet x="20" y="0"/>
+<polyline pts="13,-45,-5,-27,"/>
+<polyline pts="13,-45,2,-39,"/>
+<polyline pts="13,-45,7,-34,"/>
+<polyline pts="24,-35,6,-17,"/>
+<polyline pts="24,-35,18,-24,"/>
+<polyline pts="24,-35,14,-29,"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\passive components\lamps and signalling devices\voltage.ppd" t="" v="" n="" m="" fG="54dbb6d5-a857-4880-8405-ecd3880885dc" lG="dd995424-280c-4a3f-a3c3-37c66310cab3">
+<layers current="0">
+<layer name="0" v="1">
+<ellipse left="-50" top="-50" right="50" bottom="50"/>
+<polyline pts="-10,-30,10,-30,"/>
+<polyline pts="-10,30,10,30,"/>
+<polyline pts="0,-20,0,-40,"/>
+<outlet x="0" y="-50"/>
+<outlet x="0" y="50"/>
+</layer>
+</layers>
+</ppd>
+<ppd name="elektronics\semiconductors and tubes\transistors\switch_on.ppd" t="T" v="" n="60617:05-05-09" m="" fG="8f0630d5-8508-4789-ad72-4848e5cbb092" lG="d7684ec6-1d64-418b-980d-99ff2c7a96dd">
+<layers current="0">
+<layer name="0" v="1">
+<polyline pts="0,16,0,-16,"/>
+<polyline pts="0,-23,0,-33,"/>
+<outlet x="0" y="-35"/>
+<outlet x="0" y="34"/>
+<ellipse left="-3" top="-22" right="4" bottom="-16"/>
+<polyline pts="0,32,0,22,"/>
+<ellipse left="-3" top="16" right="4" bottom="22"/>
+</layer>
+</layers>
+</ppd>
+</repo>
+<pages current="0">
+<page name="1">
+<summary _po="1" title="" _pa="1" titleSup=""/>
+<layers current="1">
+<layer name="-1" v="1"/>
+<layer name="0" v="1">
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="600" y="450" t="2">
+<type x="540" y="490" al="2">S3</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="600" y="590" t="2">
+<type x="520" y="590" al="2">S4</type>
+</elem>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="680" y="790">
+<type x="685" y="810" al="2" v="1">C2</type>
+<value x="725" y="810" al="2">10k</value>
+</elem>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="500" y="620">
+<type x="465" y="640" al="2" v="1">C1</type>
+<value x="765" y="920" al="2">10k</value>
+</elem>
+<wire pts="600,470,600,570,"/>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="600" y="710" t="2">
+<type x="540" y="730" al="2">S9</type>
+</elem>
+<elem lGuid="36ce4fe4-b1d8-4dcb-8f67-a1ba42f3f0e8" x="600" y="830" t="2">
+<type x="610" y="830" al="2">S10</type>
+</elem>
+<wire pts="600,730,600,810,"/>
+<elem lGuid="2526000c-9071-47c9-9232-c77bf3826a51" x="336" y="636" sX="0.6923" sY="0.6923">
+<type x="262" y="600" al="2" v="1">Vin</type>
+</elem>
+<text x="560" y="460" f="120,0,1,0,Times New Roman,000000" l="1" al="9">φ1</text>
+<text x="560" y="600" f="120,0,1,0,Times New Roman,000000" l="1" al="9">φ2</text>
+<text x="560" y="720" f="120,0,1,0,Times New Roman,000000" l="1" al="9">φ1</text>
+<text x="560" y="840" f="120,0,1,0,Times New Roman,000000" l="1" al="9">φ2</text>
+<elem lGuid="861c0839-b943-4827-9431-2de9d2f7b8f6" x="420" y="520">
+<type x="371" y="500" al="2">2</type>
+</elem>
+<text x="400" y="500" f="80,0,1,0,Times New Roman,000000" l="1" al="9">A</text>
+<elem lGuid="861c0839-b943-4827-9431-2de9d2f7b8f6" x="760" y="660">
+<type x="711" y="640" al="2">3</type>
+</elem>
+<text x="780" y="640" f="80,0,1,0,Times New Roman,000000" l="1" al="9">B</text>
+<polyline op-lw="1" op-at="6" pts="700,580,860,580,"/>
+<polyline op-lw="1" op-at="6" pts="900,860,900,720,"/>
+<polyline op-lw="1" op-at="6" pts="900,860,1100,860,"/>
+<polyline pts="900,800,1080,800,"/>
+<polyline pts="700,460,720,460,"/>
+<polyline pts="720,460,720,520,"/>
+<polyline pts="720,520,760,520,"/>
+<polyline pts="760,460,760,520,"/>
+<polyline pts="760,460,780,460,"/>
+<polyline pts="780,460,780,520,"/>
+<polyline pts="780,520,820,520,"/>
+<polyline pts="820,460,820,520,"/>
+<polyline pts="820,460,840,460,"/>
+<polyline pts="840,460,840,520,"/>
+<polyline op-lw="1" op-at="6" pts="700,580,700,420,"/>
+<text x="680" y="480" f="80,0,1,0,Times New Roman,000000" l="1" al="9">va</text>
+<text x="820" y="600" f="80,0,1,0,Times New Roman,000000" l="1" al="9">t</text>
+<text x="1080" y="880" f="80,0,1,0,Times New Roman,000000" l="1" al="9">t</text>
+<text x="880" y="760" f="80,0,1,0,Times New Roman,000000" l="1" al="9">vb</text>
+<wire pts="336,670,336,900,680,900,680,794,"/>
+<wire pts="600,850,600,900," drop2="1"/>
+<wire pts="336,602,336,400,600,400,600,430,"/>
+<wire pts="600,690,600,610,"/>
+<wire pts="680,786,680,660,600,660," drop2="1"/>
+<wire pts="500,616,500,520,600,520," drop2="1"/>
+<wire pts="500,624,500,760,600,760," drop2="1"/>
+<wire pts="752,660,680,660," drop2="1"/>
+<wire pts="500,520,428,520," drop1="1"/>
+<polyline op-at="5" pts="440,540,440,880,"/>
+<text x="420" y="720" f="80,0,1,0,Times New Roman,000000" l="1" al="9">va</text>
+<polyline op-at="5" pts="760,680,760,900,"/>
+<text x="780" y="780" f="80,0,1,0,Times New Roman,000000" l="1" al="9">vb</text>
+<polyline op-lw="1" op-at="6" pts="1240,580,1400,580,"/>
+<polyline pts="1240,500,1380,500,"/>
+<polyline op-lw="1" op-at="6" pts="1240,580,1240,420,"/>
+<text x="1220" y="480" f="80,0,1,0,Times New Roman,000000" l="1" al="9">va&amp;apos;</text>
+<text x="1380" y="600" f="80,0,1,0,Times New Roman,000000" l="1" al="9">t</text>
+<rect left="940" top="420" right="1140" bottom="600"/>
+<elem lGuid="78fda929-30d8-47ac-bd30-0f4b9bb899d5" x="990" y="455" t="2" sX="0.7045" sY="0.6977">
+<type x="913" y="420" al="6">L1</type>
+<value x="913" y="460" al="6">100mH</value>
+</elem>
+<elem lGuid="63bb643a-e219-46ce-b952-5af54085a702" x="1060" y="500" op-fd="1" op-fc="8454143">
+<type x="1025" y="520" al="2">C3</type>
+<value x="1325" y="800" al="2">10k</value>
+</elem>
+<elem lGuid="d395322c-4cef-4c0a-a26b-eed2532e4699" x="1060" y="563" sX="0.9091" sY="0.9063">
+<type x="1033" y="540" al="6">4</type>
+</elem>
+<wire pts="1060,545,1060,504,"/>
+<wire pts="1017,455,1120,455,1116,454,"/>
+<wire pts="1059,455,1060,496," drop1="1"/>
+</layer>
+</layers>
+</page>
+</pages>
+</document>
