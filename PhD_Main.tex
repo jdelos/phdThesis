@@ -4,7 +4,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Graphicx.sty for Including PostScript .eps files
-
 \usepackage{graphicx}
 \usepackage[cmex10]{amsmath}
 \usepackage{amssymb}
@@ -12,9 +11,14 @@
 \usepackage{xfrac}
 \usepackage{float}
 \usepackage{psfrag}
+
+% Add caption and sources to images
+\usepackage{caption}
+
 %\usepackage{circuitikz}
 %Enables Latex Example enviroment
 \usepackage{showexpl}
+
 %Circuit drawing packages
 \usepackage[siunitx]{circuitikz}
 \sisetup{load=derived} % loading \siemens
@@ -23,12 +27,17 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 
-
 \usepackage{framed}
 
 %Bibliography per chapter
 \usepackage[square,numbers]{natbib}
 %\usepackage{chapterbib}
+
+%Hyperlinks 
+\usepackage{hyperref}
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
 
 \begin{document}
 
@@ -59,7 +68,7 @@
 
 \pagenumbering{arabic}
 
-\include{0_intro}
+\include{./0_intro/0_intro}
 \label{ch:h_scc}
 \include{./1_modeling/11_chron_scc}
 \include{./1_modeling/12_scc_av_model}
@@ -72,7 +81,9 @@
 
 %\bibliographystyle{plain}
 \bibliographystyle{plainnat}
+\bibliography{ch0}
 \bibliography{phd_bib}
+
 
 \end{document}
 
