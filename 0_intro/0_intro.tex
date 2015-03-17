@@ -126,53 +126,123 @@ The drive to reduce the volume of the drivers led to focus the research from the
 Besides the size reduction that an integrated driver would suppose, an integrated approach would also bring other benefits in terms of control and connectivity. Since such a solution would require a the design of a dedicated \emph{application-specific integrated circuit} (ASIC), the power management unit and driver control unit can be integrated together, providing the necessary intelligence for light control and the connectivity optimized for the requirements of the coming connected lighting industry. The \emph{Philips} \emph{HUE} lamp is a clear example of the requirements of the so called \emph{smart drivers}. That lamp provides a full light color gamut color control through a mobile and web application or through a remote control. The internal driver has four light channels red, green, orange and additional amber and at the same time provides wireless connectivity through ZigBee, being the electronic board populated with discrete power drivers and few micro-controller units. A solution that integrates all the functions in a single IC, or few ICs (one per channel), will definitely reduce packaging and assembling costs and still providing the same functionalities. And at the same time, the expected market size for LED lighting to justify a dedicated ASIC design for the light bulbs and indeed has been the motivation of this thesis. Therefore goal of this work was to explore and identify new architectures that are suitable for integration and at the same time can perform as an efficient LED driver.
 
 
-\chapter{Why a LED needs a driver?}
+\section{Why a LED needs a driver?}
 
-An LED driver is a circuit that transforms the electrical power from the input source to supply the LED with the appropriate form of electrical power.  As shown in figure X, and LED has a very abrupt V-I curve hence for voltages below the threshold voltages, $V_{th}$, there is now current flow and the LED behaves as an open circuit. For voltages above $V_{th}$ the curve becomes very steep and the current increases dramatically with respect to the voltages thus behaving as short circuit. Since almost all the known energy sources are voltage sources, and LED requires a circuit that controls the current flow through it; that circuit is the LED driver. 
+As shown in Fig. \ref{fig:led_I-V} a LED has a very abrupt V-I curve. For voltages below the \emph{forward voltage}, $V_{f}$, there is no current flow and the LED behaves as an open circuit. For voltages above $V_{f}$ the curve becomes very steep and the current increases dramatically with respect to the voltages, thus the LED behaves as short circuit. The driver bias the LED to a specific point, $P$ in Fig. \ref{fig:led_I-V}, providing the desired output light. The colour and flux (light intensity) will vary depending of the bias point.  Since the majority of  available  energy sources are  voltage sources, and LED requires a circuit that limits the current that flows through it, that circuit is the LED driver.
 
 \begin{figure}[!h]
 \centering
 \begin{tikzpicture}[domain=0:5]
-\draw [->] (0,0) -- (4.5,0) node[anchor=west]{$V$};
-\draw [->] (0,0) -- (0,4.5) node[anchor=east]{$I$};
+    \draw [->] (0,0) -- (4.5,0) node[anchor=west]{$V$};
+    \draw [->] (0,0) -- (0,4.5) node[anchor=east]{$I$};
 
-%Mark Vth
-\draw (2,2pt) -- (2,-5pt) node[anchor=north] {$V_{th}$};
+    %Mark Vth
+    \draw (2,2pt) -- (2,-5pt) node[anchor=north] {$V_{f}$};
 
-%Draw ideal plot
-\draw[thick] (0,0) -- (2,0) -- (4,4);
+    %Draw ideal plot
+    \draw[thick] (0,0) -- (2,0) -- (4,4);
 
-%Draw bias points
-\draw[dashed] (3,2) -- (3,-0);
-\draw (3,2pt) -- (3,-5pt) node[anchor=north]  {$V_{bias}$};
+    %Draw bias points
+    \draw[dashed] (3,2) -- (3,-0);
+    \draw (3,2pt) -- (3,-5pt) node[anchor=north]  {$V_{bias}$};
 
-\draw[dashed] (3,2) -- (-0,2);
-\draw (2pt,2) -- (-5pt,2) node[anchor=east]  {$I_{bias}$}; 
+    \draw[dashed] (3,2) -- (-0,2);
+    \draw (2pt,2) -- (-5pt,2) node[anchor=east]  {$I_{bias}$};
+    \filldraw (3,2) circle(2pt) node[anchor=west] {$P$};
+
+  
 
 \end{tikzpicture}
 \caption {}
 \label{fig:led_I-V}
 \end{figure}
 
-There are three implementations of LED drivers:
+At the first glance, keeping a constant bias current, $I_bias$, through the LED does not seems to be challenging. However LED V-I characteristic is not static, in practice LEDs has different source of deviations and drivers have to deal with them in order to keep delivering the desired light output. First, $V_f$ has a negative dependence with the temperature, drooping its values as the PN junction temperature increases. Second, the LED has an aging factor derating its light output over time, which has to be adjusted by changing the bias point. And last but not least, during production LEDs will vary in colour, flux and forward voltage; even for products from the same batch. The manufacturer reduced the dispersion between devices by binning \footnote{Quality control performed at LED production line, where each LED is individual tested and sorted in groups (bins) that have the same electrical and lighting characteristics.}, but still after binning it can be deviations from up to $10\%$ in $V_f$ for the same part number.
+
+Up to date, there are three families of LED drivers:
 
 \begin{description}
-  \item[Linear Drivers] Linear drivers place a shunt element between the source and the LED. The shunt element limits the current in the LED  
-  \item[bla] dsfas
-  \item[bla] dfa
+  \item[Linear Drivers] place a shunt element between the source and the LED. The shunt element limits the current in the LED providing the necessary voltage droop between the source and the load. The excess of voltage between the source and the load is dissipated in the shunt element, literally burned in form of heat; therefore this drivers become very inefficient if the LED voltage is not close to the source. Moreover this drivers can only provide step-down conversion, thus they cannot work when the load voltage is higher than the input supply.
+
+      \begin{figure}[!h]
+        \centering
+        \ctikzset { bipoles/length=1cm}
+        \begin{circuitikz} [american,scale=0.65]
+        \draw
+        (5,0) to[short]
+        (0,0) to[V = $v_{src}$]
+        (0,3) to[generic=${Shunt}$]
+        (5,3);
+        \draw
+        (5,0) to[leD*,mirror,v>=$v_{o}$,i<=$i_o$] (5,3); 
+        
+        \begin{scope}[xshift = 8cm, yshift=0cm]
+            \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
+            \draw[->] (0,0) -- (0,3) node[anchor=west] {$\eta $};
+            
+            %Ticks X 
+            \draw (3,2pt) -- (3,-5pt) node[anchor=north] {$1$};
+            \draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
+            
+            %Ticks Y
+            \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
+            \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$70\%$};
+            
+            %Markers
+            \draw[dotted] (3,2.5) -- (3,0);
+            \draw[dotted] (3,2.5) -- (0,2.5);
+            \draw[dotted] (1.5,1.5) -- (1.5,0);
+            \draw[dotted] (1.5,1.5) -- (0,1.5);
+            
+            
+            \draw[thick] (3,2.5) -- (0,0.5);
+            
+            
+            
+        \end{scope}
+        
+        \end{circuitikz}
+        \label{fig:linear_drv}
+        \caption{Linear LED driver schematic} 
+       \end{figure}
+      
+   The circuit of the Fig. \ref{fig:linear_drv} shows schematic of a linear driver, the shunt element can be implemented with just a resister of with an active device, the second enables regulation for variations in the source and in the load. Both cases linear drivers are very simple to implement, with very low costs and taking almost no volume, being indeed the perfect solution for integration.
+   
+   The plotted graph presents the variation of the driver efficiency with respect to the conversion ration $m$. $m$  is the ratio between the input voltage, $v_{src}$,  and the output voltage,$v_o$, being defined as
+   \begin{equation}
+        m = \frac{v_o}{v_{src}}.
+   \end{equation}
+   
+   The efficiency of the driver is the ratio between the input power and the output power
+   \begin{equation}
+        \eta = \frac{P_o}{P_i} = \frac{v_o i_o}{v_{src} i_o} = \frac{v_o}{v_{src}},
+   \end{equation}
+   thus we can see that for this case the efficiency is indeed the conversion ratio
+   \begin{equation}
+        \eta = m,
+   \end{equation} 
+   owing to the fact that LED drivers have to be efficient, saying that at worst case 80\% efficiency can be accepted, such drivers could only be suitable where the ration between input voltage and load voltage is 0.8.  
+   
+   Despite the fact that linear drivers are cheap and easy to integrate, their poor efficiencies and limitations in power conversion palace them in a unfavorable position as a realistic sortition for an integrated solution.  
+   
+   
+
+
+  \item[Inductor Based Converters] are \emph{Switched Mode Power Supplies} (SMPS) 
+  \item[Switched Capacitors] dfa
 \end{description}
 
 
 \chapter{Different types of Drivers}
 
-       
-   
+
+
 
 %\section{DC-DC Drivers}
 %\section{AC-DC Drivers}
 
 \chapter{Switched capacitors for LED drivers}
 
-There are two families within the integrated power supplies, inductor based converters and switched capacitors based converters. Inductor based converters make use of magnetic passive components as energy storage for the power conversion, being the most common converters used for LED drivers for to lighting. These converters easily achieve very large efficiencies while providing excellent current regulation output. However the magnetic devices restricts the integration of these converters. Switched Capacitor Converters (SCC) provide energy conversion using capacitors as a energy storage 
+There are two families within the integrated power supplies, inductor based converters and switched capacitors based converters. Inductor based converters make use of magnetic passive components as energy storage for the power conversion, being the most common converters used for LED drivers for to lighting. These converters easily achieve very large efficiencies while providing excellent current regulation output. However the magnetic devices restricts the integration of these converters. Switched Capacitor Converters (SCC) provide energy conversion using capacitors as a energy storage
 
 
