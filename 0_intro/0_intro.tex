@@ -167,14 +167,14 @@ Up to date, there are three families of LED drivers:
       \begin{figure}[!h]
         \centering
         \ctikzset { bipoles/length=1cm}
-        \begin{circuitikz} [american,scale=0.65]
+        \begin{circuitikz} [scale=0.65]
         \draw
         (5,0) to[short]
         (0,0) to[V = $v_{src}$]
-        (0,3) to[generic=${Shunt}$]
+        (0,3) to[generic=${Shunt}$,i=$i_o$]
         (5,3);
         \draw
-        (5,0) to[leD*,mirror,v>=$v_{o}$,i<=$i_o$] (5,3); 
+        (5,0) to[leD*,v_>=$v_{o}$] (5,3); 
         
         \begin{scope}[xshift = 8cm, yshift=0cm]
             \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
@@ -208,6 +208,8 @@ Up to date, there are three families of LED drivers:
       
    The circuit of the Fig. \ref{fig:linear_drv} shows schematic of a linear driver, the shunt element can be implemented with just a resister of with an active device, the second enables regulation for variations in the source and in the load. Both cases linear drivers are very simple to implement, with very low costs and taking almost no volume, being indeed the perfect solution for integration.
    
+   
+   
    The plotted graph presents the variation of the driver efficiency with respect to the conversion ration $m$. $m$  is the ratio between the input voltage, $v_{src}$,  and the output voltage,$v_o$, being defined as
    \begin{equation}
         m = \frac{v_o}{v_{src}}.
@@ -223,13 +225,104 @@ Up to date, there are three families of LED drivers:
    \end{equation} 
    owing to the fact that LED drivers have to be efficient, saying that at worst case 80\% efficiency can be accepted, such drivers could only be suitable where the ration between input voltage and load voltage is 0.8.  
    
-   Despite the fact that linear drivers are cheap and easy to integrate, their poor efficiencies and limitations in power conversion palace them in a unfavorable position as a realistic sortition for an integrated solution.  
+   Despite the fact that linear drivers are cheap and easy to integrate, their poor efficiencies and limitations in power conversion palace them in a unfavorable position as a realistic sortition for an integrated solution.   
    
-   
+  \item[Inductor Based Converters] are \emph{Switched Mode Power Supplies} (SMPS) \footnote{Electronic power supply that provides efficient electric power conversion by commuting between different circuit configurations (modes).}  that employ magnetic passive elements (i.e. inductors and transformers) to store energy and provide efficient electrical power conversion.
+      
+      This converters can provide step-up and step-down conversion for large dynamic ranges while keeping the efficiency very high. Besides the power conversion capabilities, these converters can provide also galvanic isolation, which, in many application, is compulsory in order to guarantee the safety of the users against electrical hazards. Such characteristics place these drivers as the preferred solution for the LED drivers manufacturers. Fig. \ref{fig:inductive_smps} the regulation characteristic curve of an inductor based converter. As shown, the theoretical efficiency of these converters is 100\% among all the conversion ratio range, in practice due to the parasitics in switches and inductors, the efficiency drops to a certain value with small fluctuations with respect to the conversion range.
+      
+      \begin{figure}[!h]
+      \centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[scale=0.65]
+\draw
+    (2.5,0) to[short]
+    (0,0) to[V = $V_{src}$]
+    (0,3) to[short]
+    (2.5,3) ;
+
+\draw
+    (2,3) --
+    (2.5,3)
+
+    (2,0) --
+    (2.5,0)
+
+    node  (IC)  at (2,0) {}
+    node  (I) at (2,3) {}
+    (I) to[open,v=$v_{i}$] (IC);
 
 
-  \item[Inductor Based Converters] are \emph{Switched Mode Power Supplies} (SMPS) 
+\draw [thick]
+    (2.5,-0.5) --
+    (2.5,3.5)  --
+    (5.5,3.5)  --
+    (5.5,-0.5) --
+    (2.5,-0.5);
+
+\draw (4,3.25)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
+
+\draw (3.5,2) to[L] (3.5,0);
+\draw (4.5,2) to[switch] (4.5,0);
+
+
+\draw
+    (5.5,0) to[short]
+    (7,0) to[ leD*,v_>=$v_{o}$]
+    (7,3) to[short,i_<=$i_o$]
+    (5.5,3) ;
+
+
+\begin{scope}[xshift = 10cm, yshift=0cm]
+            \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
+            \draw[->] (0,0) -- (0,3) node[anchor=west] {$\eta $};
+
+            %Ticks X
+            %\draw (3,2pt) -- (3,-5pt) node[anchor=north] {$1$};
+            %\draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
+
+            %Ticks Y
+            \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
+            \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$90\%$};
+
+            %Markers
+           % \draw[dotted] (3,2.5) -- (3,0);
+            \draw[dotted] (3,2.5) -- (0,2.5);
+            %\draw[dotted] (1.5,1.5) -- (1.5,0);
+            \draw[dotted] (1.5,1.5) -- (0,1.5);
+
+
+            \draw[thick] (0.5,2.5) -- (3,2.5) node[anchor=south] {$Theoretical$};
+            \draw[thick,dashed] (0.5,1.20) parabola[bend at end] (3,1.7) node[anchor=north] {$Real$};
+        \end{scope}
+  \end{circuitikz}
+\label{fig:inductive_smps}
+\caption{Generic two port block diagram of an inductor based SMPS, and the regulation-efficacy characteristic comparing the \emph{Theoretical} limit and the \emph{Real} case. }
+\end{figure}
+
+      The use of inductors is the main disadvantage of such converters. In practice the inductors dominate the entire volume of the LED drivers as shown in Fig. \ref{fig:smps_driver}. The size of the inductors is determined by the frequency of operation and voltage swing of the converter. At the same time, inductors are a challenge for integrated converters. Due to of the three dimensional nature of the magnetic components, the performance of the miniaturized versions are still far to fulfil the requirements for the consumer applications.  Research in that field are presenting new structures that can be assembled in the same package with the active devices, but the switching frequencies of the discrete derivers is not high enough to make use them.  
+      
+      \begin{figure}[!h]
+      \centering
+      \begin{tikzpicture}
+      \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[height=5cm,angle=90]{./0_intro/img/LED_driver.png}};
+      \begin{scope}[x={(image.south east)},y={(image.north west)}]
+        \draw[red,ultra thick,rounded corners] (0.70,0.3805) rectangle (0.855,0.7);
+        \draw[red,ultra thick,rounded corners] (0.11,0.1) rectangle (0.28,0.50);
+        \draw[red,ultra thick,rounded corners] (0.28,0.1) rectangle (0.63,0.62);
+    \end{scope}
+      \end{tikzpicture}
+        \caption{Magnetic components marked with a red square in a mains connected LED driver. The magnetic components dominate the volume of the converter.}
+        \label{fig:smps_driver}
+      \end{figure}
+        
+      
+      
+      
+      
+  
   \item[Switched Capacitors] dfa
+
 \end{description}
 
 
