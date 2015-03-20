@@ -40,6 +40,11 @@
     pdfborder = {0 0 0}
 }
 
+%Table 
+\usepackage{booktabs}
+\usepackage{multirow}
+\newcommand{\mcrot}[4]{\multicolumn{#1}{#2}{\rlap{\rotatebox{#3}{#4}~}}} 
+
 \begin{document}
 
 \title{Towards SC-enabled high density highly miniaturized power LED drivers: A model-centric optimization framework}
