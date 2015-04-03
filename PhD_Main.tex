@@ -26,7 +26,7 @@
 
 %Ploting packages
 \usepackage{tikz}
-\usepackage{pgfplots} 
+\usepackage{pgfplots}
 \usepackage{pgfplotstable}
 
 \usepackage{framed}
@@ -53,6 +53,9 @@
 \DeclareUnicodeCharacter{20AC}{\EurDig{}}
 
 \usepackage{pdflscape}
+
+%Roman numerals
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
 \begin{document}
 
 \title{Towards SC-enabled high density highly miniaturized power LED drivers: A model-centric optimization framework}
