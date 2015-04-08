@@ -26,6 +26,17 @@
 
 %Ploting packages
 \usepackage{tikz}
+\usetikzlibrary{arrows} 
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    % Define arrow style
+    pil/.style={
+           >-,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 

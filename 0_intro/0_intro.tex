@@ -178,7 +178,7 @@ The LED or LED chip\footnote{Electronic part composed by an assembly of LEDs con
 The Mechanical/Thermal/Electrical group that comprises heat sink, socket connector, PCBs and \emph{Electromagnetic Interference} (EMI) filter play still a relevant role with respect to the lamp design. The heat sink and the connector are in many cases the body of the lamp where the heat sink and helps to assemble the entire system. The traditional sockets, which are not design friendly, are currently kept in order to provide a fast transition for the current first wave of the \emph{LEDification}, the replacement period. Replacement lamps are also known as \emph{retrofit}\footnote{Adding the new LED technology to the older light bulb systems. In that way the end user can directly replace an incandescent lamp or a florescent tub by an LED one without needing to make any change in the current installation.} lamps. Actually the current offer of \emph{retrofitted} LED bulbs is already an evident prove of the successes achieved in that area, nowadays is already possible to find a replacement lamp for almost all sorts of old lamps. However \emph{retrofited} lamps will just have small market share as predicted in the lighting forecast of Figure~\ref{fig:lighting_forecast}. That is why innovations in the Mechanical/Thermal/Electrical group will be necessary for the coming light fixtures, to evolve and reinvent the future LED luminaries, where the small size, the low profile and the colored lights of the LEDs will play an relevant role.
 
 
-Third, the driver is with no doubt the most \emph{special} component of the entire lamp. It is referred as \emph{special} because it is the only element of the lamp that plays a role in the three factors of influence for market penetration: Intelligence, Design and Costs. First, the driver is the only element that brings the functionality to the lamp, therefore the only one that can incorporate the control and interactivity to the system. Second, its volume and its location influences the design of the lamp, the closer the driver to the LEDs is, the better the controllability and the intelligence of the system becomes. Finally the costs, actually up-to-now, reducing costs have been -with great results- the main research motivation for LED drivers. 
+Third, the driver is with no doubt the most \emph{special} component of the entire lamp. It is referred as \emph{special} because it is the only element of the lamp that plays a role in the three factors of influence for market penetration: Intelligence, Design and Costs. First, the driver is the only element that brings the functionality to the lamp, therefore the only one that can incorporate the control and interactivity to the system. Second, its volume and its location influences the design of the lamp, the closer the driver to the LEDs is, the better the controllability and the intelligence of the system becomes. Finally the costs, actually up-to-now, reducing costs have been -with great results- the main research motivation for LED drivers.
 
 Cost down reduction has enabled, up-to-now, to bring the prices for simple \emph{retrofited} lamps down to competitive levels. However the chosen circuit architectures for low cost drivers are very cost sensitive towards more intelligent drivers, as it can be seen with the different prices for the \emph{dimmable}, \emph{non-dimmable} and \emph{smart} lamps of  Table~\ref{tab:lighting_tech}. That is why, a different approach in the driver architectures is necessary  to respond the challenges for the future intelligent and connected LED lamps. In other words, the driver architecture that will provide power management, intelligence and connectivity together assembled in a reduced volume and at low cost will be, with no discussion, the key element to vertebrate the future of LED lighting technology.
 
@@ -195,247 +195,282 @@ The approach to meet the requirements for the future lamps will probably relay i
 
 Besides the size reduction that an integrated driver would suppose, such approach would also bring other benefits in terms of control and connectivity.  The power management unit and driver control unit could possibly be integrated together, providing the necessary intelligence for light control and the connectivity optimized for the requirements of the coming connected lighting industry. The \emph{Philips} \emph{HUE} lamp is a clear example of the requirements of the so called \emph{smart drivers}. That lamp provides a full light color gamut color control through a mobile and web application or through a remote control. The internal driver has four light channels red, green, orange and additional amber and at the same time provides wireless connectivity through ZigBee, being the electronic board populated with discrete power drivers and few micro-controller units. A solution capable to integrates all the functions in a single IC, or few ICs (one per channel), will definitely reduce packaging and assembling costs and still providing the same functionalities. At the same time, the expected market volume for SSL technologies will, with no doubt,  justify costs of a dedicated ASIC design for LED drivers. All-in-all has been the motivation of this PhD thesis, with  the goal to explore and identify new architectures that are suitable for integration for an efficient LED driver.
 
-%a  different approach in the LED drivers for the future generation of SSL systems.
-%
-%
-%
-%Owing to the fact of the the important role that the LED drivera will paly in the future LED based lamps
-%
-%
-%
-%
-%
-% for the LED bulbs making them more competitive in the market. However, the
-%
-%of the entire driver
-%
-%it has been main diver of research up-to-now
-%
-%
-%on the one hand the devoted research has achieved great results for the simple retrofired lamps. On the other hand these low cost drivers are very sensitive to necessary modifications for the future applications. It can be seen that as the drivers add some extra intelligence the price difference is very dramatic as shown in the prices of Table~\ref{tab:lighting_tech} between the \emph{dimmable}, \emph{non-dimmable} and \emph{smart} lamps. At the same time, this drive for very cheap drivers has detain the research efforts with respect to the power density for the driver, keeping it just to \emph{what it fits in the lamp}. However, as aforementioned the necessities of intelligent drivers require to place the drivers close to the LEDs, hence low form factors for the drivers will be necessary to implement the future generation of LED lamps.
-%
-%The combination of these three factors in the driver has been
-%
-%
-%
-%, being this is one of the design restrictions that plays the driver. The large volume of some components of the driver restrict to take advantage of the low from factor of the LEDs.
-%
-%The approach taken with respect the design of the driver has been to
-%
-%
-%
-%
-%Reducing the costs of the lamps has been the strategy taken for the first wave in the \emph{LEDification} process where retrofitting the old lamps is chosen as the way to target the end costumer. In on the one hand, fruitful results came form that research with new innovative solutions at very low costs that could be packed in almost all the light bulb shapes currently commercially available. But in the other hand, these new drivers had the incontinent of using very old components that at the same time restricted reduction of the circuit volume and made more complex the addition of extra control functionalities while keeping the initial low costs.
-%
-%\begin{figure}[!h]
-%\centering
-%\includegraphics[width=8cm]{./0_intro/img/FSolzbacher01.jpg}
-%\caption{Power System in a Package die. The circuit implements a buck converter.}
-%\label{fig:psoc_example}
-%\end{figure}
-%
-%\vspace{5mm} %5mm vertical space
-%
-%The second line of research has focus on reducing the volume of the driver circuit. That research topic arose when comparing the the volume of the LEDs and the driver, it is evidenced a mismatch between the two volume of the components, becoming in many cases the driver circuit the dominant element of the entire lamp. Such mechanical constrain supposes an obstacle to take the full advantage of the low form-facto of the LED in the future luminaries, where LED will not be assembled using the old fashioned cases. Therefore, that research has a much longer term vision for targeting the second of third generation of lights in the \emph{LEDification} process.
-%
-%The drive to reduce the volume of the drivers led to focus the research from the perspective of the integrated power supplies, where the power converter can be partially or fully integrated in a single package. There are two approaches of integrated power converters: \emph{Power System on Chip} (PSoC) or  \emph{Power System in Package} (PSiP). The first integrate all required power components, active and passive, in a single die. The second assemble all the components within the same package, keeping the appearance of an unique \emph{Integrated Circuit} (IC), see Figure~\ref{fig:psoc_example}. The advantages of having an integrated power management unit align with the necessities of the LED drivers, therefore trend of the drivers will be going towards having \emph{Power LED Drivers in Package} (PLDiP).
-%
 
 
 \section{Why a LED needs a driver?}
 
-As shown in Figure~\ref{fig:led_I-V} a LED has a very abrupt \emph{voltage-current} curve (V-I curve). For voltages below the \emph{forward voltage}, $V_{f}$, there is no current flow and the LED behaves as an open circuit. For voltages above $V_{f}$ the curve becomes very steep and the current increases dramatically with respect to the voltages, thus the LED behaves as short circuit. The driver supplies the LED to a specific operation point, $P$ in Figure~\ref{fig:led_I-V}, providing the desired output light. The colour and output flux (light intensity) will vary depending of the operation point, also known as bias point.  Own to the fact that the majority of commonly used  energy sources are voltage sources and LEDs require a limited amount of the current to operate at the desired bias point, it is necessary a circuit that controls the amount of current supplied by the source, that circuit is indeed the LEd \emph{Driver}.
+As shown in Figure~\ref{fig:led_I-V} a LED has a very abrupt \emph{voltage-current} curve (V-I curve). For voltages below the \emph{forward voltage}, $V_{f}$, there is no current flow and the LED behaves as an open circuit. For voltages above $V_{f}$ the curve becomes very steep and the current increases dramatically with respect to the voltages, thus the LED behaves as short circuit. The driver supplies the LED to a specific operation point, $P$ in Figure~\ref{fig:led_I-V}, providing the desired output light. The colour and output flux (light intensity) will vary depending of the operation point, also known as bias point.  Own to the fact that the majority of commonly used energy sources are voltage sources and, at the same time, LEDs require a limited amount of the current to operate at the desired bias point, it is necessary a circuit that controls the amount of current supplied by the source, that circuit is, indeed, the LED \emph{Driver}.
 
 
 \begin{figure}[!h]
 \centering
-\begin{tikzpicture}[domain=0:5]
-    \draw [->] (0,0) -- (4.5,0) node[anchor=west]{$V$};
-    \draw [->] (0,0) -- (0,4.5) node[anchor=east]{$I$};
+
+\begin{tikzpicture}[domain=0:6]
+    \draw [->] (0,0) -- (5.5,0) node[anchor=west]{$V$};
+    \draw [->] (0,0) -- (0,5.5) node[anchor=east]{$I$};
 
     %Mark Vth
     \draw (2,2pt) -- (2,-5pt) node[anchor=north] {$V_{f}$};
-
+    
+    %Mark Vthmin and Vt_max
+    \def\dvf{0.25}
+    \def\dvftop{0.45}
+    
+    \draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {};
+    \draw (2.5,2pt) -- (2.5,-5pt) node[anchor=north] {};
+    \draw[dotted] (1.5,0) -- (1.5,\dvftop);
+    \draw[dotted] (2.5,0) -- (2.5,\dvftop);
+    %Mark Delta Vf
+    \draw[pil,>-< ,dotted] (1.25,\dvf) -- (2.75,\dvf);
+    \draw (1,\dvf) -- (1.5,\dvf) node[anchor=south east] {$\Delta V_f$};
+    
+    
     %Draw ideal plot
-    \draw[thick] (0,0) -- (2,0) -- (4,4);
+    \draw[thick] (0,0) -- (2,0) -- (4.5,5);
+    
+    %Draw lower limit 
+    \draw[dashed] (0,0) -- (1.5,0) -- (4,5);
+    %Draw higher limit
+    \draw[dashed] (0,0) -- (2.5,0) -- (5,5);
 
-    %Draw bias points
-    \draw[dashed] (3,2) -- (3,-0);
-    \draw (3,2pt) -- (3,-5pt) node[anchor=north]  {$V_{bias}$};
+    %Draw bias point projection
+    \draw[dotted] (4,4) -- (4,-0);
+    \draw (4,2pt) -- (4,-5pt) node[anchor=north]  {$V_{bias}$};
 
-    \draw[dashed] (3,2) -- (-0,2);
-    \draw (2pt,2) -- (-5pt,2) node[anchor=east]  {$I_{bias}$};
-    \filldraw (3,2) circle(2pt) node[anchor=west] {$P$};
+    \draw[dotted] (4,4) -- (-0,4);
+    \draw (2pt,4) -- (-5pt,4) node[anchor=east]  {$I_{bias}$};
+    
+    %Draw bias point
+    \filldraw (4,4) circle(2pt) node[anchor=south west] {$P$};
 
+    %Draw bias point variations
+    \draw (4.5,4)  node[anchor=south west] {};
+    \draw (3.5,4)  node[anchor=south west] {};
+    
+    %\draw[loosely dotted] (4.5,4) -- (4.5,-0);
+    %\draw[loosely dotted] (3.5,4) -- (3.5,-0);
+    \draw (4,2pt) -- (4,-5pt) node[anchor=north]  {$V_{bias}$};
+    %Mark Vthmin and Vt_max
+    \def\bpmi{4.5}
+    \def\bpMa{3.5}
+    %\draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {};
+    %\draw (2.5,2pt) -- (2.5,-5pt) node[anchor=north] {};
+    %\draw[dotted] (1.5,0) -- (1.5,\dvftop);
+    %\draw[dotted] (2.5,0) -- (2.5,\dvftop);
+    %Mark Delta Vf
+    %\draw[pil,>-< ,dotted] (3.25,\dvf) -- (4.75,\dvf);
+    %\draw (4.5,\dvf) -- (5,\dvf) node[anchor=south west] {$\Delta V_{bias}$};
+    
+    %Mark Vthmin and Vt_max
+    \def\dvf{4}
+    %\draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {};
+    %\draw (2.5,2pt) -- (2.5,-5pt) node[anchor=north] {};
+    %\draw[dotted] (1.5,0) -- (1.5,\dvftop);
+    %\draw[dotted] (2.5,0) -- (2.5,\dvftop);
+    %Mark Delta Vf
+    \draw[pil,>-< ,dotted] (3.25,\dvf) -- (4.75,\dvf);
+    \draw (4.5,\dvf) -- (5,\dvf) node[anchor=south west] {$\Delta V_{bias}$};
 
 
 \end{tikzpicture}
-\caption {}
+\caption{Idealized LED voltage-current with the \emph{forward voltage} $V_f$  identified and projection of  the \emph{bias point} P }
 \label{fig:led_I-V}
 \end{figure}
 
-At the first glance, keeping a constant bias current, $I_bias$, through the LED does not seems to be challenging. However LED V-I characteristic is not static, in practice LEDs have different sources of deviations and the LED drivers have to deal with them in order to keep delivering the desired light output. First, $V_f$ has a negative dependence with the temperature, drooping its values as the PN junction temperature increases. Second, the LED has an aging factor derating its light output over time, which has to be adjusted by changing the bias point. And last, during production LEDs will vary in colour, flux and forward voltage; even for products from the same batch. The manufacturer reduced the dispersion between devices by binning \footnote{Quality control performed at LED production line, where each LED is individual tested and sorted in groups (bins) that have the same electrical and lighting characteristics.}, but still after binning it can be deviations from up to $10\%$ in $V_f$ for the same part number. All-in-all LEDs have to be supplied to a specific bias point despite the deviation in their characteristics and it is the LED driver the circuit responsible for that task.
+At the first glance, keeping a constant bias current, $I_bias$, through the LED does not seems to be challenging. However LED V-I characteristic is not static, in practice LEDs have different sources of deviations and the LED drivers have to deal with them in order to keep delivering the desired light output. First, $V_f$ has a negative dependence with the temperature, drooping its values as the PN junction temperature increases. Second, the LED has an aging factor which derates the light output over time, and has to be adjusted by changing the bias point. And last, during production LEDs will vary in colour, flux and forward voltage; even for products from the same batch. The manufacturers have reduced the dispersion between devices by binning \footnote{Quality control performed at LED production line, where each LED is individual tested and sorted in groups (bins) that have the same electrical and lighting characteristics.}, but still after binning, the parts suffer deviations, \emph{e.g.} $10\%$ in $V_f$. Figure ~\ref{fig:led_I-V} shows graphicly how deviations in $V_f$ produce a displacement in the V-I characteristic,  which require to modify the $V_{bias}$ within a certain range $\Delta V_{bias}$ in order to keep $I_{bias}$ constant. All-in-all LEDs lamps have to
+provide certain desired light output (or range) despite variations in the LED characteristics or of the voltage supply, thus is that control function which adds special complexity to the driver circuit.
 
-Up to date, there are three big families of LED drivers that will be presented in the following sections.
+
+Up to date, there are three big families of LED drivers that will be presented in the following sections from the integrate power supplies perspective.
 
 \section{Linear Drivers}
 
- Linear drivers place a shunt element between the source and the LED. The shunt element limits the current in the LED providing the necessary voltage droop between the source and the load. The excess of voltage between the source and the load is dissipated in the shunt element, literally burned in form of heat; therefore this drivers become very inefficient if the LED voltage is not close to the source. Moreover this drivers can only provide step-down conversion, thus they cannot work when the load voltage is higher than the input supply.
+Linear drivers place a shunt element between the source and the LED. The shunt element limits the current in the LED providing the necessary voltage droop between the source and the load. The excess of voltage between the source and the load is dissipated in the shunt element, literally burned in form of heat; therefore these drivers become very inefficient if the LED voltage is not close to the source. Moreover such drivers can only provide step-down conversion, thus they cannot work when the load voltage is higher than the input supply.
 
 \begin{figure}[!h]
-        \centering
-        \ctikzset { bipoles/length=1cm}
-        \begin{circuitikz} [scale=0.65]
-        \draw
+\centering
+\ctikzset { bipoles/length=1cm}
+\begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \begin{circuitikz} [scale=0.65]
+    \draw
         (5,0) to[short]
         (0,0) to[V = $v_{src}$]
         (0,3) to[generic=${Shunt}$,i=$i_o$]
         (5,3);
-        \draw
-        (5,0) to[leD*,v_>=$v_{o}$] (5,3);
+    \draw (5,0) to[leD*,v_>=$v_{o}$] (5,3);
+    \end{circuitikz}
+    \caption{}
+    \label{fig:linear_ckt}
+\end{subfigure}
+\begin{subfigure}[t]{.45\textwidth}
+    \begin{circuitikz} [scale=0.65]
+    \begin{scope}%[xshift = 8cm, yshift=0cm]
+        \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
+        \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
-        \begin{scope}[xshift = 8cm, yshift=0cm]
-            \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
-            \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
+        %Ticks X
+        \draw (3,2pt) -- (3,-5pt) node[anchor=north] {$1$};
+        \draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
 
-            %Ticks X
-            \draw (3,2pt) -- (3,-5pt) node[anchor=north] {$1$};
-            \draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
+        %Ticks Y
+        \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
+        \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$70\%$};
 
-            %Ticks Y
-            \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
-            \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$70\%$};
-
-            %Markers
-            \draw[dotted] (3,2.5) -- (3,0);
-            \draw[dotted] (3,2.5) -- (0,2.5);
-            \draw[dotted] (1.5,1.5) -- (1.5,0);
-            \draw[dotted] (1.5,1.5) -- (0,1.5);
-
-
-            \draw[thick] (3,2.5) -- (0,0.5);
-
-
-
-        \end{scope}
-
-        \end{circuitikz}
-        \caption{Linear LED driver schematic}
-        \label{fig:linear_drv}
-       \end{figure}
-
-   The circuit of the Figure~\ref{fig:linear_drv} shows schematic of a linear driver, the shunt element can be implemented with just a resister of with an active device, the second enables regulation for variations in the source and in the load. Both cases linear drivers are very simple to implement, with very low costs and taking almost no volume, being indeed the perfect solution for integration.
+        %Markers
+        \draw[dotted] (3,2.5) -- (3,0);
+        \draw[dotted] (3,2.5) -- (0,2.5);
+        \draw[dotted] (1.5,1.5) -- (1.5,0);
+        \draw[dotted] (1.5,1.5) -- (0,1.5);
 
 
+        \draw[thick] (3,2.5) -- (0,0.5);
+    \end{scope}
+    \end{circuitikz}
+    \caption{}
+\label{fig:linear_chr}
+\end{subfigure}
+\caption{Linear driver, \emph{left}- schematic; \emph{righ}- conversion ratio vs. efficiency characteristics}
+\label{fig:linear_drv}
+\end{figure}
 
-   The plotted graph presents the variation of the driver efficiency with respect to the conversion ration $m$. $m$  is the ratio between the input voltage, $v_{src}$,  and the output voltage,$v_o$, being defined as
+The circuit of the Figure~\ref{fig:linear_ckt} shows schematic of a linear driver, the shunt element can be implemented with just a resistor of with an active device. The firs will impose a current depending on the input source and the load conditions; the second will provide regulation of the bias point for variations in the source and in the load. Linear drivers are very simple to implement, with very low costs and taking almost no volume, being indeed the perfect solution for integration.
+
+
+The plotted graph in Figure~\ref{ig:linear_chr} presents the variation of the driver efficiency with respect to the conversion ration $m$. Where $m$  is the ratio between the input voltage, $v_{src}$,  and the output voltage,$v_o$, being defined as
    \begin{equation}
         m = \frac{v_o}{v_{src}}.
    \end{equation}
 
-   The efficiency of the driver is the ratio between the input power and the output power
+The efficiency of the driver is the ratio between the input power and the output power
    \begin{equation}
         \eta = \frac{P_o}{P_i} = \frac{v_o i_o}{v_{src} i_o} = \frac{v_o}{v_{src}},
    \end{equation}
-   thus we can see that for this case the efficiency is indeed the conversion ratio
+
+hence for this case the efficiency is indeed equal to the conversion ratio
    \begin{equation}
         \eta = m,
    \end{equation}
-   owing to the fact that LED drivers have to be efficient, saying that at worst case 80\% efficiency can be accepted, such drivers could only be suitable where the ration between input voltage and load voltage is 0.8.
+owing to the fact that LED drivers have to be efficient, saying that at worst case 80\% efficiency can be accepted, such drivers could only be suitable where the ration between input voltage and load voltage is 0.8.
 
-   Despite the fact that linear drivers are cheap and easy to integrate, their poor efficiencies and limitations in power conversion palace them in a unfavorable position as a realistic sortition for an integrated solution.
+Despite the fact that linear drivers are cheap and easy to integrate, their poor efficiencies and limitations in power conversion palace them in a unfavorable position as for a reliable architecture for an integrated solution.
 
 \section{Inductor Based Converters}
 
-Inductor Based Converters (IBCs) are \emph{Switched Mode Power Supplies} (SMPS) \footnote{Electronic power supply that provides efficient electric power conversion by commuting between different circuit configurations (modes).}  that employ magnetic passive elements (i.e. inductors and transformers) to store energy and provide efficient electrical power conversion. Since IBCs have are very efficient in voltage-to-current conversion they are ideal as LED drivers.
+\emph{Inductor Based Converters} (IBCs) are \emph{Switched Mode Power Supplies} (SMPS) \footnote{Electronic power supply that provides efficient electric power conversion by commuting between different circuit configurations (modes).}  that employ magnetic passive elements (i.e. inductors and transformers) to store energy and provide efficient electrical power conversion. Since IBCs have are very efficient in voltage-to-current conversion they are ideal as LED drivers.
 
-This converters can provide step-up and step-down conversion for large dynamic ranges while keeping the efficiency very high. Besides the power conversion capabilities, these converters can provide also galvanic isolation, which, in many application, is compulsory in order to guarantee the safety of the users against electrical hazards. Such characteristics place these drivers as the preferred solution for the LED drivers manufacturers. Figure~\ref{fig:inductive_smps} the regulation characteristic curve of an inductor based converter. As shown, the theoretical efficiency of these converters is 100\% among all the conversion ratio range, in practice due to the parasitics in switches and inductors, the efficiency drops to a certain value with small fluctuations with respect to the conversion range.
-
-Despite the aforementioned advantages of these converters they are not still very bulky with respect to the LEDs.  In practice, inductors dominate the entire volume of the LED drivers as shown in Figure~\ref{fig:smps_driver}.
+These converters can provide step-up and step-down conversion for large dynamic ranges while keeping the efficiency very high. On top of their power conversion capabilities, such converters can also provide galvanic isolation, which in many applications, is compulsory in order to guarantee the safety of the users against electrical hazards. Such characteristics place these drivers as the preferred solution for the LED drivers manufacturers. Figure~\ref{fig:inductive_smps} the regulation characteristic curve of an inductor based converter. As shown, the theoretical efficiency of these converters is 100\% among all the conversion ratio range, in practice due to the parasitics in switches and inductors, the efficiency drops to a certain value with small fluctuations with respect to the conversion range.
 
 \begin{figure}[!h]
-      \centering
+\centering
 \ctikzset { bipoles/length=1cm}
-\begin{circuitikz}[scale=0.65]
-\draw
-    (2.5,0) to[short]
-    (0,0) to[V = $V_{src}$]
-    (0,3) to[short]
-    (2.5,3) ;
+\begin{subfigure}[t]{.45\textwidth}
+    %\centering
+    \raggedright
+    \begin{circuitikz} [scale=0.65]
+    \draw
+        (2.5,0) to[short]
+        (0,0) to[V = $V_{src}$]
+        (0,3) to[short]
+        (2.5,3) ;
 
-\draw
-    (2,3) --
-    (2.5,3)
+    \draw
+        (2,3) --
+        (2.5,3)
 
-    (2,0) --
-    (2.5,0)
+        (2,0) --
+        (2.5,0)
 
     node  (IC)  at (2,0) {}
     node  (I) at (2,3) {}
     (I) to[open,v=$v_{i}$] (IC);
 
 
-\draw [thick]
-    (2.5,-0.5) --
-    (2.5,3.5)  --
-    (5.5,3.5)  --
-    (5.5,-0.5) --
-    (2.5,-0.5);
+    \draw [thick]
+        (2.5,-0.5) --
+        (2.5,3.5)  --
+        (5.5,3.5)  --
+        (5.5,-0.5) --
+        (2.5,-0.5);
 
-\draw (4,3.25)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
+    \draw (4,3.25)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
 
-\draw (3.5,2) to[L] (3.5,0);
-\draw (4.5,2) to[switch] (4.5,0);
-
-
-\draw
-    (5.5,0) to[short]
-    (7,0) to[ leD*,v_>=$v_{o}$]
-    (7,3) to[short,i_<=$i_o$]
-    (5.5,3) ;
+    \draw (3.5,2) to[L] (3.5,0);
+    \draw (4.5,2) to[switch] (4.5,0);
 
 
-\begin{scope}[xshift = 10cm, yshift=0cm]
-            \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
-            \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
+    \draw
+        (5.5,0) to[short]
+        (7,0) to[ leD*,v_>=$v_{o}$]
+        (7,3) to[short,i_<=$i_o$]
+        (5.5,3) ;
 
-            %Ticks X
-            %\draw (3,2pt) -- (3,-5pt) node[anchor=north] {$1$};
-            %\draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
+    \end{circuitikz}
+    \caption{}
+    \label{fig:linear_ckt}
+\end{subfigure}
+\begin{subfigure}[t]{.45\textwidth}
+    %\centering
+    \raggedleft
+    \begin{circuitikz} [scale=0.65]
+    \begin{scope}%[xshift = 8cm, yshift=0cm]
+        \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
+        \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
-            %Ticks Y
-            \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
-            \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$90\%$};
+        %Ticks X
+        %\draw (3,2pt) -- (3,-5pt) node[anchor=north] {$1$};
+        %\draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
 
-            %Markers
-           % \draw[dotted] (3,2.5) -- (3,0);
-            \draw[dotted] (3,2.5) -- (0,2.5);
-            %\draw[dotted] (1.5,1.5) -- (1.5,0);
-            \draw[dotted] (1.5,1.5) -- (0,1.5);
+        %Ticks Y
+        \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
+        \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$90\%$};
+
+        %Markers
+        % \draw[dotted] (3,2.5) -- (3,0);
+        \draw[dotted] (3,2.5) -- (0,2.5);
+        %\draw[dotted] (1.5,1.5) -- (1.5,0);
+        \draw[dotted] (1.5,1.5) -- (0,1.5);
 
 
-            \draw[thick] (0.5,2.5) -- (3,2.5) node[anchor=south] {$Theoretical$};
-            \draw[thick,dashed] (0.5,1.20) parabola[bend at end] (3,1.7) node[anchor=north] {$Real$};
-        \end{scope}
-\end{circuitikz}
-\caption{Generic two port block diagram of an inductor based SMPS, and the regulation-efficacy characteristic comparing the \emph{Theoretical} limit and the \emph{Real} case. }
+        \draw[thick] (0.5,2.5) -- (3,2.5) node[anchor=south] {$Theoretical$};
+        \draw[thick,dashed] (0.5,1.20) parabola[bend at end] (3,1.7) node[anchor=north] {$Real$};
+    \end{scope}
+    \end{circuitikz}
+    \caption{}
+\label{fig:linear_chr}
+\end{subfigure}
+\caption{Inductor based converter, \emph{left} - buck converter schematic; \emph{right}  characteristic comparing the \emph{Theoretical} limit and the \emph{Real} case. }
 \label{fig:inductive_smps}
 \end{figure}
 
 
-Increasing the switching frequency or reducing the voltages swing are the two possible methods in order to reduce the value, thus the size, of the magnetic components.
 
-Miniaturization of magnetic components is a challenge due to of their 3-D mechanical structure.
-The performances of the integrated inductors are still far to fulfil the requirements for the consumer applications.  Research in that field are presenting new structures that can be assembled in the same package with the active devices, but the switching frequencies of the discrete derivers is not high enough to make use them.
+\begin{figure}[!h]
+      \centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[scale=0.65]
+
+
+\begin{scope}[xshift = 10cm, yshift=0cm]
+            
+        \end{scope}
+\end{circuitikz}
+
+\end{figure}
+
+On of the disadvantage of these converters are the magnetics, and the volume related to them. In practice, inductors dominate the entire volume of the LED drivers as shown in Figure~\ref{fig:smps_driver}. Integrated implementations of these converters suffer the challenges of using integrated magnetic components. The present \emph{very-large integration scale} (VLSI) technologies do not yet offer power inductors in the commercial implementations, and the other integrated inductors are not yet mature for products out of the research phase.
+
+Yet another disadvantage for integration is the voltage stress in the switches of the converter. Switches in inductive converters have to withstand the full operational voltage, which depending on the application range from tens to few hundred of volts. Using high voltage devices have three main drawbacks: First, the losses in the devices scale quadratically with the voltage  stress. Second, worst switching performances, being high voltage devices less efficient and slower in the switching transitions. Third, the standard VLSI technologies do not offer these devices and the VLSI technologies that offer them are less performance and more expensive than the dedicated discrete technologies.
 
 \begin{figure}[!h]
 \centering
 \begin{tikzpicture}
 \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[height=5cm,angle=90]{./0_intro/img/LED_driver.png}};
 \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%\draw [<-,thick] (0.75,0.5) -- (0.855,0.7)  node [anchor=south west] {Power Magnet};
 \draw[red,ultra thick,rounded corners] (0.70,0.3805) rectangle (0.855,0.7);
 \draw[red,ultra thick,rounded corners] (0.11,0.1) rectangle (0.28,0.50);
-\draw[red,ultra thick,rounded corners] (0.28,0.1) rectangle (0.63,0.62);
+\draw[orange,ultra thick,rounded corners] (0.28,0.1) rectangle (0.63,0.62);
 \end{scope}
 \end{tikzpicture}
 \caption{Magnetic components marked with a red square in a mains connected LED driver. The magnetic components dominate the volume of the converter.}
@@ -443,16 +478,12 @@ The performances of the integrated inductors are still far to fulfil the require
 \end{figure}
 
 
-
-
-
-
 \section{Switched Capacitors}
-Switched Capacitor Converters (SCCs) are \emph{dc-dc} power circuits composed only by switches and capacitors that provide efficient voltage conversion. SCCs have been long known and utilized, initially for voltage multiplication and more recently for voltage regulation as well. Compared to inductor based power converters, the absence of magnetic elements makes them suitable for high density power systems and integrated solutions , such as Power-System-in-Package (PSiP) or Power-System-on-Chip (PSoC).
+Switched Capacitor Converters (SCCs) are \emph{dc-dc} power circuits composed only by switches and capacitors that provide efficient voltage conversion. Such converters have been initially used for voltage multiplication and more recently in applications that need voltage regulation as well. Compared to inductor based power converters, the absence of magnetic elements makes them suitable for high density power systems and integrated solutions, such as Power-System-in-Package (PSiP) or Power-System-on-Chip (PSoC).
 
-SCCs have a fix ratio of conversion between the input and the output determined by the topology. The output voltage of the converter under no load conditions is defined as \emph{target voltage} ($v_t$), and its efficiency is very high when the load is supplied close to the \emph{target voltage}. If the output voltage goes below the \emph{target voltage} the efficiency drops, similar to the linear drivers.  The converter can not supply voltages above the \emph{target voltage}.
+SCCs have a fix ratio of conversion between the input and the output determined by the topology. The output voltage of the converter under no load conditions is defined as \emph{target voltage} ($v_t$). The converter performs at high efficiency when the load is supplied close to the \emph{target voltage}. Similar to the linear drivers, if the output voltage goes below the \emph{target voltage} the efficiency drops and if the output voltage is above their \emph{target voltage} the converter cannot operate.
 
-A common practice to extend the regulation margins of these converters is to have topologies with multiple conversion rations as shown in the plot of Figure~\ref{fig:SCC_driver}. We can see that efficiency increases as the ration $m$ gets close to the first fixed conversion ration of the converter $m_1$; right after $m_1$ the efficiency drops dramatically and it linearly increases as it approaches the second fixed conversion ratio of the converter $m_2$.
+A common practice to extend the regulation margins of these converters is to have topologies with multiple conversion rations as shown in the circuit of Figure~\ref{fig:SCC_driver}. From Figure~\ref{fig:SCC_driver} it can be seen that the efficiency increases as the ration $m$ gets close to the first fixed conversion ration of the converter $m_1$; right after $m_1$ the efficiency drops again dramatically and it linearly increases as it approaches the second fixed conversion ratio of the converter $m_2$. Beyond $m_2$ the converter does not work.
 
 \begin{figure}[!h]
       \centering
@@ -522,16 +553,13 @@ A common practice to extend the regulation margins of these converters is to hav
         \end{scope}
   \end{circuitikz}
 \caption{Generic two port block diagram of an inductor based SMPS, and the regulation-efficacy characteristic comparing the \emph{Theoretical} limit and the \emph{Real} case. }
-\label{fig:inductive_smps}
+\label{fig:SCC_smps}
 \end{figure}
 
-The main advantages of these converters is that they use no inductors, which make them very favorable for integration. Integrated capacitors have a better energy density than integrated inductors. The mechanical structure of the capacitors, a stack of isolator-metal-isolator, is much easier to replicate in small scale.
-Other advantage of the switch capacitors is that they divide the absolute voltage applied to the converter with the different elements, thus reducing the voltage stress in the switches and capacitors. This voltage reduction in the components is also very relevant from the point of view of integration. First, at lower voltage capacitors have better performances: more energy density, less derating and better chances of integration. Second, lower voltage switches perform better at high frequencies. And third, the lower the blocking voltage of switches is the less silicon area needed and the more standard the fabrication process is, thus reducing the production costs.
+The main advantages of these converters is that they use no inductors, which make them very favorable for integration. Integrated capacitors have a better energy density than integrated inductors. The mechanical structure of the capacitors, a stack of isolator-metal-isolator, is much easier to replicate in small scale. Yet another advantage of the switch capacitors is that they split the absolute voltage applied to the converter with the different components, thus reducing the voltage stress in the switches and capacitors. Such voltage stress reduction is very interesting from the point of view of integration. First, at lower voltage capacitors have better performances: more energy density, less derating and better chances of integration. Second, lower voltage switches have better switching performances. Finally, low voltage devices take less silicon area and there is more offer in the standard VLSI technologies, thus reducing the production costs.  
 
-The big disadvantage of these converters is that they can not provide voltage-to-current conversion. Nevertheless, they are used for as LED driver in backlighting applications for battery supplied portable devices. In such cases, the SCCs steps-up or steps-down the battery voltage and afterwards a linear driver   provides the tight regulation that LEDs require. Adopting that architecture for general lighting could be a solution, but when we scale voltages and currents to the values used in such applications,  the number of necessary conversion steps of the SCC would make it totally infeasible and inefficient.
+The big disadvantage of these converters is that they can not provide the voltage-to-current conversion required for the LEDs to work. Nevertheless they are still used as LED drivers in backlighting applications in battery supplied devices. In such cases, the SCCs steps-up or steps-down the battery voltage and afterwards a linear driver  provides current regulation to bias properly the LEDs. Adopting that architecture for general lighting could be a solution but when  voltages and currents are scaled to the values used in these applications the number of necessary conversion steps of the SCC would make it totally infeasible and inefficient.
 
-On the one hand, the limitation in voltage-to-current conversion would place switched capacitors out of the target architectures as power LED drivers circuits. But on the other hand, their advantageous characteristics for integration made this circuits very attractive as a possible solution for an PSoC/PSiP LED driver. Both arguments have been the motivation and the driver of the research presented in this book.
+A priory adopting SCCs architectures as general LED drivers seems to be not an evident choice. On the one hand, their limitation in voltage-to-current conversion would place switched capacitors directly out of the possible candidates. However on the other hand, the advantageous characteristics of switched capacitors for integration made this circuits very attractive. Actually if the initial limitations in voltage-to-current conversion could be overcame, such architecture would be an interesting candidate to explore as a solution for a Power System \emph{on-Chip/in-Package} LED driver. Therefore the last statement was the research motivation  result of this PhD. dissertation.
 
-The book is divided in the four main sections that where necessary to build a switched capacitor LED driver. The first section introduces the new LED driver architecture used during the entire thesis, the \emph{Hybrid-Switched Capacitor Converter}, H-SCC from now on. The second part of this book, the core of this dissertation, presents the methodology to model H-SCC. The methodology extends the previous works in the topic providing an enhanced modeling for the design of SCCs and H-SCCs. The third section is devoted to the practical use of the new methodology, thus for the design phase of a converter. The modeling is used  to help in the development facilitating the sizing and optimization of the design variables. The last section presents a discrete implementation of 12W H-SCC LED driver and the design procedure. Although is not a regular practice, experimental work is not only presented in the in the last section. The experimental work has been used to also validate the new modeling methodology. The final section is the conclusion of the entire work and the new opportunities that can follow from it.
-
-
+This PhD. disoperation is divided in the four main sections that where necessary to build a switched capacitor LED driver. The first section introduces the new LED driver architecture used during the entire thesis, the \emph{Hybrid-Switched Capacitor Converter}, H-SCC from now on. The second part of this book, the core of the PhD. work, presents the methodology to model H-SCC. The methodology extends the previous works in the topic providing an enhanced modeling for the design of SCCs and H-SCCs. The third section is devoted to the practical use of the new methodology, thus for the design phase of a converter. The modeling is used  to help in the development facilitating the sizing and optimization of the design variables. The last section presents a discrete implementation of 12W H-SCC LED driver and the design procedure. Although is not a regular practice, experimental work is not only presented in the in the last section. The experimental work has been also  used to validate the presented modeling and methodology. The final section is the conclusion of the entire work and the future opportunities that the presented work can offer.
