@@ -369,45 +369,15 @@ These converters can provide step-up and step-down conversion for large dynamic 
     \raggedright
     \begin{circuitikz} [scale=0.65]
     \draw
-        (2.5,0) to[short]
-        (0,0) to[V = $V_{src}$]
-        (0,3) to[short]
-        (2.5,3) ;
-
-    \draw
-        (2,3) --
-        (2.5,3)
-
-        (2,0) --
-        (2.5,0)
-
-    node  (IC)  at (2,0) {}
-    node  (I) at (2,3) {}
-    (I) to[open,v=$v_{i}$] (IC);
-
-
-    \draw [thick]
-        (2.5,-0.5) --
-        (2.5,3.5)  --
-        (5.5,3.5)  --
-        (5.5,-0.5) --
-        (2.5,-0.5);
-
-    \draw (4,3.25)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
-
-    \draw (3.5,2) to[L] (3.5,0);
-    \draw (4.5,2) to[switch] (4.5,0);
-
-
-    \draw
-        (5.5,0) to[short]
-        (7,0) to[ leD*,v_>=$v_{o}$]
-        (7,3) to[short,i_<=$i_o$]
-        (5.5,3) ;
+        (5,0) to[short]
+        (0,0) to[V = $v_{src}$]
+        (0,3) to[generic=${Shunt}$,i=$i_o$]
+        (5,3);
+    \draw (5,0) to[leD*,v_>=$v_{o}$] (5,3);
 
     \end{circuitikz}
     \caption{}
-    \label{fig:linear_ckt}
+    \label{fig:induct_ckt}
 \end{subfigure}
 \begin{subfigure}[t]{.45\textwidth}
     %\centering
@@ -437,7 +407,7 @@ These converters can provide step-up and step-down conversion for large dynamic 
     \end{scope}
     \end{circuitikz}
     \caption{}
-\label{fig:linear_chr}
+\label{fig:induc_chr}
 \end{subfigure}
 \caption{Inductor based converter, \emph{left} - buck converter schematic; \emph{right}  characteristic comparing the \emph{Theoretical} limit and the \emph{Real} case. }
 \label{fig:inductive_smps}
