@@ -306,12 +306,12 @@ Linear drivers place a shunt element between the source and the LED. The shunt e
 \begin{subfigure}[t]{.45\textwidth}
     \begin{circuitikz} [scale=0.65]
     \begin{scope}%[xshift = 8cm, yshift=0cm]
-        \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
+        \draw[->] (0,0) -- (4,0) node[anchor=south] {$  m $};
         \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
         %Ticks X
-        \draw (3,2pt) -- (3,-5pt) node[anchor=north] {$1$};
-        \draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
+        \draw (3,-5pt) -- (3,2pt)  node[anchor=south west] {$1$};
+        \draw (1.5,-5pt) -- (1.5,2pt)   node[anchor=south west] {$0.7$};
 
         %Ticks Y
         \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
@@ -359,7 +359,7 @@ Despite the fact that linear drivers are cheap and easy to integrate, their poor
 
 \emph{Inductor Based Converters} (IBCs) are \emph{Switched Mode Power Supplies} (SMPS) \footnote{Electronic power supply that provides efficient electric power conversion by commuting between different circuit configurations (modes).}  that employ magnetic passive elements (i.e. inductors and transformers) to store energy and provide efficient electrical power conversion. Since IBCs have are very efficient in voltage-to-current conversion they are ideal as LED drivers.
 
-These converters can provide step-up and step-down conversion for large dynamic ranges while keeping the efficiency very high. On top of their power conversion capabilities, such converters can also provide galvanic isolation, which in many applications, is compulsory in order to guarantee the safety of the users against electrical hazards. Such characteristics place these drivers as the preferred solution for the LED drivers manufacturers. Figure~\ref{fig:inductive_smps} the regulation characteristic curve of an inductor based converter. As shown, the theoretical efficiency of these converters is 100\% among all the conversion ratio range, in practice due to the parasitics in switches and inductors, the efficiency drops to a certain value with small fluctuations with respect to the conversion range.
+These converters can provide step-up and step-down conversion for large dynamic ranges while keeping the efficiency very high. On top of their power conversion capabilities, such converters can also provide galvanic isolation, which in many applications, is compulsory in order to guarantee the safety of the users against electrical hazards. Such characteristics place these drivers as the preferred solution for the LED drivers manufacturers. Figure~\ref{fig:induct_ckt} shows one of the most popular implementations for LED drivers the \emph{buck} converter.  Figure~\ref{fig:induc_chr} presents the regulation characteristic curve of a generic  inductor based converter. As shown, the theoretical efficiency of these converters is 100\% among all the conversion ratio range, in practice due to the parasitics in switches and inductors, the efficiency drops to a certain value with small fluctuations with respect to the conversion range.
 
 \begin{figure}[!h]
 \centering
@@ -369,11 +369,15 @@ These converters can provide step-up and step-down conversion for large dynamic 
     \raggedright
     \begin{circuitikz} [scale=0.65]
     \draw
-        (5,0) to[short]
+        (6.5,0) to[short]
         (0,0) to[V = $v_{src}$]
-        (0,3) to[generic=${Shunt}$,i=$i_o$]
-        (5,3);
-    \draw (5,0) to[leD*,v_>=$v_{o}$] (5,3);
+        (0,3) to[switch]
+        (3,3) to[inductor=${L}$,i=$i_o$]
+        (6.5,3);
+    
+    \draw (2.5,3) to[switch] (2.5,0);     
+        
+    \draw (6.5,0) to[leD*,v_>=$v_{o}$] (6.5,3);
 
     \end{circuitikz}
     \caption{}
@@ -384,7 +388,7 @@ These converters can provide step-up and step-down conversion for large dynamic 
     \raggedleft
     \begin{circuitikz} [scale=0.65]
     \begin{scope}%[xshift = 8cm, yshift=0cm]
-        \draw[->] (0,0) -- (4,0) node[anchor=north] {$  m $};
+        \draw[->] (0,0) -- (4,0) node[anchor=south] {$  m $};
         \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
         %Ticks X
@@ -409,23 +413,8 @@ These converters can provide step-up and step-down conversion for large dynamic 
     \caption{}
 \label{fig:induc_chr}
 \end{subfigure}
-\caption{Inductor based converter, \emph{left} - buck converter schematic; \emph{right}  characteristic comparing the \emph{Theoretical} limit and the \emph{Real} case. }
+\caption{Inductor based converter, \emph{left} - buck converter schematic; \emph{right} - conversion ration \emph{vs.} efficiency curve comparing the \emph{theoretical} and a \emph{practical} limit. }
 \label{fig:inductive_smps}
-\end{figure}
-
-
-
-\begin{figure}[!h]
-      \centering
-\ctikzset { bipoles/length=1cm}
-\begin{circuitikz}[scale=0.65]
-
-
-\begin{scope}[xshift = 10cm, yshift=0cm]
-            
-        \end{scope}
-\end{circuitikz}
-
 \end{figure}
 
 On of the disadvantage of these converters are the magnetics, and the volume related to them. In practice, inductors dominate the entire volume of the LED drivers as shown in Figure~\ref{fig:smps_driver}. Integrated implementations of these converters suffer the challenges of using integrated magnetic components. The present \emph{very-large integration scale} (VLSI) technologies do not yet offer power inductors in the commercial implementations, and the other integrated inductors are not yet mature for products out of the research phase.
