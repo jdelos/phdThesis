@@ -45,7 +45,8 @@
 
 %Bibliography per chapter
 \bibliographystyle{unsrtnat}
-\usepackage[square,numbers,sort&compress]{natbib}
+\usepackage[square,numbers,sectionbib,sort&compress]{natbib}
+\usepackage{chapterbib}
 %\usepackage{chapterbib}
 
 %Hyperlinks
@@ -55,6 +56,7 @@
 }
 
 %Table
+%\usepackage{floatrow}
 \usepackage{booktabs}
 \usepackage{multirow}
 \newcommand{\mcrot}[4]{\multicolumn{#1}{#2}{\rlap{\rotatebox{#3}{#4}~}}}
@@ -99,9 +101,15 @@
 
 \include{./0_intro/0_intro}
 \label{ch:h_scc}
+\bibliographystyle{numerical}
+\bibliography{ch0}
 
-%\include{./1_modeling/11_chron_scc}
-%\include{./1_modeling/12_scc_av_model}
+\include{./1_modeling/11_chron_scc}
+\bibliographystyle{numerical}
+\bibliography{phd_bib}
+
+\include{./1_modeling/12_scc_av_model}
+
 %\include{./1_modeling/13_scc_dsg_opt}
 %\include{./1_modeling/14_scc_dyn_ssa}
 %\include{2_HSCC_arch}
@@ -110,8 +118,7 @@
 %\include{3_gid2intg}
 
 %\bibliographystyle{plain}
-\bibliographystyle{numerical}
-\bibliography{ch0,phd_bib}
+
 %\bibliography{phd_bib}
 \end{document}
 
