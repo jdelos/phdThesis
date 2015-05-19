@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage[cmex10]{amsmath}
 \usepackage{amssymb}
+\usepackage{amsmath}
+
 \usepackage{epstopdf}
 \usepackage{xfrac}
 \usepackage{float}
@@ -16,6 +18,8 @@
 % Add caption and sources to images
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{sidecap}
+\sidecaptionvpos{figure}{!h}
 
 %\usepackage{circuitikz}
 %Enables Latex Example enviroment
@@ -37,6 +41,40 @@
            shorten <=2pt,
            shorten >=2pt,}
 }
+\usetikzlibrary{patterns}
+% defining the new dimensions and parameters
+\newlength{\hatchspread}
+\newlength{\hatchthickness}
+\newlength{\hatchshift}
+\newcommand{\hatchcolor}{}
+% declaring the keys in tikz
+\tikzset{hatchspread/.code={\setlength{\hatchspread}{#1}},
+         hatchthickness/.code={\setlength{\hatchthickness}{#1}},
+         hatchshift/.code={\setlength{\hatchshift}{#1}},% must be >= 0
+         hatchcolor/.code={\renewcommand{\hatchcolor}{#1}}}
+% setting the default values
+\tikzset{hatchspread=3pt,
+         hatchthickness=0.4pt,
+         hatchshift=0pt,% must be >= 0
+         hatchcolor=black}
+% declaring the pattern
+\pgfdeclarepatternformonly[\hatchspread,\hatchthickness,\hatchshift,\hatchcolor]% variables
+   {custom north west lines}% name
+   {\pgfqpoint{\dimexpr-2\hatchthickness}{\dimexpr-2\hatchthickness}}% lower left corner
+   {\pgfqpoint{\dimexpr\hatchspread+2\hatchthickness}{\dimexpr\hatchspread+2\hatchthickness}}% upper right corner
+   {\pgfqpoint{\dimexpr\hatchspread}{\dimexpr\hatchspread}}% tile size
+   {% shape description
+    \pgfsetlinewidth{\hatchthickness}
+    \pgfpathmoveto{\pgfqpoint{0pt}{\dimexpr\hatchspread+\hatchshift}}
+    \pgfpathlineto{\pgfqpoint{\dimexpr\hatchspread+0.15pt+\hatchshift}{-0.15pt}}
+    \ifdim \hatchshift > 0pt
+      \pgfpathmoveto{\pgfqpoint{0pt}{\hatchshift}}
+      \pgfpathlineto{\pgfqpoint{\dimexpr0.15pt+\hatchshift}{-0.15pt}}
+    \fi
+    \pgfsetstrokecolor{\hatchcolor}
+%    \pgfsetdash{{1pt}{1pt}}{0pt}% dashing cannot work correctly in all situation this way
+    \pgfusepath{stroke}
+   }
 
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
@@ -44,7 +82,7 @@
 \usepackage{framed}
 
 %Bibliography per chapter
-\bibliographystyle{unsrtnat}
+%\bibliographystyle{unsrtnat}
 \usepackage[square,numbers,sectionbib,sort&compress]{natbib}
 \usepackage{chapterbib}
 %\usepackage{chapterbib}
@@ -99,16 +137,21 @@
 
 \pagenumbering{arabic}
 
-\include{./0_intro/0_intro}
-\label{ch:h_scc}
-\bibliographystyle{numerical}
-\bibliography{ch0}
+\include{0_intro}
+%\label{ch:h_scc}
+%\bibliographystyle{numerical}
 
-\include{./1_modeling/11_chron_scc}
-\bibliographystyle{numerical}
-\bibliography{phd_bib}
+\include{1_topology}
 
-\include{./1_modeling/12_scc_av_model}
+\include{2_hscc}
+
+%\include{./1_modeling/11_chron_scc}
+
+
+%\bibliographystyle{numerical}
+%\bibliography{phd_bib}
+
+%\include{./1_modeling/12_scc_av_model}
 
 %\include{./1_modeling/13_scc_dsg_opt}
 %\include{./1_modeling/14_scc_dyn_ssa}
@@ -118,8 +161,8 @@
 %\include{3_gid2intg}
 
 %\bibliographystyle{plain}
-
 %\bibliography{phd_bib}
+
 \end{document}
 
 

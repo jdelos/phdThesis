@@ -1,0 +1,2801 @@
+#LyX file created by tex2lyx 2.1
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass book
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks 0
+\pdf_bookmarksnumbered 0
+\pdf_bookmarksopen 0
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks 0
+\pdf_pdfborder 0
+\pdf_colorlinks 0
+\pdf_backref section
+\pdf_pdfusetitle 0
+\pdf_quoted_options "%
+pdfborder={0 0 0}"
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part
+
+\begin_inset Argument 1
+status collapsed
+
+
+\begin_layout Standard
+SCC for LED drivers
+\end_layout
+
+\end_inset
+
+Switched Capacitor Converters for LED drivers
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset CommandInset label
+LatexCommand label
+name "ch:h_scc"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+
+\end_layout
+
+\begin_layout Standard
+Switched Capacitor Converters (SCCs) are 
+\emph on
+dc-dc
+\emph default
+ power circuits composed only by switches and capacitors that provide efficient voltage conversion. SCCs have been long known and utilized, initially for voltage multiplication and more recently for voltage regulation as well. Compared to inductor based power converters, the absence of magnetic elements makes them suitable for high density power systems and integrated solutions, such as Power-System-in-Package (PSiP) or Power-System-on-Chip (PSoC).
+\end_layout
+
+\begin_layout Standard
+The power conversion capabilities and the favorable characteristics for integration combined with the growing necessities for integration in the LED driver circuits was the initial motivation of the presented work. This first chapter will make the reader to understand the operation of the converter, the context of the general applications of SCC and the specific work done related to LED driving.
+\end_layout
+
+\begin_layout Section
+Operation of Switched Capacitor Converters
+\end_layout
+
+\begin_layout Standard
+A Switched Capacitor Converter is a electronic circuit only composed by interconnected capacitors and switches that produces voltage-to-voltage conversion. The converter has two o more configuration modes, referred as phases, that sequentially change in order to achieve power conversion.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+ctikzset
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+ bipoles/length=1cm
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+ctikzset { scale=0.5}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{subfigure}
+\end_layout
+
+\end_inset
+
+[t]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+floatbox[{
+\backslash
+capbeside
+\backslash
+thisfloatsetup{capbesideposition={left,top},capbesidewidth=1cm}}]{figure}[
+\backslash
+FBwidth]
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%{
+\backslash
+caption{A test figure with its caption side by side}
+\backslash
+label{fig:test}}{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+ctikzset { bipoles/length=1cm}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{circuitikz}
+\end_layout
+
+\end_inset
+
+[american voltages,scale=0.6] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+draw (0,11) node[anchor=north]{ };
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Input Supply
+\end_layout
+
+\end_inset
+
+ (0,0) to[V=
+\begin_inset Formula $v_{i}$
+\end_inset
+
+] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Draw Switches
+\end_layout
+
+\end_inset
+
+ (0,10) -- (5,10) to[switch=
+\begin_inset Formula $s_1$
+\end_inset
+
+] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%S1
+\end_layout
+
+\end_inset
+
+ (5,8) to[switch=
+\begin_inset Formula $s_2$
+\end_inset
+
+] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%S2
+\end_layout
+
+\end_inset
+
+ (5,6) to[switch=
+\begin_inset Formula $s_3$
+\end_inset
+
+] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%S3
+\end_layout
+
+\end_inset
+
+ (5,4) -- 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%left branch
+\end_layout
+
+\end_inset
+
+ (3,4) to[switch=
+\begin_inset Formula $s_5$
+\end_inset
+
+] (3,2) to[switch=
+\begin_inset Formula $s_4$
+\end_inset
+
+] (3,0);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%right branch
+\end_layout
+
+\end_inset
+
+ (5,4) -- (7,4) to[switch=
+\begin_inset Formula $s_6$
+\end_inset
+
+] (7,2) to[switch=
+\begin_inset Formula $s_7$
+\end_inset
+
+] (7,0) -- (0,0);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Capacitor C1
+\end_layout
+
+\end_inset
+
+ (3,2) -- (2,2) -- (2,4) to[pC=
+\begin_inset Formula $c_1$
+\end_inset
+
+] (2,8) -- (5,8);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Capacitor C2
+\end_layout
+
+\end_inset
+
+ (7,2) -- (8.25,2) -- (8.25,4) to[pC=
+\begin_inset Formula $c_2$
+\end_inset
+
+](8.25,6) -- (5,6);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Capacitor C3
+\end_layout
+
+\end_inset
+
+ (5,0) to[pC=
+\begin_inset Formula $c_3$
+\end_inset
+
+] (5,4);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (7,4) to[short,-o] (10,4) node[anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $v_o$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (7,0) to[short,-o] (10,0) node[anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (10,4) to[open,v=
+\begin_inset Formula $v_{out}$
+\end_inset
+
+] (10,0);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{circuitikz}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+subcaption
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+Circuit diagram the two phase 3:1 Dickson Converter.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:demo_full_sch"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{subfigure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{subfigure}
+\end_layout
+
+\end_inset
+
+[t]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+ctikzset { bipoles/length=1cm}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{circuitikz}
+\end_layout
+
+\end_inset
+
+[american voltages,scale=0.6] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (-1,7) node[anchor=north]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Input Supply
+\end_layout
+
+\end_inset
+
+ (-1,0) to[V=
+\begin_inset Formula $v_{i}$
+\end_inset
+
+] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Draw Switches
+\end_layout
+
+\end_inset
+
+ (-1,6) -- (4,6);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Capacitor C1
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (4,3) to[pC=
+\begin_inset Formula $c_1$
+\end_inset
+
+] (4,6);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Capacitor C2
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (2,0)to[pC=
+\begin_inset Formula $c_2$
+\end_inset
+
+](2,3) --(4,3);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Capacitor C3
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (-1,0)-- (6,0) to[pC=
+\begin_inset Formula $c_3$
+\end_inset
+
+] (6,3) -- (4,3);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (6,3) to[short,-o] (7.5,3) node[anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $v_o$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (6,0) to[short,-o] (7.5,0) node[anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (7.5,3) to[open,v=
+\begin_inset Formula $v_{out}$
+\end_inset
+
+] (7.5,0); 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{circuitikz}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+subcaption
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+First phase, odd switched are closed and even switches are open.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:demo_full_p1"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{subfigure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{subfigure}
+\end_layout
+
+\end_inset
+
+[t]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{circuitikz}
+\end_layout
+
+\end_inset
+
+[american voltages,scale=0.6] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (0,7) node[anchor=north]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Input Supply
+\end_layout
+
+\end_inset
+
+ (-1,0) to[V=
+\begin_inset Formula $v_{i}$
+\end_inset
+
+] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Draw Switches
+\end_layout
+
+\end_inset
+
+ (-1,6);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (5,3) to[pC=
+\begin_inset Formula $c_2$
+\end_inset
+
+] (5,6);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Capacitor C1
+\end_layout
+
+\end_inset
+
+ (2,0)to[pC=
+\begin_inset Formula $c_1$
+\end_inset
+
+](2,6) --(5,6);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Capacitor C3
+\end_layout
+
+\end_inset
+
+ (5,0) to[pC=
+\begin_inset Formula $c_3$
+\end_inset
+
+] (5,3) -- (5,3);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (5,3) to[short,-o] (7.5,3) node[anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $v_o$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (-1,0) to[short,-o] (7.5,0) node[anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (7.5,3) to[open,v=
+\begin_inset Formula $v_{out}$
+\end_inset
+
+] (7.5,0);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+draw ()
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{circuitikz}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+subcaption
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+Second phase, even switched are closed and odd switches are open.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:emo_full_p2"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{subfigure}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:emo_full"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\begin_inset Argument 1
+status collapsed
+
+
+\begin_layout Standard
+Chronological Vision of SCC
+\end_layout
+
+\end_inset
+
+A chronological vision of Switched Capacitor Converters
+\end_layout
+
+\begin_layout Standard
+The first Switched Capacitor Circuit was proposed in 1919 by Heinrich Greinacher. The 
+\emph on
+Voltage Multiplier Rectifier
+\emph default
+ multiplied the peak voltage of an AC supply to a DC voltage proportional to the number of stages. In 1932 J.D. Cockcroft and E.T.S. Walton used this circuit to generate very high voltage potentials,up to 800 kilovolts, for their particle accelerator 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "30Cockcroft"
+
+\end_inset
+
+; the picture of Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Cockcroft_VMR"
+
+\end_inset
+
+ shows one of the used voltage multipliers. Subsequently, this circuit become widely used in television sets to supply high voltage to the cathode ray tube 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "70Buechel"
+
+\end_inset
+
+ and later it was used in space applications
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "86Weinberg"
+
+\end_inset
+
+. D.L. Waidelich and J.S. Brugler made some contributions to determine equivalent series resistance
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "44Waidelich,71Brugler"
+
+\end_inset
+
+ and Brugler and L. Chua proposed a unified approach to generate and analyse new topologies 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "71Brugler,77Lin"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics 
+	filename PhD Thesis/1_modeling/img/CockcroftWaltonGenerator.jpg
+	width 6cm
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+includegraphics[width=6cm]{./0_intro/img/FSolzbacher01.jpg}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Standard
+Cockcroft-Walton voltage multiplier built in 1937 by 
+\emph on
+Philips Research Labs
+\emph default
+ in Eindhoven, now exposed in the 
+\emph on
+Natural Science Museum
+\emph default
+ of London
+\begin_inset Newline newline
+\end_inset
+
+ 
+\emph on
+Source:"Cockcroft–Walton generator 2012" by Geni. Licensed under GFDL via Wikimedia Commons 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%http://commons.wikimedia.org/wiki/File:Cockcroft%E2%80%93Walton_generator_2012.JPG#/media/File:Cockcroft%E2%80%93Walton_generator_2012.JPG
+\end_layout
+
+\end_inset
+
+
+\emph default
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Cockcroft_VMR"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In 1976, J.F. Dickson 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "76Dickson"
+
+\end_inset
+
+ introduced a modification of the Cockcroft-Walton circuit to enable the integration of a voltage multiplier in an MNOS non volatile memory IC. The so-called Dickson charge-pump boosted the DC supply voltage proportionally to the number of stages in the pump. At same time, the new circuit mitigated the effects of the integrated capacitor stray capacitances on the voltage gain and reduced the output impedance of the converter increasing the current throughput. After the Dickson charge-pump other topologies
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "09Seeman"
+
+\end_inset
+
+ have been reported, such as the series-parallel converter 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "94Ngo,94Cheong"
+
+\end_inset
+
+, which allowed rational conversion ratios. F. Ueno 
+\shape italic
+et al.
+\shape default
+ 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "91Ueno"
+
+\end_inset
+
+ presented yet another topology with conversion ratios corresponding to Fibonacci series,
+\begin_inset Formula $k=1,2,3,5,8,..$
+\end_inset
+
+ ,achieving higher conversion ratios using fewer capacitors 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "95Makowski,09Allasasmeh"
+
+\end_inset
+
+. F.L. Luo 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "02Luo"
+
+\end_inset
+
+ proposed a topology cascading voltage doublers cells where the conversion ratio follows a quadratic relationship with the number of cells, and J. A. Starzyk 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "01Starzyk"
+
+\end_inset
+
+ reviewed the same concept with a multi-phase topology that can achieve the same gain with fewer capacitors.
+\end_layout
+
+\begin_layout Standard
+Two important concepts have been introduced to SC converters in order to reduce the current ripples and conduced Electromagnetic Interferences (EMI): 
+\end_layout
+
+\begin_layout Description
+Interleaving also improves the efficiency since the it can reduce the value for the output capacitor. There are different reported implementations of 2-phase 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "07Chang,99Chung"
+
+\end_inset
+
+, 16-phase 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "09Breussegem,14Andersen"
+
+\end_inset
+
+, 32-phase
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "10Le"
+
+\end_inset
+
+ 64-phase
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "15Andersen"
+
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Description
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+Current Mode
+\end_layout
+
+\end_inset
+
+ Charge-Pumps 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "96Zhu,09Das"
+
+\end_inset
+
+ where the process of charge or discharge -or both- are controlled with a current source. 
+\end_layout
+
+\begin_layout Standard
+There are other innovative approaches where SCCs are combined with inductor based converters, also referred as 
+\emph on
+hybrid
+\emph default
+ SCCs. The combination of both achieve large conversion ratios with tighter regulation. There are a large number of hybrid solutions where a SC cell is integrated into an inductor based converter 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "05Axelrod,08Axelrod, 11Mayo,11Miranda,12Kline"
+
+\end_inset
+
+. Lately, a couple of papers 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "12Zhigang,11Dazhong"
+
+\end_inset
+
+ presented a Maximum Power Point Tracking (MPPT) converter for Photovoltaic (PV) cells employing a SC converter in parallel with an inductor based converter. This hybrid combinations offer another family of converters known as 
+\emph on
+Resonant Switched Capacitor Converters
+\emph default
+ (RSCC), where the capacitors are charged through resonant transitions, thus eliminating the capacitor charge transfer losses. K.W.E. Cheng 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "01Cheng"
+
+\end_inset
+
+ in 2001 presented an early work where in the topic using inductors limit the currents thought the capacitors and charging and discharging the capacitors with resonant transitions. Subsequently, many publications appeared 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "05Lee,10Cao,11Gebben,07Shoyama"
+
+\end_inset
+
+ presenting applications and uses of this converter family. Initial RSCC topologies made use of multiple inductors to guarantee a resonant transition for all capacitors, recent works
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "13Kesarwani,13Schaef,14Kesarwani,15Schaef"
+
+\end_inset
+
+ presented new topologies that reduced the number of inductors to achieve these resonant transitions.
+\end_layout
+
+\begin_layout Section
+Sate of the Art of Switched Capacitor LED drivers
+\end_layout
+
+\begin_layout Standard
+One of the most popular application of SCCs is indeed as LED drivers for portable devices. Low power White LEDs (W-LEDs) are widely applied for back-lighting Liquid Crystal Display (LCD) in devices such as laptops, mobile phones and tablets. These applications require to generate a voltage above the LED forward voltage (
+\begin_inset Formula $v_f$
+\end_inset
+
+) from the battery, what can not been achieved with just using a linear drivers since the battery voltage is easily below to 
+\begin_inset Formula $v_f$
+\end_inset
+
+ as it discharges. Normally theses drivers implement step-up or step-down to convert the battery right above the 
+\begin_inset Formula $v_f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement t
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{circuitikz}
+\end_layout
+
+\end_inset
+
+ [scale=0.65] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+ctikzset
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+bipoles/length=0.85cm
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+[thick] (2.5,0.25) -- (2.5,6.5) -- (11.5,6.5) -- (11.5,0.25) -- (2.5,0.25);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Draw SCC block with capacitors
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (3,1) -- (3,6) -- (5,6) -- (5,1) -- (3,1);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (4,1.25) node[rotate=90,anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\emph on
+Multi-ratio SCC
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (3,2) -- (1.5,2) to[capacitor] (1.5,3) -- (3,3);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (3,4) -- (1.5,4) to[capacitor] (1.5,5) -- (3,5);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (5,5.5) to[short,-o] (14,5.5); 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (13,5.5) to[capacitor] (13,4.5) node[sground]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (4,1) -- (4,0) node[sground,scale=0.75]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Draw linear drivers
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (4,0.5) -- (10.5,0.5) -- (10.5,1);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%First transitor
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (10,1) -- (10,1.5) node[npn,anchor=E,scale=0.5](npn1)
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+ (npn1.C) -- (10,2.75) to[short,-o] (12,2.75);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Second transitor
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (10,1) -- (11,1) node[npn,anchor=E,scale=0.5](npn2)
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+ (npn2.C) -- (11,2.25) to[short,-o] (12,2.25);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Controller box
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (5.5,1) -- (8.5,1) -- (8.5,3) -- (5.5,3) -- (5.5,1); 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (5.75,2) node[anchor=west, text width = 1.75cm]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+Intensity Controller
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (npn2.B) -| (8.5,2); 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (npn1.B) -| (8.5,2);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%LEDs
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [dashed] (14.25,5.5) to[short,o-] (15,5.5) to[leD*] (15,2.75) to[short,-o] (12.25,2.75);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [dashed] (15,5.5) -- (17,5.5) to[leD*] (17,2.25) to[short,-o] (12.25,2.25);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Add battery
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (-1,0) node[sground,scale=0.75]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (-1,0) to[battery] (-1,6) -- (2.5,6);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{circuitikz}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Standard
+Block diagram of a generic driver for backlighting applications.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:backlight_LED"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is a large portfolio of available ICs, designated as Charge-Pumps (CPs), for driving LEDs in portable devices. Some commercial products are for instance the 
+\emph on
+MAX88779
+\emph default
+ 
+\begin_inset Foot
+status collapsed
+
+
+\begin_layout Standard
+Maxim
+\begin_inset script superscript
+
+\begin_layout Standard
+®
+\end_layout
+
+\end_inset
+
+ Charge Pump for Backlight/Flash/RGB LEDs with Safety Timer 
+\end_layout
+
+\end_inset
+
+ or the 
+\emph on
+MCP1252/3
+\emph default
+ 
+\begin_inset Foot
+status collapsed
+
+
+\begin_layout Standard
+Microchip
+\begin_inset script superscript
+
+\begin_layout Standard
+®
+\end_layout
+
+\end_inset
+
+ Low noise, Positive-Regulated Charge Pump
+\end_layout
+
+\end_inset
+
+. These circuits can drive withe, RGB or Flash LEDs from a Lithium-Ion battery only by adding a few external capacitors capacitors. Generally these chips integrate an multi-target SCC with different conversion ratios (1:1, 3:2, 2:1) along with a series current regulator for each LED channel a shown in the block diagram of Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:backlight_LED"
+
+\end_inset
+
+. Various publications 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "07Feng,09Wu,10Yin"
+
+\end_inset
+
+ proposed enhancements in the architectures in order to reduce the parasitic losses bringing the efficiency close to the theoretical limit. Such drivers are used in applications below a 1
+\begin_inset Formula $W$
+\end_inset
+
+ and currents below hundred 
+\begin_inset Formula $mA$
+\end_inset
+
+, their efficiency derates as the LED voltage moves away from the target voltage.
+\end_layout
+
+\begin_layout Standard
+Besides the backlighting ICs, there are no other commercial LED drivers based on SCC. However that topic has been present in several research publications for the last years with few interesting publications targeting mains connected drivers. In 2008, K.H. Lee 
+\emph on
+et al.
+\emph default
+
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "08Lee"
+
+\end_inset
+
+ presented a SC step-down converter composed of several cascaded Series-Parallel that supplied from rectified 220
+\begin_inset Formula $V_{rms}$
+\end_inset
+
+ an LED string of 75V at 15W. In the proposed solution the LEDs are directly supplied using flying capacitors what produces pulsating currents in the string and its average values is controlled modulating the frequency of the converter. The cascaded topology minimized the number of components, switched and capacitors, for the required conversion ration (fixed by the LED string).
+\end_layout
+
+\begin_layout Standard
+In 2012, M. Kline 
+\emph on
+et al.
+\emph default
+ 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "12Kline"
+
+\end_inset
+
+ proposed a isolated 
+\emph on
+DC
+\emph default
+/
+\emph on
+DC
+\emph default
+ converter that combined a SCC stage with series-LC resonant converter. The SCC stage decreased the rectified mains voltage, reducing the voltage stress in switches, capacitors and the elements of the resonant tank. The lower voltage stress allows a reduction in the volume of the passive components and the total area in the silicone. By controlling the frequency and the duty cycle of the SCC stage current through the LEDs can be regulated, resulting in a very efficient solution. In a recent publication they presented an implementation where power train and control where integrated in different stackable ICs modules
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "13Kline"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The different applications show an increasing interest in using SCC for LED drivers. It is evident that the approach used in portable devices can no be further extended in for high powers and higher voltages. The use of a bear SCC can never satisfy the requirements of LED drivers due to the following facts: 
+\end_layout
+
+\begin_layout Itemize
+Only provide voltage-to-voltage conversion 
+\end_layout
+
+\begin_layout Itemize
+Fixed conversion ratios 
+\end_layout
+
+\begin_layout Itemize
+Regulation is provided by series shunting 
+\end_layout
+
+\begin_layout Standard
+These limitations combined with the abrupt characteristics I-V of the LEDs makes barely impossible to provide high efficient solutions with the single use of SCC. The converters would require to have a large number of conversion ratios with a very large granularity to avoid uncontrolled currents flowing through the LEDs.
+\end_layout
+
+\begin_layout Standard
+The research presented in this work aims to explore the possibilities of the SCC for LED drivers and the conducting path is based in the combination of the with inductors. The overall solution improves the power density and reduced form factor of the present solutions.
+\end_layout
+
+\begin_layout Section*
+Power Levels and Integration
+\end_layout
+
+\begin_layout Standard
+There are not intrinsic implications that limit the output power of a Switched Capacitor converter, but the boundary conditions. There are implementations ranging from tens of milliwatts to tens of kilowatts, where the difference only relies in the used technology. They can be classified in 3 groups: Fully integrated circuits, integrated circuits with external capacitors and discrete solutions.
+\end_layout
+
+\begin_layout Standard
+Full integrated converter are suitable for very lower power applications from some microwatts up to some tens of milliwatts. These solutions are implemented in standard processes (CMOS, BiCMOS or Bipolar) where the priority is in achieve an integrated solution rather than efficient. These converters have very poor efficiency up to 60%, due to the low energy density and poor quality of the capacitors available in those processes. The second group overcomes this problem using external capacitors. These converters integrate the control and the power train in a single chip with a stadard CMOS process, offering output power up to one watt and peak efficiencies of 95%. In this case, the CMOS switches limit the converter efficiency and scalavility in power. The implementations with discrete components enable output powers up to kilowatts with peak efficiencies above 95%. Discrete semiconductor switches can offer lower channel resitance and better switching characterisitcs, reducing ohmic resitance and enabeling higher switching frequencies. 
+\emph on
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+color{red}
+\end_layout
+
+\end_inset
+
+ Silicon power MOSFET are the dominant in discrete implementations, but recent publications used Galiun-Nitride HEMT switches 
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "11Scott,12Scott"
+
+\end_inset
+
+
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+The limiting factor of the output power of a SC converter is driven by the boundary conditions of the technology. Up to now, integrated SC converters designs have been covered addressing the problem with the standard process in VLSI, in order to have compact power conversion units at the lowest cost. The current technologies can easily improve the present solutions, for instance, a Power-System on Package (PSoC) integrating switches and capacitors would already reduce the series resistance of the pins and optimize the silicon die area of the present integrated converters with external capacitors. The current technologies offer the possibility to achieve integrated SC converters processing higher powers, but it would require to combine them in non-standard processes.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+color{red}
+\end_layout
+
+\end_inset
+
+ Missing refs!
+\emph default
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+bibliographystyle{plainnat}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+bibliography{phd_bib} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

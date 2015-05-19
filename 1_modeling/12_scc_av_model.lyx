@@ -1,0 +1,1631 @@
+#LyX file created by tex2lyx 2.1
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass book
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks 0
+\pdf_bookmarksnumbered 0
+\pdf_bookmarksopen 0
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks 0
+\pdf_pdfborder 0
+\pdf_colorlinks 0
+\pdf_backref section
+\pdf_pdfusetitle 0
+\pdf_quoted_options "%
+pdfborder={0 0 0}"
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+
+\begin_inset Argument 1
+status collapsed
+
+
+\begin_layout Standard
+Advanced Modeling of SCC
+\end_layout
+
+\end_inset
+
+Advanced Modeling of Switched Capacitor Converters
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Section
+Single Output Converters
+\end_layout
+
+\begin_layout Standard
+Switched Capacitor Converters (SCCs) are considered to be a two-port converter with single input and a single output as shown in Fig.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:two_port"
+
+\end_inset
+
+. The input port is connected to a voltage source and the output port feeds the load. The SCC provides between input, 
+\begin_inset Formula $v_i$
+\end_inset
+
+, and output, 
+\begin_inset Formula $v_o$
+\end_inset
+
+, a voltage conversion, 
+\begin_inset Formula $m$
+\end_inset
+
+, that steps up, steps down or/and inverts the polarity of the input voltage. Up to present all the circuit theory devoted SCCs is valid only for the two-port configuration, therefore this section is dedicated to revisit the classical concepts of single output SCC and to introduce new ones that enable a broader use of such converters.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+ctikzset
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+ bipoles/length=1cm
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{circuitikz}
+\end_layout
+
+\end_inset
+
+[scale=0.65] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (1,0) to[short,o-] (0,0) to[V = 
+\begin_inset Formula $V_{supply}$
+\end_inset
+
+] (0,3) to[short,-o] (1,3) ;
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (2,3) -- (2.5,3)
+\end_layout
+
+\begin_layout Standard
+(2,0) -- (2.5,0)
+\end_layout
+
+\begin_layout Standard
+node[ocirc] (IC) at (2,0) 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+ node[ocirc] (I) at (2,3) 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+ (I) to[open,v=
+\begin_inset Formula $v_{i}$
+\end_inset
+
+] (IC);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [thick] (2.5,-0.5) -- (2.5,3.5) -- (5.5,3.5) -- (5.5,-0.5) -- (2.5,-0.5);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (4,2)node[anchor=north]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\frac{v_o}{v_{i}}=m$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ ; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (5.5,3) -- (6,3) (5.5,0) -- (6,0) node[ocirc] (O) at (6,3) 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+ node[ocirc] (OC) at (6,0) 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{}
+\end_layout
+
+\end_inset
+
+ (O) to[open,v<=
+\begin_inset Formula $v_{o}$
+\end_inset
+
+] (OC);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (7,0) to[short,o-] (8,0) to[ R= 
+\begin_inset Formula $Load$
+\end_inset
+
+,mirror] (8,3) to[short,-o] (7,3) ; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{circuitikz}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:two_port"
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Standard
+General two port configuration of a Switched Capacitor Converter. 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\begin_inset Argument 1
+status collapsed
+
+
+\begin_layout Standard
+Introducing H-SCC
+\end_layout
+
+\end_inset
+
+The Hybrid-SCC: Identifying Outputs in Switched Capacitor Converters
+\end_layout
+
+\begin_layout Standard
+Two types of nodes can be identified in a Switched Capacitor Converter, as shown in Fig. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dc_pwm_nodes"
+
+\end_inset
+
+: 
+\end_layout
+
+\begin_layout Itemize
+Fixed voltage 
+\emph on
+dc
+\emph default
+-nodes, node 
+\begin_inset Formula $a$
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% node $a$ in Fig. 
+\backslash
+ref{fig:dc_pwm_nodes}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+Floating voltage 
+\emph on
+pulsed width modulated
+\emph default
+-nodes (
+\emph on
+pwm
+\emph default
+-nodes), node 
+\begin_inset Formula $b$
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+% in Fig. 
+\backslash
+ref{fig:dc_pwm_nodes}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+ctikzset
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+ bipoles/length=1cm
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{circuitikz}
+\end_layout
+
+\end_inset
+
+[american voltages,scale=0.65] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Draw Switches
+\end_layout
+
+\end_inset
+
+ (0,0) to[V=
+\begin_inset Formula $V_{in}$
+\end_inset
+
+] (0,8) -- (5,8) to[switch=
+\begin_inset Formula $\phi_1$
+\end_inset
+
+] (5,6) to[switch=
+\begin_inset Formula $\phi_2$
+\end_inset
+
+] (5,4) to[switch=
+\begin_inset Formula $\phi_1$
+\end_inset
+
+] (5,2) to[switch=
+\begin_inset Formula $\phi_2$
+\end_inset
+
+] (5,0) -- (0,0)
+\end_layout
+
+\begin_layout Standard
+(5,6) to[short,-o] (8,6) node[anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $b \rightarrow$
+\end_inset
+
+ 
+\emph on
+pwm
+\emph default
+ node
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(5,4) to[short,-o] (8,4) node[anchor=west] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $a \rightarrow$
+\end_inset
+
+ 
+\emph on
+dc
+\emph default
+ node
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%Draw Capacitors
+\end_layout
+
+\end_inset
+
+(5,2) -- (3,2) to[C=
+\begin_inset Formula $C_{fly}$
+\end_inset
+
+] (3,6)-- (5,6)
+\end_layout
+
+\begin_layout Standard
+(5,0) -- (7,0) to[C=
+\begin_inset Formula $C_{dc}$
+\end_inset
+
+,mirror] (7,4)-- (5,4); 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (5,7) node[anchor=east]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $S_1$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ (5,5) node[anchor=east]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $S_2$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ (5,3) node[anchor=east]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $S_3$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ (5,1) node[anchor=east]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $S_4$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ ;
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{scope}
+\end_layout
+
+\end_inset
+
+[xshift=13cm,yshift=0.2cm] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [->] (-0.1,0) -- (5,0) node[anchor=west]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $t$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [->] (0,-0.1) -- (0,2.5) node[anchor=east]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $v_a$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+draw (0,-1) node[anchor=south]{0}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%        (1.25,-1) node[anchor=south] {$T$}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%        (2.5,-1)  node[anchor=south] {$2T$}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%        (3.75,-1) node[anchor=south] {$3T$} ;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [thick] (0,1) -- (0.75,0.75) -- (0.75,0.95) -- (1.25,0.80) -- (1.25,1)-- (2,0.75) -- (2,0.95) -- (2.5,0.80) -- (2.5,1)-- (3.25,0.75) -- (3.25,0.95) -- (3.75,0.80);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [dashed] (0,0.875) -- (4,0.875) node[anchor=west]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $v_a$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ ; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{scope}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{scope}
+\end_layout
+
+\end_inset
+
+[xshift=13cm,yshift=4 cm] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [->] (-0.1,0) -- (5,0) node[anchor=west]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $t$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [->] (0,-0.1) -- (0,2.5) node[anchor=east]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $v_b$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+draw (0,-1) node[anchor=south]{0}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%        (1.25,-1) node[anchor=south] {$T$}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%        (2.5,-1)  node[anchor=south] {$2T$}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%        (3.75,-1) node[anchor=south] {$3T$} ;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [thick] (0,2) -- (0.75,1.85) -- (0.75,1) -- (1.25,0.80) -- (1.25,2) -- (2,1.85) -- (2,1) -- (2.5,0.80) -- (2.5,2)-- (3.25,1.85) -- (3.25,1) -- (3.75,0.80);
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ [dashed] (0,1.515) -- (4,1.515) node[anchor=west]
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $v_b$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ ; 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{scope}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{circuitikz}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Standard
+Nodes types in a SCC. Node 
+\begin_inset Formula $a$
+\end_inset
+
+ is a 
+\emph on
+dc
+\emph default
+-node; its voltage, 
+\begin_inset Formula $v_a$
+\end_inset
+
+ is plotted in the bottom graph. Node 
+\begin_inset Formula $b$
+\end_inset
+
+ is a 
+\emph on
+pwm
+\emph default
+-node; its voltage, 
+\begin_inset Formula $v_b$
+\end_inset
+
+, is plotted in the top graph. 
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dc_pwm_nodes"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The fixed voltage 
+\emph on
+dc
+\emph default
+-nodes are the common used nodes to supply a 
+\emph on
+dc
+\emph default
+ load. They provide a fixed voltage conversion defined by the topology with a low 
+\emph on
+ac
+\emph default
+ ripple, and they always have connected a capacitor between the node and the ground by the so called 
+\emph on
+dc
+\emph default
+-capacitor as shown in the Fig. 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dc_pwm_nodes"
+
+\end_inset
+
+. Depending on the topology the number of 
+\emph on
+dc
+\emph default
+-nodes can vary between one or more, however topologies that reduce the number of 
+\emph on
+dc
+\emph default
+-capacitors (
+\begin_inset Formula $C_{dc}$
+\end_inset
+
+) trend to have a better utilization of the capacitors since 
+\emph on
+dc
+\emph default
+-capacitors do not contribute to transport charge 
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "09Seeman"
+
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The floating 
+\emph on
+Pulsed Width Modulated
+\emph default
+-nodes (
+\emph on
+pwm
+\emph default
+-nodes) have been rarely used as outputs until a recently couple of publications 
+\begin_inset CommandInset citation
+LatexCommand citet
+after ""
+before ""
+key "12Kumar,12Kline"
+
+\end_inset
+
+ presented the advantages of using them. 
+\emph on
+pwm
+\emph default
+-nodes have been normally considered just internal to the converter with any added value, but actually the conversion possibilities of SCCs can be further exploited by using these nodes as outputs.
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+pwm
+\emph default
+-node is located a the terminal of a 
+\emph on
+flying capacitor
+\emph default
+ (
+\begin_inset Formula $C_{fly}$
+\end_inset
+
+) and provides a floating 
+\emph on
+Pulsed-Width-Modulate
+\emph default
+ voltage with an added 
+\emph on
+dc
+\emph default
+ offset of a fraction of the input voltage. The magnitudes are related to the SCC topology. The pulsated voltages can be filtered using an inductive-capacitive filter (
+\emph on
+LC
+\emph default
+) allowing to supply 
+\emph on
+dc
+\emph default
+ load with averaged voltage of the node. Actually the 
+\emph on
+pwm
+\emph default
+ voltage at the node can be controlled adjusting the duty cycle of the SCC, enhancing the regulation capabilities of these outputs compared to the fixed value of the 
+\emph on
+dc
+\emph default
+-nodes. The switched capacitor converters that combine the 
+\emph on
+pwm
+\emph default
+-outputs with inductors will be referred from now on as 
+\emph on
+Hybrid
+\emph default
+-Switched Capacitor Converters (H-SCC).
+\end_layout
+
+\begin_layout Subsection
+The Output Impedance Model
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+ctikzset
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+ bipoles/length=1cm
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{circuitikz}
+\end_layout
+
+\end_inset
+
+[scale=0.65] 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+draw
+\end_layout
+
+\end_inset
+
+ (5,0) to[short,o-] (0,0) to[V = 
+\begin_inset Formula $V_{target}$
+\end_inset
+
+] (0,3) to[R=
+\begin_inset Formula $R_{scc}$
+\end_inset
+
+,-o] (5,3)
+\end_layout
+
+\begin_layout Standard
+(5,0) to[open,v>=
+\begin_inset Formula $v_o$
+\end_inset
+
+] (5,3); 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{circuitikz}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:OI_model"
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Standard
+The Output Impedance Model for SCCs. 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%
+\backslash
+input{./1_modeling/imgs/test_plot.tex}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:SINE"
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Standard
+The Output Impedance Model for SCCs. 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Identifying the source of losses in the charge transfer
+\end_layout
+
+\begin_layout Subsection
+Re-formulating the charge flow analysis
+\end_layout
+
+\begin_layout Subsubsection
+
+\begin_inset Argument 1
+status collapsed
+
+
+\begin_layout Standard
+SSL Capacitor Charge Flow
+\end_layout
+
+\end_inset
+
+Slow Switching Limit: Re-defining the Capacitor Charge Flow Vectors
+\end_layout
+
+\begin_layout Subsubsection
+
+\begin_inset Argument 1
+status collapsed
+
+
+\begin_layout Standard
+FSL Switch Charge Flow
+\end_layout
+
+\end_inset
+
+Fast Switching Limit: Re-defining the Switch Charge Flow Vectors
+\end_layout
+
+\begin_layout Subsection
+Load Model: Voltage Sink versus Current Sink
+\end_layout
+
+\begin_layout Subsection
+Sensitivity of the inductor current ripple
+\end_layout
+
+\begin_layout Section
+Multiple Output Converters
+\end_layout
+
+\begin_layout Subsection
+The Output Trans-Resistance Model
+\end_layout
+
+\begin_layout Subsection
+Obtaining the Trans-Resistance parameters with the charge flow analysis 
+\end_layout
+
+\end_body
+\end_document
