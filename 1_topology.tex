@@ -9,7 +9,7 @@ The high and diverse level of requirements for the LED drivers has made the desi
 
 
 \section{The LED load}
-
+\label{sc:LED_load}
 The LED is just a special diode that emits light as the acronym stands for \emph{Light Emitting Diode}. It is well known that a diode has a very \emph{voltage-current} ($v-i$) curve as shown in Figure~\ref{fig:led_I-V}. For voltages below the \emph{forward voltage}, $v_{f}$, there is practically no current flow and the LED behaves as an open circuit. The same characteristic applies  when reversed bias until the breakdown voltage, $v_{break}$, is reached. For voltages above $v_{f}$ the curve becomes very steep and the current increases dramatically with respect to the voltage, thus the LED behaves as a short circuit. The similar behaviour happens when the LED is reverse biased and the voltage is above $v_{break}$, however in this case there is no light generation. The LED has to be supplied at an specific point $P$ in order to provide a desired light output as shown in Figure~\ref{fig:led_I-V}, depending on the bias current light colour and intensity will vary. Due to the steepness in the $v-i$ curve, the practical way to bias a LED is supplying them with a \emph{dc}-current. Since the common used energy sources are voltage supplies, it is necessary to select a circuit that converts the input energy from the voltage source to a constant current.
 
 \begin{figure}[!h]
