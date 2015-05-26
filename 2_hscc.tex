@@ -1,8 +1,12 @@
 \chapter{Hybrid Switched Capacitor Converter}
 
-The integration and miniaturization characteristics of Switched Capacitor Converters (SCCs) have an application for LED drivers, already in  commercial ICs and also in research. Commercially, there is a large portfolio of available ICs, designated as Charge-Pumps (CPs), for backlighting in portable devices, \emph{i.e.}  \emph{MAX88779} \footnote{Maxim\textsuperscript{\textregistered} Charge Pump for Backlight/Flash/RGB LEDs with Safety Timer }, \emph{MCP1252/3} \footnote{Microchip\textsuperscript{\textregistered} Low noise, Positive-Regulated Charge Pump}. These circuits can drive withe, RGB or Flash LEDs from a Lithium-Ion battery only by adding a few external capacitors.  Generally these chips integrate an multi-target SCC with different conversion ratios (1:1, 3:2, 2:1) along with a linear regulator for each channel a shown in the block diagram of Figure~\ref{fig:backlight_LED}. Various publications ~\cite{07Feng,09Wu,10Yin} proposed enhancements in the architectures in order to reduce the parasitic losses bringing the efficiency close to the theoretical limit. The power ratings in these drivers are below a 1$W$ and currents below hundred mili-Amperes with efficiencies between 70\%-90\% depending on the operation point.
+The integration and miniaturization characteristics of Switched Capacitor Converters (SCCs) have an application for LED drivers, already in  commercial ICs and also in research. Commercially there is a large portfolio of available integrated circuits (ICs) ( designated as Charge-Pumps (CPs))  for backlighting in portable devices, \emph{i.e.}  \emph{MAX8930} \footnote{Maxim\textsuperscript{\textregistered} WLED Charge Pump, RGB, OLED Boost, LDOs with ALC and CAI }, \emph{MCP1252/3} \footnote{Microchip\textsuperscript{\textregistered} Low noise, Positive-Regulated Charge Pump}. These circuits can drive withe, RGB or Flash LEDs from a Lithium-Ion battery only by adding a few external capacitors.  Generally these chips integrate an multi-target SCC with different conversion ratios, along with a linear regulator for each channel a shown in the block diagram of Figure~\ref{fig:backlight_LED}. Various publications ~\cite{07Feng,09Wu,10Yin} proposed different modifications in the architectures in order to reduce the parasitic losses bringing the efficiency close to the theoretical limit. The power ratings in these drivers are below a 1$W$ and currents below hundred mili-Amperes with efficiencies between 70\%-90\% depending on the operation point.
 
-With respect to general lighting there are few research publications that rapport the use of SCCs. In 2008, ~\citeauthor{08Lee}~\cite{08Lee} presented a step-down converter supplied from rectified 220$V_{rms}$ providing 15W with a 95\% peak efficacy. The proposed architecture   supplied directly the LED string from the capacitors, controlling the output power by changing the switching frequency. In 2012, ~\citeauthor{2012Kline}~\cite{2012Kline} proposed a isolated converter that combined a SCC stage with series-LC resonant converter delivering 15.5W with an efficiency of  92\%.  The SCC stage decreased  the rectified mains voltage, reducing the voltage stress in switches, capacitors and the elements of the resonant tank, allowing to diminish  the volume of the passive components and the total silicone area. The LED current is regulated using frequency and the duty cycle modulation. A recent publication presented modular implementation in silicon with a stackable ICs ~\cite{2013Kline}.
+
+
+With respect to general lighting there are few research publications that report the use of SCCs. In 2008, ~\citeauthor{08Lee}~\cite{08Lee} presented a step-down converter supplied from rectified 220$V_{rms}$ providing 15W with a 95\% peak efficacy. The proposed architecture   supplied directly the LED string from the capacitors, controlling the output power by changing the switching frequency. 
+
+In 2012, ~\citeauthor{2012Kline}~\cite{2012Kline} proposed a isolated converter that combined a SCC stage with series-LC resonant converter delivering 15.5W with an efficiency of  92\%.  The SCC stage decreased  the rectified mains voltage, reducing the voltage stress in switches, capacitors and the elements of the resonant tank, allowing to diminish  the volume of the passive components and the total silicone area. The LED current is regulated using frequency and the duty cycle modulation. In a recent publication, the  presented modular implementation in silicon with a stackable ICs ~\cite{2013Kline}.
 
 Driving high power LED using a switched capacitor converter challenges the operation of these converters. SCC provide a good performance in voltage-to-voltage conversion, but they can not directly provide a voltage-to-current. In low power applications, that is solved by using a linear regulator in series with the LED string, however it is not a valid solution for general lighting where high power and currents are needed. Combining switched capacitor with inductors can provide efficient converters for LED lighting, where the use of inductors provide a tight and efficient regulation, and the use of a switched capacitor allows to reduce the voltage stress in the components reducing switching losses and size.
 
@@ -342,12 +346,12 @@ The precedent section has presented switched capacitor converters with the load 
 \begin{circuitikz}[american voltages,scale=0.65]
 \draw
         %Draw Switches
-        (0,0)  to[V=$V_{in}$]
+        (0,0)  to[V=$v_{src}$]
         (0,8)  --
-        (5,8)   to[switch=$\phi_1$]
-        (5,6)   to[switch=$\phi_2$]
-        (5,4)   to[switch=$\phi_1$]
-        (5,2)   to[switch=$\phi_2$]
+        (5,8)   to[switch=$s_1$,-*]
+        (5,6)   to[switch=$s_2$]
+        (5,4)   to[switch=$s_3$]
+        (5,2)   to[switch=$s_4$]
         (5,0)  --
         (0,0)
 
@@ -359,18 +363,14 @@ The precedent section has presented switched capacitor converters with the load 
 
 %Draw Capacitors
         (5,2) --
-        (3,2) to[C=$C_{fly}$]
+        (3,2) to[C=$c_{fly}$]
         (3,6)--
         (5,6)
 
         (5,0) --
-        (7,0) to[C=$C_{dc}$,mirror]
+        (7,0) to[C=$c_{dc}$,mirror]
         (7,4)--
         (5,4);
- \draw (5,7) node[anchor=east]{$S_1$}
-       (5,5) node[anchor=east]{$S_2$}
-       (5,3) node[anchor=east]{$S_3$}
-       (5,1) node[anchor=east]{$S_4$} ;
 
   \begin{scope}[xshift=13cm,yshift=0.2cm]
   \draw [->] (-0.1,0) -- (5,0) node[anchor=west]{$t$};
@@ -412,6 +412,7 @@ Fixed voltage \emph{dc}-nodes are the common output nodes of a SCC. With a fixed
 Floating \emph{Pulsed Width Modulated}-nodes (\emph{pwm}-nodes) have been rarely used as outputs until a recently  couple of publications~\cite{2012Kumar, 2012Kline} presented the advantages of using them. \emph{pwm}-nodes have been normally considered just internal to the converter with any added value, but actually the conversion possibilities of SCCs can be further exploited by using these nodes as outputs.
 \emph{pwm}-node are accessible from the terminals of flying capacitors ($C_{fly}$), delivering a floating pulsed-width-modulated (PWM) voltage with an added \emph{dc} offset of a fraction of the input voltage with respect to ground. The magnitudes are related to the SCC topology. The pulsated voltages can be filtered using an inductive-capacitive filter (\emph{LC}) allowing to supply \emph{dc} load with averaged voltage of the node. Furthermore the \emph{pwm} voltage at the node can be controlled adjusting the duty
 cycle of the SCC, enhancing the regulation capabilities of these outputs compared to the fixed value of the \emph{dc}-nodes.
+
 
 
 
@@ -654,7 +655,6 @@ where the subscript in $m$ denotes the node of the converter. The numbering of t
 
 In fact, a H-SCC share lots of the characteristics of a buck converter, the most common LED driver in dc-to-dc conversion. Adding the output filter to a SCC, complements the converter with tight current regulation overcoming one of the intrinsic limitations of these converters, however it requires new magnetic elements challenging again the integrability  of the converter. In the following sections is introduced the characteristics of this new \emph{hybrid} topology as a LED driver using the buck converter as the reference driver,  since a H-SCC architecture can directly replace a buck converter LED driver providing the same regulation characteristics.
 
-
 \begin{figure}[!h]
 \centering
 \ctikzset { bipoles/length=1cm}
@@ -727,6 +727,7 @@ In fact, a H-SCC share lots of the characteristics of a buck converter, the most
 \end{figure}
 
 \subsection{Output Regulation}
+
 
 In contrast with the classical SCC, the conversion ratio of the converter depends on $D$, the duty cycle of the converter, consequently the conversion ratio can be now intrinsically adjusted to provide regulation to the load without affecting the converter efficiency.
 
@@ -819,7 +820,7 @@ Actually the H-SCC is similar to a buck converter, where a LC low pass filter is
 
 The value of the power inductor can be computed as
 \begin{equation}
- l_{o}   = \frac{\Delta v_{x} \cdot DD'}{\Delta i} T,
+ l_{o}   = \frac{\Delta v_{x} \cdot DD'}{\Delta i} T_{sw},
 \label{eq:gen_l}
 \end{equation}
 where $\Delta i$ is current \emph{peak-to-peak} amplitude in the inductor. Particularizing it for the buck converter, yields to
@@ -893,7 +894,7 @@ Per contra, in the case of the H-SCC the square-wave voltage is floating with re
 \end{equation}
 therefore particularizing eq.(\ref{eq:gen_l}) for a Dickson or a Ladder H-SCC yields to
 \begin{equation}
- l_{o,hscc}  = \frac{ m_i \cdot v_{src} \cdot DD'}{\Delta i} T.
+ l_{o,hscc}  = \frac{ m_i \cdot v_{src} \cdot DD'}{\Delta i} T_{sw}.
 \label{eq:hscc_l}
 \end{equation}
 
@@ -903,6 +904,8 @@ Actually using the \emph{pwm}-nodes of an SCC reduces the amplitude of the volta
 \label{eq:l_m}
 \end{equation}
 In fact, the ratio coincides with the intrinsic conversion ratio ($m_i$) of the converter, that for a step-down is always smaller than 1. For the 3:1 Dickson H-SCC of figure~'\ref{fig:3_1_hscc} the inductor value is 3 times smaller than in a buck converter. As a matter of fact using a H-SCC introduces an new design parameter to reduce the value of the power inductor, providing a new architecture that improves the integration or power converters in this case by the reduction of the magnetic components.
+
+
 
 \subsection{Power Switches}
 The large number of switches used in a H-SCC has different advantages towards miniaturization of the converter. In fact in a H-SCC the voltage stress applied to the different switches is a fraction of the input voltage, in contrast with the buck converter that the two switches have to block the full input voltage.  allows to implement H-SCC converters with switches rated at lower voltages than the input voltage. Table ~\ref{tab:3:1 H-Dick_V_stress} shows the blocking voltages at the switches of the 3:1 H-Dickson of figure~\ref{fig:3_1_hscc}.
@@ -949,51 +952,112 @@ Dividing eq.(\ref{eq:p_sw_buck}) and eq.(\ref{eq:p_sw_hscc_sol}) yields the swit
 \label{eq:p_sw_hscc_sol}
 \end{equation}
 
-We can generalize this result for the case of Dickson and Lader converters using the expressions for the blocking voltages of table~\ref{tab:Dick_Ladder_v_blk}.
-
-
-\begin{table}[h]
-\centering
-\caption{Switch blocking voltage of Dickson and Ladder converters.}
-\label{tab:Dick_Ladder_v_blk}
-\renewcommand{\arraystretch}{1.5}% Wider
-\begin{tabular}{r c | c  c }
- Converter &  & \# Switches & Blocking voltage ($v_{ds}$)    \\
- \midrule
- N:1 Dickson & $ N \geq$ 3 & $4+N$ & $\begin{array} {rcl} \frac{v_{src}}{N} & \to & 6~ \text{switches} \\ 
-                                                      \frac{2 v_{src}}{N} & \to & (N - 2) ~\text{switches}  
-                                      \end{array}$ \\  
- N:1 Ladder & $ N \geq$ 2 & $2\cdot N$ & $ \frac{v_{src}}{N} $ \\
- 
- 
-\end{tabular}
-\end{table}
-
-
+The generalize results for an $N$:1 Dickson and Lader converters are in table~\ref{tab:Dick_Ladder_v_blk} and switching loss ratio with respect to the buck converter plotted in figure~\ref{fig:psw_ratio}.
 \begin{table}[h]
 \centering
 \caption{Switch blocking voltage of Dickson and Ladder converters.}
 \label{tab:Dick_Ladder_v_blk}
 \renewcommand{\arraystretch}{1.5}% Wider
 \begin{tabular}{r | c  c   }
- Converter &  N:1 Dickson  $ N \geq$ 3  &  N:1 Ladder $ N \geq 2$  \\  
+ Converter &  N:1 Dickson  $ N \geq$ 3  &  N:1 Ladder $ N \geq 2$  \\
  \midrule
-\# Switches & $ 4 + N $  & $2 \cdot N$ \\ 
+\# Switches & $ 4 + N $  & $2 \cdot N$ \\
  $v_{ds}$ & $\begin{array} {rcl} \frac{v_{src}}{N}   & \to &  6~ \text{switches} \\
                                            \frac{2 v_{src}}{N} & \to &  (N - 2) ~\text{switches}
-                       \end{array}$  
+                       \end{array}$
                        &   $ \frac{v_{src}}{N} $ \\
- $ P_{sw}$ &  $ \frac{4+N}{8 \cdot N^2} \cdot v_{vin}^2 \cdot f_{sw}  \cdot {c_ds} $ &  $ \frac{1}{ N} \cdot v_{src}^2 \cdot f_{sw} \cdot {c_ds} $  \\
+ $ P_{sw}$ &  $ \frac{4+N}{8 \cdot N^2} \cdot v_{vin}^2 \cdot f_{sw}  \cdot {c_{ds}} $ &  $ \frac{1}{ N} \cdot v_{src}^2 \cdot f_{sw} \cdot {c_{ds}} $  \\
  $ \frac{P_{sw}}{P_{sw,buck}}$ &  $ \frac{4+N}{8 \cdot N^2}  $ &  $ \frac{1}{ N}  $  \\
- 
- 
+
+
  \end{tabular}
 \end{table}
 
+Both converters achieve a reduction of the switching losses with respect to the buck converter. In fact the switching loss decrease as $N$ increases, although the number of switched also increase. Reducing the switching loss enables to operate the converter at higher frequencies, thus with a smaller switching period $T_{sw}$, what is also effective in the reduction of the filter inductor as it can be seen from eq.(\ref{eq:gen_l}).
+
+\begin{SCfigure}
+\centering
+\begin{tikzpicture}[scale=0.7]
+    \begin{axis}[
+        xlabel near ticks,
+        xlabel=$N$,
+        ylabel=$P_{sw}/P_{sw,buck}$,
+        axis line style={->},
+        axis y line*=left,
+        axis x line*=bottom,
+        %ytick = {0,2,4,6},
+        %yticklabels={0,$v_{src}\frac{1}{3}$,$v_{src}\frac{2}{3}$,$v_{src}$},
+        domain=3:10,
+        samples=7,
+        %xticklabels={0,$D \cdot T_{sw}$,$T_{sw}$ ,$2 T_{sw}$,$3 T_{sw} $},
+        ]
 
 
-\subsection{Small Signal }
+  \addplot[semithick,mark=*] {(4+x)/x^2};
+  \addplot [semithick,mark=o]{1/x};
+  \legend {Dickson,Ladder};
+\end{axis}
+\end{tikzpicture}
+\caption{Switching loss ratio for Dickson and Ladder converters with respect to buck converter.}
+\label{fig:psw_ratio}
+\end{SCfigure}
 
+There are a couple of considerations regarding these results for a practical implementation of a H-SCC. On the one hand, they are obtained considering that $c_{ds}$ equal for all the switches in both converters. In a practical converter each device has a different $c_{ds}$ value defined by two of the device parameters; $c_{ds}$ is directly proportional to the rated $v_{ds}$  voltage and inversely proportional to the channel resistance $r_{on}$. Theoretically lower voltage switches have smaller $c_ds$, but the final value will also depends on its $r_{on}$. On the other hand, H-SCC has a larger number of devices in series in the current path compared to a buck that only has only one switch in the current path in both phases. A proper H-SCC design reduces the number of switches in the high current path, helping to keep the conduction loss low, further considerations about that are explained in  section~\ref{sc:high_current_path}.
+
+
+
+\subsection{Multiple Outputs}
+
+The use of the internal nodes of the SCC allows to provide multiple outputs with a single power train. Now the converter can be simultaneously loaded at the \emph{pwm}-nodes and at the \emph{dc}-node providing different conversion ration of each output. The conversion ratio at the \emph{dc}-node (or nodes)  is given by the intrinsic conversion ratio of the converter $m_i$, despite of the variations in the duty cycle of the driving signal, yet the output can be linear regulated to adjust the output voltage.  The conversion ratio for the other \emph{pwm}-nodes is function of $D$ and determined in each node by the node conversion ration $m_n$. In the case of using multiple \emph{pmw}-nodes, all the outputs will depend on $D$, hence it will not be possible to have independent regulation for each of the outputs.
+
+\begin{figure}[!h]
+\centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[american voltages,scale=0.65]
+\draw
+        %Draw Switches
+
+        (0,0) node[sground]{} to[V=$v_{src}$]
+        (0,8)  --
+        (5,8)   to[switch,l_=$s_1$,-*]
+        (5,6)   to[switch,l_=$s_2$]
+        (5,4)   to[switch,l_=$s_3$]
+        (5,2)   to[switch,l_=$s_4$]
+        (5,0)  --
+        (0,0)
+
+        (5,6) to[short] (8,6) to[L,l=$l_o$] (12,6) to[C,l_=$c_o$] (12,3) node[sground]{}
+        (11,6) -- (14,6) to[R,l_=$r_2$,v^=$v_{o2}$] (14,3) node[sground]{}
+
+        (5,4) to[short]
+        (9,4) to[R,l_=$r_1$,v^=$v_{o1}$] (9,0) -- (5,0)
+
+%Draw Capacitors
+        (5,2) --
+        (3,2) to[C=$c_{fly}$]
+        (3,6)--
+        (5,6)
+
+        (5,0) --
+        (7,0) to[C,l=$c_{dc}$]
+        (7,4)--
+        (5,4);
+
+\end{circuitikz}
+\caption {2:1 H-SCC with two outputs; $r_1$ is loaded to the \emph{dc}-node and $r_2$ is loaded to the first \emph{pwm}-node.}
+\label{fig:2:1hscc_dual_output}
+\end{figure}
+
+Figure~\ref{fig:2:1hscc_dual_output} shows a converter with two output voltages. $r_1$ is loaded to the \emph{dc}-node with an output voltage approximated to
+\begin{equation}
+v_{o1} = \frac{1}{2} v_{src}.
+\end{equation}
+
+$r_2$ is connected to the first \emph{pwm}-node with an output voltage function of $D$ as
+\begin{equation}
+v_{o2} = \frac{1+D}{2} v_{src},
+\end{equation}
+thus this output can be regulated.
 
 
 
@@ -1141,8 +1205,76 @@ The plot of figure~\ref{fig:induc_vx_led_drv} shows the transient voltage at the
 
 On the contrary a H-SCC has a narrow excursion range of the switching node, what helps to decrease the value of the output inductor. The narrow margins of regulation that LEDs require due to their abrupt $v-i$ characteristics (see section~\ref{sc:LED_load}) suits the reduced dynamic range that H-SCC offer. As a general practice in the design of a LED driver the voltage of the LED string is often optimized by selecting low, mid or high power LEDs and associating them in series or parallel. It is favorable to select a high voltages in the LED strings, but small enough to be driven by a buck converter. Increasing the voltage in the LED string decreases driving currents, which favors in lower conduction losses in the driver, mainly in switches and power inductors.
 
-
-
+%\subsection{High Current Paths}
+%\label{sc:high_current_path}
+%
+%The current
+%
+%\begin{figure}[t]
+%\ctikzset { bipoles/length=1cm}
+%\centering
+%    \begin{circuitikz}[american voltages,scale=0.6]
+%
+%    \draw
+%            %Input Supply
+%            (0,0)  to[V=$v_{src}$]
+%            %Draw Switches
+%            (0,10)  --
+%            (5,10)  to[switch=$s_1$,-*] %S1
+%            (5,8)   to[switch=$s_2$] %S2
+%            (5,6)   to[switch=$s_3$] %S3
+%            (5,4) --
+%            %left branch
+%            (3,4)   to[switch=$s_5$]
+%            (3,2)   to[switch=$s_4$]
+%            (3,0);
+%
+%    \draw   %right branch
+%            (5,4) --
+%            (7,4)   to[switch,l_=$s_6$]
+%            (7,2)   to[switch,l_=$s_7$]
+%            (7,0) -- (0,0);
+%
+%
+%
+%    \draw %Capacitor C1
+%           (3,2) -- (2,2)
+%            to[pC,l_=$c_1$] (2,8) --
+%           (5,8);
+%
+%    \draw %Capacitor C2
+%           (7,2) --
+%           (8.25,2)  to[pC,l_=$c_2$](8.25,6) --
+%           (5,6);
+%
+%    \draw  %Inductor
+%            (5,8) -- (8,8) node[anchor=south] {$v_x$} to[L=$l_o$] (12,8)
+%            (12,6) node[sground] {}  to[pC,l=$c_{o}$] (12,8)
+%            (12,8) -- (14,8) to[leD*] (14,6)
+%            (14,5) to[leD*] (14,3) node[sground]{}
+%            (14,9) to[open,v^=$v_o$] (14,2);
+%
+%    \draw[dotted]   (14,6) -- (14,5);
+%
+%
+%    \draw %Capacitor C3
+%          (5,0) to[pC,l_=$c_3$,-*] (5,4) node[anchor=south east] {};
+%
+%    % Draw currents flow arrows
+%    % Ph1
+%    \draw[thick,->] (0.25,6) -- (0.25,8.75) to[bend left=45] (1.25,9.75) -- (3.75,9.75)
+%                    to[bend left=45] (4.75,8.75) to[bend right = 45] (5.75,7.75) -- (7.5,7.75);
+%
+%    \draw[thick] (2.25,5.5) -- (2.25,6.75) to[bend left=45] (3.25,7.75) -- (7,7.75) ;
+%
+%    %Ph 2
+%    \draw[thick, dashed,->] (1.75,5.5) -- (1.75,7.75) to[bend left=45] (2.25,8.25) -- (7.5,8.25) ;
+%    \draw[thick, dashed] (4.75,6.25) -- (4.75,7.25) to[bend left=45] (5.75,8.25)  ;
+%
+%     \end{circuitikz}
+% \caption{ H-SCC with a 3:1 Dickson topology with the inductor connected to the second \emph{pwm}-node.}
+% \label{fig:3_1_hscc}
+%\end{figure}
 
 
 
