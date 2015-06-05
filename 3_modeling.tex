@@ -1,0 +1,83 @@
+\chapter[Advanced Modeling of SCC]{Advanced Modeling of Switched Capacitor Converters}
+
+\section{Introduction}
+
+\section{Single Output Converters}
+Switched Capacitor Converters has been always treated as a two-port converter with single input and a single output as shown in Fig.\ref{fig:two_port}. The input port is connected to a voltage source and the output port feeds the load. The SCC provides between input, $v_i$, and output, $v_o$, a voltage conversion, $m$,  that  steps up, steps down or/and inverts the polarity of the input voltage. Up to present all the circuit theory devoted SCCs is valid only for the two-port configuration, therefore this section is dedicated to revisit the classical concepts of single output SCC and to introduce new ones that enable a broader use of such converters.
+
+\begin{figure}[!h]
+\centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[scale=0.65]
+\draw
+    (1,0) to[short,o-]
+    (0,0) to[V = $V_{supply}$]
+    (0,3) to[short,-o]
+    (1,3) ;
+
+\draw
+    (2,3) --
+    (2.5,3)
+
+    (2,0) --
+    (2.5,0)
+
+    node[ocirc]  (IC)  at (2,0) {}
+    node[ocirc]  (I) at (2,3) {}
+    (I) to[open,v=$v_{i}$] (IC);
+
+
+\draw [thick]
+    (2.5,-0.5) --
+    (2.5,3.5)  --
+    (5.5,3.5)  --
+    (5.5,-0.5) --
+    (2.5,-0.5);
+
+\draw (4,2)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
+\draw
+    (5.5,3) -- (6,3)
+    (5.5,0) -- (6,0)
+    node[ocirc]  (O)  at (6,3) {}
+    node[ocirc]  (OC) at (6,0) {}
+    (O) to[open,v^<=$v_{o}$] (OC);
+
+\draw
+    (7,0) to[short,o-]
+    (8,0) to[ R= $Load$,mirror]
+    (8,3) to[short,-o]
+    (7,3) ;
+\end{circuitikz}
+\label{fig:two_port}
+\caption{General two port configuration of a Switched Capacitor Converter. }
+\end{figure}
+
+
+\subsection{The Output Impedance Model}
+\subsection{Identifying the source of losses in the charge transfer}
+\subsection{Re-formulating the charge flow analysis}
+\subsubsection[SSL Capacitor Charge Flow]{Slow Switching Limit: Re-defining the Capacitor Charge Flow Vectors}
+\subsubsection[FSL Switch Charge Flow]{Fast Switching Limit: Re-defining the Switch Charge Flow Vectors}
+
+\subsection{Load Model: Voltage Sink versus Current Sink}
+\subsection{Sensitivity of the inductor current ripple}
+
+\section{Multiple Output Converters}
+\subsection{The Output Trans-Resistance Model}
+\subsection{Obtaining the Trans-Resistance parameters with the charge flow analysis }
+
+
+
+\chapter[Optimization and Design]{Optimization and Design of Hybrid-Switched Capacitor Converters}
+\section{Introduction}
+\section{Study in the correlation of the design parameters and the Output Impedance}
+\section{Encapsulating the Switches and Capacitors area breakdown in an optimization procedure}
+\section{Insights towards a complete optimization}
+
+\chapter[Dynamic Study]{Dynamic Study of Hybrid-Switched Capacitor Converters}
+\section{Small Signal Analysis}
+
+
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{references} 

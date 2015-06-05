@@ -192,6 +192,7 @@ These converters can provide step-up and step-down conversion for large dynamic 
     \caption{}
     \label{fig:induct_ckt}
 \end{subfigure}
+\hfill
 \begin{subfigure}[t]{.45\textwidth}
     %\centering
     \raggedleft
@@ -282,13 +283,13 @@ A common practice to extend the regulation margins of these converters is to hav
 
     %Load and capacitor C2
     \draw (5,0) to[capacitor=$c_2$,-*] (5,3);
-    \draw (6.5,3) to[leD*,v^=$v_{o}$] (6.5,0);
-    
+    \draw (6.5,3) to[leD*,v_=$v_{o}$] (6.5,0);
 
     \end{circuitikz}
     \caption{}
     \label{fig:SCC_ckt}
 \end{subfigure}
+\hfill
 \begin{subfigure}[t]{.45\textwidth}
     %\centering
     \raggedleft
@@ -390,11 +391,15 @@ Currently the most innovative approach is taken by the startup \emph{Gooee} that
 
    %LEDs
 
-   \draw [dashed] (14,5.5) to[short,o-] (15,5.5)
-                    to[leD*] (15,2.75) to[short,-o] (12,2.75);
+   \draw [dotted] (14,5.5) to[short,o-] (15,5.5)
+                  (15,2.75) to[short,-o] (12,2.75);
+                  
+   \draw (15,5.5) to[leD*] (15,2.75);
 
-   \draw [dashed] (15,5.5) -- (17,5.5)
-                    to[leD*] (17,2.25) to[short,-o] (12,2.25);
+   \draw [dotted] (15,5.5) -- (17,5.5)
+                  (17,2.25) to[short,-o] (12,2.25);
+                  
+   \draw (17,5.5) to[leD*] (17,2.25);
 
    %Add battery
 

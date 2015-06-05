@@ -1,20 +1,90 @@
 \chapter{Hybrid Switched Capacitor Converter}
 
-The integration and miniaturization characteristics of Switched Capacitor Converters (SCCs) have an application for LED drivers, already in  commercial ICs and also in research. Commercially there is a large portfolio of available integrated circuits (ICs) ( designated as Charge-Pumps (CPs))  for backlighting in portable devices, \emph{i.e.}  \emph{MAX8930} \footnote{Maxim\textsuperscript{\textregistered} WLED Charge Pump, RGB, OLED Boost, LDOs with ALC and CAI }, \emph{MCP1252/3} \footnote{Microchip\textsuperscript{\textregistered} Low noise, Positive-Regulated Charge Pump}. These circuits can drive withe, RGB or Flash LEDs from a Lithium-Ion battery only by adding a few external capacitors.  Generally these chips integrate an multi-target SCC with different conversion ratios, along with a linear regulator for each channel a shown in the block diagram of Figure~\ref{fig:backlight_LED}. Various publications ~\cite{07Feng,09Wu,10Yin} proposed different modifications in the architectures in order to reduce the parasitic losses bringing the efficiency close to the theoretical limit. The power ratings in these drivers are below a 1$W$ and currents below hundred mili-Amperes with efficiencies between 70\%-90\% depending on the operation point.
+Driving high power LEDs using a switched capacitor converter challenges the operation of these converters. The SCC provides good performance in voltage-to-voltage conversion, but it can not directly provide regulated current. In low power applications, that is solved by using a linear regulator in series with the LED string, however that is not a valid solution for general lighting where high power and high current are needed. Combining switched capacitors with inductors can provide efficient converters for LED lighting, where the use of inductors provide a tight and efficient regulation, and the use of a switched capacitor allows to reduce the voltage stress in the components, in turn reducing switching losses and size.
+
+The \emph{Hybrid} switched capacitor converter (H-SCC) is a merge of a switched capacitor and an inductive converter, which will be introduced in this chapter. The first section will introduce the reader to basic knowledge about switched capacitor converters (SCC) to understand the enhancements, modifications and characteristics of the \emph{Hybrid}-SCC. The second section will present the H-SCC architecture and its operation, relating it to concepts about SCCs previously described. In the third section, we will present the main LED driver architecture based on a H-SCC that has been the driver of this thesis. At the same time, other architecture are qualitatively described to give to the reader a perspective of the broad range of applications in LED driving that H-SCCs have. The last section, will conclude and summarise the contribution of this chapter.
 
 
+\section{State of the Art}
+In  commercial ICs but also in research the integration and miniaturization characteristics of Switched Capacitor Converters (SCCs) have an application for LED drivers. Commercially there is a large portfolio of available integrated circuits (ICs) ( designated as Charge-Pumps (CPs))  for backlighting in portable devices, \emph{i.e.}  \emph{MAX8930} \footnote{Maxim\textsuperscript{\textregistered} WLED Charge Pump, RGB, OLED Boost, LDOs with ALC and CAI }, \emph{MCP1252/3} \footnote{Microchip\textsuperscript{\textregistered} Low noise, Positive-Regulated Charge Pump}. These circuits can drive White or RGB LEDs from a Lithium-Ion battery by merely adding a few external capacitors,  as shown in the block diagram of Figure~\ref{fig:SCC_backlight_LED}. Generally these chips integrate a SCC with different conversion ratios, along with a linear regulator for each channel. Various publications ~\cite{07Feng,09Wu,10Yin} proposed different modifications of the architectures in order to reduce the parasitic losses, bringing the efficiency close to the theoretical limit. The power ratings in these drivers are below 1$W$ at currents below hundred mili-Amperes with efficiencies between 70\%-90\% depending on the operation point.
 
-With respect to general lighting there are few research publications that report the use of SCCs. In 2008, ~\citeauthor{08Lee}~\cite{08Lee} presented a step-down converter supplied from rectified 220$V_{rms}$ providing 15W with a 95\% peak efficacy. The proposed architecture   supplied directly the LED string from the capacitors, controlling the output power by changing the switching frequency. 
+\begin{figure}[!ht]
+    \centering
+    \begin{circuitikz} [american voltages,scale=0.65]
+    \ctikzset{bipoles/length=1cm}
+   \draw[thick] (2.5,0.25) --
+                (2.5,6.5) --
+                (11.5,6.5) --
+                (11.5,0.25) --
+                (2.5,0.25);
 
-In 2012, ~\citeauthor{2012Kline}~\cite{2012Kline} proposed a isolated converter that combined a SCC stage with series-LC resonant converter delivering 15.5W with an efficiency of  92\%.  The SCC stage decreased  the rectified mains voltage, reducing the voltage stress in switches, capacitors and the elements of the resonant tank, allowing to diminish  the volume of the passive components and the total silicone area. The LED current is regulated using frequency and the duty cycle modulation. In a recent publication, the  presented modular implementation in silicon with a stackable ICs ~\cite{2013Kline}.
+    %Draw SCC block with capacitors
+    \draw (3,1) --
+          (3,6) --
+          (5,6) --
+          (5,1) --
+          (3,1);
 
-Driving high power LED using a switched capacitor converter challenges the operation of these converters. SCC provide a good performance in voltage-to-voltage conversion, but they can not directly provide a voltage-to-current. In low power applications, that is solved by using a linear regulator in series with the LED string, however it is not a valid solution for general lighting where high power and currents are needed. Combining switched capacitor with inductors can provide efficient converters for LED lighting, where the use of inductors provide a tight and efficient regulation, and the use of a switched capacitor allows to reduce the voltage stress in the components reducing switching losses and size.
+    \draw (4,3) node[rotate=90,anchor=west] {SCC};
 
-The \emph{Hybrid} switched capacitor converter (h-SCC) is a merge of a switched capacitor and an inductive converter, and it will be introduced in this chapter. The first section will introduce the reader to basic operation of the switched capacitor converters and the common used model. The second section, will present the H-SCC architecture and their operation. In the third section, different LED driver architectures will be presented along with architecture and control modifications that extends the range of operation of the converter.
+    \draw (5,5.5) to[short,-o] (14,5.5);
+    \draw (13,5.5) to[capacitor] (13,4.5) node[sground]{};
+
+    \draw (4,1) -- (4,0) node[sground,scale=0.75]{};
+
+   %Draw linear drivers
+   \draw  (4,0.5) -- (10.5,0.5) -- (10.5,1);
+
+   %First transitor
+   \draw   (10,1) -- (10,1.5) node[npn,anchor=E,scale=0.5](npn1){}
+           (npn1.C) -- (10,2.75) to[short,-o] (12,2.75);
+
+   %Second transitor
+   \draw  (10,1) -- (11,1)
+           node[npn,anchor=E,scale=0.5](npn2){}
+           (npn2.C) -- (11,2.25) to[short,-o] (12,2.25);
+
+   %Controller box
+   \draw (5.5,1) -- (8.5,1) -- (8.5,3) -- (5.5,3) -- (5.5,1);
+   \draw (5.75,2) node[anchor=west, text width = 1.75cm]{Intensity Controller};
+   \draw (npn2.B) -| (8.5,2);
+   \draw (npn1.B) -| (8.5,2);
+
+   %LEDs
+
+   \draw (14,5.5) to[short,o-] (15,5.5)
+                    to[leD*] (15,2.75) to[short,-o] (12,2.75);
+
+   \draw (15,5.5) -- (17,5.5)
+                    to[leD*] (17,2.25) to[short,-o] (12,2.25);
+
+   %Add battery
+
+   \draw (-1,0) node[sground,scale=0.75]{} to[battery = $v_{src}$] (-1,5.5)
+         -- (3,5.5);
+
+   \draw (3,5) -- (1.5,5) to[C,l_=$c_2$] (1.5,3.5) -- (3,3.5);
+   \draw (3,3) -- (1.5,3) to[C,l_=$c_1$] (1.5,1.5) -- (3,1.5);
+
+
+    \end{circuitikz}
+    \caption{Block diagram of the common architecture used in Charge Pump LED drivers for small screen backlighting in portable applications.}
+    \label{fig:SCC_backlight_LED}
+\end{figure}
+
+With respect to general lighting there are a few research publications that report the use of SCCs. In 2008, ~\citeauthor{08Lee}~\cite{08Lee} presented a step-down converter supplied from rectified 220$V_{rms}$ providing 15W with a 95\% peak efficiency. The proposed architecture directly supplied the LED string from the capacitors, controlling the output power by changing the switching frequency.
+
+In 2012, ~\citeauthor{2012Kline}~\cite{2012Kline} proposed a isolated converter that combined a SCC stage with series-LC resonant converter delivering 15.5W with an efficiency of  92\%.  The SCC stage decreased  the rectified mains voltage, reducing the voltage stress in switches, capacitors and the elements of the resonant tank, allowing to diminish  the volume of the passive components and the total silicon area. The LED current is regulated by modulating frequency and duty cycle.  The architecture was recently implemented in modular silicon dies, that can be stacked in order to adjust to the different mains voltages~\cite{2013Kline}.
+
+
+%different LED driver architectures will be presented along with architecture and control modifications that extends the range of operation of the converter.
 
 \section{Switched Capacitor Converter}
 
-A SCCs are a family of SMPS circuits that provide power conversion using only switches and capacitors as shown in figure~\ref{fig:demo_full_sch}. A SCC has two or more operation modes, referred as phases, each operating mode is associated with a different circuit arrangement of the capacitors , and sequentially switching between the different modes provides a voltage conversion between input and output. The circuit in figure~\ref{fig:demo_full_sch} is a two phase 3:1 Dickson that provides a step down conversion ratio of $\frac{1}{3}$. During the first phase the odd switches are closed, resulting with the circuit of figure~\ref{fig:demo_full_p1}. During the second phase, the even switches are closed, resulting with the circuit of figure~\ref{fig:demo_full_p2}.
+SCCs are a family of SMPS circuits that provide power conversion using only switches and capacitors. % as shown in figure~\ref{fig:demo_full_sch}.
+A SCC has two or more operation modes, referred as phases, and each operating mode is associated with a different circuit arrangement of the capacitors. The SCC is sequentially switching between the different modes, providing a voltage conversion between input and output. The circuit in figure~\ref{fig:demo_full_sch} is a two phase 3:1 Dickson that provides a step down conversion ratio of $\frac{1}{3}$. During the first phase the odd switches are closed, resulting in the circuit of figure~\ref{fig:demo_full_p1}. During the second phase, the even switches are closed, resulting in the circuit of figure~\ref{fig:demo_full_p2}.
+
+Dickson and Ladder are the preferred SCC topologies used in this dissertation. They have been selected since both topologies keep similar characteristics that favour the design of Hybrid-SCCs such as equal voltage ripple among all the internal nodes and reduced dispersion in the voltage stress among all the components (switches and capacitors). Despite that the following examples are based on a Dickson converter they hold for any other SCC well posed topology~\cite{Seeman:EECS-2009-78}. Other topologies are analysed in the X appendix.
 
 \begin{figure}[!h]
 \centering
@@ -138,7 +208,9 @@ A SCCs are a family of SMPS circuits that provide power conversion using only sw
 
 \subsection{Conversion ratio}
 
-The conversion ratio of the converter and the steady state voltages in the capacitors can be obtained applying Kirchhoff's voltage law (KVL) of each phase and solving the system of linear equations that provide the different equations. Therefore KVL equations of the first phase are:
+The conversion ratio of the converter and the steady state voltages in the capacitors is obtained applying Kirchhoff's voltage law (KVL) for the circuit of each phase. Combining the different linear independent equations the system can be solved.
+
+KVL equations of the first phase are:
 \begin{align}
 \label{eqn:ph1_kvl}
 \begin{split}
@@ -148,30 +220,39 @@ The conversion ratio of the converter and the steady state voltages in the capac
 \end{split}
 \end{align}
 
-The KVL equations of the second phase are
+KVL equations of the second phase are:
 \begin{align}
 \label{eqn:ph2_kvl}
 \begin{split}
-  v_{c_1} - v_{c_2} - v_{c_2} &=0, \\
+  v_{c_1} - v_{c_2} - v_{c_3} &=0, \\
   v_{out} - v_{c_3}  &=0.
 \end{split}
 \end{align}
 
-Selecting the linear independent equations from eq.(\ref{eqn:ph1_kvl}) and eq.(\ref{eqn:ph2_kvl}) the system can be solved, yielding
+Selecting the linear independent equations from eq.(\ref{eqn:ph1_kvl}) and eq.(\ref{eqn:ph2_kvl}), a solvable system can be formulated as
+\begin{align}
+\label{eqn:sys_kvl}
+\begin{split}
+  v_{src} - v_{c_1} - v_{c_2} &=0, \\
+  v_{c_1} - v_{c_2} - v_{c_3} &=0, \\
+  v_{out} - v_{c_2}  &=0,\\
+  v_{out} - v_{c_3}  &=0,
+\end{split}
+\end{align}
+solving it yields to
 \begin{align}
 \label{eqn:sol_kvl}
 \begin{split}
-  v_{out} =  v_{c_3} = v{c_2} &=\frac{V_{src}}{3} , \\
-  v_{c_1} &=\frac{2 V_{src}}{3} ,
+  v_{out} =  v_{c_3} = v_{c_2} &=\frac{V_{src}}{3} , \\
+  v_{c_1} &=\frac{2 \cdot V_{src}}{3} ,
 \end{split}
 \end{align}
-thus the converter conversion ratio is
+hence the converter conversion ratio is
 
 \begin{equation}
 \label{eqn:m_kvl}
 m_i = \frac{v_{out}}{v_{src}} = \frac{1}{3}.
 \end{equation}
-
 
 This result shows that the conversion ratio is defined by the topology of the converter and independent of the switching operating regime. From now on, the conversion ratio defined by the topology will be referred as the \emph{intrinsic} conversion ratio and defined as $m_i$.
 
@@ -201,18 +282,15 @@ A SCC has a fixed conversion ratio only defined by its topology and not by its o
  \node [block] (SCC) [minimum height = 2.6cm, minimum width = 1.95cm] at(-1.5,1.5) {SCC};
  %\node [block] (SCC) [minimum height = 4pt, minimum width = 3pt] at(-.5,1.5) {SCC};
 \end{circuitikz}
-
 \end{SCfigure}
 
-
-
-Indirectly, there is the possibility to regulate the output voltage by means of a linear regulator, thus the output voltage is adjusted by drooping the excess voltage ($v_{drop}$) in a series element with the load, as shown in the schematic of figure~\ref{fig:linear_scc}. This can be achieved in two ways: Using an external liner regulator connected  between the converter output and the load, or what is more common, using or \emph{'misusing'}  the behaviour of the SCC in order to provide this linear regulation characteristics. Regulating the load in this way  the efficiency of the converter is affected, the efficiency decreases as the difference between $m \cdot v_{src}$ and $v_o$ increases. Actually, like a linear regulator,  the efficiency of the converter can be written as function of $v_{src}$ and $v_o$ as
-
+Indirectly, there is always the possibility to regulate the output voltage by means of a linear regulator, thus the output voltage is adjusted by drooping the excess voltage ($v_{drop}$) in a series element with the load, as shown in the schematic of figure~\ref{fig:linear_scc}. This can be achieved in two ways: Using an external liner regulator connected  between the converter output and the load, or what is more common, using or \emph{'misusing'}  the behaviour of the SCC in order to provide this linear regulation characteristic. Regulating the load in such a way reduces the efficiency of the converter.%in fact the converter's efficiency decreases as the difference between $m \cdot v_{src}$ and $v_o$ increases. Actually,
+Like a linear regulator,  the efficiency of the converter can be written as function of $v_{src}$ and $v_o$ as
 \begin{equation}
 \eta = \frac{P_o}{P_i} = \frac{v_o \cdot i_o}{m \cdot v_{src} \cdot i_o} = \frac{v_o}{m \cdot v_{src}}.
 \end{equation}
 
-Figure~\ref{fig:eff_crv_linear_vs_scc_linear} plots the theoretical maximum efficiency with respect of the effective conversion ratio of the power converter  $m_e = v_o/v_src$. Comparing the characteristics of a single linear regulator and a linear regulated 2:1 SCC shows that for conversion ratios below $1/2$ the SCC converter has 50\% better efficiency, however above $1/2$ the SCC is not longer operative.
+Figure~\ref{fig:eff_crv_linear_vs_scc_linear} plots the theoretical maximum efficiency with respect of the effective conversion ratio of the power converter  $m_e = v_o/v_{src}$. Comparing the characteristics of a single linear regulator and a linear regulated 2:1 SCC shows that for conversion ratios below $1/2$ the SCC converter has better efficiency, however above $1/2$ the SCC is not longer operative.
 
 \begin{SCfigure}
 \centering
@@ -247,7 +325,7 @@ Figure~\ref{fig:eff_crv_linear_vs_scc_linear} plots the theoretical maximum effi
 \subsection{Multiple conversion ratio converters}
 
 Multiple conversion ratio converters enable to extend the regulation margins and increase the conversion efficiency. Figure~\ref{fig:eff_crv_linear_vs_scc_linear} shows the limitations of a 2:1 SCC. First, the converter is only operative for conversion rations below $1/2$. Second, as the conversion ratio moves below the intrinsic conversion  ratio of the converter ($1/2$) the efficiency linearly decreases.
-Topologies, like the one of figure~\ref{fig:M_SCC_ckt}, have multiple conversion ratios - $\frac{1}{3}$, $\frac{1}{2}$, $\frac{2}{3}$ and $1$ - that extend the operation margins and increase the efficiency of the converter as shown in the plot of figure~\ref{fig:M_SCC_plt}.
+Other topologies, like the one of figure~\ref{fig:M_SCC_ckt}, have multiple conversion ratios - $\frac{1}{3}$, $\frac{1}{2}$, $\frac{2}{3}$ and $1$ - that extend the operation margins and increase the efficiency of the converter as shown in the plot of figure~\ref{fig:M_SCC_plt}. A detailed analysis of this converter is presented in the appendicle X, section B.
 
 \begin{figure}[!h]
 \centering
@@ -338,7 +416,7 @@ Topologies, like the one of figure~\ref{fig:M_SCC_ckt}, have multiple conversion
 
 \subsection{Converter output nodes}
 
-The precedent section has presented switched capacitor converters with the load connected to a node that provides a fixed conversion ratio. Actually that is the most common and extended way of employing such converters, however a SCC can supply the load from other nodes internal nodes of the converter with special characteristics. In truth, two types of nodes can be identified in a Switched Capacitor Converter: Fixed voltage \emph{dc}-nodes, node $a$ in figure~\ref{fig:dc_pwm_nodes}, and floating voltage \emph{pulsed width modulated}-nodes (\emph{pwm}-nodes),  node $b$ in figure~\ref{fig:dc_pwm_nodes}.
+The previous section presented switched capacitor converters with the load connected to a node that provides a fixed conversion ratio. Actually, that is the most common way of employing these converters, however a SCC can supply the load from other nodes. Two types of nodes can be identified in a Switched Capacitor Converter: Fixed voltage \emph{dc}-nodes, node $a$ in figure~\ref{fig:dc_pwm_nodes}, and floating voltage \emph{pulse width modulated} nodes (\emph{pwm}-nodes),  node $b$ in figure~\ref{fig:dc_pwm_nodes}.
 
 \begin{figure}[!h]
 \centering
@@ -407,19 +485,14 @@ The precedent section has presented switched capacitor converters with the load 
 \label{fig:dc_pwm_nodes}
 \end{figure}
 
-Fixed voltage \emph{dc}-nodes are the common output nodes of a SCC. With a fixed conversion ratio defined by the topology, they supply the output load with a low voltage ripple with a capacitor in parallel connected to ground. The capacitors that are connected between a \emph{dc}-node and ground are  \emph{dc}-capacitors as shown in the Fig. \ref{fig:dc_pwm_nodes}. A converter have one or more \emph{dc}-capacitors, however topologies with a reduced number of them ($C_{dc}$) trend to have a better utilization of the capacitors, since these capacitors do not contribute to the charge transportation~\cite{Seeman:EECS-2009-78}.\\
+Fixed voltage \emph{dc}-nodes are the common output nodes of a SCC. A \emph{dc}-node supplies the load with a fixed conversion ratio defined by the topology, and  with a low voltage ripple thanks to the capacitor in parallel with the load. The capacitors that are connected between a \emph{dc}-node and ground are  \emph{dc}-capacitors as shown in the Fig. \ref{fig:dc_pwm_nodes}. A SCC can have one or more \emph{dc}-capacitors, however topologies with a reduced number of these trend to have a better area utilization , since these \emph{dc}-capacitors do not contribute to the charge transportation~\cite{Seeman:EECS-2009-78}.\\
 
-Floating \emph{Pulsed Width Modulated}-nodes (\emph{pwm}-nodes) have been rarely used as outputs until a recently  couple of publications~\cite{2012Kumar, 2012Kline} presented the advantages of using them. \emph{pwm}-nodes have been normally considered just internal to the converter with any added value, but actually the conversion possibilities of SCCs can be further exploited by using these nodes as outputs.
-\emph{pwm}-node are accessible from the terminals of flying capacitors ($C_{fly}$), delivering a floating pulsed-width-modulated (PWM) voltage with an added \emph{dc} offset of a fraction of the input voltage with respect to ground. The magnitudes are related to the SCC topology. The pulsated voltages can be filtered using an inductive-capacitive filter (\emph{LC}) allowing to supply \emph{dc} load with averaged voltage of the node. Furthermore the \emph{pwm} voltage at the node can be controlled adjusting the duty
+Floating \emph{pulse width modulated}-nodes (\emph{pwm}-nodes) have been rarely used as outputs until recent couple of publications~\cite{2012Kumar, 2012Kline} presented the advantages of using them. \emph{pwm}-nodes have been normally considered  internal to the converter without any added functionality, but actually the conversion possibilities of SCCs can be further enhnaced by using these nodes as outputs.
+\emph{pwm}-nodes are accessible from the terminals of flying capacitors ($c_{fly}$), delivering a floating pulse-width-modulated (PWM) voltage with an added \emph{dc} offset of a fraction of the input voltage with respect to ground. The magnitudes are related to the SCC topology. The pulsating voltages can be filtered using an inductive-capacitive filter (\emph{LC}), allowing to supply a \emph{dc} load with the averaged voltage of the node. Furthermore the \emph{pwm} voltage at the node can be controlled by adjusting the duty
 cycle of the SCC, enhancing the regulation capabilities of these outputs compared to the fixed value of the \emph{dc}-nodes.
 
-
-
-
-
-
 \section{Hybrid Switched Capacitor}
-A Hybrid Switched Capacitor Converter (H-SCC) uses a low pass filter to supply a \emph{dc} voltage from a \emph{pwm}-node, as shown in figure~\ref{fig:3_1_hscc}. The low pass filter is composed by inductor $l_o$ and capacitor $c_o$, and averages the \emph{pwm}-voltage of the switching node $v_x$.
+A Hybrid Switched Capacitor Converter (H-SCC) uses a low pass filter to supply a \emph{dc} voltage from a \emph{pwm}-node, as shown in figure~\ref{fig:3_1_hscc}. The low pass filter is composed of an inductor $l_o$ and capacitor $c_o$, and averages the \emph{pwm}-voltage of the switching node $v_x$.
 
 \begin{figure}[t]
 \ctikzset { bipoles/length=1cm}
@@ -518,8 +591,7 @@ A Hybrid Switched Capacitor Converter (H-SCC) uses a low pass filter to supply a
 \caption{Transient voltage at the switching node of the switching node $v_x$ of the H-SCC in figure~\ref{fig:3_1_hscc}}
 \label{fig:vx_t}
 \end{SCfigure}
-
-As in the previous case, odd switches are closed during one phase (figure~\ref{fig:hscc_full_p1}) and even switches (figure~\ref{fig:hscc_full_p2}) are closed during the other phase. The switching between the two phases produces a \emph{pwm} voltage at the switching node $v_x$ as shown in the graph of the figure~\ref{fig:led_I-V}. Hence  the voltage at the switching node $v_x$ during an entire switching period $T_{sw}$ is
+Like in the previous circuit, odd switches are closed during one phase (figure~\ref{fig:hscc_full_p1}) and even switches (figure~\ref{fig:hscc_full_p2}) are closed during the other phase. The switching between the two phases produces a \emph{pwm} voltage at the switching node $v_x$ as shown in the graph of the figure~\ref{fig:vx_t}. Hence  the voltage at the switching node $v_x$ during an entire switching period $T_{sw}$ is
 
 \begin{equation}
 v_x(t) = \left\{
@@ -532,7 +604,7 @@ v_x(t) = \left\{
 \label{eq:vx_t}
 \end{equation}
 
-where $D$ corresponds to the duty cycle. The output filter averages voltage at the switching node voltage, and the resulting mean  value $v_{out}$ is obtained by integrating eq.(~\ref{eq:vx_t}) during a switching cycle:
+where $D$ corresponds to the duty cycle. The output filter averages the voltage at the switching node $v_x$, therefore the mean value at $v_{out}$ can be obtained integrating eq.(~\ref{eq:vx_t}) during a switching cycle as,
 \begin{align}
  v_{out} & = \frac{1}{T} \int_{0}^{T}  v_x(t) dt \\[3ex]
  v_{out} & = \frac{1}{T} \left( \int_{0}^{DT} \frac{1}{3} v_{src} ~dt + \int_{DT}^{T} \frac{2}{3} v_{src} ~dt \right) \\[3ex]
@@ -544,7 +616,7 @@ thus the converter conversion ratio for the second node ($n_2$) is
  m_2   = \frac{v_{out}}{v_{src}} = \frac{2-D}{3},
  \label{eq:int_vx_t}
 \end{equation}
-where the subscript in $m$ denotes the node of the converter. The numbering of the nodes is made in the following order top-bottom and left-right, see  circuit schematic of figure~\ref{fig:3_1_hscc}. Figure~\ref{fig:pwm_nodes} plots all the switching voltages available in the converter. The square-wave voltages cover a the range from 0 to $v_{src}$ equally divided with an amplitude of $v_{src}/3$. In fact, this equal spacing is one of the singularities of Dickson and Lader converters with respect to the other topologies. (That is why these two topologies were selected to implement all the H-SCC of this dissertation.) Therefore the amplitude of the voltage at the switching node is
+where the subscript in $m$ denotes the node of the converter. The numbering of the nodes is made in the following order top-bottom and left-right, see the circuit schematic of figure~\ref{fig:3_1_hscc}. Actually in the 3:1 H-Dickson there is a plurality of \emph{pwm}-nodes. Figure~\ref{fig:pwm_nodes} plots all the switching voltages available in the converter. The square-wave voltages cover the range from 0 to $v_{src}$ equally divided with an amplitude of $v_{src}/3$. In fact, this equal spacing is one of the singularities of Dickson and Ladder converters with respect to the other topologies, and the reason why these two topologies were selected to implement all the H-SCCs of this dissertation. Having an equal voltage ripple at the different switching nodes, allows to use the same inductance value for each of the different \emph{pwm}-nodes. The amplitude of the voltage in any Dickson and Ladder converter at the switching node is
 \begin{equation}
 \Delta v_x = m_i v_{src}.
 \label{eq:del_vx}
@@ -653,7 +725,7 @@ where the subscript in $m$ denotes the node of the converter. The numbering of t
 \label{fig:pwm_nodes}
 \end{SCfigure}
 
-In fact, a H-SCC share lots of the characteristics of a buck converter, the most common LED driver in dc-to-dc conversion. Adding the output filter to a SCC, complements the converter with tight current regulation overcoming one of the intrinsic limitations of these converters, however it requires new magnetic elements challenging again the integrability  of the converter. In the following sections is introduced the characteristics of this new \emph{hybrid} topology as a LED driver using the buck converter as the reference driver,  since a H-SCC architecture can directly replace a buck converter LED driver providing the same regulation characteristics.
+In fact, a H-SCC shares many of the characteristics of a buck converter, the most common LED driver circuit used in dc-to-dc conversion. Adding the output filter to a SCC complements the converter with tight current regulation and overcomes one of the intrinsic regulation limitations of SCCs. However it requires magnetic elements, challenging again the integrability  of the converter. The following sections introduces the characteristics of this new \emph{hybrid} topology as a LED driver, using the buck converter as a reference. %  since a H-SCC architecture can directly replace a buck converter LED driver providing the same regulation characteristics.
 
 \begin{figure}[!h]
 \centering
@@ -689,7 +761,7 @@ In fact, a H-SCC share lots of the characteristics of a buck converter, the most
          \draw (6,2) node[anchor=south] {$v_x$};
 
          \end{circuitikz}
-     \subcaption{First phase, odd switched are closed and even switches are open.}
+     \subcaption{First phase, odd switches are closed and even switches are open.}
      \label{fig:hscc_full_p1}
      \end{subfigure}
 
@@ -719,24 +791,24 @@ In fact, a H-SCC share lots of the characteristics of a buck converter, the most
          \draw (5,4) node[anchor=south] {$v_x$};
 
          \end{circuitikz}
-     \subcaption{Second phase, even switched are closed and odd switches are open.}
+     \subcaption{Second phase, even switches are closed and odd switches are open.}
      \label{fig:hscc_full_p2}
      \end{subfigure}
-\caption{}
+\caption{The two switching modes of 3:1 H-Dickson of figure~\ref{fig:3_1_hscc}}
 \label{fig:hscc_phases}
 \end{figure}
 
 \subsection{Output Regulation}
 
 
-In contrast with the classical SCC, the conversion ratio of the converter depends on $D$, the duty cycle of the converter, consequently the conversion ratio can be now intrinsically adjusted to provide regulation to the load without affecting the converter efficiency.
+In contrast with the classical SCC, the conversion ratio of a H-SCC converter depends on the duty cycle of the converter ($D$), consequently the conversion ratio can now be adjusted to provide regulation of the load without directly affecting the converter's efficiency.
 
 Figure~\ref{fig:reg_comp} compares the idealized trend curves of the converter efficiency with respect to the conversion ratio for a H-SCC, a SCC and a buck converter. For example a 3:1 Dickson has an intrinsic conversion ratio of
 $ m_i = \frac{1}{3} $ and provides regulation at costs of efficiency (see dashed line). Instead, using the third \emph{pwm}-node ($n_3$), located at the negative terminal of capacitor $c_1$ in the schematic of figure~\ref{fig:3_1_hscc}, the converter has an adjustable conversion ratio of
 \begin{equation}
 m_3 = \frac{D}{3}
 \end{equation}
-by changing the duty cycle $D$ of the drive signal. In this case, the efficiency vs. regulation curve keeps flat within a regulation margins and drops for extreme duty cycles cause of the internal losses of the SCC (see solid line). The details of the loss mechanisms in SCC and H-SCC, are covered in chapter X dedicated to modeling. Indeed, the efficiency vs. regulation curve of a H-SCC is similar to the one of a buck converter (dotted line) but with a smaller dynamic range.
+by changing the duty cycle $D$ of the drive signal. In this case, the efficiency vs. regulation curve is flat within the regulation margins and drops for extreme duty cycles by cause of the internal losses of the SCC (see solid line). The details of the loss mechanisms in SCC and H-SCC are covered in chapter X dedicated to modeling. Indeed, the efficiency vs. regulation curve of a H-SCC is similar to the one of a buck converter (dotted line) but with a smaller dynamic range.
 \begin{SCfigure}
 \centering
 \begin{circuitikz}[american voltages,xscale=0.55,yscale=0.65]
@@ -773,7 +845,7 @@ by changing the duty cycle $D$ of the drive signal. In this case, the efficiency
   %\draw (8,3.25) node[anchor=west] {$\Delta v_x$};
 \end{scope}
 \end{circuitikz}
-\caption{Comparison between converters of regulation vs efficiency (trend curves): 3:1 H-Dickson $3rd$ \emph{pwm}-node (solid line), 3:1 Dickson (dashed line) and buck converter (dotted line).}
+\caption{Comparison of regulation vs. efficiency characteristics between converters: 3:1 H-Dickson $3rd$ \emph{pwm}-node (solid line), 3:1 Dickson (dashed line) and buck converter (dotted line).}
 \label{fig:reg_comp}
 \end{SCfigure}
 
@@ -812,20 +884,21 @@ by changing the duty cycle $D$ of the drive signal. In this case, the efficiency
 \end{tabular}
 \end{table}
 
-Ideally a buck converter can provide a conversion ratio between 0 and 1. It is the same case for a H-SCC, however the conversion ratio is segmented. Each segment is associated to a different \emph{pwm}-node of the converter, and it has a limited dynamic range of regulation $\Delta m$. Table~\ref{tab:3:1 H-Dick_M} presents the conversion characteristics for the different nodes of the 3:1 H-Dickson of figure~\ref{fig:3_1_hscc}. It can be seen that the dynamic range of conversion ($\Delta m$) is the same across all the \emph{pwm}-nodes and equal to equal to the intrinsic conversion ratio of the converter $m_i$, this characteristic is shared with two topologies used in this dissertation: Dickson and Ladder.
+Ideally a buck converter provides a conversion ratio between 0 and 1. Indeed, it is the same case for a H-SCC, however the conversion ratio is segmented in different ranges. Each segment is associated with a different \emph{pwm}-node of the converter, and it has a limited dynamic range of regulation $\Delta m$. Table~\ref{tab:3:1 H-Dick_M} presents the conversion characteristics for the different nodes of the 3:1 H-Dickson of figure~\ref{fig:3_1_hscc}. It can be seen that the dynamic range of conversion ($\Delta m$) is the same across all the \emph{pwm}-nodes and equal to the intrinsic conversion ratio of the converter $m_i$. This characteristic is shared between the two topologies used in this dissertation: Dickson and Ladder.
 
 \subsection{Power Inductor}
+\label{ch:power_inductor}
 
-Actually the H-SCC is similar to a buck converter, where a LC low pass filter is excited with a square-wave voltage as shown in figure~\ref{fig:ind_ckt_l}. The size of the power inductor is directly proportional to the amplitude of the square-wave voltage at the switching node ($\Delta v_x$) that in a buck converter is equal to the source voltage  as shown in the plot from figure~\ref{fig:induc_vx}.
+Like in a buck converter, a H-SCC uses a inductor-capacitor (LC) low pass filter to supply the load with a \emph{dc} voltage. In contrast with the SCC, the H-SCC adds an inductor to the converter, introducing again a challenge in the integrability of the converter, as it was already discussed in the second chapter. However the advantages that it add in terms of regulation and efficiency justify its use. Actually, the inductor also benefits from the reduced voltage ripple present in the \emph{pwm}-nodes, relaxing the requirements in terms of inductance. Reducing the value of the inductance is a key element to scale down the size of the inductor volume. Lower inductance values require less energy storage in the magnetic field that surrounds the inductor, which allows to use smaller magnetic cores. Even, for small enough inductance values, core less inductors can be used with the advantages that they bring in terms of integration.
 
-The value of the power inductor can be computed as
+The inductance value of the power inductor in a buck type converter configuration is
 \begin{equation}
  l_{o}   = \frac{\Delta v_{x} \cdot DD'}{\Delta i} T_{sw},
 \label{eq:gen_l}
 \end{equation}
-where $\Delta i$ is current \emph{peak-to-peak} amplitude in the inductor. Particularizing it for the buck converter, yields to
+where $\Delta i$ is the \emph{peak-to-peak} current amplitude in the inductor, $D$ the duty cycle and $D'=(1-D)$. From eq.(\ref{eq:gen_l}) it can be seen that the size of the power inductor is directly proportional to the amplitude of the square-wave voltage at the switching node ($\Delta v_x$), which in a buck converter is equal to the source voltage as shown in the plot from figure~\ref{fig:induc_vx}. Particularizing eq.(\ref{eq:gen_l}) for a buck converter, yields to
 \begin{equation}
- l_{o,buck}  = \frac{v_{src} \cdot DD'}{\Delta i} T.
+ l_{o,buck}  = \frac{v_{src} \cdot DD'}{\Delta i} T_{sw}.
 \label{eq:buck_l}
 \end{equation}
 
@@ -883,11 +956,11 @@ where $\Delta i$ is current \emph{peak-to-peak} amplitude in the inductor. Parti
     \caption{}
 \label{fig:induc_vx}
 \end{subfigure}
-\caption{Inductor based converter, \emph{left} - buck converter schematic; \emph{right} - transient voltage at the switching node during two switching periods. }
+\caption{Inductor based converter, \emph{left} - synchronous buck converter schematic; \emph{right} - transient voltage at the switching node during two switching periods. }
 \label{fig:inductive_smps}
 \end{figure}
 
-Per contra, in the case of the H-SCC the square-wave voltage is floating with respect the ground (see figure~\ref{fig:vx_t}) and its ripple amplitude $\Delta v_x$ depends on the converter's topology. In the case of the Dickson and Ladder converters the amplitude of the voltage ripple $\Delta v_x$ is the same for all of the \emph{pwm}-nodes and equal to
+Opposite to the buck converter, in the H-SCC the square-wave voltages are floating with respect the ground (see figure~\ref{fig:vx_t}) and its ripple amplitude $\Delta v_x$ depends on the converter's topology. In the case of the Dickson and Ladder converters the amplitude of the voltage ripple $\Delta v_x$ is the same for all of the \emph{pwm}-nodes and equal to
 \begin{equation}
  \Delta v_x   = m_i \cdot v_{src},
 \label{eq:h_scc_Del_vx}
@@ -903,12 +976,10 @@ Actually using the \emph{pwm}-nodes of an SCC reduces the amplitude of the volta
  \frac{l_{o,hscc}}{l_{o,buck}} =  \frac{{ m_i \cdot v_{src} \cdot DD' \cdot T}/{\Delta i} }{{  v_{src} \cdot DD' \cdot T}/{\Delta i}} = m_i.
 \label{eq:l_m}
 \end{equation}
-In fact, the ratio coincides with the intrinsic conversion ratio ($m_i$) of the converter, that for a step-down is always smaller than 1. For the 3:1 Dickson H-SCC of figure~'\ref{fig:3_1_hscc} the inductor value is 3 times smaller than in a buck converter. As a matter of fact using a H-SCC introduces an new design parameter to reduce the value of the power inductor, providing a new architecture that improves the integration or power converters in this case by the reduction of the magnetic components.
-
-
+In fact, the ratio coincides with the intrinsic conversion ratio ($m_i$) of the converter, which for a step-down is always smaller than 1. For the 3:1 Dickson H-SCC of figure~\ref{fig:3_1_hscc} the inductor value is 3 times smaller than in a buck converter. As a matter of fact, using an H-SCC introduces an new design parameter to reduce the value of the power inductor, providing a new architecture that improves the integration or power converters in this case by the reduction of the magnetic components.
 
 \subsection{Power Switches}
-The large number of switches used in a H-SCC has different advantages towards miniaturization of the converter. In fact in a H-SCC the voltage stress applied to the different switches is a fraction of the input voltage, in contrast with the buck converter that the two switches have to block the full input voltage.  allows to implement H-SCC converters with switches rated at lower voltages than the input voltage. Table ~\ref{tab:3:1 H-Dick_V_stress} shows the blocking voltages at the switches of the 3:1 H-Dickson of figure~\ref{fig:3_1_hscc}.
+The large number of switches used in a H-SCC has different advantages towards miniaturization of the converter. In fact, in a H-SCC the voltage stress applied to the different switches is a fraction of the input voltage, in contrast to the buck converter where each of the switches have to block the full input voltage. Therefore SCCs can be implemented with switches rated at lower voltages than the input voltage. Table ~\ref{tab:3:1 H-Dick_V_stress} shows the blocking voltages of the switches of the 3:1 H-Dickson of figure~\ref{fig:3_1_hscc}.
 
 \begin{table}[h]
 \centering
@@ -923,24 +994,25 @@ The large number of switches used in a H-SCC has different advantages towards mi
 \end{tabular}
 \end{table}
 
-Reducing the voltage stress has several advantages. First, low voltage devices take less silicon area and have a larger offer in the standard integration processes. Second, switching performance of the devices are better since the devices are smaller in area, thus smaller in parasitic capacitances, as a consequence they can switch faster. Finally, the switching losses of the converter are reduced since they are quadratically proportional to the blocking voltages of the switches ($v_{ds}$).  The switching losses ratio between the buck and the 3:1 H-Dickson are computed  assuming that $c_{ds}$ is equal for all the switches in both converters, using the switching losses formula associated to the parasitic  capacitances~\cite{2001fundamentals_erickson}:
+Reducing the voltage stress has several advantages. First, low voltage devices take less silicon area in the standard integration processes. Second, switching performance of these devices is better since they are smaller in area, and with less parasitic capacitances, as a consequence, they can switch faster. Finally, the switching losses of the converter are reduced since they are quadratically proportional to the blocking voltages of the switches ($v_{ds}$). The reduction of the switching loss with respect to a buck converter can be easily calculated using the switching loss formula associated to parasitic  capacitances~\cite{2001fundamentals_erickson}:
 \begin{equation}
 P_{sw} = \frac{1}{2} f_{sw} \cdot c_{ds} \cdot v_{ds}^2.
 \label{eq:p_sw_dev}
 \end{equation}
+In this exercise it has been assumed that $c_{ds}$ is equal for the different switches in both converters, despite the fact that value would be different for each switch in a real implementation. This simplification has been taken in order to show the impact of the voltage reduction to the switching loss. %Actually, as previously mentioned using lower voltage switches will also lead in a reduction to the parasitic capacitances leading to smaller switching loss as well.
 
-The blocking voltages of the switches in the buck converter of figure~\ref{fig:ind_ckt_l} is $v_{src}$, thus the switching losses are
+The blocking voltage of the switch in the buck converter of figure~\ref{fig:ind_ckt_l} is $v_{src}$, thus replacing it in eq.(\ref{eq:p_sw_dev}), the switching losses are
 \begin{equation}
 P_{sw,buck} =   f_{sw} \cdot c_{ds} \cdot v_{src}^2.
 \label{eq:p_sw_buck}
 \end{equation}
 
-The blocking voltages of the 3:1 H-Dickson are in table~\ref{tab:3:1 H-Dick_V_stress}, thus the switching losses for that converter are
+The blocking voltages of the 3:1 H-Dickson are in table~\ref{tab:3:1 H-Dick_V_stress}, thus replacing it in eq.(\ref{eq:p_sw_dev}) the switching losses for that converter are
 \begin{equation}
 P_{sw,hscc} =  \frac{6}{2}  f_{sw} \cdot c_{ds} \left( \frac{1}{3} v_{src} \right)^2 + \frac{1}{2}  f_{sw} \cdot c_{ds} \left( \frac{2}{3} v_{src} \right)^2 ,
 \label{eq:p_sw_hscc}
 \end{equation}
-rearranging yields
+rearranging yields to
 \begin{equation}
 P_{sw,hscc} =  \frac{5}{9}  f_{sw} \cdot c_{ds} \cdot v_{src}^2.
 \label{eq:p_sw_hscc_sol}
@@ -952,7 +1024,7 @@ Dividing eq.(\ref{eq:p_sw_buck}) and eq.(\ref{eq:p_sw_hscc_sol}) yields the swit
 \label{eq:p_sw_hscc_sol}
 \end{equation}
 
-The generalize results for an $N$:1 Dickson and Lader converters are in table~\ref{tab:Dick_Ladder_v_blk} and switching loss ratio with respect to the buck converter plotted in figure~\ref{fig:psw_ratio}.
+The results for a generalized $N$:1 Dickson and Ladder converter are in table~\ref{tab:Dick_Ladder_v_blk}, and in figure~\ref{fig:psw_ratio} is plotted the switching loss ratio with respect to the buck converter.
 \begin{table}[h]
 \centering
 \caption{Switch blocking voltage of Dickson and Ladder converters.}
@@ -973,7 +1045,7 @@ The generalize results for an $N$:1 Dickson and Lader converters are in table~\r
  \end{tabular}
 \end{table}
 
-Both converters achieve a reduction of the switching losses with respect to the buck converter. In fact the switching loss decrease as $N$ increases, although the number of switched also increase. Reducing the switching loss enables to operate the converter at higher frequencies, thus with a smaller switching period $T_{sw}$, what is also effective in the reduction of the filter inductor as it can be seen from eq.(\ref{eq:gen_l}).
+Both converters achieve a reduction of the switching losses with respect to the buck converter. In fact the switching loss decrease as $N$ increases, although the number of switches increase as well. Reducing the switching loss enables to operate the converter at higher frequencies, thus with a smaller switching period $T_{sw}$, which is also effective in the reduction of the power inductor.
 
 \begin{SCfigure}
 \centering
@@ -1002,13 +1074,13 @@ Both converters achieve a reduction of the switching losses with respect to the 
 \label{fig:psw_ratio}
 \end{SCfigure}
 
-There are a couple of considerations regarding these results for a practical implementation of a H-SCC. On the one hand, they are obtained considering that $c_{ds}$ equal for all the switches in both converters. In a practical converter each device has a different $c_{ds}$ value defined by two of the device parameters; $c_{ds}$ is directly proportional to the rated $v_{ds}$  voltage and inversely proportional to the channel resistance $r_{on}$. Theoretically lower voltage switches have smaller $c_ds$, but the final value will also depends on its $r_{on}$. On the other hand, H-SCC has a larger number of devices in series in the current path compared to a buck that only has only one switch in the current path in both phases. A proper H-SCC design reduces the number of switches in the high current path, helping to keep the conduction loss low, further considerations about that are explained in  section~\ref{sc:high_current_path}.
+There are a couple of considerations regarding these results for a practical implementation of a H-SCC. On the one hand, they are obtained considering that $c_{ds}$ is equal for all the switches in both converters. In a practical converter each device has a different $c_{ds}$ value defined by two of the device parameters; $c_{ds}$ is directly proportional to the rated $v_{ds}$  voltage and inversely proportional to the channel resistance $r_{on}$. Theoretically lower voltage switches have smaller $c_{ds}$, but the final value will also depends on its $r_{on}$. On the other hand, H-SCC has a larger number of devices in series in the current path compared to a buck that only has only one switch in the current path in both phases. A proper H-SCC design reduces the number of switches in the high current path, helping to keep the conduction loss low. %Further considerations about this are explained in  section~\ref{sc:high_current_path}.
 
 
 
 \subsection{Multiple Outputs}
 
-The use of the internal nodes of the SCC allows to provide multiple outputs with a single power train. Now the converter can be simultaneously loaded at the \emph{pwm}-nodes and at the \emph{dc}-node providing different conversion ration of each output. The conversion ratio at the \emph{dc}-node (or nodes)  is given by the intrinsic conversion ratio of the converter $m_i$, despite of the variations in the duty cycle of the driving signal, yet the output can be linear regulated to adjust the output voltage.  The conversion ratio for the other \emph{pwm}-nodes is function of $D$ and determined in each node by the node conversion ration $m_n$. In the case of using multiple \emph{pmw}-nodes, all the outputs will depend on $D$, hence it will not be possible to have independent regulation for each of the outputs.
+The use of the internal nodes of the SCC allows to provide multiple outputs with a single power train. In this case the converter could be simultaneously loaded at the \emph{pwm}-nodes and at the \emph{dc}-node, providing different conversion ratio for each output. The conversion ratio at the \emph{dc}-node (or nodes)  is given by the intrinsic conversion ratio of the converter $m_i$, independent of the variations in the duty cycle of the driving signal, yet the fixed output can be linear regulated to adjust the output voltage.  The conversion ratio for the other \emph{pwm}-nodes is function of $D$ and determined in each node by the node conversion ration $m_n$. In the case of using multiple \emph{pmw}-nodes, all the outputs will depend on $D$, hence it will not be possible to have independent regulation for each of the outputs.
 
 \begin{figure}[!h]
 \centering
@@ -1063,7 +1135,7 @@ thus this output can be regulated.
 
 \section{LED Driver}
 
-The buck converter is usually the first choice that comes in mind when a LED has to be supplied from a \emph{dc} source (see figure~\ref{fig:ind_ckt_led_drv}). The converter provides a step-down conversion that can be adjusted to the LED voltage, and at the same time it provides an excellent current regulation since the inductor is in series with the LED load.
+The buck converter is usually the first choice that comes to mind when a LED has to be supplied from a \emph{dc} source (see figure~\ref{fig:ind_ckt_led_drv}). The converter provides a step-down conversion that can be adjusted to the LED voltage, and at the same time it provides an excellent current regulation thanks to the inductor connected in series with the LED load.
 
 \begin{figure}[!h]
 \centering
@@ -1078,7 +1150,7 @@ The buck converter is usually the first choice that comes in mind when a LED has
         (1,2) -- (1.5,2) to[inductor=${l_o}$,i=$i_o$]
         (3.5,2) -- (4,2) to[C,l_=$c_o$] (4,0) -- (-1,0);
 
-    \draw (4,2) to[short] (5.5,2) to[leD*,v^=$v_o$] (5.5,0) -- (4,0);
+    \draw (4,2) to[short] (5.5,2) to[leD*,v_=$v_o$] (5.5,0) -- (4,0);
 
     \draw (1,2) to[switch,l_=$s_2$] (1,0);
 
@@ -1090,6 +1162,7 @@ The buck converter is usually the first choice that comes in mind when a LED has
     \caption{}
     \label{fig:ind_ckt_led_drv}
 \end{subfigure}
+\hfill
 \begin{subfigure}[t]{.45\textwidth}
     %\centering
     \raggedleft
@@ -1128,7 +1201,7 @@ The buck converter is usually the first choice that comes in mind when a LED has
 \label{fig:inductive_led_drv}
 \end{figure}
 
-The plot of figure~\ref{fig:induc_vx_led_drv} shows the transient voltage at the switching node $v_x$, the average voltage at the LED, and the limits of the forward voltage variations $\Delta v_f$ . It is evident that the margins of operation required by the LED $\Delta v_f$ are much smaller than the regulation margins of the buck converter, which, indeed, is almost the full range of the input voltage from $0$ to $V_{src}$. In fact, as aforementioned in the previous section this large voltage ripple at the switching node requires a large inductor to filter.
+The plot of figure~\ref{fig:induc_vx_led_drv} shows the transient voltage at the switching node $v_x$, the average voltage at the LED, and the limits of the forward voltage variations $\Delta v_f$ . It is evident that the margins of operation required by the LED $\Delta v_f$ are much smaller than the regulation margins of the buck converter, which indeed, is almost the full range of the input voltage from $0$ to $V_{src}$. In fact, as aforementioned in the previous section, this large voltage ripple at the switching node requires a large inductor to filter.
 
 \begin{figure}[!h]
 \centering
@@ -1147,7 +1220,7 @@ The plot of figure~\ref{fig:induc_vx_led_drv} shows the transient voltage at the
         (1,2) -- (2,2) to[inductor=${l_o}$,i=$i_o$]
         (4,2) -- (4,2) to[C,l_=$c_o$] (4,0.5) node[sground]{};
 
-    \draw (4,2) to[short] (5.5,2) to[leD*,v^=$v_o$] (5.5,0.5) node[sground]{};
+    \draw (4,2) to[short] (5.5,2) to[leD*,v_=$v_o$] (5.5,0.5) node[sground]{};
 
     \draw (1,2) to[switch,l_=$s_3$] (1,0.5);
     \draw[dotted] (1,0.5) --  (1,0) ;
@@ -1163,6 +1236,7 @@ The plot of figure~\ref{fig:induc_vx_led_drv} shows the transient voltage at the
     \caption{}
     \label{fig:hscc_ckt_led_drv}
 \end{subfigure}
+\hfill
 \begin{subfigure}[t]{.45\textwidth}
     %\centering
     \raggedleft
@@ -1203,7 +1277,86 @@ The plot of figure~\ref{fig:induc_vx_led_drv} shows the transient voltage at the
 \label{fig:hscc_led_drv}
 \end{figure}
 
-On the contrary a H-SCC has a narrow excursion range of the switching node, what helps to decrease the value of the output inductor. The narrow margins of regulation that LEDs require due to their abrupt $v-i$ characteristics (see section~\ref{sc:LED_load}) suits the reduced dynamic range that H-SCC offer. As a general practice in the design of a LED driver the voltage of the LED string is often optimized by selecting low, mid or high power LEDs and associating them in series or parallel. It is favorable to select a high voltages in the LED strings, but small enough to be driven by a buck converter. Increasing the voltage in the LED string decreases driving currents, which favors in lower conduction losses in the driver, mainly in switches and power inductors.
+On the contrary, a H-SCC has a narrow excursion range of the switching node, which helps to decrease the value of the output inductor (see section~\ref{ch:power_inductor}). The narrow margins of regulation that LEDs require due to their abrupt $v-i$ characteristics (see section~\ref{sc:LED_load}) suit the reduced dynamic range that an H-SCC offer. As a general practice in the design of a LED driver, the voltage of the LED string is often optimized by selecting low, mid or high power LEDs and wiring them in series or parallel. It is favorable to select a high voltage in the LED strings, but small enough to be driven by a buck converter. Increasing the voltage in the LED string decreases driving currents, which means lower conduction losses in the driver, mainly in the switches and power inductors.
+
+\subsection{\emph{dc-dc} topologies}
+
+\begin{figure}[t]
+\ctikzset { bipoles/length=1cm}
+\def\radius{.25}
+\tikzstyle{vs}=[shift={(0,\radius)}]
+\tikzstyle{hs}=[shift={(-\radius,0)}]
+\centering
+    \begin{circuitikz}[american voltages,scale=0.6]
+
+    \draw
+            %Input Supply
+            (-1,0)  to[V=$v_{src}$]
+            %Draw Switches
+            (-1,14)  --
+            (5,14)  to[switch=$s_1$] %node[anchor=west] {$n_1$}%S1
+            (5,12)  to[switch=$s_2$] %node[anchor=east] {$n_2$}%S1
+            (5,10)  to[switch=$s_3$] %node[anchor=east] {$n_3$}%S1
+            (5,8)   to[switch=$s_4$] %node[anchor=west] {$n_4$}%S2
+            (5,6)   to[switch=$s_5$] %node[anchor=west] {$n_5$}%S3
+            (5,4) --
+            %left branch
+            (3,4)   to[switch=$s_7$]
+            (3,2)   to[switch=$s_6$]
+            (3,0);
+
+    \draw   %right branch
+            (5,4) --
+            (7,4)   to[switch,l_=$s_8$]
+            (7,2)   to[switch,l_=$s_9$]
+            (7,0) -- (-1,0);
+
+
+
+    \draw %Capacitor C1
+           (2,8)
+            to[pC,l_=$c_1$] (2,12) --
+           (5,12);
+
+    \draw %Capacitor C2
+           (8.25,6)  to[pC,l_=$c_2$](8.25,10) --
+           (5,10);
+
+    \draw %Capacitor C3
+           (3,2) -- (2,2)
+            to[pC,l_=$c_3$] (2,8) --
+           (5,8);
+
+    \draw %Capacitor C4
+           (7,2) --
+           (8.25,2) -- (8.25,4) to[pC,l_=$c_4$](8.25,6) --
+           (5,6);
+
+
+    \draw  %LC output filter &  Output LED string
+            (8.25,10)node[anchor=south] {$v_x$} to[L=$l_o$] (14,10)
+            (13.5,0) to[pC,l=$c_{o}$] (13.5,10) -|
+            (16,9) to[leD*] (16,7) to[leD*] (16,5) to[leD*] (16,3) to[leD*] (16,1) |- (7,0) ;
+    
+    %Vout label 
+    \draw (16.25,12) to[open,v^=$v_{out}$] (16.25,-2);
+
+    \draw %Capacitor C3
+           (5,0) to[pC,l_=$c_5$,-*] (5,4) ;% node[anchor=south east] {$n_{dc}$};
+
+     %\draw (7,4) to[short,-o] (10,4) node[anchor=west] {};
+     %\draw (7,0) to[short,-o] (12,0) node[anchor=west] {};
+
+
+     \draw (7,4) --([hs]8.25,4 |- 7,4) arc(180:0:\radius) to[short,-o] (10,4) to[open,v^=$v_{aux}$] (10,0) ;
+
+
+     \end{circuitikz}
+ \caption{ 5:1 Dickson LED driver for 24V e-merge track lighting application. The driver has two outputs: A $12V$, $12W$  LED string, and a $4V$, $200mW$  to supply auxiliary and low voltage electronics. }
+ \label{fig:5_1_hscc_emerge}
+\end{figure}
+
+
 
 %\subsection{High Current Paths}
 %\label{sc:high_current_path}
@@ -1281,6 +1434,5 @@ On the contrary a H-SCC has a narrow excursion range of the switching node, what
 
 
 \clearpage
-
 \bibliographystyle{plainnat}
 \bibliography{references} 
