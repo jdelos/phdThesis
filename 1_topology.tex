@@ -345,7 +345,7 @@ With regard to the  miniaturization of power supplies, we can indemnify two clea
 
 Generalist IC manufacturers such as NXP, TI, ST, etc. have a large portfolio of dedicated LED drivers for the this three main applications: Backlighting, Automotive and General Lighting. Innovation from the perspective of the IC manufacturers is very limited just providing the two standard integrated circuit solutions with regard to power management for LED drivers: controller or controller and power train. This approach facilitates the driver development by reducing component count and design time, however  using this circuits the possibilities to reduce the size of the off-chip passives if very limited, topologies are fixed. Currently there is any commercial IC that solves the challenges of the smart drivers, offering connectivity and power management.
 
-Currently the most innovative approach is taken by the startup \emph{Gooee} that proposes connected lighting platform consisting  of two ICs. The control chip integrates a micro-controller unit (MCU) with to implement the communication and sensing, and the power chip with the LED driver that interfaces with the LED; the platform  is completed with a cloud service that enables from a web application to have access to the lamp fixture data logs. The technical details of the power chip are no yet available~\cite{web:Gooee}.
+Currently the most innovative approach is taken by the startup \emph{Gooee} that proposes connected lighting platform consisting   of two ICs. The control chip integrates a micro-controller unit (MCU) with to implement the communication and sensing, and the power chip with the LED driver that interfaces with the LED; the platform  is completed with a cloud service that enables from a web application to have access to the lamp fixture data logs. The technical details of the power chip are no yet available~\cite{web:Gooee}.
 
 \begin{figure}[t]
     \centering
@@ -393,12 +393,12 @@ Currently the most innovative approach is taken by the startup \emph{Gooee} that
 
    \draw [dotted] (14,5.5) to[short,o-] (15,5.5)
                   (15,2.75) to[short,-o] (12,2.75);
-                  
+
    \draw (15,5.5) to[leD*] (15,2.75);
 
    \draw [dotted] (15,5.5) -- (17,5.5)
                   (17,2.25) to[short,-o] (12,2.25);
-                  
+
    \draw (17,5.5) to[leD*] (17,2.25);
 
    %Add battery
@@ -441,13 +441,6 @@ Regarding general lighting, full integrated implementations were reported for \e
 \subsection{Inductor Based LED Drivers}
 
 Inductor based converters are, without doubt, most used solution for LED drivers. Inductive converters have an excellent current-to-voltage regulation at high efficiencies, and at the same time can provide galvanic isolation. That is why, the majority of IC manufacturers offer a large portfolio of ICs for LED driving, with two approaches of integration: Control circuit alone, or Control circuit with the power switches. In both cases, buffer capacitors and magnetics have be mounted externally. Different flavors of control circuits can be found, covering the usual architectures (buck, boost or fly-back) and with different control schemes providing Power Factor Correction (PFC)  and dimmability. Practically SSL products already in the market have build the electronics around these, circuits.
-
-
-
-
-
-
-
 
 \section{Conclusions}
 The different applications show an increasing interest in using SCC for LED drivers. It is evident that the approach used in portable devices can no be further extended in for high powers and higher voltages. The use of a bear SCC can never satisfy the requirements of LED drivers due to the following facts:
