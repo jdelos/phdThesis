@@ -29,10 +29,15 @@
 \usepackage[siunitx]{circuitikz}
 \sisetup{load=derived} % loading \siemens
 
+%tables
+\usepackage{tablefootnote}
+
 %Ploting packages
 \usepackage{tikz}
 \def\radius{.25}
 \tikzstyle{vs}=[shift={(0,\radius)}]
+\tikzstyle{vs_d}=[shift={(0,-\radius)}]
+
 \tikzstyle{hs}=[shift={(-\radius,0)}]
 \usetikzlibrary{arrows}
 \tikzset{
@@ -78,6 +83,16 @@
 %    \pgfsetdash{{1pt}{1pt}}{0pt}% dashing cannot work correctly in all situation this way
     \pgfusepath{stroke}
    }
+
+%Plots marks
+\tikzset{
+    scale plot marks/.is choice,
+    scale plot marks/false/.code={
+        \def\pgfuseplotmark##1{\pgftransformresetnontranslations\csname pgf@plot@mark@##1\endcsname}
+    },
+    scale plot marks/true/.style={},
+    scale plot marks/.default=true
+}
 
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}

@@ -24,22 +24,24 @@
 \BOOKMARK [2][-]{subsection.3.3.4}{Multiple Outputs}{section.3.3}% 24
 \BOOKMARK [2][-]{subsection.3.3.5}{Topology configurations}{section.3.3}% 25
 \BOOKMARK [1][-]{section.3.4}{LED Driver}{chapter.3}% 26
-\BOOKMARK [2][-]{subsection.3.4.1}{dc-dc topologies}{section.3.4}% 27
-\BOOKMARK [0][-]{chapter.4}{Advanced Modeling of SCC}{part.1}% 28
-\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 29
-\BOOKMARK [1][-]{section.4.2}{Single Output Converters}{chapter.4}% 30
-\BOOKMARK [2][-]{subsection.4.2.1}{The Output Impedance Model}{section.4.2}% 31
-\BOOKMARK [2][-]{subsection.4.2.2}{Identifying the source of losses in the charge transfer}{section.4.2}% 32
-\BOOKMARK [2][-]{subsection.4.2.3}{Re-formulating the charge flow analysis}{section.4.2}% 33
-\BOOKMARK [2][-]{subsection.4.2.4}{Load Model: Voltage Sink versus Current Sink}{section.4.2}% 34
-\BOOKMARK [2][-]{subsection.4.2.5}{Sensitivity of the inductor current ripple}{section.4.2}% 35
-\BOOKMARK [1][-]{section.4.3}{Multiple Output Converters}{chapter.4}% 36
-\BOOKMARK [2][-]{subsection.4.3.1}{The Output Trans-Resistance Model}{section.4.3}% 37
-\BOOKMARK [2][-]{subsection.4.3.2}{Obtaining the Trans-Resistance parameters with the charge flow analysis }{section.4.3}% 38
-\BOOKMARK [0][-]{chapter.5}{Optimization and Design}{part.1}% 39
-\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 40
-\BOOKMARK [1][-]{section.5.2}{Study in the correlation of the design parameters and the Output Impedance}{chapter.5}% 41
-\BOOKMARK [1][-]{section.5.3}{Encapsulating the Switches and Capacitors area breakdown in an optimization procedure}{chapter.5}% 42
-\BOOKMARK [1][-]{section.5.4}{Insights towards a complete optimization}{chapter.5}% 43
-\BOOKMARK [0][-]{chapter.6}{Dynamic Study}{part.1}% 44
-\BOOKMARK [1][-]{section.6.1}{Small Signal Analysis}{chapter.6}% 45
+\BOOKMARK [2][-]{subsection.3.4.1}{dc-dc architectures}{section.3.4}% 27
+\BOOKMARK [2][-]{subsection.3.4.2}{ac-dc architectures}{section.3.4}% 28
+\BOOKMARK [1][-]{section.3.5}{Summary}{chapter.3}% 29
+\BOOKMARK [0][-]{chapter.4}{Advanced Modeling of SCC}{part.1}% 30
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.2}{Single Output Converters}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.2.1}{The Output Impedance Model}{section.4.2}% 33
+\BOOKMARK [2][-]{subsection.4.2.2}{Identifying the source of losses in the charge transfer}{section.4.2}% 34
+\BOOKMARK [2][-]{subsection.4.2.3}{Re-formulating the charge flow analysis}{section.4.2}% 35
+\BOOKMARK [2][-]{subsection.4.2.4}{Load Model: Voltage Sink versus Current Sink}{section.4.2}% 36
+\BOOKMARK [2][-]{subsection.4.2.5}{Sensitivity of the inductor current ripple}{section.4.2}% 37
+\BOOKMARK [1][-]{section.4.3}{Multiple Output Converters}{chapter.4}% 38
+\BOOKMARK [2][-]{subsection.4.3.1}{The Output Trans-Resistance Model}{section.4.3}% 39
+\BOOKMARK [2][-]{subsection.4.3.2}{Obtaining the Trans-Resistance parameters with the charge flow analysis }{section.4.3}% 40
+\BOOKMARK [0][-]{chapter.5}{Optimization and Design}{part.1}% 41
+\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 42
+\BOOKMARK [1][-]{section.5.2}{Study in the correlation of the design parameters and the Output Impedance}{chapter.5}% 43
+\BOOKMARK [1][-]{section.5.3}{Encapsulating the Switches and Capacitors area breakdown in an optimization procedure}{chapter.5}% 44
+\BOOKMARK [1][-]{section.5.4}{Insights towards a complete optimization}{chapter.5}% 45
+\BOOKMARK [0][-]{chapter.6}{Dynamic Study}{part.1}% 46
+\BOOKMARK [1][-]{section.6.1}{Small Signal Analysis}{chapter.6}% 47
