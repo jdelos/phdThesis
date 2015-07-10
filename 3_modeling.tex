@@ -1,12 +1,12 @@
 \chapter[Modeling of H-SCC]{Modeling of Hybrid Switched Capacitor Converters}
 
-Switch capacitor converters are circuits composed by a large number of switches and capacitors, and require accurate models to properly design them. SCCs have the peculiarity to be lossy by nature due to the non adiabatic energy transfer between capacitors, phenomenon not present in the inductor based converters. Generally, modeling of SCCs focuses just on  the description of the loss mechanisms associated to conduction and capacitor charge transfer, neglecting other sources of loss such as driving and switching loss. These loss mechanisms are proportional to the output current, thus are normally modeled with resistor in the well known output impedance model. 
+Switch capacitor converters are circuits composed by a large number of switches and capacitors, and require accurate models to properly design them. SCCs have the peculiarity to be lossy by nature due to the non adiabatic energy transfer between capacitors, phenomenon not present in the inductor based converters. Generally, modeling of SCCs focuses just on  the description of the loss mechanisms associated to conduction and capacitor charge transfer, neglecting other sources of loss such as driving and switching loss. These loss mechanisms are proportional to the output current, thus are normally modeled with resistor in the well known output impedance model.
 
-This chapter presents a new methodology to model a SCC when any of the nodes in the converter are loaded. The proposed methodology also include the effects of PWM control, thus accurately predicting the equivalent internal impedance and the converter conversion ratio.  
+This chapter presents a new methodology to model a SCC when any of the nodes in the converter are loaded. The proposed methodology also include the effects of PWM control, thus accurately predicting the equivalent internal impedance and the converter conversion ratio.
 
-The chapter is divided in two sections, the first section is devoted to the study and model a SCC when loaded from a \emph{pwm}-node, reviewing and extending the charge flow analysis~\cite{95Makowski,Seeman:EECS-2009-78} to include two new aspects that arise with the proposed hybrid converter. First, any of the nodes of the converter are considered as possible outputs that can be loaded. Second, the analysis includes the effects of duty cycle (PWM) in any of the operation regimes of the converter, and this alters the conversion ratio and the internal equivalent impedance. The previous models are discussed, and the limiting are factors identifying. Subsequently the charge flow analysis is reformulated using a new approach based on current-loaded outputs that leads a better accuracy and covers the analysis of both SCC and H-SCC. The new model is compared to circuit simulations and experimental data. 
+The chapter is divided in two sections, the first section is devoted to the study and model a SCC when loaded from a \emph{pwm}-node, reviewing and extending the charge flow analysis~\cite{95Makowski,Seeman:EECS-2009-78} to include two new aspects that arise with the proposed hybrid converter. First, any of the nodes of the converter are considered as possible outputs that can be loaded. Second, the analysis includes the effects of duty cycle (PWM) in any of the operation regimes of the converter, and this alters the conversion ratio and the internal equivalent impedance. The previous models are discussed, and the limiting are factors identifying. Subsequently the charge flow analysis is reformulated using a new approach based on current-loaded outputs that leads a better accuracy and covers the analysis of both SCC and H-SCC. The new model is compared to circuit simulations and experimental data.
 
-The second section is devoted to the study of multiple loaded H-SCC. Based on the well-known output impedance model, a new circuit representation for converters with multiple current-loaded outputs is presented. The related characterization methodology is developed to determine the parameters of said new model based on the current-loaded analysis presented in the first section. The resulting model is validated against simulation and experimental data. 
+The second section is devoted to the study of multiple loaded H-SCC. Based on the well-known output impedance model, a new circuit representation for converters with multiple current-loaded outputs is presented. The related characterization methodology is developed to determine the parameters of said new model based on the current-loaded analysis presented in the first section. The resulting model is validated against simulation and experimental data.
 
 
 \section{Single Output Converters}
@@ -91,7 +91,7 @@ v_{out} =  m \cdot v_{src} - i_o \cdot r_{scc} .
 \label{fig:scc_model_oi}
 \end{figure}
 
-Up to day, there are two different methodologies to infer the model parameters: $m$ and $r_scc$. On the one hand, S. Ben-Yaakov  ~\cite{2009Ben-Yaakov,2012Ben-Yaakov,2013Evzelman} has claimed a generalized methodology based on the analytical solution of each of the different transient circuits of the converter, reducing all of them to a single transient solution. The methodology achieves a high accuracy, but yields to a set of none linear equations and high complexity for the analysis of advanced architectures. 
+Up to day, there are two different methodologies to infer the model parameters: $m$ and $r_scc$. On the one hand, S. Ben-Yaakov  ~\cite{2009Ben-Yaakov,2012Ben-Yaakov,2013Evzelman} has claimed a generalized methodology based on the analytical solution of each of the different transient circuits of the converter, reducing all of them to a single transient solution. The methodology achieves a high accuracy, but yields to a set of none linear equations and high complexity for the analysis of advanced architectures.
 
 On the other hand,  M. Makowski and D. Maksimovic~\cite{95Makowski} presented a methodology based on the analysis of the charge flow between capacitors in steady-state. The methodology is simple to apply and yields with a set of linear expressions, being them easy to operate for further analysis of the converters. Based on the charge flow analysis, M.Seeman~\cite{Seeman:EECS-2009-78} developed different metrics allowing to compare performances between capacitive and inductive converters.  Although both methodologies are valid in the modeling of SCCs, none of them has been used to model the effects of a loaded \emph{pwm}-node, which is fundamental to study the H-SCC.  Nevertheless the charge flow analysis has a more clean and simplified way of describing the loss mechanism, based on the hypothesis that a SCC in steady-state has to have null charge balance in all the capacitors. That is why this methodology has been chosen in to model the H-SCC, although few modeling hypothesis have been reviewed and modified according with operation of the new \emph{hybrid} converter.
 
@@ -103,6 +103,13 @@ The charge flow method~\cite{95Makowski} makes some assumptions in order to mode
 
 \subsection{Re-formulating the charge flow analysis}
 
+The SSL impedance encompasses the losses produced in the charge transfer from capacitor to capacitor and from voltage supply to capacitor; therefore, for this analysis none of the parasitic resistances are taken into account. As mentioned before, the classical approach to study SCCs is to assume an infinitely large output capacitance connected to a \emph{dc}-node, an approach that has two limitations:
+\begin{enumerate}
+   \item Produces inaccuracies when the output capacitor is comparable in value to the flying capacitors.
+   \item Cannot be used for a converter with a load connected to one of the internal nodes.
+\end{enumerate}
+
+
 \begin{figure}[!h]
 \centering
 \ctikzset { bipoles/length=1cm}
@@ -116,14 +123,17 @@ The charge flow method~\cite{95Makowski} makes some assumptions in order to mode
         (3,0) to[pC,l=$c_2$] (3,3) -- (6,3)
         (6,0) to[pC,l=$c_3$] (6,3) --
         (8,3) to[I,l=$i_o$] (8,0) -- (0,0);
-    \begin{scope}[>=latex,semithick,text=black]
+    \begin{scope}[>=latex,thick,text=black]
         \draw [->,rounded corners=7pt,dashed]
             (0.4,2.4) -- (2.4,2.4) -- (2.4,0.4);
         \draw [->,rounded corners=7pt,dashed]
-            (3.6,0.5) |- (5.4,2.4) -- (5.4,0.4);
-
+            (3.6,0.5) |- (5.4,2.7) -- (5.4,0.4);
         \draw [->,rounded corners=7pt]
              (6.3,2) |- (8,3.3);
+        \draw [>=latex,text=black,dashed]
+          (0,4)  -- (0.9,4) node[anchor=west]{Redistributed charge};
+        \draw [>=latex,text=black]
+          (0,4.5)  -- (0.9,4.5) node[anchor=west]{Pumped charge};
     \end{scope}
     \end{circuitikz}
     \caption{}
@@ -140,7 +150,7 @@ The charge flow method~\cite{95Makowski} makes some assumptions in order to mode
         (3,0) to[pC,l=$c_1$] (3,3)
         (6,0) to[pC,l=$c_3$] (6,3) --
         (8,3) to[I,l=$i_o$] (8,0) -- (1,0);
-    \begin{scope}[>=latex,semithick,text=black]
+    \begin{scope}[>=latex,thick,text=black]
         \draw [->,rounded corners=7pt,dashed]
             (3.6,0.5) |- (5.4,2.4) -- (5.4,0.4);
         \draw [->,rounded corners=7pt]
@@ -150,10 +160,11 @@ The charge flow method~\cite{95Makowski} makes some assumptions in order to mode
     \end{circuitikz}
     \caption{}
 \end{subfigure}
-\caption{Charge flow in a Dickson 3:1 converter loaded at the DC output with a large capacitor during the two switching phases: a) phase I, b) phase II. The solid line marks the pumped charge to the load and the dashed lines the possible paths of the redistributed charge.}
-\label{fig:chargge_flow_I}
+\caption{Charge flows in a Dickson 3:1 converter when loaded at a \emph{dc}-node with a large capacitor during the two switching phases. The solid line marks the pumped charge to the load and the dashed lines the possible paths of the redistributed charge.}
+\label{fig:charge_flow_I}
 \end{figure}
 
+In the original charge flow analysis of the SSL impedance~\cite{95Makowski}, it is assumed that all of the pumped charge to the load is only supplied by a \emph{dc}-capacitor without any \emph{pumping} contribution from the flying capacitors, as shown in figure~\ref{fig:charge_flow_I}.  However, for a finite value of the output capacitor, or for converters loaded from an internal node, all of the capacitors contribute to pumping charge to the load~\cite{2013Breussegem:c_out}, as shown in figure~\ref{fig:charge_flow_II}. The original analysis omitted the \emph{pumped} charge contribution of the flying capacitors, thereby overestimating the \emph{redistributed} charge, resulting in an overestimation of the SSL impedance.
 
 \begin{figure}[!h]
 \centering
@@ -168,17 +179,23 @@ The charge flow method~\cite{95Makowski} makes some assumptions in order to mode
         (3,0) to[pC,l=$c_2$] (3,3) -- (6,3)
         (6,0) to[pC,l=$c_3$] (6,3) --
         (8,3) to[I,l=$i_o$] (8,0) -- (0,0);
-    \begin{scope}[>=latex,semithick,text=black]
+    \begin{scope}[>=latex,thick,text=black]
         \draw [->,rounded corners=7pt,dashed]
             (0.4,2.4) -- (2.4,2.4) -- (2.4,0.4);
         \draw [->,rounded corners=7pt,dashed]
-            (3.6,0.5) |- (5.4,2.4) -- (5.4,0.4);
+            (3.6,0.5) |- (5.4,2.7) -- (5.4,0.4);
 
         \draw [->,rounded corners=7pt]
             (2,3.3) -- (7,3.3)
             (2.7,2) |- (7.5,3.3)
             (6.3,2) |- (8,3.3);
+        \draw [>=latex,text=black,dashed]
+          (0,4)  -- (0.9,4) node[anchor=west]{Redistributed charge};
+        \draw [>=latex,text=black]
+          (0,4.5)  -- (0.9,4.5) node[anchor=west]{Pumped charge};
     \end{scope}
+
+
     \end{circuitikz}
     \caption{}
 \end{subfigure}
@@ -190,27 +207,65 @@ The charge flow method~\cite{95Makowski} makes some assumptions in order to mode
     \begin{circuitikz} [american,scale=0.65]
     \draw
         (1,0) to[V=$v_{src}$] (1,3)
-        (6,3) to[pC,l=$c_2$] (3,3)
+        (6,3) --  (3,3)
         (3,0) to[pC,l=$c_1$] (3,3)
-        (6,0) to[pC,l=$c_3$] (6,3) --
+        (6,0)-- (6,0.25) to[pC,l=$c_3$] (6,1.5) to[pC,l=$c_2$] (6,2.75) |-
         (8,3) to[I,l=$i_o$] (8,0) -- (1,0);
-    \begin{scope}[>=latex,semithick,text=black]
+    \begin{scope}[>=latex,thick,text=black]
         \draw [->,rounded corners=7pt,dashed]
-            (3.6,0.5) |- (5.4,2.4) -- (5.4,0.4);
+            (3.6,0.5) |- (5.4,2.7) -- (5.4,0.4);
         \draw [->,rounded corners=7pt]
-             (2.7,2) |- (7.5,3.6)
-             (6.3,2) |- (8,3.6);% -- (8.6,0.4);
+             (2.7,2) |- (7.5,3.3)
+             (6.3,2.5) |- (8,3.3);% -- (8.6,0.4);
     \end{scope}
     \end{circuitikz}
     \caption{}
 \end{subfigure}
-\caption{Charge flow in a Dickson 3:1 converter loaded at one of the internal nodes during the two switching phases: a) phase I, b) phase II. The solid line marks the pumped charge to the load and the dashed lines the possible paths of the redistributed charge.}
-\label{fig:chargge_flow_II}
+\caption{Charge flows in a Dickson 3:1 converter when loaded at one of the \emph{pwm}-nodes during the two switching phases. The \emph{solid} lines marks the pumped charge paths to the load and the \emph{dashed} lines the possible paths of the redistributed charge.}
+\label{fig:charge_flow_II}
 \end{figure}
 
+In order to overcome the restrictions of the original charge flow methodology, the proposed methodology models the load as a current sink instead of a voltage sink. This slight modification has a relevant change in the modeling of the converter, adding three important aspects to the modeling:
+\begin{enumerate}
+  \item Connect the load to any of the nodes of the converter, since it does not fix any voltage at the connected node.
+
+  \item Include the \emph{dc}-capacitors in the analysis, since the voltage across the sink is given by the capacitor and not longer by the previous used voltage sink.
+
+  \item Estimate the delivered charge to the load for each of the circuit modes of the converter, since the current sink has a value of the averaged output current.
+\end{enumerate}
+
+\subsubsection[SSL]{Slow Switching Limit}
+
+A charge multiplier vector $\mathbf{a}$ is obtained for all of the operation modes, also known as phases, of the converter. The charge multiplier vector corresponds to the charge flowing in every individual capacitor or source, normalized with respect to the total output charge $q_{out}$, as described in~\cite{95Makowski,Seeman:EECS-2009-78}. Owing to the fact that load current $i_o$ is assumed constant, the output charge of the $j$-phase can be expressed as the ratio of the phase duration $D^j$ to the total switching period $T_{sw}$, and its contribution to the total output charge $q_{out}$ is
+\begin{equation}
+    q^j_{out} = i_{o} T_{sw} D^j = D^j q_{out} .
+\label{eq:qout}
+\end{equation}
+
+Each charge flow element $ a(D^j)_i^j$  is a function of the phase duration $D^j$ and corresponds to the total net charge circulating in the $i$-th capacitor $c_i$ during the $j$-th phase, and can be used to compute the $net$ voltage $v_n$ variation at the end of the $j$-th phase period:
+\begin{equation}
+\Delta {v_n}^j_i  = \frac{a_i ^j }{c_i} q_{out} .
+\label{eq:net_voltage}
+\end{equation}
+
+The current flowing through the $i$-th capacitor can be assumed to be constant, since the load has been modeled as a constant current skin. Hence the current in the $i$-th capacitor will a
+
+ Due to the approximation of constant load current, it can be assumed that in the $i$-th capacitor the charge to the load is pumped by a constant current $i_i$.
 
 
-\subsubsection[SSL Capacitor Charge Flow]{Slow Switching Limit: Re-defining the Capacitor Charge Flow Vectors}
+Hence the pumped voltage $v_p$ variation during the $j$-th phase of the total switching period $T_{sw}$ can be simply computed as
+\begin{equation}
+\Delta {v_p}^j_i  = \frac{i_i^j}{c_i} T_{sw} D^j = \frac{a_i ^j }{c_i} q_{out} .
+\label{eq:pumped_voltage}
+\end{equation}
+
+
+\begin{figure}[!h]
+\centering
+\input{./3_modeling/Delta_vc1.tex}
+\caption{The two possible voltage waveforms that show the capacitors in a SCC. Ripples are associated with the charge flow mechanisms: top) unipolar capacitor discharge (DC capacitor); bottom) bipolar capacitor discharge (flying capacitor).}
+\label{fig:charge_flow_I}
+\end{figure}
 
 
 \subsubsection[FSL Switch Charge Flow]{Fast Switching Limit: Re-defining the Switch Charge Flow Vectors}
