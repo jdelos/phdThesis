@@ -1,14 +1,23 @@
-\chapter[Advanced Modeling of H-SCC]{Modeling of Hybrid Switched Capacitor Converters}
+\chapter[Modeling of H-SCC]{Modeling of Hybrid Switched Capacitor Converters}
 
-Switch capacitor converters are circuits composed by a large number of components, switches and capacitors, and require special methods to study them. At the same time, SCCs are lossy circuits by nature due to non adiabatic energy transfer between capacitors, which is not observed in inductive converters. Hence SCCs are lossy by default from the beginning of the design process    
+Switch capacitor converters are circuits composed by a large number of switches and capacitors, and require accurate models to properly design them. SCCs have the peculiarity to be lossy by nature due to the non adiabatic energy transfer between capacitors, phenomenon not present in the inductor based converters. Generally, modeling of SCCs focuses just on  the description of the loss mechanisms associated to conduction and capacitor charge transfer, neglecting other sources of loss such as driving and switching loss. These loss mechanisms are proportional to the output current, thus are normally modeled with resistor in the well known output impedance model. 
+
+Up to day, there are two different methodologies to model a SCCs. On the one hand, S. Ben-Yaakov  ~\cite{2009Ben-Yaakov,2012Ben-Yaakov,2013Evzelman} has claimed a generalized methodology based on the analytical solution of each of the different transient circuits of the converter, reducing all of them to a single transient solution. The methodology achieves a high accuracy, but yields to a set of none linear equations and high complexity for the analysis of advanced architectures. On the other hand,  M. Makowski and D. Maksimovic~\cite{95Makowski} presented a methodology based on the analysis of the charge flow between capacitors in steady-state. The methodology is simple to apply and yields with a set of linear expressions, being them easy to operate for further analysis of the converters. Based on the charge flow analysis, M.Seeman~\cite{Seeman:EECS-2009-78} developed different metrics allowing to compare performances between capacitive and inductive converters.  Although both methodologies are valid in the modeling of SCCs, none of them has been used to model the effects of a loaded \emph{pwm}-node, which is fundamental to study the H-SCC.
+
+This chapter presents a new methodology to model a SCC when any of the nodes in the converter are loaded. The proposed methodology also include the effects of PWM control, thus accurately predicting the equivalent internal impedance and the converter conversion ratio.  
+
+The chapter is divided in two sections, the first section is devoted to the study and model a SCC when loaded from a \emph{pwm}-node, reviewing and extending the charge flow analysis~\cite{95Makowski,Seeman:EECS-2009-78} to include two new aspects that arise with the proposed hybrid converter. First, any of the nodes of the converter are considered as possible outputs that can be loaded. Second, the analysis includes the effects of duty cycle (PWM) in any of the operation regimes of the converter, and this alters the conversion ratio and the internal equivalent impedance. The previous models are discussed, and the limiting are factors identifying. Subsequently the charge flow analysis is reformulated using a new approach based on current-loaded outputs that leads a better accuracy and covers the analysis of both SCC and H-SCC. The new model is compared to circuit simulations and experimental data. 
+
+The second section is devoted to the study of multiple loaded H-SCC. Based on the well-known output impedance model, a new circuit representation for converters with multiple current-loaded outputs is presented. The related characterization methodology is developed to determine the parameters of said new model based on the current-loaded analysis presented in the first section. The resulting model is validated against simulation and experimental data. 
+
 
 \section{Single Output Converters}
-Switched Capacitor Converters has been always treated as a two-port converter with single input and a single output as shown in Fig.\ref{fig:two_port}. The input port is connected to a voltage source and the output port feeds the load. The SCC provides between input, $v_i$, and output, $v_o$, a voltage conversion, $m$,  that  steps up, steps down or/and inverts the polarity of the input voltage. Up to present all the circuit theory devoted SCCs is valid only for the two-port configuration, therefore this section is dedicated to revisit the classical concepts of single output SCC and to introduce new ones that enable a broader use of such converters.
+Switched Capacitor Converters has been always treated as a two-port converter with single input and a single output as shown in Fig.\ref{fig:two_port}. The input port is connected to a voltage source and the output port feeds the load. The SCC provides between input, $v_i$, and output, $v_o$, a voltage conversion, $m$,  that  steps up, steps down or/and inverts the polarity of the input voltage. Up to present all the circuit theory devoted SCCs is valid only for the two-port configuration, therefore this section is dedicated to revisit the classical concepts of single output SCC and to introduce new ones that enable to study the H-SCC.
 
 \begin{figure}[!h]
 \centering
 \ctikzset { bipoles/length=1cm}
-\begin{circuitikz}[scale=0.65]
+\begin{circuitikz}[american voltages,scale=0.65]
 \draw
     (1,0) to[short,o-]
     (0,0) to[V = $V_{supply}$]
@@ -48,12 +57,34 @@ Switched Capacitor Converters has been always treated as a two-port converter wi
     (8,3) to[short,-o]
     (7,3) ;
 \end{circuitikz}
-\label{fig:two_port}
 \caption{General two port configuration of a Switched Capacitor Converter. }
+\label{fig:two_port}
 \end{figure}
 
-
 \subsection{The Output Impedance Model}
+Commonly, a SCC is modeled as a voltage source connected to a series resistor~\cite{2000Oota,2012Peter}, as shown in figure~\ref{fig:scc_model_oi}. The voltage source takes the value of the input source $v_{src}$ times the converter's conversion ratio $m$, given by its topology. Resistor $r_{scc}$  models conduction and charge transfer loss since they are directly proportional to output current. When the converter operates under no load condition, no losses are produced, and the measured output voltage defined as the \emph{target} voltage ($v_{trg}$) of the converter, which
+
+
+
+\begin{figure}[!h]
+\centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[american voltages, scale=0.65]
+\draw
+    (-0.5,0) to[V = $ m \cdot v_{src}  $]
+    (-0.50,3) to[R,l=$r_{scc}$,-o]  (3,3)
+    (3.5,3) to[short,o-]
+    (4.25,3)   to[R,l_=$r_o$]
+    (4.25,0) to[short,-o] (3.5,0)
+    (3,0) to[short,o-] (-0.5,0)
+    (0,3) to[open,v^=$v_{trg}$] (0,0)
+    (4.5,3) to[open,v^=$v_{out}$] (4.5,0);
+
+\end{circuitikz}
+\caption{Output impedance model of a switched capacitor converter.}
+\label{fig:scc_model_oi}
+\end{figure}
+
 \subsection{Identifying the source of losses in the charge transfer}
 \subsection{Re-formulating the charge flow analysis}
 \subsubsection[SSL Capacitor Charge Flow]{Slow Switching Limit: Re-defining the Capacitor Charge Flow Vectors}
