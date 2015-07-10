@@ -1,0 +1,128 @@
+
+%% Removed H-SCC Chapter 2 %%
+
+
+Actually using the \emph{pwm}-nodes of an SCC reduces the amplitude of the voltage ripple at the filter inductor, what at the same time requires a smaller inductor value for a converter operating under the same frequency and current ripple conditions. The reduction ratio of the inductor can be obtained from eqs. (\ref{eq:buck_l}) and (\ref{eq:hscc_l}) as
+\begin{equation}
+ \frac{l_{o,hscc}}{l_{o,buck}} =  \frac{{ m_i \cdot v_{src} \cdot DD' \cdot T}/{\Delta i} }{{  v_{src} \cdot DD' \cdot T}/{\Delta i}} = m_i.
+\label{eq:l_m}
+\end{equation}
+In fact, the ratio coincides with the intrinsic conversion ratio ($m_i$) of the converter, which for a step-down is always smaller than 1. For the 3:1 Dickson H-SCC of figure~\ref{fig:3_1_hscc} the inductor value is 3 times smaller than in a buck converter. As a matter of fact, using an H-SCC introduces an new design parameter to reduce the value of the power inductor, providing a new architecture that improves the integration or power converters in this case by the reduction of the magnetic components.
+
+
+As a general practice in the design of a LED driver, the voltage of
+the LED string is often optimized by selecting low, mid or high
+power LEDs and wiring them in series or parallel. It is favorable
+to select a high voltage in the LED strings, but small enough to be
+driven by a buck converter. Increasing the voltage in the LED
+string decreases currents through the converter reducing the
+conduction losses.
+
+
+%\subsection{High Current Paths} %\label{sc:high_current_path} %
+%The current % %\begin{figure}[t] %\ctikzset { bipoles/length=1cm}
+%\centering % \begin{circuitikz}[american voltages,scale=0.6] % %
+\draw % %Input Supply % (0,0) to[V=$v_{src}$] % %Draw Switches %
+(0,10) -- % (5,10) to[switch=$s_1$,-*] %S1 % (5,8) to[switch=$s_2$]
+%S2 % (5,6) to[switch=$s_3$] %S3 % (5,4) -- % %left branch % (3,4)
+to[switch=$s_5$] % (3,2) to[switch=$s_4$] % (3,0); % % \draw %right
+branch % (5,4) -- % (7,4) to[switch,l_=$s_6$] % (7,2)
+to[switch,l_=$s_7$] % (7,0) -- (0,0); % % % % \draw %Capacitor C1 %
+(3,2) -- (2,2) % to[pC,l_=$c_1$] (2,8) -- % (5,8); % % \draw
+%Capacitor C2 % (7,2) -- % (8.25,2) to[pC,l_=$c_2$](8.25,6) -- %
+(5,6); % % \draw %Inductor % (5,8) -- (8,8) node[anchor=south]
+{$v_x$} to[L=$l_o$] (12,8) % (12,6) node[sground] {}
+to[pC,l=$c_{o}$] (12,8) % (12,8) -- (14,8) to[leD*] (14,6) % (14,5)
+to[leD*] (14,3) node[sground]{} % (14,9) to[open,v^=$v_o$] (14,2);
+% % \draw[dotted] (14,6) -- (14,5); % % % \draw %Capacitor C3 %
+(5,0) to[pC,l_=$c_3$,-*] (5,4) node[anchor=south east] {}; % % %
+Draw currents flow arrows % % Ph1 % \draw[thick,->] (0.25,6) --
+(0.25,8.75) to[bend left=45] (1.25,9.75) -- (3.75,9.75) % to[bend
+left=45] (4.75,8.75) to[bend right = 45] (5.75,7.75) -- (7.5,7.75);
+% % \draw[thick] (2.25,5.5) -- (2.25,6.75) to[bend left=45]
+(3.25,7.75) -- (7,7.75) ; % % %Ph 2 % \draw[thick, dashed,->]
+(1.75,5.5) -- (1.75,7.75) to[bend left=45] (2.25,8.25) --
+(7.5,8.25) ; % \draw[thick, dashed] (4.75,6.25) -- (4.75,7.25)
+to[bend left=45] (5.75,8.25) ; % % \end{circuitikz} % \caption{
+H-SCC with a 3:1 Dickson topology with the inductor connected to
+the second \emph{pwm}-node.} % \label{fig:3_1_hscc} %\end{figure}\
+
+%\begin{SCfigure} %\centering %\begin{circuitikz}[american
+voltages,xscale=0.55,yscale=0.65] %\begin{scope} % \draw [->] (0,0)
+-- (10,0) node[anchor=west]{$t$}; % \draw [->] (0,0) -- (0,6.5)
+node[anchor=east]{$v_x$}; % % %Vertical ticks % \draw (2pt,6) --
+(-5pt,6) node[anchor=east] {$v_{src} $}; % \draw (2pt,4) --
+(-5pt,4) node[anchor=east] {$v_{src} \frac{2}{3}$}; % \draw (2pt,2)
+-- (-5pt,2) node[anchor=east] {$v_{src} \frac{1}{3}$}; % %
+%Horizontal ticks % \draw (1.25,2pt) -- (1.25,-5pt)
+node[anchor=north] {$DT$}; % \draw (3,2pt) -- (3,-5pt)
+node[anchor=north] {$T$}; % \draw (6,2pt) -- (6,-5pt)
+node[anchor=north] {$2T$}; % \draw (9,2pt) -- (9,-5pt)
+node[anchor=north] {$3T$}; % \draw (0,0) node[anchor=north east]
+{$0$}; % % \draw[semithick, dashed] (0,2.1) -- (1.15,2.1) --
+(1.35,3.9) -- (2.9,3.9) -- % (3.1,2.1) -- (4.15,2.1) -- (4.35,3.9)
+-- (5.95,3.9) -- % (6.1,2.1) -- (7.15,2.1) -- (7.35,3.9) -- (9,3.9)
+; % % \draw[semithick,dotted] (0,5.9) -- (1.15,5.9) -- (1.35,4.1)
+-- (2.9,4.1) -- % (3.1,5.9) -- (4.15,5.9) -- (4.35,4.1) --
+(5.9,4.1) -- % (6.1,5.9) -- (7.15,5.9) -- (7.35,4.1) -- (9,4.1) ; %
+% \draw[semithick ] (0,1.95) -- (1.15,1.95) -- (1.35,0.05) --
+(2.9,0.05) -- % (3.1,1.95) -- (4.15,1.95) -- (4.35,0.05) --
+(5.9,0.05) -- % (6.1,1.95) -- (7.15,1.95) -- (7.35,0.05) --
+(9,0.05) ; % % \draw[semithick, dashdotted ] (0,0.05) --
+(1.15,0.05) -- (1.35,1.95) -- (2.9,1.95) -- % (3.1,0.05) --
+(4.15,0.05) -- (4.35,1.95) -- (5.9,1.95) -- % (6.1,0.05) --
+(7.15,0.05) -- (7.35,1.95) -- (9,1.95) ; % %\end{scope}
+%\end{circuitikz} %\caption{Transient voltages of all the different
+\emph{pwm}-nodes of the converter of figure~\ref{fig:3_1_hscc}.}
+%\label{fig:vx_t} %\end{SCfigure}
+
+
+
+%%Single output block diagram
+
+\begin{figure}[!h]
+\centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[scale=0.65]
+\draw
+    (1,0) to[short,o-]
+    (0,0) to[V = $V_{supply}$]
+    (0,3) to[short,-o]
+    (1,3) ;
+
+\draw
+    (2,3) --
+    (2.5,3)
+
+    (2,0) --
+    (2.5,0)
+
+    node[ocirc]  (IC)  at (2,0) {}
+    node[ocirc]  (I) at (2,3) {}
+    (I) to[open,v=$v_{i}$] (IC);
+
+
+\draw [thick]
+    (2.5,-0.5) --
+    (2.5,3.5)  --
+    (5.5,3.5)  --
+    (5.5,-0.5) --
+    (2.5,-0.5);
+
+\draw (4,2)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
+\draw
+    (5.5,3) -- (6,3)
+    (5.5,0) -- (6,0)
+    node[ocirc]  (O)  at (6,3) {}
+    node[ocirc]  (OC) at (6,0) {}
+    (O) to[open,v^<=$v_{o}$] (OC);
+
+\draw
+    (7,0) to[short,o-]
+    (8,0) to[ R= $Load$,mirror]
+    (8,3) to[short,-o]
+    (7,3) ;
+\end{circuitikz}
+\label{fig:two_port}
+\caption{General two port configuration of a Switched Capacitor Converter. }
+\end{figure}
