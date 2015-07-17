@@ -96,6 +96,11 @@
 
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{intersections,backgrounds}
+\newcommand{\vasymptote}[3][]{
+    \draw [name path=#3,#1] ({rel axis cs:0,0} -| {axis cs:#2,0}) -- ({rel axis cs:0,1} -| {axis cs:#2,0});
+}
 
 \usepackage{framed}
 

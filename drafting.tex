@@ -1,6 +1,6 @@
-
-%% Removed H-SCC Chapter 2 %%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               CHAPTER 3: H-SCC                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Actually using the \emph{pwm}-nodes of an SCC reduces the amplitude of the voltage ripple at the filter inductor, what at the same time requires a smaller inductor value for a converter operating under the same frequency and current ripple conditions. The reduction ratio of the inductor can be obtained from eqs. (\ref{eq:buck_l}) and (\ref{eq:hscc_l}) as
 \begin{equation}
@@ -126,3 +126,41 @@ node[anchor=north] {$3T$}; % \draw (0,0) node[anchor=north east]
 \label{fig:two_port}
 \caption{General two port configuration of a Switched Capacitor Converter. }
 \end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               CHAPTER 4: MODELING                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+%Define the two vertical regions SSL & FSL
+  \vasymptote[draw=none]{1e5}{ssl};
+  \vasymptote[draw=none]{1e6}{fsl};
+
+  %Define vertical axis at zero
+  \path[name path=yaxis_0] (axis cs:0,0) -- (axis cs:0,1e10);
+  \path[name path=yaxis_fsl] (axis cs:1e6,0) -- (axis cs:1e6,1e10);
+  \path[name path=yaxis_Inf] (axis cs:5e6,0) -- (axis cs:5e6,1e10);
+
+  \addplot [
+        thick,
+        draw=none,
+        fill=lightgray,
+        fill opacity=0.3
+    ]
+    fill between[
+        of = yaxis_0 and ssl,
+    ];
+
+    \addplot [
+        thick,
+        draw=none,
+        fill=lightgray,
+        fill opacity=0.3
+    ]
+    fill between[
+        of=yaxis_fsl and yaxis_Inf,
+    ];
+
+    %\node[anchor=north,rotate=45] at (\lbssl,1/(\lbssl*\C)){$SSL$};
+    %
+    \node[anchor=north] at (1e6,4){$FSL$};
