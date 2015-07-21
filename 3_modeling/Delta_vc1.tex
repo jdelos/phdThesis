@@ -21,30 +21,30 @@ xtick align=inside
 ]
 %%Left arrows
 \draw[dotted] (-1cm,0) -- (10cm,0);
-\node[anchor=south,rotate=90] at (-1cm,1.375){$\Delta v_n^1$};
+\node[anchor=south,rotate=90] at (-1cm,1.375){$\Delta vn^1$};
 
 \draw[|->] (-0.25cm,0) -- (-0.25cm,2.2);
 \draw[dotted] (-.25cm,2.2) -- (17,2.2);
-\node[anchor=south,rotate=90] at (-0.25cm,1){$\Delta v_r^1$};
+\node[anchor=south,rotate=90] at (-0.25cm,1){$\Delta vr^1$};
 
 \draw[|->] (-0.25cm,2.2) -- (-0.25cm,2.75);
 \draw[dotted] (-1cm,2.75) -- (10cm,2.75);
-\node[anchor=south,rotate=90] at (-0.25cm,2.4){$\Delta v_p^1$};
+\node[anchor=south,rotate=90] at (-0.25cm,2.4){$\Delta vp^1$};
 
 \draw[|->] (-1cm,0) -- (-1cm,2.75);
 
 %%Right arrows
 \draw[|->] (10cm,2.75) -- (10cm,0);
-\node[anchor=south,rotate=90] at (10cm,1.375){$\Delta v_n^2$};
+\node[anchor=south,rotate=90] at (10cm,1.375){$\Delta vn^2$};
 
 
 \draw[dotted] (9.25cm,1.95) -- (63,1.95);
 
 \draw[|->] (9.25cm,2.75) -- (9.25cm,1.95);
-\node[anchor=south,rotate=90] at (9.25cm,2.35){$\Delta v_r^2$};
+\node[anchor=south,rotate=90] at (9.25cm,2.35){$\Delta vr^2$};
 
 \draw[|->] (9.25cm,1.95) -- (9.25cm,0);
-\node[anchor=south,rotate=90] at (9.25cm,0.9750){$\Delta v_p^2$};
+\node[anchor=south,rotate=90] at (9.25cm,0.9750){$\Delta vp^2$};
 
 %Bottom arrows
 \draw[<->] (0,0) -- (52,0);
@@ -74,31 +74,31 @@ xtick align=inside
 ]
 \addplot [thick,solid,forget plot]
   table {./3_modeling/vc2.dat};
-  
+
 %%Left arrows
 \draw[dotted] (-1cm,0) -- (10cm,0);
-\node[anchor=south,rotate=90] at (-0.25cm,0.25){$\Delta v_n^1$};
+\node[anchor=south,rotate=90] at (-0.25cm,0.25){$\Delta vn^1$};
 
 \draw[|->] (-0.25cm,0) -- (-0.25cm,0.505);
 \draw[dotted] (-.25cm,0.505) -- (9.25cm,0.505);
-\node[anchor=south,rotate=90] at (-0.25cm,0.75){$\Delta v_p^1$};
+\node[anchor=south,rotate=90] at (-0.25cm,0.75){$\Delta vp^1$};
 
 \draw[<-|] (-0.25cm,0.505) -- (-0.25cm,.954);
 
 \draw[dotted] (-1cm,0.954) -- (11,0.954);
 \draw[|->] (-1cm,0) -- (-1cm,0.954);
-\node[anchor=south,rotate=90] at (-1cm,0.475){$\Delta v_r^1$};
+\node[anchor=south,rotate=90] at (-1cm,0.475){$\Delta vr^1$};
 
 %%Right arrows
 \draw[|->] (10cm,0.935) -- (10cm,0);
-\node[anchor=south,rotate=90] at (10cm,.47){$\Delta v_p^2$};
+\node[anchor=south,rotate=90] at (10cm,.47){$\Delta vp^2$};
 
 \draw[dotted] (10cm,0.935) -- (62,0.935);
 \draw[|->] (9.25cm,0.505) -- (9.25cm,.935);
-\node[anchor=south,rotate=90] at (9.25cm,0.75){$\Delta v_r^2$};
+\node[anchor=south,rotate=90] at (9.25cm,0.75){$\Delta vr^2$};
 
 \draw[|->] (9.25cm,0.505) -- (9.25cm,0);
-\node[anchor=south,rotate=90] at (9.25cm,0.25){$\Delta v_n^2$};
+\node[anchor=south,rotate=90] at (9.25cm,0.25){$\Delta vn^2$};
 
 %Vertical dotted line
 \draw[dotted] (52,-2cm) -- (52,0.505);

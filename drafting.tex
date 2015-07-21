@@ -131,7 +131,7 @@ node[anchor=north] {$3T$}; % \draw (0,0) node[anchor=north east]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               CHAPTER 4: MODELING                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 %Define the two vertical regions SSL & FSL
   \vasymptote[draw=none]{1e5}{ssl};
   \vasymptote[draw=none]{1e6}{fsl};
@@ -164,3 +164,17 @@ node[anchor=north] {$3T$}; % \draw (0,0) node[anchor=north east]
     %\node[anchor=north,rotate=45] at (\lbssl,1/(\lbssl*\C)){$SSL$};
     %
     \node[anchor=north] at (1e6,4){$FSL$};
+
+The \emph{solid} lines marks the pumped charge paths to the load and the \emph{dashed} lines the possible paths of the redistributed charge.
+
+ in order to overcome the restrictions of the original charge flow methodology, 
+ 
+As described in the previous section, the proposed methodology models the load as a current sink instead of a voltage sink. This slight modification has a relevant change in the modeling of the converter, adding three important aspects to the modeling:
+\begin{enumerate}
+  \item Connect the load to any of the nodes of the converter, since it does not fix any voltage at the connected node.
+
+  \item Include the \emph{dc}-capacitors in the analysis, since the voltage across the sink is given by the capacitor and not longer by the previous used voltage sink.
+
+  \item Estimate the delivered charge to the load for each of the circuit modes of the converter, since the current sink has a value of the averaged output current.
+\end{enumerate}
+
