@@ -167,8 +167,8 @@ node[anchor=north] {$3T$}; % \draw (0,0) node[anchor=north east]
 
 The \emph{solid} lines marks the pumped charge paths to the load and the \emph{dashed} lines the possible paths of the redistributed charge.
 
- in order to overcome the restrictions of the original charge flow methodology, 
- 
+ in order to overcome the restrictions of the original charge flow methodology,
+
 As described in the previous section, the proposed methodology models the load as a current sink instead of a voltage sink. This slight modification has a relevant change in the modeling of the converter, adding three important aspects to the modeling:
 \begin{enumerate}
   \item Connect the load to any of the nodes of the converter, since it does not fix any voltage at the connected node.
@@ -177,4 +177,29 @@ As described in the previous section, the proposed methodology models the load a
 
   \item Estimate the delivered charge to the load for each of the circuit modes of the converter, since the current sink has a value of the averaged output current.
 \end{enumerate}
+
+
+A charge multiplier vector $\mathbf{a}$ is obtained for all of the operation modes, also known as phases, of the converter. The charge multiplier vector corresponds to the charge flowing in every individual capacitor or source, normalized with respect to the total output charge $q_{out}$, as described in~\cite{95Makowski,Seeman:EECS-2009-78}. Owing to the fact that load current $i_o$ is assumed constant, the output charge of the $j$-phase can be expressed as the ratio of the phase duration $D^j$ to the total switching period $T_{sw}$, and its contribution to the total output charge $q_{out}$ is
+\begin{equation}
+    q^j_{out} = i_{o} T_{sw} D^j = D^j q_{out} .
+\label{eq:qout}
+\end{equation}
+
+Each charge flow element $ a(D^j)_i^j$  is a function of the phase duration $D^j$ and corresponds to the total net charge circulating in the $i$-th capacitor $c_i$ during the $j$-th phase, and can be used to compute the $net$ voltage $vn$ variation at the end of the $j$-th phase period:
+
+The current flowing through the $i$-th capacitor can be assumed to be constant, since the load has been modeled as a constant current skin. Hence the current in the $i$-th capacitor will a
+Due to the approximation of constant load current, it can be assumed that in the $i$-th capacitor the charge to the load is pumped by a constant current $i_i$.
+
+Hence the pumped voltage $vp$ variation during the $j$-th phase of the total switching period $T_{sw}$ can be simply computed as
+\begin{equation}
+\Delta {vp}^j_i  = \frac{i_i^j}{c_i} T_{sw} D^j = \frac{a_i ^j }{c_i} q_{out} .
+\label{eq:pumped_voltage}
+\end{equation}
+
+where $b_i^j$ is an equivalent impedance that depends on capacitor values and the circuit configuration during the $j$-th phase. It is easily derived through basic circuit analysis.
+
+As mentioned before, one part of the delta voltage $\Delta vp_i^j$ is due to the charge redistribution and the other is due to the charge pumping. Both can be easily identified from the voltage waveforms that are present on the capacitors, shown in Figure~\ref{fig:cap_riples}. From the graph, the voltage ripple associated with the redistributed charge $\Delta vr$ can be defined as
+
+The voltage variation due to the charge \emph{redistribution} $\Delta vr$  is obtained by substituting~\ref{eq:net_voltage} and~\ref{eq:pumped_voltage} into~\ref{eq:rdst_ripple_I}, and this yields
+
 

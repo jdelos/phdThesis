@@ -33,14 +33,13 @@
 \BOOKMARK [2][-]{subsection.4.1.2}{Revising the charge flow analysis}{section.4.1}% 33
 \BOOKMARK [2][-]{subsection.4.1.3}{Load Model: Voltage Sink versus Current Sink}{section.4.1}% 34
 \BOOKMARK [2][-]{subsection.4.1.4}{Re-formulating the charge flow analysis}{section.4.1}% 35
-\BOOKMARK [2][-]{subsection.4.1.5}{Sensitivity of the inductor current ripple}{section.4.1}% 36
-\BOOKMARK [1][-]{section.4.2}{Multiple Output Converters}{chapter.4}% 37
-\BOOKMARK [2][-]{subsection.4.2.1}{The Output Trans-Resistance Model}{section.4.2}% 38
-\BOOKMARK [2][-]{subsection.4.2.2}{Obtaining the Trans-Resistance parameters with the charge flow analysis }{section.4.2}% 39
-\BOOKMARK [0][-]{chapter.5}{Optimization and Design}{part.1}% 40
-\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 41
-\BOOKMARK [1][-]{section.5.2}{Study in the correlation of the design parameters and the Output Impedance}{chapter.5}% 42
-\BOOKMARK [1][-]{section.5.3}{Encapsulating the Switches and Capacitors area breakdown in an optimization procedure}{chapter.5}% 43
-\BOOKMARK [1][-]{section.5.4}{Insights towards a complete optimization}{chapter.5}% 44
-\BOOKMARK [0][-]{chapter.6}{Dynamic Study}{part.1}% 45
-\BOOKMARK [1][-]{section.6.1}{Small Signal Analysis}{chapter.6}% 46
+\BOOKMARK [1][-]{section.4.2}{Multiple Output Converter}{chapter.4}% 36
+\BOOKMARK [2][-]{subsection.4.2.1}{The Output Trans-Resistance Model}{section.4.2}% 37
+\BOOKMARK [2][-]{subsection.4.2.2}{Obtaining the Trans-Resistance parameters with the charge flow analysis }{section.4.2}% 38
+\BOOKMARK [0][-]{chapter.5}{Optimization and Design}{part.1}% 39
+\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 40
+\BOOKMARK [1][-]{section.5.2}{Study in the correlation of the design parameters and the Output Impedance}{chapter.5}% 41
+\BOOKMARK [1][-]{section.5.3}{Encapsulating the Switches and Capacitors area breakdown in an optimization procedure}{chapter.5}% 42
+\BOOKMARK [1][-]{section.5.4}{Insights towards a complete optimization}{chapter.5}% 43
+\BOOKMARK [0][-]{chapter.6}{Dynamic Study}{part.1}% 44
+\BOOKMARK [1][-]{section.6.1}{Small Signal Analysis}{chapter.6}% 45
