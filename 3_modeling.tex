@@ -1,16 +1,16 @@
 \chapter[Modeling of H-SCC]{Modeling of Hybrid Switched Capacitor Converters}
 
-Switch capacitor converters are circuits composed by a large number of switches and capacitors, and require accurate models to properly design them. SCCs have the peculiarity to be lossy by nature due to the non adiabatic energy transfer between capacitors, phenomenon not present in the inductor based converters. Generally, modeling of SCCs focuses just on  the description of the loss mechanisms associated to conduction and capacitor charge transfer, neglecting other sources of loss such as driving and switching loss. These loss mechanisms are proportional to the output current, thus are normally modeled with resistor in the well known output impedance model.
+Switch capacitor converters are circuits composed by a large number of switches and capacitors, and require accurate models to properly design them. SCCs have the peculiarity to be lossy by nature due to the non adiabatic energy transfer between capacitors, phenomenon not present in the inductor based converters. Generally, the modeling of SCCs focuses just on the description of the loss mechanisms associated to conduction and capacitor charge transfer, neglecting other sources of loss such as driving and switching loss. These loss mechanisms are proportional to the output current, thus they are normally modeled with resistor in the well known output impedance model.
 
-This chapter presents a new methodology to model a SCC when any of the nodes in the converter are loaded. The proposed methodology also include the effects of PWM control, thus accurately predicting the equivalent internal impedance and the converter conversion ratio.
+This chapter presents an enhanced methodology that allows to model a SCC when any of the nodes, \emph{dc} or \emph{pwm}, are loaded. The proposed methodology include also the effects of PWM control, thus accurately predicting the equivalent internal impedance and the converter conversion ratio.
 
-The chapter is divided in two sections, the first section is devoted to the study and model a SCC when loaded from a \emph{pwm}-node, reviewing and extending the charge flow analysis~\cite{95Makowski,Seeman:EECS-2009-78} to include two new aspects that arise with the proposed hybrid converter. First, any of the nodes of the converter are considered as possible outputs that can be loaded. Second, the analysis includes the effects of duty cycle (PWM) in any of the operation regimes of the converter, and this alters the conversion ratio and the internal equivalent impedance. The previous models are discussed, and the limiting are factors identifying. Subsequently the charge flow analysis is reformulated using a new approach based on current-loaded outputs that leads a better accuracy and covers the analysis of both SCC and H-SCC. The new model is compared to circuit simulations and experimental data.
+The chapter is divided in two sections, the first section is devoted to the study and model a SCC when loaded from a \emph{pwm}-node, reviewing and extending the charge flow analysis~\cite{95Makowski,Seeman:EECS-2009-78} to include two new aspects that arise with the proposed hybrid converter. First, any of the nodes of the converter are considered as possible outputs that can be loaded. Second, the analysis includes the effects of duty cycle modulation (PWM) in any of the operation regimes of the converter, which indeed affects the converter's conversion ratio and the produced losses. The previous models are discussed, and the limiting factors are identified. Subsequently the charge flow analysis is reformulated using a new approach that leads a better accuracy for the analysis SCC and allows to model the new proposed H-SCC. The new model is validated against circuit simulations and experimental data.
 
 The second section is devoted to the study of multiple loaded H-SCC. Based on the well-known output impedance model, a new circuit representation for converters with multiple current-loaded outputs is presented. The related characterization methodology is developed to determine the parameters of said new model based on the current-loaded analysis presented in the first section. The resulting model is validated against simulation and experimental data.
 
 
 \section{Single Output Converters}
-Switched Capacitor Converters has been always treated as a two-port converter with single input and a single output as shown in Fig.\ref{fig:two_port}. The input port is connected to a voltage source and the output port feeds the load. The SCC provides between input, $v_i$, and output, $v_o$, a voltage conversion, $m$,  that  steps up, steps down or/and inverts the polarity of the input voltage. Up to present all the circuit theory devoted SCCs is valid only for the two-port configuration, therefore this section is dedicated to revisit the classical concepts of single output SCC and to introduce new ones that enable to study the H-SCC.
+Switched Capacitor Converters has been always treated as a two-port converter with single input and a single output as shown in Fig.\ref{fig:two_port}. The input port is connected to a voltage source and the output port feeds the load. The SCC provides between input, $v_i$, and output, $v_o$, a voltage conversion, $m$,  that  steps up, steps down or/and inverts the polarity of the input voltage. The current circuit theory  related to SCCs is valid only for the two-port configuration, therefore this section is dedicated to revisit the classical concepts of single output SCC and to enhance them to also cover the H-SCC.
 
 \begin{figure}[!h]
 \centering
@@ -78,23 +78,25 @@ Switched Capacitor Converters has been always treated as a two-port converter wi
 \caption{Output impedance model of a switched capacitor converter.}
 \label{fig:scc_model_oi}
 \end{SCfigure}
-The behavior of SSCs is modeled with the well-known output impedance model~\cite{2000Oota,2012Peter} that is composed of a controlled voltage source and equivalent resistance $r_{scc}$, as shown in Figure~\ref{fig:scc_model_oi}.The output voltage provided by the converter under no-load conditions is defined as \emph{target voltage} ($v_{trg}$). It is modeled with the controlled voltage source, being the value of voltage supply $v_{src}$ multiplied by the conversion ratio $m$, thus
+The behavior of SSCs is modeled with the well-known output impedance model~\cite{2000Oota,2012Peter} that is composed of a controlled voltage source and equivalent resistance $r_{scc}$, as shown in Figure~\ref{fig:scc_model_oi}.The output voltage provided by the converter under no-load conditions is defined as \emph{target voltage} ($v_{trg}$). The  controlled voltage source provides the target voltage, being the value of voltage supply $v_{src}$ multiplied by the conversion ratio $m$, thus
 \begin{equation}
 v_{trg} =  m \cdot v_{src} .
 \label{eq:vtrg}
 \end{equation}
 
-When loaded, the voltage droop across $r_{scc}$ accounts for the loss produced in the converter. In fact, the loss are proportional to the output current $i_o$, that is why they are represented with a resistor. Hence the output voltage of the converter can be obtained as
+When the converter is loaded, the voltage at the converter's output, $v_{outs}$, drops proportionally with the load current. This is modeled with resistor $r_{scc}$, which accounts for the losses produced in the converter. Since the losses are proportional to the output current $i_o$, they can be modeled with a resistor. Using the presented model, the output voltage of the converter can be obtained as
 \begin{equation}
 v_{out} =  m \cdot v_{src} - i_o \cdot r_{scc} .
 \label{eq:vout_scc}
 \end{equation}
 
+Therefore to solve \ref{eq:vout_scc} is necessary to obtain from the converter the two parameters of the model, the conversion ration $m$  and the equivalent output resistance $r_{scc}$. The first, can be easily solved using Kirchhoff's Voltage Laws as previously explained in Section~\ref{ch:conversion_ratio}. The second, is more complex and actually is the main problem in the modeling of SCCs. 
+
 Up to day, there are two different methodologies to infer the equivalent output resistance $r_{scc}$, plotted in~\ref{fig:plot_rscc}. On the one hand, S. Ben-Yaakov  ~\cite{2009Ben-Yaakov,2012Ben-Yaakov,2013Evzelman} has claimed a generalized methodology based on the analytical solution of each of the different R-C transient circuits of the converter, reducing all of them to a single transient solution. The methodology achieves a high accuracy, but yields to a set of none linear equations and high complexity for the analysis of advanced architectures.
 
 On the other hand,  M. Makowski and D. Maksimovic~\cite{95Makowski} presented a methodology based on the analysis of the charge flow between capacitors in steady-state. The methodology is simple to apply and yields with a set of linear expressions, being them easy to operate for further analysis of the converters. Based on the charge flow analysis, M.Seeman~\cite{Seeman:EECS-2009-78} developed different metrics allowing to compare performances between capacitive and inductive converters.
 
-Although both methodologies are valid in the modeling of SCCs, none of them has been used to model the effects of a loaded \emph{pwm}-node, which is fundamental to study the H-SCC.  Nevertheless the charge flow analysis has a more clean and simplified way of describing the loss mechanism, based on the hypothesis that a SCC in steady-state has to have null charge balance in all the capacitors. That is why this methodology has been chosen in to model the H-SCC, although few modeling hypothesis have been reviewed and modified according to the operation of the new \emph{hybrid} switched capacitor converter.
+Although both methodologies are valid in the modeling of SCCs, none of them has been used to model the effects of a loaded \emph{pwm}-node, which is fundamental to study the H-SCC.  Nevertheless the charge flow analysis has a more clean and simplified way of describing the loss mechanism, based on the hypothesis that a SCC in steady-state has to have null charge balance in all the capacitors. For that reason, this methodology has been chosen in this dissertation in order to model the \emph{hybrid} switched capacitor converter. 
 
 \sidecaptionvpos{figure}{!b}
 \begin{SCfigure} %[!h]
@@ -145,11 +147,11 @@ Although both methodologies are valid in the modeling of SCCs, none of them has 
 
 As aforementioned $r_{scc}$ accounts for the loss when the converter is loaded. All losses in the converter are, in fact, dissipated in the resistive elements of the converter: \emph{on}-resistance $r_{on}$ of the switches and equivalent series resistance $r_{esr}$ of the capacitors, thus all loesses represented by $r_{scc}$ are conduction losses. Nevertheless, the origin and magnitude of the losses depends on the operation region of the converter, which is function of the switching frequency as shown in the plot of Figure~\ref{fig:plot_rscc}.
 
-There are two well-defined operation regimes of the converter: the \emph{Slow Switching Limit} (SSL) and the \emph{Fast Switching Limit} (FSL), and each of the regime defines an asymptotic limit of the $r_{scc}$ curve. In SSL, the converter operates at a switching frequency $f_{sw}$ much lower than the time constant $\tau$ of the converter, thereby allowing the full charge and discharge of the capacitors as shown in Figure~\ref{fig:ic_ssl}. As shown in Figure~\ref{fig:ic_fsl} currents have exponential-shape waveforms. The losses are then determined by the charge transfer between capacitors, but dissipated in the resistive paths of the converter mainly in switch $r_{on}$. Therefore reducing the switch resistance will not reduce the losses, instead will produce sharper discharge currents in the switches producing more EMI. In that region $r_{scc}$ losses are inversely proportional of product between the switching frequency and capacitances, limited by the SSL asymptote (see Figure~\ref{fig:plot_rscc}).
+As SCC has two well-defined regimes of operation: the \emph{Slow Switching Limit} (SSL) and the \emph{Fast Switching Limit} (FSL). Each of the two regimes defines an asymptotic limit for the $r_{scc}$ curve. In SSL, the converter operates at a switching frequency $f_{sw}$ much lower than the time constant $\tau$ of charge and discharge of the converter's capacitors, thereby allowing the full charge and discharge of the capacitors. As shown in Figure~\ref{fig:ic_ssl} the capacitor currents present an exponential-shape waveform. In this regime of operation, the losses are determined by the charge transfer between capacitors, and dissipated in the resistive paths of the converter, mainly in the switches. That is why, reducing the switch channel resistance does not decreases the losses, instead, it will produce sharper discharge currents producing higher electromagnetic disturbances. In SSL, losses are inversely proportional of product between the switching frequency and capacitances, limited by the SSL asymptote as it can be seen in Figure~\ref{fig:plot_rscc}.
 
-In FSL, the converter operates with a switching frequency $f_{sw}$ much higher than the time constant $\tau$ of the converter, limiting the charge and discharge transient times of the capacitors; as shown in Figure~\ref{fig:ic_fsl} currents have block-shape waveforms. In such conditions losses totally depend on the parasitic resistive elements ($r_{on}$, $r_{esr}$), therefore changes in the capacitances or frequency do not modify the produces losses. In that region $r_{scc}$ is constant and limited by the FSL asymptote (see Figure~\ref{fig:plot_rscc}).
+In FSL, the converter operates with a switching frequency $f_{sw}$ much higher than the time constant $\tau$ of charge and discharge of the converter's capacitors, limiting the full charge and discharge transients. As shown in Figure~\ref{fig:ic_fsl} currents have block-shape waveforms. In such operation regime, the losses are totally produced by the parasitic resistive elements ($r_{on}$, $r_{esr}$), therefore changes in the capacitances or frequency do not modify the produced losses\footnote{The switching losses are not included in the modeling of $r_{scc}$. }. In FSL, $r_{scc}$ is constant and limited by the FSL asymptote as it can be seen in Figure~\ref{fig:plot_rscc}.
 
-\begin{figure}[!h]
+\begin{figure}[!h] 
 \centering
 \ctikzset { bipoles/length=1cm}
 \begin{subfigure}[t]{.45\textwidth}
@@ -251,9 +253,9 @@ In FSL, the converter operates with a switching frequency $f_{sw}$ much higher t
 
 \subsection{Revising the charge flow analysis}
 
-The charge flow analysis method is based on charge conservation in the capacitors during a switching period when the converter is in steady state~\cite{95Makowski}. Based on the charge flow of the capacitors, the converter is studied in two well-defined operating regimes: the Slow Switching Limit (SSL) and the Fast Switching Limit (FSL). In SSL, losses are then dominated by the charge transfer between capacitors, therefore only the charge transfer loss mechanisms are studied.  In FSL, losses depend on the conduction through the parasitic resistive elements, therefore only the conduction losses are studied. This division in the study of the converter reduces the complexity of the problem, and enables a simplified but accurate analysis.
+The charge flow analysis is based on the charge conservation in the converter's capacitors during an entire switching period in steady state~\cite{95Makowski}. The converter is studied in the two well-defined operating regimes: the Slow Switching Limit (SSL) and the Fast Switching Limit (FSL). In SSL, losses are then dominated by the charge transfer between capacitors, therefore only the charge transfer loss mechanisms are studied.  In FSL, losses depend on the conduction through the parasitic resistive elements, therefore only the conduction losses are studied. This division in the study of the converter reduces the complexity of the problem, and enables a simplified but accurate analysis.
 
-The charge flow analysis uses the flowing charges in the different elements of the converter instead of the currents. Furthermore, the charges are grouped in different charge flow vectors, each vector is normalized with respect to the total charge flow of an output of the converter.
+In the charge flow analysis, the flowing charges are used instead of the currents. Moreover, the charges are grouped in charge flow vectors, being each vector is normalized with respect to the total charge flow delivered at the output of the converter.
 
 
 \subsection{Load Model: Voltage Sink versus Current Sink}
@@ -340,22 +342,26 @@ In order to model a SCC, the original charge flow method~\cite{95Makowski} makes
 \label{fig:loads}
 \end{figure}
 
-These simplifications reduce the usability of the model to the specific application of dc-to-dc conversion, and at the same time limit the flexibility to model different concepts of the SCC, such as the aforementioned hybrid concept. In order to overcome these limitations, the presented methodology makes two different assumptions:
+Such assumptions reduce the usability of the model to the specific application of dc-to-dc conversion, and, at the same time, limit the flexibility to model different concepts of the SCC, such as the H-SCC previously introduced in Chapter~\ref{ch:H-SCC}. In order to overcome these limitations, the presented methodology makes two different assumptions:
 \begin{enumerate}
   \item The load is assumed to be a constant current source with a value equal to the average load current, as shown in Figure~\ref{fig:isink_load}. In fact, using such approach the charge delivered to the load can be evaluated for each switching phases $j$ as
       \begin{equation}
-        q_{out}^j = D^j \frac{i_{out}}{f_{sw}} = D^j i_{out}{T_{sw}}  = D^j q_{out}.
+        q_{out}^j = D^j \frac{i_{out}}{f_{sw}} = D^j i_{out}{T_{sw}}  = D^j q_{out},
       \label{eq:q_out}
       \end{equation}
+  where $i_{out}$ is the average output current and $D^j$ is the duty cycle corresponding to the $j$-th phase. 
+  
 
-  \item Any of the converter nodes can be loaded. Since the load is modeled as a current sink, it can be now connected to any of the converter's nodes without fixing a voltage at the node.
+  \item Any of the converter nodes can be loaded. Since the load is modeled as a current sink, it can be now connected to any of the converter's nodes without biasing it.
+      
+  \item When the load is connected to a \emph{dc}-node the associated \emph{dc}-capacitor of the node is not longer cancelled by the load model, thus the effects of the output capacitor are included in the model. 
 
 \end{enumerate}
 
 
 \subsection{Re-formulating the charge flow analysis}
 
-The equivalent impedance encompasses the root losses produced in a SCC due to capacitor charge transfer and charge conduction. As aforementioned, the classical charge flow methodology assumes an infinitely large output capacitance connected to a \emph{dc}-node, producing inaccuracy in the prediction of the equivalent output impedance when the output capacitor is comparable in value to the flying capacitors~\cite{2013Breussegem:c_out}. The root cause of this inaccuracy relies in the wrong quantification of the flow of  charges that produces losses in the converter.\\
+The equivalent impedance encompasses the root losses produced in a SCC due to capacitor charge transfer and charge conduction. As aforementioned, the classical charge flow methodology assumes an infinitely large output capacitance connected to a \emph{dc}-node, producing inaccuracy in the prediction of the equivalent output impedance when the output capacitor is comparable in value to the flying capacitors~\cite{2013Breussegem:c_out}. Actually, the root cause for this inaccuracy relies in the wrong quantification of the charge vectors that produces the converter losses.\\
 
 \begin{figure}[!h]
 \centering
@@ -411,21 +417,22 @@ The equivalent impedance encompasses the root losses produced in a SCC due to ca
 \label{fig:charge_flow_I}
 \end{figure}
 
-Looking in detail the flow of charges in a SCC, we can see that the capacitors of a SCC have two different flows of charge during each circuit mode:
+Looking, in detail, the charge flow in a SCC, we can identify two different charge flows during each circuit mode:
 \begin{description}
 
-  \item[Redistributed charge] flows between the capacitors in order to equalize the different voltages, and is the charge flow that produces losses. Therefore capacitor charge losses can be evaluated by quantifying this charge flow.
+  \item[Redistributed charge] flows between capacitors in order to equalize their voltage differences, being them the source of losses, thus by evaluating them the capacitor charge losses can be obtained.
 
       This charge flow is associated with a charge or discharge of the capacitors, happening right after the switching event and lasting for a short period of time\footnote{The duration of the charge depends on the time constant of the associated R-C circuit.}.
 
-  \item[Pumped charge] flows from the capacitors to the load, this charge is consumed by the load, hence producing useful work.  This charge delivery is associated with a discharge of the capacitors and last for the entire period.
+  \item[Pumped charge] flows from the capacitors to the load, this charge is consumed by the load, hence producing useful work.  This charge delivery is associated with a discharge of the capacitors, lasting for the entire phase time.
 
 \end{description}
-Actually, we can also define a theoretical third charge flow, which is necessary to solve the converter:
+
+In fact, we can also define another theoretical charge flow, which is used to solve the flowing charges in the converter:
 \begin{description}
 
   \item[Net charge] flow is quantified based on the principle of \emph{capacitor charge balance} for a converter in steady state. Based on that principle all \emph{net} charges in the capacitors can be obtained applying KCL, but using charges instead of currents. Therefore, the circuit can be solved for the \emph{net} charges flow applying
-      the \emph{capacitor charge balance} as 
+      the \emph{capacitor charge balance} as
       \begin{equation}
        \forall~c_{i} : \sum_{j=1}^{phases}q_{i}^j = 0,
       \label{eq:charge_balance}
@@ -502,18 +509,18 @@ The loss mechanisms of the converters can be better understood based on these tw
 \label{fig:charge_flow_II}
 \end{figure}
 
-In another scenario, the one of Figure~\ref{fig:charge_flow_II},  a 3:1 H-Dickson with the load connected to second ~\emph{pwm}-node and equalized capacitors. In such converter, there is a redistributed charge flow between the different capacitors and at the same time all capacitors pump charge towards the load. Hence all the capacitors contributing in the charge delivery to the load.
+In another scenario, the one of Figure~\ref{fig:charge_flow_II},  a 3:1 H-Dickson with the load connected to second ~\emph{pwm}-node. In such converter, there is a redistributed charge flow between the different capacitors as in the previous case, but at the same time, all capacitors pump charge to the load as well. Therefore all the capacitors  contribute in delivering charge to the load.
 
-In fact, the original analysis omitted the \emph{pumped} charge contribution of the flying capacitors, thereby overestimating the \emph{redistributed} charge, resulting in an overestimation of the equivalent output resistance impedance for the SSL. Therefore, in order to estimate the right output impedance, the \emph{redistributed} charge flow has to be properly quantified.\\
+As a matter of fact, the original analysis omitted to quantify the \emph{pumped} charge contribution of the flying capacitors; thereby overestimating the \emph{redistributed} charge, which leaded larger equivalent output resistance for the SSL. Therefore, in order to estimate the right output impedance, the \emph{redistributed} charge flow has to be properly quantified.\\
 
 \begin{figure}[!h]
 \centering
 \input{./3_modeling/Delta_vc1.tex}
-\caption{The two possible voltage waveforms that show the capacitors in a SCC. Ripples are associated with the charge flow mechanisms: top) unipolar capacitor discharge (DC capacitor); bottom) bipolar capacitor discharge (flying capacitor).}
+\caption{Two possible voltage waveforms that show the capacitors in a SCC. Ripples are associated with the charge flow mechanisms: top) unipolar capacitor discharge (DC capacitor); bottom) bipolar capacitor discharge (flying capacitor).}
 \label{fig:cap_riples}
 \end{figure}
 
-Looking to the voltage ripple in the capacitors during a switching cycle of Figure~\ref{fig:cap_riples}, we can identify three different voltage ripples associated to the previous described charge flows:
+Looking to the voltage ripple in the capacitors during an entire switching cycle, in Figure~\ref{fig:cap_riples}, we can identify three different voltage ripples associated to the previous described charge flows:
 \begin{description}
   \item[Net voltage ripple $\Delta vn$] is the voltage variation measured at the beginning and at the end of the switch events. As a matter of fact, this \emph{net} ripple can be computed from the null \emph{charge balance} in a capacitor in steady-state condition as
       \begin{equation}
@@ -528,12 +535,12 @@ Looking to the voltage ripple in the capacitors during a switching cycle of Figu
 
       Notice that \emph{capacitor charge balance} principle is reflected in the \emph{net }voltage ripples of Figure~\ref{fig:cap_riples}. Thus the sum of all \emph{net} ripples of each capacitor during a switching cycle  must be zero; that is why in the two phase converter used in the example $\Delta vn^1 = \Delta vn^2$.
 
-  \item[Pumped voltage ripple $\Delta vp$] is the voltage variation associated with the discharge of the capacitor by a constant current, thanks to assumption of modeling the load as current sink. Therefore it can be identified by the linear voltage discharge. Therefore \emph{pumped} ripple can be obtained for each $j$-th switching phase as
+  \item[Pumped voltage ripple $\Delta vp$] is the voltage variation associated with the discharge of the capacitor by a constant current. Thanks to modeling the load as current sink, it can be identified by the linear voltage discharge, thus the \emph{pumped} ripple can be obtained for each switching phase as
       \begin{equation}
         \Delta {vp}^j_i  = D^j \frac{i_i^j}{c_i }T_{sw},
       \label{eq:pumped_voltage}
       \end{equation}
-      where $i_i^j$ is the current flowing through the $i$-th capacitor $c_i$. In fact, the current flowing in each individual capacitor $c_i$ during each phase $j$ can be expressed as function of the output current by solving the network of capacitors associated to the circuit of each mode, thus
+      where $i_i^j$ is the current flowing through the $i$-th capacitor $c_i$. Actually, the current flowing in each individual capacitor $c_i$ during each $j$-th phase can be expressed as function of the output current by solving the network of capacitors associated to the circuit of each mode, thus
       \begin{equation}
         i_i^j = b_i^j i_{out} ,
       \label{eq:b_cnst}
@@ -543,42 +550,42 @@ Looking to the voltage ripple in the capacitors during a switching cycle of Figu
         \Delta {vp}^j_i  = D^j \frac{b_i^j}{c_i } {i_{out}} {T_{sw}} = D^j \frac{b_i^j}{c_i } {q_{out}}.
       \label{eq:pumped_voltage_cf}
       \end{equation}
-      
+
       Like in the previous case with the \emph{net} charge flow, the $b_i^j$ elements are gathered in the \emph{pumped} charge flow vector $\mathbf{b}$ as
-      
+
       \begin{equation}
         \mathbf{b}^j =  \left[ b_1^j~b_2^j \cdots b_n^j \right] = \frac{\left[ ~i_1^j~i_2^j \cdots i_n^j \right]}{i_{out}},
       \label{eq:b_vector}
       \end{equation}
-      
-      where the superindex denotes the $j$-th phase, $i_i$ is the \emph{pumped} current flowing in the $i$-th capacitor $c_i$; the vector is normalized with respect to the output current $i_{out}$. Notice that the vector is dual for currents or charges. 
-      
 
-  \item[Redistributed ripple $\Delta vr$ ]is the voltage variation associated with an exponential charge or discharge transient caused by a charge redistribution between capacitors and it happens just right after a phase transition event. The \emph{redistribution} ripple can be quantified by the addition of the two previous ripples as
+      where the superindex denotes the $j$-th phase, $i_i$ is the \emph{pumped} current flowing in the $i$-th capacitor $c_i$. The vector is normalized with respect to the output current $i_{out}$. Notice that $b$ vector is dual for currents or charges.
+
+
+  \item[Redistributed ripple $\Delta vr$ ]is the voltage variation associated to an exponential charge or discharge transient. Produced by the charge redistribution between capacitors and happening just right after the phase transition event. The \emph{redistribution} ripple can be quantified by the addition of the two previous ripples as
       \begin{equation}
-        \Delta {vr}^j_i  = {vn}^j_i + {vp}^j_i .
+        \Delta {vr}^j_i  = \Delta {vn}^j_i + \Delta {vp}^j_i .
       \label{eq:rdst_ripple_I}
       \end{equation}
-      Substituting (~\ref{eq:net_voltage_cf}) and (\ref{eq:pumped_voltage_cf}) into (\ref{eq:rdst_ripple_I}) the \emph{redistributed} ripple is formulated in terms of the charge flow analysis, as 
+      Substituting (~\ref{eq:net_voltage_cf}) and (\ref{eq:pumped_voltage_cf}) into (\ref{eq:rdst_ripple_I}) the \emph{redistributed} ripple is formulated in terms of the charge flow analysis, as
       \begin{equation}
         \Delta {vr}^j_i  = \frac{q_{out}}{c_i} \left[ a^j_i - D^j b^j_i \right] .
       \label{eq:rdst_ripple_II}
       \end{equation}
-      
-      
+
+
 \end{description}
 
 
 \subsubsection[SSL]{Slow Switching Limit Equivalent Output Resistance}
 
-The SSL equivalent output resistance $r_{ssl}$ accounts for the losses produced by the capacitor charge transfer, therefore $r_{scc}$ can be obtained evaluating the losses in the capacitors.  The energy lost in a charge or discharge of a capacitor is given by
+The SSL equivalent output resistance $r_{ssl}$ accounts for the losses produced by the capacitor charge transfer, therefore $r_{scc}$ can be obtained evaluating the losses in the capacitors.  The energy lost in a charge or discharge of capacitor $c$ is given by
 \begin{equation}
 E_{loss}=\frac{1}{2}{{\Delta{v}}_c}^2 c.
 \label{eq:e_lost}
 \end{equation}
-where $\Delta v_c$ is the voltage variation in the process. Previously, we defined that the \emph{redistributed} ripple is associated to the capacitor charge transfer, thus by substituting (\ref{eq:rdst_ripple_II}) into (\ref{eq:e_lost}) we obtain the losses due to capacitor charge transfer 
+where $\Delta v_c$ is the voltage variation in the process. Previously, we defined that the \emph{redistributed} ripple is associated to the capacitor charge transfer, thus by substituting (\ref{eq:rdst_ripple_II}) into (\ref{eq:e_lost}) we obtain the losses due to capacitor charge transfer
 \begin{equation}
-E_i^j=\frac{1}{2}{({\Delta{vr}}_i^j)}^2C_i=\frac{1}{2}\frac{{q_{out}}^2}{{c_i}^2}{\left[a_{i\
+E_i^j=\frac{1}{2}{({\Delta{vr}}_i^j)}^2 c_i = \frac{1}{2}\frac{{q_{out}}^2}{{c_i}^2}{\left[a_{i\
 }^j-{D^j} {b_i^j}\right]}^2c_i=\frac{1}{2}\frac{{q_{out}}^2}{c_i}{\left[a_{i\
 }^j-{D^j} {b_i^j}\right]}^2 .
 \label{eq:e_lost_ssl}
@@ -602,12 +609,12 @@ r_{ssl}=\frac{P_{ssl}}{{i_o}^2}=\frac{P_{ssl}}{{(f_{sw} {q_{out}})}^2}=\frac{1}{
 
 
 \subsubsection[FSL]{Fast Switching Limit}
-The fast switching limit (FSL) equivalent output resistance ($r_{fsl}$) accounts for losses produced in the resistive circuit elements, being these the \emph{on}-resistance of the switches and the Equivalent Series Resistance (ESR) of the capacitors $r_{esr,c}$. As outlined in~\cite{Seeman:EECS-2009-78}, the charge flow vectors through the parasitic resistive elements $\mathbf{ar}$ can be derived using the charge flow vectors $\mathbf{a}$, then $r_{fsl}$ is computed as 
+The fast switching limit (FSL) equivalent output resistance $r_{fsl}$ accounts for losses produced in the resistive circuit elements, being these the \emph{on}-resistance of the switches and the Equivalent Series Resistance (ESR) of the capacitors $r_{esr,c}$. As outlined in~\cite{Seeman:EECS-2009-78}, the charge flow vectors through the parasitic resistive elements $\mathbf{ar}$ can be derived from the charge flow vectors $\mathbf{a}$, then $r_{fsl}$ is computed as
 \begin{equation}
-r_{fsl}=\sum_{i=1}^{elm.}\sum_{j=1}^{phases}\frac{r_i}{D^j}{{ar}_{i\ ^j}}^2,
+r_{fsl}=\sum_{i=1}^{elm.}\sum_{j=1}^{phases}\frac{r_i}{D^j}{{ar}_{i ^j}}^2,
 \label{eq:r_ssl}
 \end{equation}
-where $r_i$ is the resistance value of the $i$-th element with a flowing charge $ar_i$.  
+where $r_i$ is the resistance value of the $i$-th element with a flowing charge $ar_i$.
 
 
 \subsubsection{Equivalent Switched Capacitor Converter Resistance}
@@ -616,31 +623,32 @@ With the goal of obtaining a simple design equation, an analytical approximation
 r_{scc} \approx \sqrt{{r_{ssl}}^2+{r_{fsl}}^2},
 \label{eq:r_scc}
 \end{equation}
-and it used in all the presenter results from this dissertation. Nevertheless, a recent publication~\cite{2012Makowski} claimed a \emph{better} approximation as
+being used in all the presented results of this dissertation. 
+
+A recent publication~\cite{2012Makowski} claimed a \emph{better} approximation as
 \begin{equation}
 r_{scc,bis} \approx \sqrt[\leftroot{-3}\uproot{3} u]{{r_{ssl}}^{u}+{r_{fsl}}^{u}},
 \label{eq:r_scc_II}
 \end{equation}
-where $u = 2.54$. The value of factor $u$ comes from an approximation from the exact formula of the output for a single lossy capacitor operating with a duty cycle of $0.5$, however it becomes worst than the original approximation for duty cycles different of $0.5$ or for converters with different time constants between phases. A slightly better accuracy is e obtained with readjustment of the $u$ factor with the duty cycle $D$ obtained given by
+where $u = 2.54$. This value comes from solving the equation of a single switched capacitor operating with a 0.5 duty cycle. This formulation has a better accuracy for converters with equal capacitor values, however it becomes worst than the original approximation for duty cycles different of $0.5$ or for converters with different time constants between phases. A slightly better accuracy is obtained with $u$ as function of the duty cycle $D$, as
 \begin{align}
-p & = \frac{1}{2} \left[ \frac{e^{\frac{1}{D}+1}}{e^{\frac{1}{D}-1}} + \frac{e^{\frac{1}{1-D}+1}}{e^{\frac{1}{1-D}-1}} \right], 
+p & = \frac{1}{2} \left[ \frac{e^{\frac{1}{D}+1}}{e^{\frac{1}{D}-1}} + \frac{e^{\frac{1}{1-D}+1}}{e^{\frac{1}{1-D}-1}} \right],
 \\
 \\
 u &= \frac{1}{\log_2 p}.
 \label{eq:u_factor}
 \end{align}
-showing better results in converters with similar time constants between phases. In circuits with very different time constants between phases non of the approximations shows a better results in for the whole range of $D$ that are conclusive to favour the use.
+
+This approach shows better results in converters with similar time constants between phases. In circuits with different time constants, any of the approximations shows to be better than the others for the whole range of $D$.
 
 \subsubsection{Conversion ratio}
 
 The conversion ratio of the converter can be obtained with the source \emph{net} charge element from vector $\mathbf{a}$ as
 \begin{equation}
-m(D^j)=\frac{{v_{trg}}}{v_{src}}=\sum_{j=1}^{phases}a_{in}^j.
+m=\frac{{v_{trg}}}{v_{src}}=\sum_{j=1}^{phases}a_{in}^j.
 \label{eq:r_ssl}
 \end{equation}
-where $a_{in}$  corresponds to the input voltage source term of the charge
-vector multiplier $\mathbf{a}$.
-
+where $a_{in}$  corresponds to the input voltage source term of the charge vector multiplier $\mathbf{a}$.
 \section{Multiple Output Converter}
 
 

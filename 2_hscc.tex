@@ -1,5 +1,5 @@
 \chapter{Hybrid Switched Capacitor Converter}
-
+\label{ch:H-SCC}
 Driving high power LEDs using a switched capacitor converter challenges the operation of these converters. The SCC provides good performance in voltage-to-voltage conversion, but it can not directly provide regulated current. In low power applications, that is solved by using a linear regulator in series with the LED string, however that is not a valid solution for general lighting where high power and high current are needed. Combining switched capacitors with inductors can provide efficient converters for LED lighting, where the use of inductors provide a tight and efficient regulation, and the use of a switched capacitor allows to reduce the voltage stress in the components, in turn reducing switching losses and the volume of the inductor.
 
 The \emph{hybrid} switched capacitor converter (H-SCC) is a merge of a switched capacitor and an inductive converter, which will be introduced in this chapter. The first section introduces the basic knowledge about switched capacitor converters (SCC) to understand the enhancements, modifications and characteristics of the \emph{hybrid}-SCC. The second section presents the H-SCC topology and  operation. The third section introduces LED drivers circuits based on H-SCC, being them the fundamental circuits of this disoperation. Additionally, different driver architectures are described in this section giving a broader perspective of different applications of H-SCC in LED drivers.
@@ -202,7 +202,7 @@ Dickson and Ladder are the preferred SCC topologies used in this dissertation. B
 \end{figure}
 
 \subsection{Conversion ratio}
-
+\label{ch:conversion_ratio}
 The conversion ratio of the converter and the steady state voltages in the capacitors are obtained applying Kirchhoff's voltage law (KVL) for each circuit mode, and combining the different linear independent equations.
 
 KVL equations of the first phase are:
