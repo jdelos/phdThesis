@@ -20,31 +20,39 @@ axis x line*=bottom,
 axis y line*=left,
 xlabel= {duty cycle},
 ylabel= {$r_{scc}~[\Omega]$},
-yticklabel style={text width=2em,align=right},
+yticklabel style={text width=2em,align=right}
 ]
 
-\addplot [semithick,mark=square,only marks,forget plot]
-  table {./3_modeling/sim_rx_1MHz_O2.dat};
-
-\addplot [semithick,solid,forget plot]
-  table {./3_modeling/mdl_rx_1MHz_O2.dat};
-
-%\addplot [semithick,dashed,forget plot]
-%  table {./3_modeling/mdl_see_rx_1MHz_O1.dat};
+    \addplot [semithick,mark=square,only marks]
+      table[y=y4] {./3_modeling/rx_sw_dx_O2.dat};\label{pl_PLECS}
+    \addplot [semithick,smooth,black]
+      table [y=y2] {./3_modeling/rm1_sw_dx_O2.dat};\label{pl_MDL}
+    \addplot [semithick,smooth,black!66]
+      table [y=y2] {./3_modeling/rm2_sw_dx_O2.dat};
+    \addplot [semithick,smooth,black!33]
+      table [y=y2] {./3_modeling/rm3_sw_dx_O2.dat};
+    
+    \addplot [semithick,smooth,black,dashed]
+      table [y=y2] {./3_modeling/rm1_ms_sw_dx_O2.dat};\label{pl_MDL}
 
 \end{axis}
 
 \begin{axis}[%
-axis y line*=right,
-axis x line=none,
-ylabel = {$\epsilon_r~[\%]$},
-yticklabel pos=right,
-yticklabel style={text width=2em,align=left},
-]
+    axis y line*=right,
+    axis x line=none,
+    ylabel = {$\epsilon_r~[\%]$},
+    yticklabel pos=right,
+    yticklabel style={text width=2em,align=left},
+    ]
 
-\addplot [semithick,mark=star,only marks,forget plot]
-  table {./3_modeling/error_rx_1MHz_O2.dat};
+    \addplot [semithick,mark=star,only marks,black]
+    table [y=y4] {./3_modeling/err1_sw_dx_O2.dat};
 
+    \addplot [semithick,mark=star,only marks,black!66]
+    table [y=y4] {./3_modeling/err2_sw_dx_O2.dat};
+
+    \addplot [semithick,mark=star,only marks,black!33]
+    table [y=y4] {./3_modeling/err3_sw_dx_O2.dat};
 
 \end{axis}
 \end{tikzpicture}

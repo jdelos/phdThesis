@@ -1,0 +1,87 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\begin{tikzpicture}
+\pgfplotsset{
+    width=4.5cm,
+    height=3.25cm,
+    scale only axis,
+    ylabel near ticks,
+    enlarge y limits={0.2},
+    xlabel near ticks,
+    ylabel near ticks,
+    enlarge x limits={0.15},
+}
+\begin{loglogaxis}[
+        %xlabel= {$f_{sw}[Hz] $},
+        xticklabels={,,},
+        ylabel= {$ r_{scc} ~ [\Omega] $} ,
+        axis y line*=left,
+        axis x line*=bottom,
+        %xtick=\empty, ytick=\empty,
+        %ytick = {0,.125,.25},
+        %yticklabels={0,$v_{src}\frac{1}{3}$,$v_{src}\frac{2}{3}$,$v_{src}$},
+        %xticklabels={0,$D \cdot T_{sw}$,$T_{sw}$ ,$2 T_{sw}$,$3 T_{sw} $},
+        enlarge y limits={0.2},
+        title={$D=10\%$},
+        legend style={
+                legend columns = -1,
+                at={(0.5,0.95)},
+                anchor=south,
+                draw=none,
+                font=\tiny,
+                column sep=1ex},
+        ]
+
+\addplot [semithick,mark=square,only marks,black]
+  table [y=y1]{./3_modeling/rx_sw_fsw_O1.dat};\label{pl_PLECS}
+
+\addplot [semithick,smooth,black]
+  table [y=y1]{./3_modeling/rm1_sw_fsw_O1.dat};\label{pl_MDL}
+  \addlegendentry{}
+
+\addplot [semithick,smooth,black!66]
+  table [y=y1]{./3_modeling/rm2_sw_fsw_O1.dat};
+
+\addplot [semithick,smooth,black!33]
+  table [y=y1]{./3_modeling/rm3_sw_fsw_O1.dat};
+
+\end{loglogaxis}
+
+\begin{semilogxaxis}[%
+    axis y line*=right,
+    axis x line=none,
+    %ylabel = {$\epsilon_r~[\%]$},
+    yticklabel pos=right,
+    yticklabel style={text width=2em,align=left},
+    enlarge y limits={0.15},
+    legend style={
+                    legend columns = -1,
+                    at={(0.5,0.95)},
+                    anchor=south,
+                    draw=none,
+                    font=\tiny,
+                    column sep=1ex},
+    ]
+
+\addlegendimage{/pgfplots/refstyle=pl_PLECS}\addlegendentry{PLECS}
+\addlegendimage{/pgfplots/refstyle=pl_MDL}\addlegendentry{Model}
+
+\addplot [semithick,mark=star,only marks,black]
+  table [y=y1]{./3_modeling/err1_sw_fsw_O1.dat};
+  \addlegendentry{ $\epsilon_r$}
+
+\addplot [semithick,mark=star,only marks,black!66]
+  table [y=y1]{./3_modeling/err2_sw_fsw_O1.dat};
+  
+\addplot [semithick,mark=star,only marks,black!33]
+  table [y=y1]{./3_modeling/err3_sw_fsw_O1.dat};
+  
+
+\end{semilogxaxis}
+
+\end{tikzpicture}

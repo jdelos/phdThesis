@@ -31,11 +31,15 @@
     ]
 
     \addplot [semithick,mark=square,only marks]
-      table {./3_modeling/sim_rx_100kHz_O1.dat};\label{pl_PLECS}
+      table[y=y1] {./3_modeling/rx_sw_dx_O1.dat};\label{pl_PLECS}
+    \addplot [semithick,smooth,black]
+      table [y=y1] {./3_modeling/rm1_sw_dx_O1.dat};\label{pl_MDL}
+    \addplot [semithick,smooth,black!66]
+      table [y=y1] {./3_modeling/rm2_sw_dx_O1.dat};
+    \addplot [semithick,smooth,black!33]
+      table [y=y1] {./3_modeling/rm3_sw_dx_O1.dat};
 
 
-    \addplot [semithick]
-      table {./3_modeling/mdl_rx_100kHz_O1.dat};\label{pl_MDL}
 
 \end{axis}
 
@@ -48,9 +52,20 @@
     ]
     \addlegendimage{/pgfplots/refstyle=pl_PLECS}\addlegendentry{PLECS}
     \addlegendimage{/pgfplots/refstyle=pl_MDL}\addlegendentry{Model}
-    \addplot [semithick,mark=star,only marks]
-      table {./3_modeling/error_rx_100kHz_O1.dat};
+    
+    \addplot [semithick,mark=star,only marks,black]
+      table [y=y1] {./3_modeling/err1_sw_dx_O1.dat};
       \addlegendentry{ Rel. Error $(\epsilon_r)$}
+      
+    \addplot [semithick,mark=star,only marks,black!66]
+      table [y=y1] {./3_modeling/err2_sw_dx_O1.dat};
+    
+    \addplot [semithick,mark=star,only marks,black!33]
+      table [y=y1] {./3_modeling/err3_sw_dx_O1.dat};
+    
+    
+      
+      
 \end{axis}
 \end{tikzpicture}
 

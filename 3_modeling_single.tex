@@ -1,4 +1,3 @@
-\chapter[Modeling of H-SCC]{Modeling of Hybrid Switched Capacitor Converters}
 
 Switch capacitor converters are circuits composed by a large number of switches and capacitors, and require accurate models to properly design them. SCCs have the peculiarity to be lossy by nature due to the non adiabatic energy transfer between capacitors, phenomenon not present in the inductor based converters. Generally, the modeling of SCCs focuses just on the description of the loss mechanisms associated to conduction and capacitor charge transfer, neglecting other sources of loss such as driving and switching loss. These loss mechanisms are proportional to the output current, thus they are normally modeled with resistor in the well known output impedance model.
 
@@ -790,7 +789,7 @@ where $a_{in}$  corresponds to the input voltage source term of the charge vecto
 \caption{}
 \label{fig:3_1_hscc_exp_b}
 \end{subfigure}
-\caption{ 3:1 Dickson used for the experimental results, \emph{left}- output taken from a \emph{pwm}-node; \emph{right}- output taken from a \emph{dc}-node.}
+\caption{Experiment 3:1 Dickson used for the experimental results, \emph{left}- output taken from a \emph{pwm}-node; \emph{right}- output taken from a \emph{dc}-node.}
 \label{fig:3_1_hscc_exp}
 \end{figure}
 
@@ -834,7 +833,7 @@ The model was validated using a 3:1 Dickson converter for the two different scen
         \label{fig:exp_rscc_pwm_node_100MHz}
     \end{subfigure}
 
-\caption{Two possible voltage waveforms that show the capacitors in a SCC. Ripples are associated with the charge flow mechanisms: top) unipolar capacitor discharge (DC capacitor); bottom) bipolar capacitor discharge (flying capacitor).}
+\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a}. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different switching frequencies ($f_{sw}$): \emph{top to bottom}- $100kHz$, $1MHz$, $10MHz$ and $100MHz$.Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:an_apprx}): \emph{Black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }
 \label{fig:exp_rscc_pwm_node}
 \end{figure}
 
@@ -877,50 +876,73 @@ The model was validated using a 3:1 Dickson converter for the two different scen
         \label{fig:exp_rscc_dc_node_100MHz}
     \end{subfigure}
 
-\caption{Two possible voltage waveforms that show the capacitors in a SCC. Ripples are associated with the charge flow mechanisms: top) unipolar capacitor discharge (DC capacitor); bottom) bipolar capacitor discharge (flying capacitor).}
-\label{fig:exp_rscc_pwm_node}
+\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b} plotted as function of the duty cycle. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different switching frequencies ($f_{sw}$): \emph{top to bottom}- $100kHz$, $1MHz$, $10MHz$ and $100MHz$.Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:an_apprx}): \emph{Black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }
+\label{fig:exp_rscc_dc_node}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
-    \begin{subfigure}{\textwidth}
-        \parbox[c]{.03\linewidth}{\subcaption{}}
-        \hspace{.02\linewidth}
-        \parbox[c]{.95\linewidth}{
-        \centering
-        \input{./3_modeling/rscc_pwm_fsw_sweep_01.tex}}
-        \label{fig:exp_rscc_dc_node_100kHz}
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_11.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_12.tex}
     \end{subfigure}
 
-%    \begin{subfigure}{\textwidth}
-%        \parbox[c]{.03\linewidth}{\subcaption{}}
-%        \hspace{.02\linewidth}
-%        \parbox[c]{.95\linewidth}{
-%        \centering
-%        \input{./3_modeling/rscc_dc_node_1MHz.tex}}
-%        \label{fig:exp_rscc_dc_node_1MHz}
-%    \end{subfigure}
-%
-%    \begin{subfigure}{\textwidth}
-%        \parbox[c]{.03\linewidth}{\subcaption{}}
-%        \hspace{.02\linewidth}
-%        \parbox[c]{.95\linewidth}{
-%        \centering
-%        \input{./3_modeling/rscc_dc_node_10MHz.tex}}
-%        \label{fig:exp_rscc_dc_node_10MHz}
-%    \end{subfigure}
-%
-%    \begin{subfigure}{\textwidth}
-%        \parbox[c]{.03\linewidth}{\subcaption{}}
-%        \hspace{.02\linewidth}
-%        \parbox[c]{.95\linewidth}{
-%        \centering
-%        \input{./3_modeling/rscc_dc_node_100MHz.tex}}
-%        \label{fig:exp_rscc_dc_node_100MHz}
-%    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_21.tex}
+        %}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_22.tex}
+    \end{subfigure}
 
-\caption{Two possible voltage waveforms that show the capacitors in a SCC. Ripples are associated with the charge flow mechanisms: top) unipolar capacitor discharge (DC capacitor); bottom) bipolar capacitor discharge (flying capacitor).}
+        \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_31.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_32.tex}
+    \end{subfigure}
+
+\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a} as function of the switching frequency ($f_{sw}$). \emph{Plots 1-5 top-to-bottom}-  Experimental points ($\Box$ ) compared with the model (\emph{solid line}) and the absolute relative error ($star$)  at different duty cycles ($D$): - $10\%$, $23\%$, $50\%$, $63\%$ and $90\%$. \emph{Bottom-right}- Parametric plot with all the curves. Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:an_apprx}): \emph{Black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }\label{fig:exp_rscc_pwm_node_fsw}
+\end{figure}
+
+
+\begin{landscape}
+\thispagestyle{empty}
+\begin{figure}[!h]
+\centering
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_11.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_12.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_21.tex}
+        %}
+    \end{subfigure}
+    
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_22.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+       \input{./3_modeling/rscc_pwm_fsw_sweep_31.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \input{./3_modeling/rscc_pwm_fsw_sweep_32.tex}
+    \end{subfigure}
+    
+\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a} as function of the switching frequency ($f_{sw}$). \emph{plots 1-5 top-to-bottom}-  Experimental points ($\Box$ ) compared with the model (\emph{solid line}) and the absolute relative error ($star$)  at different duty cycles ($D$): - $10\%$, $23\%$, $50\%$, $63\%$ and $90\%$. \emph{bottom-right}- Parametric plot with all the curves.   }
 \label{fig:exp_rscc_pwm_node}
 \end{figure}
+\end{landscape}
 
 
