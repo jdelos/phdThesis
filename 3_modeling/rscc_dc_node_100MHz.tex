@@ -1,0 +1,50 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\begin{tikzpicture}
+\pgfplotsset{
+    width=9cm,
+    height=2.5cm,
+    scale only axis,
+    ylabel near ticks,
+    enlarge y limits={0.2},
+    xlabel near ticks,
+    ylabel near ticks,
+}
+\begin{axis}[%
+axis x line*=bottom,
+axis y line*=left,
+xlabel= {duty cycle},
+ylabel= {$r_{scc}~[\Omega]$},
+yticklabel style={text width=2em,align=right},
+]
+
+\addplot [semithick,mark=square,only marks,forget plot]
+  table {./3_modeling/sim_rx_100MHz_O2.dat};
+
+\addplot [semithick,solid,forget plot]
+  table {./3_modeling/mdl_rx_100MHz_O2.dat};
+
+%\addplot [semithick,dashed,forget plot]
+%  table {./3_modeling/mdl_see_rx_100MHz_O1.dat};
+
+\end{axis}
+
+\begin{axis}[%
+axis y line*=right,
+axis x line=none,
+ylabel = {$\epsilon_r~[\%]$},
+yticklabel pos=right,
+yticklabel style={text width=2em,align=left},
+]
+
+\addplot [semithick,mark=star,only marks,forget plot]
+  table {./3_modeling/error_rx_100MHz_O2.dat};
+
+
+\end{axis}
+\end{tikzpicture}

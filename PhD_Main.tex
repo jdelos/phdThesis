@@ -9,6 +9,9 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 
+%Appendix
+\usepackage[titletoc]{appendix}
+
 \usepackage{epstopdf}
 \usepackage{xfrac}
 \usepackage{float}
@@ -33,6 +36,7 @@
 \usepackage{tablefootnote}
 
 %Ploting packages
+\usepackage{xcolor} 
 \usepackage{tikz}
 \def\radius{.25}
 \tikzstyle{vs}=[shift={(0,\radius)}]
@@ -168,7 +172,9 @@
 
 \include{2_hscc}
 
-\include{3_modeling}
+\include{3_modeling_single}
+
+\include{3_modeling_multiple}
 
 \include{4_optimitzation}
 
@@ -189,6 +195,16 @@
 
 %\bibliographystyle{plain}
 %\bibliography{phd_bib}
+
+\begin{appendices}
+\appendixpage
+\noappendicestocpagenum
+\addappheadtotoc
+
+\include{3_apdx_mdlg}
+\end{appendices}
+
+
 
 \end{document}
 

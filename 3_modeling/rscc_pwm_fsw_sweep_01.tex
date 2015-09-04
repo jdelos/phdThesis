@@ -1,0 +1,59 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\begin{tikzpicture}
+\pgfplotsset{
+    width=7cm,
+    height=5cm,
+    scale only axis,
+    ylabel near ticks,
+    enlarge y limits={0.2},
+    xlabel near ticks,
+    ylabel near ticks,
+}
+\begin{loglogaxis}[
+        xlabel= {switching frequency $[Hz] $},
+        ylabel= {$ [\Omega] $} ,
+        axis y line*=left,
+        axis x line*=bottom,
+        %xtick=\empty, ytick=\empty,
+        %ytick = {0,.125,.25},
+        %yticklabels={0,$v_{src}\frac{1}{3}$,$v_{src}\frac{2}{3}$,$v_{src}$},
+        %xticklabels={0,$D \cdot T_{sw}$,$T_{sw}$ ,$2 T_{sw}$,$3 T_{sw} $},
+        enlarge x limits={0.25},
+        enlarge y limits={0.25}
+        ]
+
+\addplot [semithick,mark=triangle,only marks,black]
+  table [y=y1]{./3_modeling/r_scc_O1.dat};
+\addplot [semithick,smooth,black]
+  table [y=y1]{./3_modeling/r_x_mdl_O1.dat};
+
+\addplot [semithick,mark=o,only marks,black!75]
+  table [y=y3]{./3_modeling/r_scc_O1.dat};
+\addplot [semithick,smooth,black!75]
+  table [y=y3]{./3_modeling/r_x_mdl_O1.dat};
+
+\addplot [semithick,mark=square,only marks]
+  table [y=y4]{./3_modeling/r_scc_O1.dat};
+\addplot [semithick,smooth]
+  table [y=y4]{./3_modeling/r_x_mdl_O1.dat};
+%
+%\addplot [semithick,mark=star,only marks]
+%  table [y=y5]{./3_modeling/r_scc_O1.dat};
+%\addplot [semithick,smooth]
+%  table [y=y5]{./3_modeling/r_x_mdl_O1.dat};
+%
+%\addplot [semithick,mark=diamond,only marks]
+%  table[y=y7] {./3_modeling/r_scc_O1.dat};
+%\addplot [semithick,smooth]
+%  table [y=y7]{./3_modeling/r_x_mdl_O1.dat};
+
+
+\end{loglogaxis}
+
+\end{tikzpicture}
