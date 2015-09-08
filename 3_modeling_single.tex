@@ -655,6 +655,7 @@ where $r_i$ is the resistance value of the $i$-th resistive element.
 
 
 \subsubsection{Equivalent Switched Capacitor Converter Resistance}
+\label{ch:rscc_apprx}
 With the goal of obtaining a simple design equation, an analytical approximation of $r_{scc}$ suggested in~\cite{1998Arntzen,1999Maksimovic}, is given by
 \begin{equation}
 r_{scc} \approx \sqrt{{r_{ssl}}^2+{r_{fsl}}^2},
@@ -740,6 +741,7 @@ where $a_{in}$  corresponds to the input voltage source term of the charge vecto
 \caption{}
 \label{fig:3_1_hscc_exp_a}
 \end{subfigure}
+\hfill
 \hfill
 \begin{subfigure}[t]{0.45\textwidth}
     \centering
@@ -833,7 +835,7 @@ The model was validated using a 3:1 Dickson converter for the two different scen
         \label{fig:exp_rscc_pwm_node_100MHz}
     \end{subfigure}
 
-\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a}. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different switching frequencies ($f_{sw}$): \emph{top to bottom}- $100kHz$, $1MHz$, $10MHz$ and $100MHz$.Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:an_apprx}): \emph{Black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }
+\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a}. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different switching frequencies ($f_{sw}$): $100kHz$ (\emph{a}) , $1MHz$ (\emph{b}), $10MHz$ (\emph{c}) and $100MHz$ (\emph{d}). Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:rscc_apprx}): \emph{black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }
 \label{fig:exp_rscc_pwm_node}
 \end{figure}
 
@@ -876,7 +878,7 @@ The model was validated using a 3:1 Dickson converter for the two different scen
         \label{fig:exp_rscc_dc_node_100MHz}
     \end{subfigure}
 
-\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b} plotted as function of the duty cycle. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different switching frequencies ($f_{sw}$): \emph{top to bottom}- $100kHz$, $1MHz$, $10MHz$ and $100MHz$.Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:an_apprx}): \emph{Black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }
+\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b}. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different switching frequencies ($f_{sw}$): $100kHz$ (\emph{a}) , $1MHz$ (\emph{b}), $10MHz$ (\emph{c}) and $100MHz$ (\emph{d}). Plots are obtained using the presented model using  the different analytical $r_{scc}$ approximations (see~\ref{ch:rscc_apprx}): \emph{black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$, and using the original charge flow analysis (\emph{dashed line}).}
 \label{fig:exp_rscc_dc_node}
 \end{figure}
 
@@ -910,39 +912,68 @@ The model was validated using a 3:1 Dickson converter for the two different scen
 \caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a} as function of the switching frequency ($f_{sw}$). \emph{Plots 1-5 top-to-bottom}-  Experimental points ($\Box$ ) compared with the model (\emph{solid line}) and the absolute relative error ($star$)  at different duty cycles ($D$): - $10\%$, $23\%$, $50\%$, $63\%$ and $90\%$. \emph{Bottom-right}- Parametric plot with all the curves. Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:an_apprx}): \emph{Black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }\label{fig:exp_rscc_pwm_node_fsw}
 \end{figure}
 
-
 \begin{landscape}
+\newcommand\pHeigh{3.25cm}
+\newcommand\pWidth{4cm}
+
 \thispagestyle{empty}
 \begin{figure}[!h]
 \centering
     \begin{subfigure}{0.45\textwidth}
-        \input{./3_modeling/rscc_pwm_fsw_sweep_11.tex}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_11.tex}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.45\textwidth}
-        \input{./3_modeling/rscc_pwm_fsw_sweep_12.tex}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_12.tex}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.45\textwidth}
-        \input{./3_modeling/rscc_pwm_fsw_sweep_21.tex}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_13.tex}
         %}
     \end{subfigure}
-    
+
     \begin{subfigure}{0.45\textwidth}
-        \input{./3_modeling/rscc_pwm_fsw_sweep_22.tex}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_21.tex}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.45\textwidth}
-       \input{./3_modeling/rscc_pwm_fsw_sweep_31.tex}
+        \centering
+       \input{./3_modeling/rscc_dc_fsw_sw_22.tex}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.45\textwidth}
-        \input{./3_modeling/rscc_pwm_fsw_sweep_32.tex}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_23.tex}
     \end{subfigure}
-    
-\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a} as function of the switching frequency ($f_{sw}$). \emph{plots 1-5 top-to-bottom}-  Experimental points ($\Box$ ) compared with the model (\emph{solid line}) and the absolute relative error ($star$)  at different duty cycles ($D$): - $10\%$, $23\%$, $50\%$, $63\%$ and $90\%$. \emph{bottom-right}- Parametric plot with all the curves.   }
-\label{fig:exp_rscc_pwm_node}
+
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_31.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+       \input{./3_modeling/rscc_dc_fsw_sw_32.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_33.tex}
+    \end{subfigure}
+
+\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b} as function of the switching frequency ($f_{sw}$). \emph{Left axis} - Experimental points ($\Box$) compared with this work model (\emph{solid black line}) and M. Seeman's model (\emph{solid grey line}). \emph{Right axis} - Relative error between PLECS results and this work model (\emph{black stars}) and Seeman's model (\emph{grey stars}). Plots are presented for different duty cycles: \emph{top-to-bottom}- $D = 23.3\%$, $D = 50\%$ and $D = 76.7\%$; and for different output capacitor ($c_3$) values: \emph{left-to-right}- $c_3 = c_{fly} = 100nF$, $c_2 = 10~c_{fly} = 1\mu F$ and $c_3 = 100~c_{cfly} = 100\mu F$.}
+\label{fig:exp_rscc_dc_node}
 \end{figure}
 \end{landscape}
 
-
+\begin{figure}[!h]
+\newcommand\pHeigh{5cm}
+\newcommand\pWidth{7cm}
+\centering
+     \input{./3_modeling/rscc_dc_cout_sweep.tex}
+     \caption{Equivalent Output Resistance ($r_{scc}$) as function of the relative size of the output capacitor (\emph{dc}-capacitor) with respect to the flying capacitors for the 3:1 Dickson converter of Figure~\ref{fig:3_1_hscc_exp_b}. Results presented for the converter operating at $f_{sw}=100kHz$ with capacitors $c_1=c_2=c_{fly}=100nF$ and all switch resistances $r_{on} = 100m\Omega$.}\label{fig:exp_rscc_pwm_node_fsw}
+\end{figure}

@@ -14,30 +14,38 @@
     ylabel near ticks,
     enlarge y limits={0.2},
     legend style={
-                legend columns = -1,
+                legend columns = 3,
                 at={(0.5,1.075)},
                 anchor=south,
                 draw=none,
                 font=\small,
-                column sep=2ex},
+                column sep=2ex,
+                legend cell align=left},
 }
 
 \begin{axis}[%
     axis x line*=bottom,
     axis y line*=left,
-    xlabel= {duty cycle},
+    %xlabel= {duty cycle},
     ylabel= {$r_{scc}~[\Omega]$},
     yticklabel style={text width=2em,align=right},
     ]
+    
+    \addplot [semithick,mark=square,only marks,white]
+      table[y=y1] {./3_modeling/rx_sw_dx_O1.dat};\label{pl_PLECS_hidden}
 
     \addplot [semithick,mark=square,only marks]
       table[y=y1] {./3_modeling/rx_sw_dx_O1.dat};\label{pl_PLECS}
-    \addplot [semithick,smooth,black]
-      table [y=y1] {./3_modeling/rm1_sw_dx_O1.dat};\label{pl_MDL}
-    \addplot [semithick,smooth,black!66]
-      table [y=y1] {./3_modeling/rm2_sw_dx_O1.dat};
-    \addplot [semithick,smooth,black!33]
-      table [y=y1] {./3_modeling/rm3_sw_dx_O1.dat};
+
+
+    \addplot [semithick,smooth,mark=o,mark repeat=10]
+      table [y=y1] {./3_modeling/rm1_sw_dx_O1.dat};\label{pl_MDL_JD}
+
+    \addplot [semithick,smooth,mark=+,mark repeat=10]%black!66]
+      table [y=y1] {./3_modeling/rm2_sw_dx_O1.dat};\label{pl_Makw}
+
+    \addplot [semithick,smooth,mark=x,mark repeat=10]%black!33]
+      table [y=y1] {./3_modeling/rm3_sw_dx_O1.dat};\label{pl_Makw rec}
 
 
 
@@ -51,21 +59,25 @@
     yticklabel style={text width=2em,align=left},
     ]
     \addlegendimage{/pgfplots/refstyle=pl_PLECS}\addlegendentry{PLECS}
-    \addlegendimage{/pgfplots/refstyle=pl_MDL}\addlegendentry{Model}
-    
-    \addplot [semithick,mark=star,only marks,black]
+    \addlegendimage{/pgfplots/refstyle=pl_MDL_JD}\addlegendentry{This Work}
+
+    \addplot [semithick,mark=o,only marks,black!60]
       table [y=y1] {./3_modeling/err1_sw_dx_O1.dat};
-      \addlegendentry{ Rel. Error $(\epsilon_r)$}
-      
-    \addplot [semithick,mark=star,only marks,black!66]
+    \addlegendentry{ $\epsilon_r$ (Rel. Error)}
+
+
+    \addlegendimage{/pgfplots/refstyle=pl_PLECS_hidden}\addlegendentry{\color{white}PLECS}
+    \addlegendimage{/pgfplots/refstyle=pl_Makw}\addlegendentry{Makowski}
+    \addplot [semithick,mark=+,only marks,black!60]
       table [y=y1] {./3_modeling/err2_sw_dx_O1.dat};
-    
-    \addplot [semithick,mark=star,only marks,black!33]
+    \addlegendentry{$\epsilon_r$ \color{white}(Rel. Error) }
+
+    \addlegendimage{/pgfplots/refstyle=pl_PLECS_hidden}\addlegendentry{\color{white}PLECS}
+    \addlegendimage{/pgfplots/refstyle=pl_Makw rec}\addlegendentry{Mak. rect.}
+    \addplot [semithick,mark=x,only marks,black!60]
       table [y=y1] {./3_modeling/err3_sw_dx_O1.dat};
-    
-    
-      
-      
+    \addlegendentry{$\epsilon_r$ \color{white}(Rel. Error)}
+
 \end{axis}
 \end{tikzpicture}
 

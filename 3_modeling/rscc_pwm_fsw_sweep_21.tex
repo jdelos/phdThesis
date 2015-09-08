@@ -32,11 +32,11 @@
 
 \addplot [semithick,mark=square,only marks,black]
   table [y=y4]{./3_modeling/rx_sw_fsw_O1.dat};
-\addplot [semithick,smooth,black]
+\addplot [semithick,smooth,black,mark=o]
   table [y=y4]{./3_modeling/rm1_sw_fsw_O1.dat};
-\addplot [semithick,smooth,black!66]
+\addplot [semithick,smooth,black,mark=+]
   table [y=y4]{./3_modeling/rm2_sw_fsw_O1.dat};
-\addplot [semithick,smooth,black!33]
+\addplot [semithick,smooth,black,mark=x]
   table [y=y4]{./3_modeling/rm3_sw_fsw_O1.dat};
 
 
@@ -51,14 +51,14 @@ yticklabel style={text width=2em,align=left},
 enlarge y limits={0.15}
 ]
 
-\addplot [semithick,mark=star,only marks,black]
+\addplot [semithick,mark=o,only marks,black!60]
   table [y=y4]{./3_modeling/err1_sw_fsw_O1.dat};
-  
-\addplot [semithick,mark=star,only marks,black!66]
-  table [y=y1]{./3_modeling/err2_sw_fsw_O1.dat};
 
-\addplot [semithick,mark=star,only marks,black!33]
-  table [y=y1]{./3_modeling/err3_sw_fsw_O1.dat};
+\addplot [semithick,mark=+,only marks,black!60]
+  table [y=y4]{./3_modeling/err2_sw_fsw_O1.dat};
+
+\addplot [semithick,mark=x,only marks,black!60]
+  table [y=y4]{./3_modeling/err3_sw_fsw_O1.dat};
 
 \end{semilogxaxis}
 

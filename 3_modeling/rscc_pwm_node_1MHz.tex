@@ -18,19 +18,20 @@
 \begin{axis}[%
 axis x line*=bottom,
 axis y line*=left,
-xlabel= {duty cycle},
+%xlabel= {duty cycle},
 ylabel= {$r_{scc}~[\Omega]$},
 yticklabel style={text width=2em,align=right}
 ]
 
     \addplot [semithick,mark=square,only marks]
       table[y=y4] {./3_modeling/rx_sw_dx_O1.dat};\label{pl_PLECS}
-    \addplot [semithick,smooth,black]
-      table [y=y2] {./3_modeling/rm1_sw_dx_O1.dat};\label{pl_MDL}
-    \addplot [semithick,smooth,black!66]
-      table [y=y2] {./3_modeling/rm2_sw_dx_O1.dat};
-    \addplot [semithick,smooth,black!33]
-      table [y=y2] {./3_modeling/rm3_sw_dx_O1.dat};
+    \addplot [semithick,smooth,mark=o,mark repeat=10]
+      table [y=y2] {./3_modeling/rm1_sw_dx_O1.dat};\label{pl_MDL_JD}
+    \addplot [semithick,smooth,mark=+,mark repeat=10]%black!66]
+      table [y=y2] {./3_modeling/rm2_sw_dx_O1.dat};\label{pl_Makw}
+    \addplot [semithick,smooth,mark=x,mark repeat=10]%black!33]
+      table [y=y2] {./3_modeling/rm3_sw_dx_O1.dat};\label{pl_Makw rec}
+
 
 \end{axis}
 
@@ -42,13 +43,11 @@ yticklabel style={text width=2em,align=right}
     yticklabel style={text width=2em,align=left},
     ]
 
-    \addplot [semithick,mark=star,only marks,black]
+    \addplot [semithick,mark=o,only marks,black!60]
     table [y=y4] {./3_modeling/err1_sw_dx_O1.dat};
-          
-    \addplot [semithick,mark=star,only marks,black!66]
+    \addplot [semithick,mark=+,only marks,black!60]
     table [y=y4] {./3_modeling/err2_sw_dx_O1.dat};
-
-    \addplot [semithick,mark=star,only marks,black!33]
+    \addplot [semithick,mark=x,only marks,black!60]
     table [y=y4] {./3_modeling/err3_sw_dx_O1.dat};
 
 \end{axis}

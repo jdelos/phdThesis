@@ -1,0 +1,85 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\begin{tikzpicture}
+\pgfplotsset{
+    width=\pWidth,
+    height=\pHeigh,
+    scale only axis,
+    ylabel near ticks,
+    enlarge y limits={0.2},
+    xlabel near ticks,
+    ylabel near ticks,
+    enlarge x limits={0.15},
+%    domain=1e6:1e8,
+%    xmin=1e6,
+%    xmax=1e8,
+}
+\begin{loglogaxis}[
+        %xlabel= {$f_{sw}[Hz] $},
+        xticklabels={,,},
+        ylabel= {$ r_{scc} ~ [\Omega] $} ,
+        axis y line*=left,
+        axis x line*=bottom,
+        ytick = {1e1,1},
+        %xtick=\empty, ytick=\empty,
+        %ytick = {0,.125,.25},
+        %yticklabels={0,$v_{src}\frac{1}{3}$,$v_{src}\frac{2}{3}$,$v_{src}$},
+        %xticklabels={0,$D \cdot T_{sw}$,$T_{sw}$ ,$2 T_{sw}$,$3 T_{sw} $},
+        enlarge y limits={0.1},
+        domain=10e6:10e8,
+        %title={$c_o= c_{fly}$},,
+        legend style={
+                legend columns = -1,
+                at={(0.5,0.95)},
+                anchor=south,
+                draw=none,
+                font=\tiny,
+                column sep=1ex},
+        ]
+
+    \addplot [thin,mark=square,only marks,black]
+      table [y=y2]{./3_modeling/rx_sw_fsw_1Co.dat};
+    \addplot [thin,smooth,black,mark=o,mark repeat=2]
+      table [y=y2]{./3_modeling/rx_JD_sw_fsw_1Co.dat};\label{pl_MDL}
+    %\addlegendentry{Model};
+    \addplot [thin,smooth,mark=+,mark repeat=2]
+      table [y=y2]{./3_modeling/rx_MS_sw_fsw_1Co.dat};
+    %\addlegendentry{Seeman};
+    \addplot [thin,smooth,mark=x,mark repeat=2]
+      table [y=y2]{./3_modeling/rx_ST_sw_fsw_1Co.dat};
+    %\addlegendentry{Steyaert};
+
+
+\end{loglogaxis}
+
+\begin{semilogxaxis}[%
+    axis y line*=right,
+    axis x line=none,
+    %ylabel = {$\epsilon_r~[\%]$},
+    yticklabel pos=right,
+    yticklabel style={text width=2em,align=left},
+    enlarge y limits={0.25},
+    legend style={
+                    legend columns = -1,
+                    at={(0.5,0.95)},
+                    anchor=south,
+                    draw=none,
+                    font=\tiny,
+                    column sep=1ex},
+    ]
+
+
+    \addplot [semithick,mark=o,only marks,black!60]
+      table [y=y2]{./3_modeling/err_JD_sw_fsw_1Co.dat};
+    \addplot [semithick,mark=+,only marks,black!50]
+      table [y=y2]{./3_modeling/err_MS_sw_fsw_1Co.dat};
+    \addplot [semithick,mark=x,only marks,black!50]
+      table [y=y2]{./3_modeling/err_ST_sw_fsw_1Co.dat};
+
+\end{semilogxaxis}
+\end{tikzpicture}

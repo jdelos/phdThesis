@@ -28,27 +28,24 @@
         %xticklabels={0,$D \cdot T_{sw}$,$T_{sw}$ ,$2 T_{sw}$,$3 T_{sw} $},
         enlarge y limits={0.2},
         title={$D=10\%$},
-        legend style={
-                legend columns = -1,
-                at={(0.5,0.95)},
-                anchor=south,
-                draw=none,
-                font=\tiny,
-                column sep=1ex},
+        title style = {
+            at= {(0.5,1.25)}},
         ]
+
+\addplot [semithick,mark=square,only marks,white]
+  table [y=y1]{./3_modeling/rx_sw_fsw_O1.dat};\label{pl_PLECS_hd}
 
 \addplot [semithick,mark=square,only marks,black]
   table [y=y1]{./3_modeling/rx_sw_fsw_O1.dat};\label{pl_PLECS}
 
-\addplot [semithick,smooth,black]
+\addplot [semithick,smooth,black,mark=o]
   table [y=y1]{./3_modeling/rm1_sw_fsw_O1.dat};\label{pl_MDL}
-  \addlegendentry{}
 
-\addplot [semithick,smooth,black!66]
-  table [y=y1]{./3_modeling/rm2_sw_fsw_O1.dat};
+\addplot [semithick,smooth,black,mark=+]
+  table [y=y1]{./3_modeling/rm2_sw_fsw_O1.dat};\label{pl_Makow}
 
-\addplot [semithick,smooth,black!33]
-  table [y=y1]{./3_modeling/rm3_sw_fsw_O1.dat};
+\addplot [semithick,smooth,black,mark=x]
+  table [y=y1]{./3_modeling/rm3_sw_fsw_O1.dat};\label{pl_Makow_II}
 
 \end{loglogaxis}
 
@@ -60,27 +57,34 @@
     yticklabel style={text width=2em,align=left},
     enlarge y limits={0.15},
     legend style={
-                    legend columns = -1,
+                    legend columns = 3,
                     at={(0.5,0.95)},
                     anchor=south,
                     draw=none,
                     font=\tiny,
-                    column sep=1ex},
+                    column sep=0.5ex,
+                    legend cell align=left},
     ]
 
 \addlegendimage{/pgfplots/refstyle=pl_PLECS}\addlegendentry{PLECS}
-\addlegendimage{/pgfplots/refstyle=pl_MDL}\addlegendentry{Model}
-
-\addplot [semithick,mark=star,only marks,black]
+\addlegendimage{/pgfplots/refstyle=pl_MDL}\addlegendentry{This work}
+\addplot [semithick,mark=o,only marks,black!60]
   table [y=y1]{./3_modeling/err1_sw_fsw_O1.dat};
   \addlegendentry{ $\epsilon_r$}
-
-\addplot [semithick,mark=star,only marks,black!66]
+  
+\addlegendimage{/pgfplots/refstyle=pl_PLECS_hd}\addlegendentry{\color{white}PLECS}
+\addlegendimage{/pgfplots/refstyle=pl_Makow}\addlegendentry{Mak.}  
+\addplot [semithick,mark=+,only marks,black!60]
   table [y=y1]{./3_modeling/err2_sw_fsw_O1.dat};
-  
-\addplot [semithick,mark=star,only marks,black!33]
+   \addlegendentry{ $\epsilon_r$}
+   
+   
+\addlegendimage{/pgfplots/refstyle=pl_PLECS_hd}\addlegendentry{\color{white}PLECS}
+\addlegendimage{/pgfplots/refstyle=pl_Makow_II}\addlegendentry{Mak. Rect.}  
+\addplot [semithick,mark=x,only marks,black!60]
   table [y=y1]{./3_modeling/err3_sw_fsw_O1.dat};
-  
+\addlegendentry{ $\epsilon_r$}
+
 
 \end{semilogxaxis}
 
