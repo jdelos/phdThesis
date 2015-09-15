@@ -1,3 +1,4 @@
+\part{Hybrid Switched Capacitor LED driver}
 \chapter{Hybrid Switched Capacitor Converter}
 \label{ch:H-SCC}
 Driving high power LEDs using a switched capacitor converter challenges the operation of these converters. The SCC provides good performance in voltage-to-voltage conversion, but it can not directly provide regulated current. In low power applications, that is solved by using a linear regulator in series with the LED string, however that is not a valid solution for general lighting where high power and high current are needed. Combining switched capacitors with inductors can provide efficient converters for LED lighting, where the use of inductors provide a tight and efficient regulation, and the use of a switched capacitor allows to reduce the voltage stress in the components, in turn reducing switching losses and the volume of the inductor.
@@ -283,6 +284,7 @@ Indirectly, there is always the possibility to regulate the output voltage by me
  Like a linear regulator,  the efficiency of the converter can be written as function of $v_{src}$ and $v_o$ as
 \begin{equation}
 \eta = \frac{P_o}{P_i} = \frac{v_o \cdot i_o}{m \cdot v_{src} \cdot i_o} = \frac{v_o}{m \cdot v_{src}}.
+\label{eq:eff_vo}
 \end{equation}
 
 Figure~\ref{fig:eff_crv_linear_vs_scc_linear} plots the theoretical maximum efficiency with respect of the effective conversion ratio of the power converter  $m_e = v_o/v_{src}$. Comparing the characteristics of a single linear regulator and a linear regulated 2:1 SCC shows that for conversion ratios below $1/2$ the SCC converter has better efficiency, however above $1/2$ the SCC is not longer operative.

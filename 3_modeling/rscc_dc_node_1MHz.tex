@@ -25,7 +25,7 @@ yticklabel style={text width=2em,align=right}
 
     \addplot [semithick,mark=square,only marks]
       table[y=y4] {./3_modeling/rx_sw_dx_O2.dat};\label{pl_PLECS}
-    
+
     \addplot [semithick,smooth,mark=o,mark repeat=10]
       table [y=y2] {./3_modeling/rm1_sw_dx_O2.dat};\label{pl_MDL_JD}
 
@@ -35,8 +35,12 @@ yticklabel style={text width=2em,align=right}
     \addplot [semithick,smooth,mark=x,mark repeat=10]%black!33]
       table [y=y2] {./3_modeling/rm3_sw_dx_O2.dat};\label{pl_Makw rec}
 
-    \addplot [semithick,smooth,dashed,black!50]
+    \addplot [semithick,smooth,dashed,black!75]
       table [y=y2] {./3_modeling/rm1_ms_sw_dx_O2.dat};\label{pl_MS}
+      
+    \addplot [semithick,smooth,dotted,black!75]
+      table [y=y2] {./3_modeling/rx_ST_sw_dx_1Co.dat};\label{pl:Stey}
+
 
 \end{axis}
 

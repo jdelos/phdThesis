@@ -132,6 +132,10 @@ node[anchor=north] {$3T$}; % \draw (0,0) node[anchor=north east]
 %               CHAPTER 4: MODELING                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%Intro
+
+that arise with the proposed hybrid converter. First, any of the nodes of the converter are considered as possible outputs that can be loaded. Second, the analysis includes the effects of duty cycle modulation (PWM) in any of the operation regimes of the converter, which indeed affects the converter's conversion ratio and the produced losses.
+
 %Define the two vertical regions SSL & FSL
   \vasymptote[draw=none]{1e5}{ssl};
   \vasymptote[draw=none]{1e6}{fsl};
@@ -202,4 +206,61 @@ As mentioned before, one part of the delta voltage $\Delta vp_i^j$ is due to the
 
 The voltage variation due to the charge \emph{redistribution} $\Delta vr$  is obtained by substituting~\ref{eq:net_voltage} and~\ref{eq:pumped_voltage} into~\ref{eq:rdst_ripple_I}, and this yields
 
+
+% 3x3 plot of dc-node fsw sweep
+
+
+\begin{figure}[!h]
+\newcommand\pHeigh{3.25cm}
+\newcommand\pWidth{2.25cm}
+\centering
+    \begin{subfigure}{0.325\textwidth}
+        %\raggedright
+        \input{./3_modeling/rscc_dc_fsw_sw_11.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.325\textwidth}
+        %\centering
+        \input{./3_modeling/rscc_dc_fsw_sw_12.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.325\textwidth}
+        %\raggedleft
+        \input{./3_modeling/rscc_dc_fsw_sw_13.tex}
+        %}
+    \end{subfigure}
+
+    \begin{subfigure}{0.325\textwidth}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_21.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.325\textwidth}
+        \centering
+       \input{./3_modeling/rscc_dc_fsw_sw_22.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.325\textwidth}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_23.tex}
+    \end{subfigure}
+
+    \begin{subfigure}{0.325\textwidth}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_31.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.325\textwidth}
+        \centering
+       \input{./3_modeling/rscc_dc_fsw_sw_32.tex}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.325\textwidth}
+        \centering
+        \input{./3_modeling/rscc_dc_fsw_sw_33.tex}
+    \end{subfigure}
+
+\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b} as function of the switching frequency ($f_{sw}$). \emph{Left axis} - Experimental points ($\Box$) compared with this work model (\emph{solid black line}) and M. Seeman's model (\emph{solid grey line}). \emph{Right axis} - Relative error between PLECS results and this work model (\emph{black stars}) and Seeman's model (\emph{grey stars}). Plots are presented for different duty cycles: \emph{top-to-bottom}- $D = 23.3\%$, $D = 50\%$ and $D = 76.7\%$; and for different output capacitor ($c_3$) values: \emph{left-to-right}- $c_3 = c_{fly} = 100nF$, $c_2 = 10~c_{fly} = 1\mu F$ and $c_3 = 100~c_{cfly} = 100\mu F$.}
+\label{fig:exp_rscc_dc_node}
+\end{figure}
 

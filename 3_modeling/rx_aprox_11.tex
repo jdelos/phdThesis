@@ -1,0 +1,58 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\begin{tikzpicture}
+\pgfplotsset{
+    width=\pWidth,
+    height=\pHeigh,
+    scale only axis,
+    ylabel near ticks,
+    enlarge y limits={0.2},
+    xlabel near ticks,
+    ylabel near ticks,
+    enlarge x limits={0.15},
+    every tick label/.append style={font=\footnotesize},
+    yticklabel style={text width=2em,align=right},
+}
+
+\begin{semilogxaxis}[
+        %xlabel= {$f_{sw}[Hz] $},
+        xticklabels={,,},
+        ylabel= {$ \epsilon_r ~ [\%] $} ,
+        axis y line*=left,
+        axis x line*=bottom,
+        %yticklabel style={xshift=0.5ex},
+        enlarge y limits={0.1},
+        title={$D=\dutyCycle\%~(\mu=\uDx)$ },
+        title style = {
+                at ={(0.5,1.1)},
+                font=\footnotesize },
+        legend style={
+                legend columns = -1,
+                at={(0.5,1)},
+               anchor=south,
+                draw=none,
+                font=\tiny,
+                column sep=1ex,
+                legend cell align = left},
+        ]
+
+
+    \addplot [thin,smooth,black,mark=o,mark repeat=2]
+      table [y=y1]{./3_modeling/err_rx_aprox_ORG_hom.dat};\label{pl_MDL}
+    \addlegendentry{Org};
+    \addplot [thin,smooth,mark=+,mark repeat=2]
+      table [y=y1]{./3_modeling/err_rx_aprox_MAK_hom.dat};
+    \addlegendentry{Mak};
+    \addplot [thin,smooth,mark=x,mark repeat=2]
+      table [y=y1]{./3_modeling/err_rx_aprox_RMAK_hom.dat};
+    \addlegendentry{*Mak};
+
+
+\end{semilogxaxis}
+
+\end{tikzpicture}

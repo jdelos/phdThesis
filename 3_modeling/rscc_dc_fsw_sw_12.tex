@@ -15,20 +15,15 @@
     xlabel near ticks,
     ylabel near ticks,
     enlarge x limits={0.15},
+    every tick label/.append style={font=\footnotesize},
 }
 \begin{loglogaxis}[
-        %xlabel= {$f_{sw}[Hz] $},
         xticklabels={,,},
-        %ylabel= {$ r_{scc} ~ [\Omega] $} ,
         axis y line*=left,
         axis x line*=bottom,
         ytick = {1e1,1},
-        %xtick=\empty, ytick=\empty,
-        %ytick = {0,.125,.25},
-        %yticklabels={0,$v_{src}\frac{1}{3}$,$v_{src}\frac{2}{3}$,$v_{src}$},
-        %xticklabels={0,$D \cdot T_{sw}$,$T_{sw}$ ,$2 T_{sw}$,$3 T_{sw} $},
         enlarge y limits={0.1},
-        yticklabel style={text width=2em,align=right},
+        yticklabel style={text width=3em,align=right,xshift=0.5ex},
         title={$c_o= 10 c_{fly}$},
         title style = {
                 at ={(0.5,1.2)} },
@@ -39,7 +34,7 @@
 
     \addplot [thin,mark=square,only marks,black]
       table [y=y1]{./3_modeling/rx_sw_fsw_10Co.dat};\label{pl_PLECS}
-      
+
     \addplot [thin,smooth,black,mark=o,mark repeat=2]
       table [y=y1]{./3_modeling/rx_JD_sw_fsw_10Co.dat};\label{pl_MDL}
     %\addlegendentry{Model};
@@ -56,9 +51,8 @@
 \begin{semilogxaxis}[%
     axis y line*=right,
     axis x line=none,
-    %ylabel = {$\epsilon_r~[\%]$},
     yticklabel pos=right,
-    yticklabel style={text width=2em,align=left},
+    yticklabel style={text width=1em,align=left,xshift=-0.5ex},
     enlarge y limits={0.25},
     legend style={
                     legend columns = 3,
@@ -74,15 +68,15 @@
     \addplot [semithick,mark=o,only marks,black!60]
       table [y=y1]{./3_modeling/err_JD_sw_fsw_10Co.dat};
     \addlegendentry{ $\epsilon_r$}
-    
+
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hid}\addlegendentry{\color{white}PLECS}
     \addlegendimage{/pgfplots/refstyle=pl_MS}\addlegendentry{Makowski}
     \addplot [semithick,mark=+,only marks,black!50]
       table [y=y1]{./3_modeling/err_MS_sw_fsw_10Co.dat};
     \addlegendentry{ $\epsilon_r$}
-    
+
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hid}\addlegendentry{\color{white}PLECS}
-    \addlegendimage{/pgfplots/refstyle=pl_MS}\addlegendentry{Steyaert}      
+    \addlegendimage{/pgfplots/refstyle=pl_MS}\addlegendentry{Steyaert}
     \addplot [semithick,mark=x,only marks,black!50]
       table [y=y1]{./3_modeling/err_ST_sw_fsw_10Co.dat};
     \addlegendentry{ $\epsilon_r$}

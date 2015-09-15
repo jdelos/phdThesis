@@ -17,15 +17,10 @@
     enlarge x limits={0.15},
 }
 \begin{loglogaxis}[
-        %xlabel= {$f_{sw}[Hz] $},
         xticklabels={,,},
         ylabel= {$ r_{scc} ~ [\Omega] $} ,
         axis y line*=left,
         axis x line*=bottom,
-        %xtick=\empty, ytick=\empty,
-        %ytick = {0,.125,.25},
-        %yticklabels={0,$v_{src}\frac{1}{3}$,$v_{src}\frac{2}{3}$,$v_{src}$},
-        %xticklabels={0,$D \cdot T_{sw}$,$T_{sw}$ ,$2 T_{sw}$,$3 T_{sw} $},
         enlarge y limits={0.2},
         title={$D=10\%$},
         title style = {
@@ -71,16 +66,16 @@
 \addplot [semithick,mark=o,only marks,black!60]
   table [y=y1]{./3_modeling/err1_sw_fsw_O1.dat};
   \addlegendentry{ $\epsilon_r$}
-  
+
 \addlegendimage{/pgfplots/refstyle=pl_PLECS_hd}\addlegendentry{\color{white}PLECS}
-\addlegendimage{/pgfplots/refstyle=pl_Makow}\addlegendentry{Mak.}  
+\addlegendimage{/pgfplots/refstyle=pl_Makow}\addlegendentry{Mak.}
 \addplot [semithick,mark=+,only marks,black!60]
   table [y=y1]{./3_modeling/err2_sw_fsw_O1.dat};
    \addlegendentry{ $\epsilon_r$}
-   
-   
+
+
 \addlegendimage{/pgfplots/refstyle=pl_PLECS_hd}\addlegendentry{\color{white}PLECS}
-\addlegendimage{/pgfplots/refstyle=pl_Makow_II}\addlegendentry{Mak. Rect.}  
+\addlegendimage{/pgfplots/refstyle=pl_Makow_II}\addlegendentry{Mak. Rect.}
 \addplot [semithick,mark=x,only marks,black!60]
   table [y=y1]{./3_modeling/err3_sw_fsw_O1.dat};
 \addlegendentry{ $\epsilon_r$}

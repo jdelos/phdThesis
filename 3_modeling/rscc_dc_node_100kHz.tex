@@ -20,7 +20,7 @@
                 draw=none,
                 font=\small,
                 column sep=2ex,
-                legend cell align=left},               
+                legend cell align=left},
 }
 
 \begin{axis}[%
@@ -30,25 +30,28 @@
     ylabel= {$r_{scc}~[\Omega]$},
     yticklabel style={text width=2em,align=right},
     ]
-    
+
     \addplot [semithick,mark=square,only marks,white]
       table[y=y1] {./3_modeling/rx_sw_dx_O2.dat};\label{pl_PLECS_hidden}
 
     \addplot [semithick,mark=square,only marks]
       table[y=y1] {./3_modeling/rx_sw_dx_O2.dat};\label{pl_PLECS}
-      
-      
+
+
     \addplot [semithick,smooth,mark=o,mark repeat=10]
       table [y=y1] {./3_modeling/rm1_sw_dx_O2.dat};\label{pl_MDL_JD}
-      
+
     \addplot [semithick,smooth,mark=+,mark repeat=10]%black!66]
       table [y=y1] {./3_modeling/rm2_sw_dx_O2.dat};\label{pl_Makw}
-      
+
     \addplot [semithick,smooth,mark=x,mark repeat=10]%black!33]
       table [y=y1] {./3_modeling/rm3_sw_dx_O2.dat};\label{pl_Makw rec}
 
-    \addplot [semithick,smooth,dashed,black!50]
-      table [y=y1] {./3_modeling/rm1_ms_sw_dx_O2.dat};\label{pl_MS}
+    \addplot [semithick,smooth,dashed,black!75]
+      table [y=y1] {./3_modeling/rm1_ms_sw_dx_O2.dat};\label{pl:95Makw}
+    
+    \addplot [semithick,smooth,dotted,black!75]
+      table [y=y1] {./3_modeling/rx_ST_sw_dx_1Co.dat};\label{pl:Stey}
 
 
 
@@ -67,23 +70,25 @@
     \addplot [semithick,mark=o,only marks,black!60]
       table [y=y1] {./3_modeling/err1_sw_dx_O2.dat};
     \addlegendentry{ $\epsilon_r$ (Rel. Error)}
-    
-    
+
+
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hidden}\addlegendentry{\color{white}PLECS}
     \addlegendimage{/pgfplots/refstyle=pl_Makw}\addlegendentry{Makowski}
     \addplot [semithick,mark=+,only marks,black!60]
       table [y=y1] {./3_modeling/err2_sw_dx_O2.dat};
     \addlegendentry{$\epsilon_r$ \color{white}(Rel. Error) }
-    
+
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hidden}\addlegendentry{\color{white}PLECS}
     \addlegendimage{/pgfplots/refstyle=pl_Makw rec}\addlegendentry{Mak. rect.}
     \addplot [semithick,mark=x,only marks,black!60]
       table [y=y1] {./3_modeling/err3_sw_dx_O2.dat};
     \addlegendentry{$\epsilon_r$ \color{white}(Rel. Error)}
-    
+
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hidden}\addlegendentry{\color{white}PLECS}
-    \addlegendimage{/pgfplots/refstyle=pl_MS}\addlegendentry{Seeman} 
- 
+    \addlegendimage{/pgfplots/refstyle=pl:95Makw}\addlegendentry{95Makowski.}
+    \addlegendimage{/pgfplots/refstyle=pl:Stey}\addlegendentry{Steyaert}
+    
+
 \end{axis}
 \end{tikzpicture}
 

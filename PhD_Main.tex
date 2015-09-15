@@ -7,8 +7,15 @@
 \usepackage{graphicx}
 \usepackage[cmex10]{amsmath}
 \usepackage{amssymb}
-\usepackage{amsmath}
+\usepackage{systeme,amsmath}
+\newcommand{\irow}[1]{% inline row vector
+  \begin{bmatrix}#1\end{bmatrix}%
+}
 
+\newcommand{\me}{\mathrm{e}}
+\setlength{\jot}{8pt}% tweak
+%% Enable to flush floats without a page break
+\usepackage{afterpage}
 %Appendix
 \usepackage[titletoc]{appendix}
 
@@ -165,20 +172,14 @@
 
 \pagenumbering{arabic}
 
-\include{0_intro}
+%\include{0_intro}
 %\label{ch:h_scc}
 %\bibliographystyle{numerical}
-
 \include{1_topology}
-
 \include{2_hscc}
-
 \include{3_modeling}
-
 %\input{3_modeling_multiple}
-
-\include{4_optimitzation}
-
+%\include{4_validation}
 %\include{./1_modeling/11_chron_scc}
 
 
