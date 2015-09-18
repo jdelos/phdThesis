@@ -128,6 +128,80 @@ node[anchor=north] {$3T$}; % \draw (0,0) node[anchor=north east]
 \end{figure}
 
 
+
+\begin{figure}[!h]
+\centering
+\ctikzset { bipoles/length=1cm}
+%\ctikzset { scale=0.5}
+\begin{subfigure}[t]{\textwidth}
+    \centering
+    %\ctikzset { bipoles/length=1cm}
+        \begin{circuitikz}[american voltages,scale=0.6]
+        \draw (-1,7) node[anchor=north]{ };
+        \draw %Input Supply
+                (-1,0)  to[V=$v_{src}$]
+                %Draw Switches
+                (-1,4)  --
+                (4,4);
+
+        %Capacitor C1
+        \draw   (4,2) to[pC=$c_1$] (4,4);
+
+        %Capacitor C2
+        \draw (2,0)to[pC=$c_2$](2,2) --(4,2);
+
+        %Capacitor C3
+        \draw  (-1,0)--
+               (6,0) to[pC=$c_3$]
+               (6,2) -- (4,2);
+
+         \draw (6,2) to[L,l=$l_o$,-o] (11,2) node[anchor=west] {};
+         \draw (6,0) to[short,-o] (11,0) node[anchor=west] {};
+         \draw (11,2) to[open,v^=$v_{out}$] (11,0);
+
+         \draw (10,0) to[pC,l=$c_{o}$] (10,2);
+         \draw (6,2) node[anchor=south] {$v_x$};
+
+         \end{circuitikz}
+     \subcaption{First phase, odd switches are closed and even switches are open.}
+     \label{fig:hscc_full_p1}
+     \end{subfigure}
+
+\begin{subfigure}[t]{\textwidth}
+      \centering
+      \begin{circuitikz}[american voltages,scale=0.6]
+        \draw (0,4.5) node[anchor=north]{ };
+        \draw   %Input Supply
+                (-1,0)  to[V=$v_{src}$]
+                %Draw Switches
+                (-1,4);
+
+        \draw   (5,2) to[pC=$c_2$] (5,4);
+
+        \draw %Capacitor C1
+               (2,0)to[pC=$c_1$](2,4) --(5,4);
+
+        \draw %Capacitor C3
+               (5,0) to[pC=$c_3$]
+               (5,2) -- (5,2);
+
+         \draw (5,4) to[L,l=$l_o$,-o] (11,4) node[anchor=west] {};
+         \draw (-1,0) to[short,-o] (11,0) node[anchor=west] {};
+         \draw (11,4) to[open,v^=$v_{out}$] (11,0);
+         \draw (10,0) to[pC,l=$c_{o}$] (10,4);
+
+         \draw (5,4) node[anchor=south] {$v_x$};
+
+         \end{circuitikz}
+     \subcaption{Second phase, even switches are closed and odd switches are open.}
+     \label{fig:hscc_full_p2}
+     \end{subfigure}
+\caption{The two switching modes of 3:1 H-Dickson of Figure~\ref{fig:3_1_hscc}}
+\label{fig:hscc_phases}
+\end{figure}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               CHAPTER 4: MODELING                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
