@@ -1,6 +1,6 @@
 \clearpage
 \section{Multiple Output Converter}
-Another advantage of combining a SCC with inductors is to enable multiple output voltages with a single power stage. \citeauthor{2012Kumar}~\cite{2012Kumar} presented a Triple Output Fixed Ratio Converter (TOFRC) where a 2:1 Ladder converter is combined with two inductors in order to provide three fixed output voltages with a single SCC stage.
+Another advantage that SCC offers is to provide multiple outputs using a single SCC stage.  \citeauthor{2012Kumar}~\cite{2012Kumar} presented a Triple Output Fixed Ratio Converter (TOFRC) where a 2:1 Ladder converter is combined with two inductors in order to provide three fixed output voltages with a single SCC stage.
 
 \subsection{The Output Trans-Resistance Model}
 
@@ -33,17 +33,17 @@ The proposed model is shown in Figure\ref{fig:scc_model_tr}; as it can be seen, 
 
 The other source, produces a voltage droop associated with the losses in the converter. The current delivered by each loaded node adds a specific contribution to the converter losses. Therefore, this voltage source takes the value given by the linear combination of all the converter output currents weighted by their associated trans-resistance factor $z$.
 
-The trans-resistance factor $z_{xy}$ produces a voltage drop at the output $x$ proportional to the charge (\emph{i.e}. current) delivered by the output $y$.  It can be seen that the trans-resistance factor $z_{xx}$ corresponds to the voltage drop of the same output where the current is delivered, thus this parameter is  the output impedance for that node. Since all the trans-resistance factors relate current to voltage, they have are expressed in \emph{Ohms}.
+The trans-resistance factor $z_{xy}$ produces a voltage drop at the output $x$ proportional to the charge (\emph{i.e}. current) delivered by the output $y$.  It can be seen that the trans-resistance factor $z_{xx}$ corresponds to the voltage drop of the same output where the current is delivered, thus this parameter is  the output impedance for that node. Since all the trans-resistance factors relate current to voltage, they are in \emph{Ohms}.
 
-With the proposed model, the converter behavior can be obtained as
+With the proposed model, the converter behavior can be described as
 \begin{equation}
  \mathbf{v_o} = -\mathbf{Z} \cdot \mathbf{i_o} + \mathbf{m} \cdot v_{src},
  \label{eq:admit_sol}
 \end{equation}
-where $\mathbf{Z}$ is the \emph{trans-resistance matrix}, which is symmetric in two phase converters.
+where $\mathbf{Z}$ is the \emph{trans-resistance matrix}. $\mathbf{Z}$ is symmetric for two phase converters.
 
 
-\subsection{Model duality: Power losses and Trans-resistance model}
+\subsection{Model duality: Power losses and trans-resistance parameters}
 \begin{figure}[!h]
 \centering
 \ctikzset { bipoles/length=1cm}
@@ -84,7 +84,7 @@ and the total converter losses are
 %\subsubsection{Slow Switching Limit}
 Using the the charge flow analysis  described in the previous section, the total losses of a two output converter can be computed as well. In order to make the analysis less cumbersome, the phases are eluded and losses are computed in a single capacitor for the SSL. The results can be extended for any converter with any number of phases and capacitors.
 
-In the case of a multiple-output converter, each of the individual outputs produces a \emph{redistributed} flow of charge through the capacitors that can be individually quantified, being $g_{i,1}$ associated to the first output, $g_{i,2}$ associated to the second output, etc. The total \emph{redistributed} charge is the sum of each individual contributions as
+In the case of a multiple-output converter, each of the individual outputs produces a \emph{redistributed} charge flow through the capacitors that can be individually quantified, being $g_{i,1}$  the \emph{redistributed} cahrge flow multiplier associated to the first output, $g_{i,2}$ associated to the second output. The total \emph{redistributed} charge is the sum of each individual contributions as
 \begin{equation}
  g_i =  (g_{i,1} ~ q_{o,1} +  g_{i,2} ~ q_{o,2}).
  \label{eq:g_i_total}
@@ -145,7 +145,9 @@ leading to a similar polynomial solution of the previous case. Hence the general
  \label{eq:z_fsl_xy}
 \end{equation}
 
-It can be seen from~\eqref{eq:z_ssl_xy} and ~\eqref{eq:z_fsl_xy} that there are not individual solutions for the cross trans-resistance elements $z_{xy}$ and $z_{yx}$. Actually the individual value of these parameters is related to the order of sequence of the converter's circuit modes. In the case of a two-phase converters, the parameters are equal, thus $Z_{xy} = z_{yx}$,  which transforms $\mathbf{Z}$ matrix to a symmetric matrix. At the same time it reduces the generic expression to two:
+It can be seen from~\eqref{eq:z_ssl_xy} and ~\eqref{eq:z_fsl_xy} that they are not provided the individual equations for the cross trans-resistance elements $z_{xy}$ and $z_{yx}$. The values of these parameters are related to the order of sequence of the different converter circuit modes for converters with more that two phases.
+
+In the case of a two-phase converters the sequence is irrelevant and the two parameters are equal, thus $Z_{xy} = z_{yx}$, making $\mathbf{Z}$ matrix symmetric.  For a two phase converters the generic expressions of the trans-resistance parameters, are reduced to two:
 \begin{equation}
   z_{ssl,xy}  =  \frac{1}{2~f_{sw}} \sum_{i=1}^{caps.} \sum_{j=1}^{phas.}
   \frac{g_{i,x}^j g_{i,y}^j}{c_i}.
@@ -157,7 +159,7 @@ It can be seen from~\eqref{eq:z_ssl_xy} and ~\eqref{eq:z_fsl_xy} that there are 
  \label{eq:z_fsl_xy_2ph}
 \end{equation}
 
-For multiple-phase converters, the relation between the sequentiality of the circuit modes and the cross trans-conductance has not be yet found. Nevertheless multiple-phase converters are beyond the scope of this dissertation, since they have not been used for the H-SCCs of this work.
+For converters with more than two phases, the relation between sequentiality of the circuit modes and the cross trans-conductances has not yet been found. Nevertheless, converters with more that 2-phases are beyond the scope of this work.
 
 \subsection{Trans-resistance Parameters Methodology}
 
@@ -167,23 +169,23 @@ Therefore the \emph{charge flow multipliers} are collected in a matrix as
 \begin{equation}
  \mathbf{A}^j =
    \bordermatrix { ~ & out_1 & out_2 & ~ & out_n \cr
-     v_{in} & a_{1,1}^j  & a_{1,2}^j & \cdots & a_{1,n}^j \cr
-     C_1    & a_{2,1}^j  & a_{2,2}^j & \cdots & a_{2,n}^j \cr
+     v_{src} & a_{1,1}^j  & a_{1,2}^j & \cdots & a_{1,n}^j \cr
+     c_1    & a_{2,1}^j  & a_{2,2}^j & \cdots & a_{2,n}^j \cr
       ~     & \vdots     & \vdots & \ddots & \vdots \cr
-     C_p    & a_{p,1}^j  & a_{p,2}^j & \cdots & a_{p,n}^j \cr},
+     c_p    & a_{p,1}^j  & a_{p,2}^j & \cdots & a_{p,n}^j \cr},
  \label{eq:A_matrix}
 \end{equation}
-where the elements of the first row  $a_{1,x}^j$ corresponds to the \emph{charge flow multiplier}  delivered by the input voltage source associated to the charge flow through the $x$\emph{-th} output. The remaining elements after the first row are associated with the charge flow in the capacitors. Therefore $a_{1,1}$ is the net charge flow in capacitor $C_1$ due to the charge delivered at the $1st$ output node of a converter with $p$ capacitors and $n$ outputs.
+where the elements of the first row  $a_{1,x}^j$ corresponds to the \emph{charge flow multiplier}  delivered by the input voltage source associated to the charge flow through the $x$\emph{-th} output. The remaining elements after the first row are associated with the charge flow in the capacitors. Therefore $a_{1,1}$ is the net charge flow in capacitor $c_1$ due to the charge delivered at the $1st$ output node of a converter with $p$ capacitors and $n$ outputs.
 
 Likewise, the \emph{charge pumped multipliers} are collected in the following matrix
 \begin{equation}
  \mathbf{B}^j =
    \bordermatrix { ~ & out_1 & out_2 & ~ & out_n \cr
-     C_1  & b_{1,1}^j  & b_{1,2}^j & \cdots & b_{1,n}^j \cr
-     C_2  & b_{2,1}^j  & b_{2,2}^j & \cdots & b_{2,n}^j \cr
+     c_1  & b_{1,1}^j  & b_{1,2}^j & \cdots & b_{1,n}^j \cr
+     c_2  & b_{2,1}^j  & b_{2,2}^j & \cdots & b_{2,n}^j \cr
       ~   & \vdots     & \vdots & \ddots & \vdots \cr
-     C_p  & b_{p,1}^j  & b_{p,2}^j & \cdots & b_{p,n}^j \cr}
- \label{eq:A_matrix},
+     c_p  & b_{p,1}^j  & b_{p,2}^j & \cdots & b_{p,n}^j \cr}
+     \label{eq:A_matrix},
 \end{equation}
 where all the elements are associated with the converter capacitors.
 
@@ -201,7 +203,7 @@ where all the elements are associated with the converter switches. This matrix c
 
  The converter is described with two trans-resistance matrix: one for the SSL, $\mathbf{Z_{ssl}}$, and another for the FSL, $\mathbf{Z_{fsl}}$.
 
-\subsubsection{Slow Switching Limit Trans-resistance Matrix}
+\subsection{Slow Switching Limit Trans-resistance Matrix}
 
 The \emph{redistributed} charge flow multipliers matrix can be obtained from the
 matrices $\mathbf{A}$ and $\mathbf{B}$  as
@@ -210,9 +212,9 @@ matrices $\mathbf{A}$ and $\mathbf{B}$  as
  \label{eq:R_matrix}.
 \end{equation}
 The \emph{redistributed charge} corresponds to the charge that flows between capacitors; therefore it is the root cause of
-losses associated with the SSL operation regime \cite{SeemanPhD06}.
+losses associated with the SSL operation regime~\cite{Seeman:EECS-2009-78}.
 
-The SSL trans-resistance factors can be individually obtained from the redistributed charge multipliers as described in \eqref{eq:z_ssl}. In order to obtain directly the trans-resistance matrix, the operation in \eqref{eq:z_ssl} is performed in  two steps. First, the outer product of  each row of $\mathbf{G}^j$ is taken with itself as
+The SSL trans-resistance factors can be individually obtained from the redistributed charge multipliers as described in \eqref{eq:z_ssl_xy_2ph}. In order to obtain directly the trans-resistance matrix, the operation in \eqref{eq:z_ssl_xy_2ph} is performed in  two steps. First, the outer product of  each row of $\mathbf{G}^j$ is taken with itself as
 \begin{equation}
  \mathbf{K}_i^j =[\mathbf{G}_{(i,1:end)}^j ]^T \mathbf{G}_{(i,1:end)}^j ,
  \label{eq:K_matrix}
@@ -224,7 +226,7 @@ Second, with the set of $\mathbf{K}$ matrices the trans-resistance matrix is obt
  \label{eq:G_ssl}
 \end{equation}
 
-\subsubsection{Fast Switching Limit trans-resistance Matrix}
+\subsection{Fast Switching Limit trans-resistance Matrix}
 For the FSL, the trans-resistance matrix is obtained using the switch charge multipliers
 contained in matrix $\mathbf{Ar}$. The operation to obtain the trans-resistance matrix as described
 in \eqref{eq:z_ssl_xy_2ph} is performed in two steps. First, a set of matrices are obtained by taking the outer product
@@ -236,84 +238,22 @@ of each row of $\mathbf{Ar}$ with itself as
 yielding a matrix for each row in $\mathbf{Ar}$ associated with a switch \emph{on}-resistance ($r_{i}$). Second, with the set of matrices $\mathbf{Kr}$ the FSL trans-resistance matrix is obtained as
 \begin{equation}
  \mathbf{Z_{fsl}} =  \sum_{i=1}^{swts.} \sum_{j=1}^{phas.} \frac{_{i}}{D^j}
-\mathbf{Kr}_i^j ,
+\mathbf{Kr}_i^j,
  \label{eq:G_fsl}
 \end{equation}
 
-\subsubsection{Total Trans-resistance Matrix}
+\subsection{Converter trans-resistance Matrix}
 The total trans-resistance values are approximated using~\eqref{eq:r_scc} as
 \begin{equation}
- \mathbf{Z}_{(x,y)} = \sqrt{\mathbf{Z_{ssl,(x,y)}}^2 + \mathbf{Z_{fsl,(x,y)}}^2}.
+ \mathbf{Z}_{(x,y)} \approx \sqrt{\mathbf{Z_{ssl,(x,y)}}^2 + \mathbf{Z_{fsl,(x,y)}}^2}.
  \label{eq:G_total}
 \end{equation}
 
-\subsubsection{Conversion Ratio Vector }
+\subsection{Conversion Ratio Vector }
 
 The conversion ratio vector is obtained as
 \begin{equation}
  \mathbf{m} = \sum_{j=1}^{phas.}[\mathbf{A}^j_{(1,1:end)}]^T.
  \label{eq:m_equation}
 \end{equation}
-
-\subsection{Experimental Model Validation}
-
-The trans-impedance matrix is determined for the converter of Figure~\ref{fig:2_1_two_outs}. The results of the model parameters are compared with both  PLECS\footnote[1]{Behavioral circuit simulator running on Matlab \textsuperscript{\textregistered}-Simulink \textsuperscript{\textregistered}} simulations and experiments.
-
-\begin{figure}[t]
-\ctikzset { bipoles/length=1cm}
-\centering
-\begin{circuitikz}[american voltages,scale=0.6]
-    \draw
-            %Input Supply
-            %(0,0)  to[V=$v_{src}$]
-            %Draw Switches
-            %(0,10)  --
-            (5,10.4) node[anchor=south] {$v_{src}$}
-            (5,10) node[rground, yscale=-1] {}
-            to[switch=$s_1$] %S1
-            (5,8)   to[switch=$s_2$] %S2
-            (5,6)   to[switch=$s_3$] %S3
-            (5,4)   to[switch=$s_4$]
-            (5,2)   node[sground] {};
-
-
-    \draw %Capacitor C1
-           (5,4) -- (3,4)
-           to[pC,l^=$c_1$]
-           (3,8) -- (5,8);
-
-    \draw %Capacitor C2
-           (5,2) -|  (7,4)
-           to[pC,l_=$c_2$] (7,6) --
-           (5,6);
-
-    \draw (5,8) -- (8,8) to[short,i=$i_3$,-o] (10,8) node[anchor=west] {$v_{3}$} ;
-    \draw (5,6) -- (8,6) to[short,i=$i_2$,-o] (10,6) node[anchor=west] {$v_{2}$} ;
-    \draw (5,4) -- ([hs]7,6 |- 5,4) arc(180:0:\radius) -- (8,4) to[short,i=$i_1$,-o] (10,4) node[anchor=west] {$v_{1}$} ;
-
-
-     \end{circuitikz}
-\caption{ Circuit used for the experimental setup, 2:1 SCC, presenting all the available outputs. In the experimental setup the outputs were loaded with constant current sinks. }
-\label{fig:2_1_two_outs}
-\end{figure}
-
-
-The circuit is solved for matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{Ar}$ in both phases. As previously mentioned,
-each column corresponds to an output node, where the first column corresponds to the output $V_{o3}$ , the second column
-to the output $V_{o2}$, and the third column to the output $V_{o1}$.
-
-\begin{figure*}[t]
-  %\includegraphics[page=1]{APEC_SIM_big}
-  \centering
-  \caption{SSL comparison between PLECS simulation and the proposed model.}
-  \label{fig:sim_ssl}
-\end{figure*}
-
-
-\begin{figure*}[t]
-  %\includegraphics[page=3]{APEC_SIM_big}
-  \centering
-  \caption{FSL comparison between PLECS simulation and the proposed model.}
-  \label{fig:sim_fsl}
-\end{figure*}
 

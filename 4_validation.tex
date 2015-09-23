@@ -1,5 +1,5 @@
 \chapter{Model validation}
-The validation of the model was done by measuring the output equivalent resistance of a SCC and comparing to the model results, either using transient circuit simulations and experimental circuits. 
+The validation of the model was done by measuring the output equivalent resistance of a SCC and comparing to the model results, either using transient circuit simulations and experimental circuits.
 
 Because the proposed method has the goal to model losses produced by the charge transfer between capacitors and conductance through resistive elements (switches and parasitics), simulations with a behavioral simulator only take into account these two sources of losses, enabling a fair comparison to validate the proposed model.  Nevertheless, an experimental converter was specifically build with the only propose to validate measure and validate the model. The converter was designed to mitigate any other source of loss not included in the model, such as switching losses. These other loss mechanisms, such as switching losses, can be added to the model as described in ~\cite{Seeman:EECS-2009-78}; however, they are out of the scope of the model presented in the previous chapter.
 
@@ -362,3 +362,67 @@ The results obtained with the original charge flow analysis (\emph{dashed grey})
      \input{./3_modeling/rscc_dc_cout_sweep.tex}
      \caption{Equivalent Output Resistance ($r_{scc}$) as function of the relative size of the output capacitor (\emph{dc}-capacitor) with respect to the flying capacitors for the 3:1 Dickson converter of Figure~\ref{fig:3_1_hscc_exp_b}. Results presented for the converter operating at $f_{sw}=100kHz$ with capacitors $c_1=c_2=c_{fly}=100nF$ and all switch resistances $r_{on} = 100m\Omega$.}\label{fig:exp_rscc_pwm_node_fsw}
 \end{figure}
+
+
+\subsection{Experimental Model Validation}
+
+The trans-impedance matrix is determined for the converter of Figure~\ref{fig:2_1_two_outs}. The results of the model parameters are compared with both  PLECS\footnote[1]{Behavioral circuit simulator running on Matlab \textsuperscript{\textregistered}-Simulink \textsuperscript{\textregistered}} simulations and experiments.
+
+\begin{figure}[t]
+\ctikzset { bipoles/length=1cm}
+\centering
+\begin{circuitikz}[american voltages,scale=0.6]
+    \draw
+            %Input Supply
+            %(0,0)  to[V=$v_{src}$]
+            %Draw Switches
+            %(0,10)  --
+            (5,10.4) node[anchor=south] {$v_{src}$}
+            (5,10) node[rground, yscale=-1] {}
+            to[switch=$s_1$] %S1
+            (5,8)   to[switch=$s_2$] %S2
+            (5,6)   to[switch=$s_3$] %S3
+            (5,4)   to[switch=$s_4$]
+            (5,2)   node[sground] {};
+
+
+    \draw %Capacitor C1
+           (5,4) -- (3,4)
+           to[pC,l^=$c_1$]
+           (3,8) -- (5,8);
+
+    \draw %Capacitor C2
+           (5,2) -|  (7,4)
+           to[pC,l_=$c_2$] (7,6) --
+           (5,6);
+
+    \draw (5,8) -- (8,8) to[short,i=$i_3$,-o] (10,8) node[anchor=west] {$v_{3}$} ;
+    \draw (5,6) -- (8,6) to[short,i=$i_2$,-o] (10,6) node[anchor=west] {$v_{2}$} ;
+    \draw (5,4) -- ([hs]7,6 |- 5,4) arc(180:0:\radius) -- (8,4) to[short,i=$i_1$,-o] (10,4) node[anchor=west] {$v_{1}$} ;
+
+
+     \end{circuitikz}
+\caption{ Circuit used for the experimental setup, 2:1 SCC, presenting all the available outputs. In the experimental setup the outputs were loaded with constant current sinks. }
+\label{fig:2_1_two_outs}
+\end{figure}
+
+
+The circuit is solved for matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{Ar}$ in both phases. As previously mentioned,
+each column corresponds to an output node, where the first column corresponds to the output $V_{o3}$ , the second column
+to the output $V_{o2}$, and the third column to the output $V_{o1}$.
+
+\begin{figure*}[t]
+  %\includegraphics[page=1]{APEC_SIM_big}
+  \centering
+  \caption{SSL comparison between PLECS simulation and the proposed model.}
+  \label{fig:sim_ssl}
+\end{figure*}
+
+
+\begin{figure*}[t]
+  %\includegraphics[page=3]{APEC_SIM_big}
+  \centering
+  \caption{FSL comparison between PLECS simulation and the proposed model.}
+  \label{fig:sim_fsl}
+\end{figure*}
+

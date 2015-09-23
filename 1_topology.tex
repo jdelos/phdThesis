@@ -105,13 +105,14 @@ Linear drivers place a shunt element between the source and the load(\emph{i.e} 
     \begin{circuitikz} [american voltages,scale=0.65]
     \draw
         (0,0) to[V = $v_{src}$]
-        (0,3) to[generic=$r_series$,i=$i_o$]
+        (0,3) to[generic=$r_{series}$,i=$i_o$]
         (5,3) to[leD*,v=$v_{o}$]
         (5,0) -- (0,0);
     \end{circuitikz}
     \caption{}
     \label{fig:linear_ckt}
 \end{subfigure}
+\hfill
 \begin{subfigure}[t]{.45\textwidth}
     \begin{circuitikz} [scale=0.65]
     \begin{scope}%[xshift = 8cm, yshift=0cm]
@@ -195,24 +196,18 @@ These converters can provide step-up and step-down conversion for large dynamic 
 \hfill
 \begin{subfigure}[t]{.45\textwidth}
     %\centering
-    \raggedleft
     \begin{circuitikz} [scale=0.65]
     \begin{scope}%[xshift = 8cm, yshift=0cm]
         \draw[->] (0,0) -- (4,0) node[anchor=south] {$  m $};
         \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
-        %Ticks X
-        %\draw (3,2pt) -- (3,-5pt) node[anchor=north] {$1$};
-        %\draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
 
         %Ticks Y
         \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
         \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$90\%$};
 
         %Markers
-        % \draw[dotted] (3,2.5) -- (3,0);
         \draw[dotted] (3,2.5) -- (0,2.5);
-        %\draw[dotted] (1.5,1.5) -- (1.5,0);
         \draw[dotted] (1.5,1.5) -- (0,1.5);
 
 
@@ -229,9 +224,7 @@ These converters can provide step-up and step-down conversion for large dynamic 
 
 One of the disadvantages of these converters is the magnetic components, and the volume related to them. In practice, inductors dominate the entire volume of the LED drivers as shown in Figure~\ref{fig:smps_driver}. Integrated implementations of these converters suffer the challenges of using integrated magnetic components. The present \emph{very-large integration scale} (VLSI) technologies do not yet offer power inductors in the commercial implementations, and other integrated inductors are not yet mature enough for non-research products.
 
-Yet another disadvantage for integration is the voltage stress in the switches of the converter. Switches in inductive converters have to withstand the full operational voltage, which depending on the application range, is from tens to a few hundreds of volts. Using high voltage devices has three main drawbacks: First, the losses in the devices scale quadratically with the voltage  stress. Second, bad switching performances, because high voltage devices are less efficient and slower switching. Third, the standard VLSI technologies do not offer these \emph{high voltage} (HV) devices and the VLSI technologies that offer them are less performant and more expensive than the dedicated discrete technologies.
-
-\begin{figure}[!h]
+\begin{SCfigure}[][!h]
 \centering
 \begin{tikzpicture}
 \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[height=5cm,angle=90]{./0_intro/img/LED_driver.png}};
@@ -244,8 +237,98 @@ Yet another disadvantage for integration is the voltage stress in the switches o
 \end{tikzpicture}
 \caption{Magnetic components marked with a black square in a mains connected LED driver. These components dominate the volume of the converter.}
 \label{fig:smps_driver}
-\end{figure}
+\end{SCfigure}
 
+Yet another disadvantage for integration is the voltage stress in the switches of the converter. Switches in inductive converters have to withstand the full operational voltage, which depending on the application range, is from tens to a few hundreds of volts. Using high voltage devices has three main drawbacks: First, the losses in the devices scale quadratically with the voltage  stress. Second, bad switching performances, because high voltage devices are less efficient and slower switching. Third, the standard VLSI technologies do not offer these \emph{high voltage} (HV) devices and the VLSI technologies that offer them are less performant and more expensive than the dedicated discrete technologies.
+
+\subsection{Energy transfer in inductor based converters}
+%\begin{wrapfigure}{o}{0.7\textwidth}
+Inductor based converter are ideal lossless, since the energy transfer between a voltage and an inductor is an adiabatic process, which can be demonstrated using the circuit of Figure~\ref{fig:ind_chrg}.
+
+\begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{.33\textwidth}
+    \raggedright
+    %\ctikzset { bipoles/length=1cm}
+    \begin{circuitikz} [american,scale=0.65]
+    \draw
+        (0,0) to[battery1 = $v_{src}$]
+        (0,3) to[cspst=$s_1$] (2,3) to[short,i=$i$]
+        (3,3) to[inductor=${l}$,v=$v_l$]
+        (3,0) -- (0,0);
+    \draw[white]  (2.5,-2pt) node[anchor=north,font=\footnotesize] {$t+t_{on}$};
+    \end{circuitikz}
+    \label{fig:induct_charge}
+    \end{subfigure}
+    \begin{subfigure}[b]{.33\textwidth}
+    \raggedright
+    \begin{circuitikz} [scale=0.65]
+    \begin{scope}%[xshift = 8cm, yshift=0cm]
+        \draw[->] (0,0) -- (0,1.25) node[anchor=east] {$ s_1 $};
+        \draw[->] (0,0) -- (3.5,0) node[anchor=south] {$  t $};
+
+        \draw[->] (0,1.75) -- (0,3) node[anchor=east] {$ i $};
+        \draw[->] (0,1.75) -- (3.5,1.75) node[anchor=south] {$  t $};
+
+        %Ticks Y
+        \draw (0.5,0pt) -- (0.5,-2pt) node[anchor=north,font=\footnotesize] {$t_o$};
+        \draw (2.5,0pt) -- (2.5,-2pt) node[anchor=north,font=\footnotesize] {$t_o+t_{x}$};
+
+        %Markers
+        \draw[dotted] (.5,0) -- (0.5,1.75);
+        \draw[dotted] (2.5,0) -- (2.5,2);
+
+        \draw[semithick] (0.5,0) |- (3.25,0.65) ;
+        %\draw (1.5,.32) node[font=\footnotesize] {$t_{on}$};
+        \fill[gray!50] (0.5,1.75) -- (2.5,2.75)  -- (2.5,1.75);
+        \draw[semithick] (0.5,1.75) -- (2.5,2.75) -- (3,3);
+
+        \draw[->] (2,2) to[bend left=45] (1,2.5) node[font=\footnotesize,anchor=south]{$Q_{src}$};
+
+        %\draw[thick,dashed] (0.5,1.20) parabola[bend at end] (3,1.7) node[anchor=north] {$Real$};
+    \end{scope}
+    \end{circuitikz}
+
+    \end{subfigure}
+    \caption{Energy transfer in an inductor.}
+    \label{fig:ind_chrg}
+\end{figure}
+On the one hand, the energy stored in an inductor is given by
+\begin{equation}
+E_l = \frac{1}{2} l i^2.
+\label{eq:e_induct}
+\end{equation}
+The current flowing in the inductor after switch $s_1$ is closed is given by
+\begin{equation}
+i(t)= \frac{1}{l} \int v_l dt = \frac{v_{src}}{l}t.
+\label{eq:i_inductor}
+\end{equation}
+Hence substituting~\eqref{eq:i_inductor} into~\eqref{eq:e_induct}, it can be computed the energy stored in the inductor after closing $s_1$ during the time $t_x$ results in
+\begin{equation}
+E_{l,t_x}= \frac{v_{src}^2{t_x}^2}{2l} .
+\label{eq:e_l_tx}
+\end{equation} 
+On the other hand, the energy delivered by the energy source $v_{src}$ is given 
+\begin{equation}
+E_{src} = v_{src} q_{src}.
+\label{eq:e_src}
+\end{equation}
+The charge $q_{src}$ delivered by the energy source after closing $s_1$ during a time $t_x$ can be obtained integrating~\eqref{eq:i_inductor}, the inductor current,  between $t_o$ and $t_o+t_x$ as
+\begin{equation}
+q_{src} = \int_t^{t_o+t_x} i(t) dt = \frac{v_{src}}{2l}{t_x}^2 .
+\label{eq:q_src}
+\end{equation}
+hence substituting~\eqref{eq:q_src} into~\eqref{eq:e_src} gives the energy deliver by the source resulting in
+\begin{equation}
+E_{src,t_x} = \frac{v_{src}^2{t_x}^2}{2l}.
+\label{eq:e_src_tx}
+\end{equation}
+The energy lost while transferring energy between the source and the inductor, is the difference between the energy deliver from the source~\eqref{eq:e_src_tx} and the energy stored in the inductor~\eqref{eq:e_l_tx}, which results in
+\begin{equation}
+E_{loss} = E_{src,t_x} - E_{l,t_x} = \frac{v_{src}^2{t_x}^2}{2l} - \frac{v_{src}^2{t_x}^2}{2l} =0.
+\label{eq:e_loss_l}
+\end{equation}
+In conclusion, transferring energy between a voltage source and inductor is lossless, and that is why generally inductor based converters achieve very high conversion efficiencies. In these converters, the losses are produced in the resistive elements such as switches, and track connections .
 
 \section{Capacitor Based Converters }
 Switched Capacitor Converters (SCCs) are SMPS composed only of switches and capacitors. SCC were initially used for voltage multiplication~\cite{30Cockcroft,44Waidelich,76Dickson} and more recently in applications that need voltage regulation as well~\cite{Ng:EECS-2011-94}. Compared to inductor based converters, the absence of magnetic elements places them in a good position for high density power systems and integrated solutions, such as Power-System-in-Package (PSiP) or Power-System-on-Chip (PSoC).
@@ -333,6 +416,85 @@ The big disadvantage of these converters is that they can not directly provide t
 
 Based on the previous arguments adopting an SCC architecture for a general solution for LED drivers seems to be, a priori,  not an evident choice. On the one hand, their limitation in voltage-to-current conversion would directly disqualify switched capacitors. On the other hand, the advantageous characteristics of switched capacitors for integration made these circuits very attractive. Actually, if the initial limitations in voltage-to-current conversion could be overcome, such architecture would be an interesting candidate to explore as a solution for a \emph{Power System on-Chip/in-Package} LED driver.  Exploring the possibilities that switched capacitor converters can offer in terms of integrated and miniaturized LED drivers with efficient voltage-to-current conversion was the rational of this dissertation.
 
+\subsection{Energy transfer in capacitor based converters}
+%\begin{wrapfigure}{o}{0.7\textwidth}
+Capacitor based converter are lossy converter by nature, since the energy transfer between a voltage and a capacitor is a non-adiabatic process, which can be demonstrated using the circuit of Figure~\ref{fig:cap_chrg}.
+\begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{.33\textwidth}
+    \raggedright
+    %\ctikzset { bipoles/length=1cm}
+    \begin{circuitikz} [american,scale=0.65]
+    \draw
+        (0,0) to[battery1 = $v_{src}$]
+        (0,3) to[cspst=$s_1$] (2,3) to[short,i=$i$]
+        (3,3) to[capacitor=${c}$,v=$v$]
+        (3,0) -- (0,0);
+    %\draw[white]  (2.5,-2pt) node[anchor=north,font=\footnotesize] {$t_o$};
+    \end{circuitikz}
+    \label{fig:induct_charge}
+    \end{subfigure}
+    \begin{subfigure}[b]{.33\textwidth}
+    \raggedright
+    \begin{circuitikz} [scale=0.65]
+    \begin{scope}%[xshift = 8cm, yshift=0cm]
+        \draw[->] (0,0) -- (0,1.25) node[anchor=east] {$ s_1 $};
+        \draw[->] (0,0) -- (3.5,0) node[anchor=south] {$  t $};
+
+        \draw[->] (0,1.75) -- (0,3) node[anchor=east] {$ v $};
+        \draw[->] (0,1.75) -- (3.5,1.75) node[anchor=south] {$  t $};
+
+        %Ticks Y
+        \draw (0.5,0pt) -- (0.5,-2pt) node[anchor=north,font=\footnotesize] {$t_o$};
+        %\draw (2.5,0pt) -- (2.5,-2pt) node[anchor=north,font=\footnotesize] {$t+t_{x}$};
+        \draw (3pt,2.5) -- (-2pt,2.5) node[anchor=east,font=\footnotesize]{$v_{src}$};
+
+        %Markers
+        \draw[dotted] (.5,0) -- (0.5,1.75);
+        \draw[dotted] (0,2.5) -- (2.5,2.5);
+        
+        \draw[semithick] (0.5,0) |- (3.25,0.65) ;
+        %\draw (1.5,.32) node[font=\footnotesize] {$t_{on}$};
+        %\fill[gray!50] (0.5,1.75) -- (2.5,2.75)  -- (2.5,1.75);
+        \draw[semithick] (0.5,1.75) |- (3.25,2.5) ;
+
+        %\draw[->] (2,2) to[bend left=45] (1,2.5) node[font=\footnotesize,anchor=south]{$Q_{src}$};
+
+        %\draw[thick,dashed] (0.5,1.20) parabola[bend at end] (3,1.7) node[anchor=north] {$Real$};
+    \end{scope}
+    \end{circuitikz}
+
+    \end{subfigure}
+    \caption{Energy transfer in a capacitor.}
+    \label{fig:cap_chrg}
+\end{figure}
+
+On the one hand, the energy stored in a capacitor is given by
+\begin{equation}
+E_c = \frac{1}{2} c v^2.
+\label{eq:e_cap}
+\end{equation}
+After closing the switch at $t_o$, the capacitor is charged at $v_{src}$.  The charge delivered by the source $q_{src}$ to charge the capacitor is related its capacitance as
+\begin{equation}
+q_{src}= c~v_{src},
+\label{eq:q_src_cap}
+\end{equation}
+hence the energy stored in the charged capacitor results in  
+\begin{equation}
+E_{c^+} = \frac{1}{2} \frac{q_{src}}{v_{src}}  {v_{src}}^2 = \frac{1}{2}q_{src}~v_{src}.
+\label{eq:e_cap+}
+\end{equation}
+On the other hand, the energy delivered by the energy source is just 
+\begin{equation}
+E_{src} = v_{src} q_{src}.
+\label{eq:e_src_c}
+\end{equation}
+The energy lost while transferring energy between the source and the capacitor, is the difference between the energy deliver from the source~\eqref{eq:e_src_c} and the energy stored in the capacitor~\eqref{eq:e_cap+}, which results in
+\begin{equation}
+E_{loss} = E_{src} - E_{c^+} = v_{src}~q_{src}  - \frac{1}{2}q_{src}~v_{src}  = \frac{1}{2}q_{src}~v_{src}.
+\label{eq:e_loss_l}
+\end{equation}
+In conclusion, transferring energy between a voltage source and a capacitor is a lossy process. Actually, half of the used energy is lost, and the other half is stored in the capacitor. The energy lost is dissipated in the resistive elements such as switches and  track connections.
 
 \section{State of the art LED Drivers}
 Screen backlighting, Automotive and General Lighting are currently the three main areas of applicaiton of LEDs. Looking into these three areas of application gives a broad overview about the different driver architectures currently used and the approaches towards integration and miniaturization.

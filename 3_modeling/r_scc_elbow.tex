@@ -1,0 +1,56 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\begin{tikzpicture}
+\pgfplotsset{
+    width=\pWidth,
+    height=\pHeigh,
+    scale only axis,
+    xlabel near ticks,
+    ylabel near ticks,
+    enlarge x limits={0.05},
+    enlarge y limits={0.05},
+    every tick label/.append style={font=\footnotesize},
+    %yticklabel style={text width=2em,align=right},
+}
+
+\begin{loglogaxis}[
+        ylabel= {$  [\Omega] $},
+        xlabel= {$ f_{sw}~[Hz]$},
+        axis y line*=left,
+        axis x line*=bottom,
+        xtick=\empty, ytick=\empty,
+        xtick={250e3},
+        xticklabels={$f_{\angle}$},
+        legend style={
+                draw=none,
+                font=\footnotesize,
+                column sep=1ex,
+                legend cell align = left}
+        ]
+
+     \addplot [thick,smooth,black,domain=100e3:1e6]
+        {1/(1e-6*x)*( exp(0.5/(x*1e-6))+1 )/(exp(0.5/(x*1e-6))-1)};
+     \addlegendentry{$r_{scc}~(CF)$};
+
+     \addplot [semithick,dashed,smooth,gray,domain=100e3:275e3] {1/(1e-6*x)};
+     \addlegendentry{$r_{ssl}$};
+
+     \addplot [semithick,dotted,smooth,gray,domain=200e3:1e6] {4)};
+     \addlegendentry{$r_{fsl}$};
+
+     \draw[->,thin] ({axis cs:250e3,0}|-{axis cs:0,4}) -- ({axis cs:250e3,0}|-{ axis cs:0,5.2521});
+     %\draw[thin,dashed] ({axis cs:250e3,0}|-{axis cs:0,4}) -- ({axis cs:250e3,0}|-{ axis cs:0,0});
+     \addplot [thin,mark=o,only marks,mark size=1] coordinates  { (250e3,4) (250e3,5.2521)};
+
+     \node[font=\footnotesize, anchor=north east ] at (axis cs:250e3,4) {$r_x$};
+     \node[font=\footnotesize, anchor=south west] at (axis cs:250e3,5.2521) {$r_{elbow}$};
+     \node[font=\footnotesize, anchor=north, rotate=90] at (axis cs:250e3,4.5) {$p$};
+
+\end{loglogaxis}
+
+\end{tikzpicture}
