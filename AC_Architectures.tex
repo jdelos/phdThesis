@@ -1,0 +1,212 @@
+
+\section{AC-DC LED Drivers}
+In~\emph{ac-dc} conversion the LED drivers have to fulfill the governmental regulations  with respect to the power quality.
+Depending on the power consumption, the used architectures have a single stage, for low powers and PF above 0.9, and two stages, for high powers and unity PF.  Independently of the number stages, the input stage is generally implemented with a boost-like converter. Boost-like topologies are the preferred converters duet to their large dynamic range of conversion, which provide the required high power factor (PF) and a low total harmonic distortion (THD) of these applications.
+
+The H-SCC concept of combining a SCC with an inductor can also be used in \emph{ac-dc} LED drivers,  bringing to these applications benefits of H-SCC with respect to miniaturization. Actually, introducing small modification of the already presented \emph{hybrid} converters, their characteristics can be changed to suit the requirements of \emph{ac-dc} applications. For instance, just by swapping the input and output terminals of a H-Dickson, the converter operates then as boost-like converter, stepping-up the input voltage. The following section presents two different architectures for \emph{ac-dc} LED drivers, showing the flexibility of the \emph{hybrid} converters. The first architectures presents a single stage converter. The second, presents a two stage LED driver based on a previous low power factor \emph{ac-dc} SCC LED driver.
+
+
+\subsection{Single-stage \emph{ac-dc}}
+
+Figure~\ref{fig:hscc_boost} shows a boost 1:3 H-Dickson converter with a multiplexer. The power inductor is connected between the input supply and the switching node $v_x$. The multiplexer enables to interconnect the \emph{pwm}-nodes with the switching node, providing full conversion range. Notice that the converter in this boost-like configuration has two \emph{dc}-nodes available as outputs: $n_{bus}$ and $n_{dc}$. The former input terminals of the 3:1 Dickson are now an output of the converter, being actually used to supply the LED load. The former \emph{dc}-node $n_{dc}$ can be used also as an output, providing a voltage conversion of $1/3$ with respect to the output node ($n_{bus}$). For the proper operation of the converter, the voltage across capacitor $c_o$  has to be above the pear input voltage.
+
+Table~\ref{tab:1:3 H-Dick_M} presents the conversion ratios available in the converter. The conversion ratios associated to nodes $n_1$ to $_n4$ are given with respect to the output node $n_{bus}$. Contrary, the conversion ratio for $n_dc$ is given by takin $n_out$ as input.
+\begin{figure}[t]
+\ctikzset { bipoles/length=1cm}
+\centering
+    \begin{circuitikz}[american voltages,scale=0.6]
+
+    \draw
+            %Input Supply
+            (-4,0)--
+            (11,0)  to[pC,l=$c_{o}$]
+            %Draw Switches
+            (11,10)  --
+            (5,10)  to[switch=$s_1$] %S1
+            (5,8)   to[switch=$s_2$] %S2
+            (5,6)   to[switch=$s_3$] %S3
+            (5,4) --
+            %left branch
+            (3,4)   to[switch=$s_7$]
+            (3,2)   to[switch=$s_6$]
+            (3,0);
+
+    \draw   (11,10) -| (13,9) to[leD*] (13,7) to[leD*] (13,5) to[leD*] (13,3) to[leD*] (13,1) |- (7,0) ;
+    \draw    (13.25,12) to[open,v^=$v_{out}$] (13.25,-2);
+
+    \draw   %right branch
+            (5,4) --
+            (7,4)   to[switch,l_=$s_4$]
+            (7,2)   to[switch,l_=$s_5$]
+            (7,0);
+
+    % Nodes
+    \draw   (5,8) node[anchor=west] {$n_1$};
+    \draw   (8.25,6) node[anchor=south] {$n_2$};
+    \draw   (2,2) node[anchor=north] {$n_3$};
+    \draw   (8.25,2) node[anchor=west] {$n_4$};
+    \draw   (5,10) node[anchor=east] {$n_{bus}$};
+
+
+    \draw %Capacitor C1
+           (3,2) -- (2,2)
+            to[pC,l_=$c_1$] (2,8) --
+           (5,8);
+
+    \draw %Capacitor C2
+           (7,2) --
+           (8.25,2)  to[pC,l_=$c_2$](8.25,6) --
+           (5,6);
+
+    %\draw  %Inductor
+    %        (8.25,6) to[L=$l_o$,-o] (12,6);
+
+
+    \draw %Capacitor C3
+           (5,0) to[pC,l_=$c_3$] (5,4) node[anchor=south east] {$n_{dc}$};
+
+     %\draw (7,4) to[short,-o] (10,4) node[anchor=west] {};
+     %Inductor
+     \draw (-4,0) to[rsV=$v_{src}$]
+           (-4,6) to[L=$l_i$] node[anchor=south] {$v_x$} (-1,6);
+
+     %Mux connections
+     \draw (2,8) -|  (1,7) -- (0.25,7) node[anchor=east] {$_3$}%top 1
+           (0.25,6) node[anchor=east] {$_2$} -- ([hs]1,6 -| 2,2 ) arc(180:0:\radius) -- (5,6)%middle
+           (2,2) -| (1,5) -- (0.25,5) node[anchor=east] {${_1}$}; % bottom 1
+     %mux
+     \draw (-1,5) -- (-1,7) -- (0.25,7.5) -- (0.25,4.5) -- (-1,5)
+           (-0.6,6) node[rotate=90] {mux}
+           (-0.6,7.2) -- (-0.6,8) node[anchor=west,rotate=90] {sel};
+
+
+
+     \end{circuitikz}
+ \caption{ 1:3 H-Dickson boost topology with a multiplexer.}
+ \label{fig:hscc_boost}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\caption{Conversion ratio of the different nodes of a 1:3 H-Dickson converter.}
+\label{tab:1:3 H-Dick_M}
+\renewcommand{\arraystretch}{1.5}% Wider
+\begin{tabular}{l  c | c c c c c }
+ Node &  & $n_1$ & $n_2$ & $n_3$ & $n_4$ & $n_{dc}$\footnote{Conversion ratio for the \emph{dc}-node is taken with respect to $v_{out}$} \\
+ \midrule
+ Conversion ratio & $m_x$ & $\frac{3}{2+D} $    & $\frac{3}{2-D} $ & $\frac{3}{D} $ & $\frac{3}{1-D} $ & $\frac{1}{3}$ \\
+ Range of conversion &       & $1 \cdots \frac{3}{2}$ & $\frac{3}{2} \cdots 3 $ & $3 \cdots \infty $ & $ 3 \cdots \infty $ & - \\
+ Dynamic conversion range & $\Delta m$ &  $\frac{1}{2}$ &  $\frac{3}{2}$ &  $\infty$ &  $\infty$ &  -
+\end{tabular}
+\end{table}
+
+The circuit operates over three sections in order to cover the full range of the input voltage.  Depending on the input voltage and the bus voltage the multiplexer switches channels accordingly. When the input voltage ($v_{src}$) is between $0$  and $ \frac{v_{out}}{3}$, the first channel is selected; when $v_{src}$ is between $\frac{v_{out}}{3}$ and $\frac{2 v_{out}}{3}$, the second channel is selected; and when $v_{src}$ is between $\frac{2 v_{out}}{3}$ and $v_{out}$, the third channel is selected. The input current shape and the power delivered is controlled by the switching frequency and the duty cycle of the SCC stage.
+
+The power quality achieved with this topology is restricted to the limitations of single-stage mains connected LED drivers~\cite{1991Kheraluwala,2003AND8124D,2009Yuequan,2012Yuequan}, where the main trade-offs are size of the output capacitor, power quality and low frequency light flickering.
+
+The main advantages of using this architecture are the same as previously described, reduced voltage stress in the inductor, and in the switches.
+%Further details about the operation of this converter are in annex X, section Y.
+
+\subsection[Dual-Stage PFC]{Dual-Stage power factor correction }
+\begin{figure}[!h]
+\ctikzset { bipoles/length=1cm}
+\centering
+    \begin{circuitikz}[american voltages,scale=0.6]
+
+        %SCC switch leg
+    \draw
+
+            (5,12)  to[switch=$s_1$] %S1
+            (5,10)  to[switch=$s_2$] %S1
+            (5,8)   to[switch=$s_3$] %S2
+            (5,6)   to[switch=$s_4$] %S3
+            (5,4)   to[switch=$s_5$]
+            (5,2)   to[switch=$s_6$]
+            (5,0);
+
+         %HB switch leg
+       \draw
+            %Input Supply
+            (2.5,12) -- (0,12)  to[switch=$s'_1$] %S1
+            (0,10)  to[switch=$s'_2$] (0,8) -- (2.5,8)%S1
+            (0,8)   to[switch=$s'_3$] %S2
+            (0,6)   to[switch=$s'_4$] (0,4) -- (2.5,4) %S3
+            (0,4)   to[switch=$s'_5$]
+            (0,2)   to[switch=$s'_6$]
+            (0,0);
+
+       %diode routings
+    \draw  (-3,10) to[/tikz/circuitikz/bipoles/length=0.75cm,D*,l=$d_1$] (-1,10) -- (0,10) node[anchor=south east] {$vx_{3}$}
+           (-3,6) to[/tikz/circuitikz/bipoles/length=0.75cm,D*,l=$d_2$] (-1,6) -- (0,6)  node[anchor=south east] {$vx_{2}$}
+           (-3,10) to[switch=$s''_1$] (-3,6) to[switch=$s''_2$] (-3,2) -- (0,2)node[anchor=south east] {$vx_{1}$};
+
+    %Source and input inductor
+    \draw (0,0) -- (-6,0) to[rsV=$v_{src}$] (-6,10) to[L=$l_i$] (-3,10) node[anchor=south] {$vx$};
+
+    %\draw   (11,10) to[short,-o] (12,10) to[open,v^=$v_{out}$] (12,0) to[short,o-] (11,0);
+
+    %DC capacitor leg
+    \draw
+           (5,0) -- (2.5,0) to[pC,l_=$c_1$] (2.5,4) -- (5,4)
+           (2.5,4) to[pC,l_=$c_3$] (2.5,8) -- (5,8)
+           (2.5,8) to[pC,l_=$c_5$] (2.5,12) -- (5,12);
+
+    %flying capacitor leg
+    \draw
+           (5,2) -- (7.5,2) to[pC,l_=$c_2$] (7.5,6) -- (5,6)
+           (7.5,6) to[pC,l_=$c_4$] (7.5,10) -- (5,10);
+
+
+
+    %Output filter leg
+    \draw (7.5,6) -- (8,6) to[L=$l_o$] (11,6) -|
+          (13,5) to[leD*] (13,3.5) to[leD*] (13,1) |- (0,0)
+          (11,6) to[C,l_=$c_o$] (11,0);
+
+    \draw  (13,6.5) to[open,v^=$v_{out}$] (13,0);
+
+
+
+     \end{circuitikz}
+ \caption[Off-line mains connected LED driver]{Off-line \emph{ac-dc} LED driver using the 3:1 Ladder converter as \emph{dc-link}.  }
+ \label{fig:hscc_seg_pfc}
+\end{figure}
+Dual-stage LED drivers have high performances in terms of power and light quality. In the two stage configuration, the input stage is an active power factor  converter with near unity PF and low THD, while the second stage is used for \emph{dc-dc} conversion to control the LED load. The link between the two stages is commonly done by means of a capacitor used as a buffer between the input and the output. The input stage, normally a boost converter, steps-up the input voltage to a value above the peak mains voltage.
+
+The same configuration can be implemented using a single Ladder~\cite{segPFC} converter as shown in Figure~\ref{fig:hscc_seg_pfc}. One of the characteristics in a Ladder converter is that it has a leg of staked \emph{dc}-capacitors ($c_1$,$c_3$ and $c_3$) connected to ground, which provide multiple voltage levels equally spaced with respect ground. The link between the two stages is then done using this leg of \emph{dc}-capacitors, which enables the input stage to step-up the mains voltage
+
+ these capacitors are used as a link between the two stages, but in this cased the bus voltage is equally divided among these capacitors.
+
+
+
+ The two stages are linked using the \emph{dc}-capacitors of the Ladder converter.
+
+
+
+The Ladder converter is composed by the staked switches $s$ and the two legs of capacitors: The odd numbered capacitors form the \emph{dc}-capacitor leg, and the even numbered capacitors form the flying capacitor leg. The inductor $l_o$ is connected to the \emph{pwm}-node $v_{x1}$, and supplies the LEDs string.  The load is regulated using the duty cycle of the $s$ switches, like in the previous H-SCC \emph{dc-dc} architectures.
+
+The active power factor correction (PFC) is implemented with a \emph{segmented} boost stage, composed by switches $s'$ and $s''$, inductor $l_i$, and diodes $d_1$ and $d_2$. The different voltage availabe
+
+
+The voltage available in each of the \emph{dc}-capacitors is used to generate a plurality of floating PWM voltages that can excite the input inductor to operate as a boost converter.  Each \emph{dc}-capacitor has a pair of switches in parallel to generate this PWM voltage, thus $c_1$ has $s'5$ and $s'6$; $c_3$ has $s'3$ and $s'4$; and $c_5$ has $s'1$ and $s'2$. The inductor's switching node $vx$ can be connected to any of the floating switching nodes $vx_{1,2,3}$ using the diode-clamped multiplexer formed by switches $s''$ and diodes $d$. Further operation details are explained in annex X, section Y.\\
+
+
+Using H-SCC offers \emph{ac-dc}converters that :
+ \begin{enumerate}
+
+   \item Have a reduced size at the input inductor. This is because the voltage swing is a fraction of the input voltage.
+
+   \item Switches and capacitors are rated at a fraction of the peak input voltage.
+
+   \item Only the diodes block high voltage of  maximum the peak mains voltage. At the same time, they operate at the \emph{ac} source frequency, reducing the switching loss.
+
+   \item The voltage of the bus capacitors is reduced, being only a fraction of the peak mains voltage, allowing to use low voltage (LV) capacitors that generally feature higher energy densities.
+ \end{enumerate}
+
+\section{Summary}
+
+
+Finally, the last section was dedicated to exploring the possibilities of the H-SCCs for LED driving. Different driver architectures for both \emph{dc-dc} and \emph{ac-dc} applications were presented, showing that the \emph{hybrid} structure can be used in a broad range of applications, which go beyond LED drivers.
+
+In conclusion, the H-SCC is a new power converter topology composed of a SCC and an inductor. The SCC implements the power train structure, where the SCC's conversion ratio adds a new variable to the design of the converter. Modifying this variable allows to adjust the voltages stress if the switches, capacitors, and inductors, and favors the integrability of the converter. At the same time, the extra  inductor extends the regulation margins because it allows to control the output voltage with the duty cycle of the SCC stage.
+

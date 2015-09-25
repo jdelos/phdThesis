@@ -1207,12 +1207,7 @@ v_{o2} = \frac{1+D}{2} v_{src}.
 \end{equation}
 The voltage $v_{o2}$ can be regulated by means of $D$.
 
-%\subsection{Topology configurations}
-%
-%Here will be studied the different possibilities that this topology offers. It has to be considered the different combinations N:1 SCC  [Buck, Boost, Buck-Boost], 1:N SCC [Buck,Boost, Buck-Boost].
-
-
-\section{LED Driver}
+\section{DC-DC LED Drivers}
 The buck converter is one of the most used topologies for LED drivers in \emph{dc-dc} applications. It has an excellent current regulation and a continuous output current thanks to the inductor connected in series with the output, as shown in Figure~\ref{fig:ind_ckt_led_drv}.
 
 \begin{figure}[!h]
@@ -1357,101 +1352,11 @@ It can be seen in Figure~\ref{fig:induc_vx_led_drv} that the voltage swing at th
 
 The abrupt $v-i$ characteristics of the LEDs is an advantage for the reduced conversion range of the H-SCC. Contrary to the buck converter, the H-SCC has a smaller voltage swing in the switching node. Figure~\ref{fig:hscc_led_drv} shows that the voltage limits of the switching node in a H-SCC can accommodate $\Delta v_f$ variations of the LED load.  As previously described in Section~\ref{sec:out_reg}, the dynamic conversion range at the outputs depend on the intrinsic conversion ratio $m_i$ of the SCC stage, therefore it can be adjusted for the requirements of the load.
 
-The following subsections present different LED drivers based on H-SCCs for \emph{dc-dc} and \emph{ac-dc}. The presented topologies are also suitable to supply other load types, specially when these require a reduced conversion margin.
+%The following subsections present different LED drivers based on H-SCCs for \emph{dc-dc} and \emph{ac-dc}. The presented topologies are also suitable to supply other load types, specially when these require a reduced conversion margin.
 
 \subsection{Single-stage \emph{dc-dc} with auxiliary output voltage}
-
-Figure~\ref{fig:5_1_hscc_emerge} shows the \emph{dc-dc} LED driver with an auxiliary output voltage~\cite{WO2015/040564}.
-In fact, this architecture has been used in an experimental set-up for this dissertation presented in the last chapter. The converter features two outputs: The main output $v_{out}$ supplies the LED load and normally delivers the largest amount of power. The output voltage can be controlled using the duty cycle $D$, thus its value is given by
-\begin{equation}
-v_{out} =  v_{src}  \frac{4 - D }{5}.
-\label{eq:dc_dc_vout}
-\end{equation}
-
-The secondary output $v_{aux}$ supplies the low voltage electronics dedicated to the control of the driver, providing functionalities such as connectivity, light control and stand-by operation. The secondary output has no direct means of regulation and provides a fix conversion ratio equal to
-\begin{equation}
-v_{aux} =  v_{src} \frac{1 }{5}.
-\label{eq:dc_dc_vaux}
-\end{equation}
-Nevertheless, the voltage at this output can still be controlled by means of a linear regulator.
-\begin{figure}[t]
+\begin{figure}[!h]
 \ctikzset { bipoles/length=1cm}
-
-\centering
-    \begin{circuitikz}[american voltages,scale=0.6]
-
-    \draw
-            %Input Supply
-            (-1,0)  to[V=$v_{src}$]
-            %Draw Switches
-            (-1,14)  --
-            (5,14)  to[switch=$s_1$] %node[anchor=west] {$n_1$}%S1
-            (5,12)  to[switch=$s_2$] %node[anchor=east] {$n_2$}%S1
-            (5,10)  to[switch=$s_3$] %node[anchor=east] {$n_3$}%S1
-            (5,8)   to[switch=$s_4$] %node[anchor=west] {$n_4$}%S2
-            (5,6)   to[switch=$s_5$] %node[anchor=west] {$n_5$}%S3
-            (5,4) --
-            %left branch
-            (3,4)   to[switch=$s_9$]
-            (3,2)   to[switch=$s_8$]
-            (3,0);
-
-    \draw   %right branch
-            (5,4) --
-            (7,4)   to[switch,l_=$s_6$]
-            (7,2)   to[switch,l_=$s_7$]
-            (7,0) -- (-1,0);
-
-
-
-    \draw %Capacitor C1
-           (2,8)
-            to[pC,l_=$c_1$] (2,12) --
-           (5,12);
-
-    \draw %Capacitor C2
-           (8.25,6)  to[pC,l_=$c_2$](8.25,10) --
-           (5,10);
-
-    \draw %Capacitor C3
-           (3,2) -- (2,2)
-            to[pC,l_=$c_3$] (2,8) --
-           (5,8);
-
-    \draw %Capacitor C4
-           (7,2) --
-           (8.25,2) -- (8.25,4) to[pC,l_=$c_4$](8.25,6) --
-           (5,6);
-
-
-    \draw  %LC output filter &  Output LED string
-            (8.25,10)node[anchor=south] {$v_x$} to[L=$l_o$] (14,10)
-            (13.5,0) to[pC,l=$c_{o}$] (13.5,10) -|
-            (16,9) to[leD*] (16,7) to[leD*] (16,5) to[leD*] (16,3) to[leD*] (16,1) |- (7,0) ;
-
-    %Vout label
-    \draw (16.25,12) to[open,v^=$v_{out}$] (16.25,-2);
-
-    \draw %Capacitor C3
-           (5,0) to[pC,l_=$c_5$,-*] (5,4) ;% node[anchor=south east] {$n_{dc}$};
-
-     %\draw (7,4) to[short,-o] (10,4) node[anchor=west] {};
-     %\draw (7,0) to[short,-o] (12,0) node[anchor=west] {};
-
-
-     \draw (7,4) --([hs]8.25,4 |- 7,4) arc(180:0:\radius) to[short,-o] (10,4) to[open,v^=$v_{aux}$] (10,0) ;
-
-
-     \end{circuitikz}
- \caption[5:1 H-Dickosn 12W LED driver]{ 5:1 Dickson LED driver for 24V e-merge track lighting application. The driver has two outputs: A $12V$, $12W$  LED string, and $4V$, $200mW$  to supply low power auxiliary loads. }
- \label{fig:5_1_hscc_emerge}
-\end{figure}
-This architecture has a limited conversion range between $3/5$ and $4/5$. This conversion ratio can be extended introducing a multiplexer between the different floating \emph{pwm}-nodes and the power inductor~\cite{WO2015/040517} as shown in Figure~\ref{fig:5_1_hscc_mux}. The multiplexer allows to connect any of available \emph{pwm}-nodes of the converter with the power inductor. In this way the conversion ratio of the converter covers the entire dynamic range between ground and $v_{src}$.
-%A detailed description of this architecture can be found in the annex X section Y.
-
-\begin{figure}[t]
-\ctikzset { bipoles/length=1cm}
-
 \centering
     \begin{circuitikz}[american voltages,scale=0.6]
 
@@ -1459,276 +1364,172 @@ This architecture has a limited conversion range between $3/5$ and $4/5$. This c
             %Input Supply
             (0,0)  to[V=$v_{src}$]
             %Draw Switches
-            (0,14)  --
-            (5,14)  to[switch=$s_1$] %node[anchor=west] {$n_1$}%S1
-            (5,12)  to[switch=$s_2$] %node[anchor=east] {$n_2$}%S1
-            (5,10)  to[switch=$s_3$] %node[anchor=east] {$n_3$}%S1
-            (5,8)   to[switch=$s_4$] %node[anchor=west] {$n_4$}%S2
-            (5,6)   to[switch=$s_5$] %node[anchor=west] {$n_5$}%S3
-            (5,4) --
+            (0,10.5)  --
+            (5,10.5)  to[switch=$s_1$] %node[anchor=west] {$n_1$}%S1
+            (5,9)  to[switch=$s_2$] %node[anchor=east] {$n_2$}%S1
+            (5,7.5)  to[switch=$s_3$] %node[anchor=east] {$n_3$}%S1
+            (5,6)   to[switch=$s_4$] %node[anchor=west] {$n_4$}%S2
+            (5,4.5)   to[switch=$s_5$] %node[anchor=west] {$n_5$}%S3
+            (5,3) --
             %left branch
-            (3,4)   to[switch=$s_9$]
-            (3,2)   to[switch=$s_8$]
+            (3,3)   to[switch=$s_9$]
+            (3,1.5)   to[switch=$s_8$]
             (3,0);
 
     \draw   %right branch
-            (5,4) --
-            (7,4)   to[switch,l_=$s_6$]
-            (7,2)   to[switch,l_=$s_7$]
+            (5,3) --
+            (7,3)   to[switch,l_=$s_6$]
+            (7,1.5)   to[switch,l_=$s_7$]
             (7,0) -- (0,0);
 
 
 
     \draw %Capacitor C1
-           (2,8)
-            to[pC,l_=$c_1$] (2,12) --
-           (5,12);
+           (2,6)
+            to[pC,l_=$c_1$] (2,9) --
+           (5,9);
 
     \draw %Capacitor C2
-           (8.25,6)  to[pC,l=$c_2$](8.25,10) --
-           (5,10);
+           (8.25,4.5)  to[pC,l_=$c_2$](8.25,7.5) --
+           (5,7.5);
 
     \draw %Capacitor C3
-           (3,2) -- (2,2)
-            to[pC,l_=$c_3$] (2,8) --
-           (5,8);
+           (3,1.5) -- (2,1.5)
+            to[pC,l_=$c_3$] (2,6) --
+           (5,6);
 
     \draw %Capacitor C4
-           (7,2) --
-           (8.25,2) -- (8.25,4) to[pC,l=$c_4$](8.25,6) --
-           (5,6);
+           (7,1.5) --
+           (8.25,1.5) -- (8.25,3) to[pC,l_=$c_4$](8.25,4.5) --
+           (5,4.5);
 
 
     \draw  %LC output filter &  Output LED string
-            (12,10)node[anchor=south west] {$v_x$} to[L=$l_o$] (15.5,10)
-            (15.5,0) to[pC,l=$c_{o}$] (15.5,10) -|
-            (18,9) to[leD*] (18,7) to[leD*] (18,5) to[leD*] (18,3) to[leD*] (18,1) |- (7,0) ;
-
-            %Mux
-    \draw   (12,10) -- (12,11) -- (11,11.5) -- (11,8.5) -- (12,9) -- (12,10)
-            (11.5,10) node[rotate=90] {$mux$}
-            (11.5,11.25) -- (11.5,12) node[anchor=west, rotate=90] {$sel$};
-
-    \draw    %Mux connections
-            (5,12)  --  (10,12) |- (11,11)
-            (8.25,10)  --  (11,10)
-            (5,8) --  (6.5,8) -- ([vs_d]5,10 -| 6.5,8 ) arc(270:90:\radius) --  (6.5,10.5) -- (11,10.5)
-            (8.25,6) -| (9.5,9.5) -- (11,9.5)
-            (8.25,2) -| (10,9) -- (11,9);
+            (8.25,7.5)node[anchor=south] {$v_x$} to[L=$l_o$] (14,7.5)
+            (13.5,0) to[pC,l=$c_{o}$] (13.5,7.5) -|
+            (16,7.5) -- (16,7)  to[leD*] (16,5) to[leD*] (16,3) to[leD*] (16,1)   |- (7,0) ;
 
     %Vout label
-    \draw (16.25,12) to[open,v^=$v_{out}$] (16.25,-2);
+    \draw (16.25,8.5) to[open,v^=$v_{out}$] (16.25,-1);
 
     \draw %Capacitor C3
-           (5,0) to[pC,l_=$c_5$] (5,4) ;% node[anchor=south east] {$n_{dc}$};
+           (5,0) to[pC,l_=$c_5$] (5,3) ;% node[anchor=south east] {$n_{dc}$};
 
      %\draw (7,4) to[short,-o] (10,4) node[anchor=west] {};
      %\draw (7,0) to[short,-o] (12,0) node[anchor=west] {};
 
 
-     %\draw (7,4) --([hs]8.25,4 |- 7,4) arc(180:0:\radius) to[short,-o] (10,4) to[open,v^=$v_{aux}$] (10,0) ;
+     \draw (7,3) --([hs]8.25,4 |- 7,3) arc(180:0:\radius) to[short,-o] (10,3) to[open,v^=$v_{aux}$] (10,0) ;
+
+
+     \end{circuitikz}
+ \caption[5:1 H$^2$-Dickosn 12W LED driver]{ 5:1 H$^2$-Dickson LED driver for 24V e-merge track lighting application. The driver has two outputs: A $12V$, $12W$  LED string, and $4V$, $200mW$  to supply low power auxiliary loads. }
+ \label{fig:5_1_hscc_emerge}
+\end{figure}
+Figure~\ref{fig:5_1_hscc_emerge} shows the \emph{dc-dc} LED driver with an auxiliary output voltage~\cite{WO2015/040564}.
+In fact, this architecture has been used in an experimental set-up for this dissertation presented in the last chapter. The converter features two outputs: The main output $v_{out}$ supplies the LED load and normally delivers the largest amount of power. The output voltage can be controlled using the duty cycle $D$, thus its value is given by
+\begin{equation}
+v_{out} =  v_{src}  \frac{4 - D }{5}.
+\label{eq:dc_dc_vout}
+\end{equation}
+The secondary output $v_{aux}$ supplies the low voltage electronics dedicated to the control of the driver, providing functionalities such as connectivity, light control and stand-by operation. The secondary output has no direct means of regulation and provides a fix conversion ratio equal to
+\begin{equation}
+v_{aux} =  v_{src} \frac{1 }{5}.
+\label{eq:dc_dc_vaux}
+\end{equation}
+Nevertheless, the voltage at this output can still be controlled by means of a linear regulator.
+\begin{figure}[!h]
+\ctikzset { bipoles/length=1cm}
+\centering
+    \begin{circuitikz}[american voltages,scale=0.6]
+
+    \draw
+            %Input Supply
+            (0,0)  to[V=$v_{src}$]
+            %Draw Switches
+            (0,10.5)  --
+            (5,10.5)  to[switch=$s_1$] %node[anchor=west] {$n_1$}%S1
+            (5,9)  to[switch=$s_2$] %node[anchor=east] {$n_2$}%S1
+            (5,7.5)  to[switch=$s_3$] %node[anchor=east] {$n_3$}%S1
+            (5,6)   to[switch=$s_4$] %node[anchor=west] {$n_4$}%S2
+            (5,4.5)   to[switch=$s_5$] %node[anchor=west] {$n_5$}%S3
+            (5,3) --
+            %left branch
+            (3,3)   to[switch=$s_9$]
+            (3,1.5)   to[switch=$s_8$]
+            (3,0);
+
+    \draw   %right branch
+            (5,3) --
+            (7,3)   to[switch,l_=$s_6$]
+            (7,1.5)   to[switch,l_=$s_7$]
+            (7,0) -- (0,0);
+
+
+
+    \draw %Capacitor C1
+           (2,6)
+            to[pC,l_=$c_1$] (2,9) --
+           (5,9);
+
+    \draw %Capacitor C2
+           (8.25,4.5)  to[pC,l=$c_2$](8.25,7.5) --
+           (5,7.5);
+
+    \draw %Capacitor C3
+           (3,1.5) -- (2,1.5)
+            to[pC,l_=$c_3$] (2,6) --
+           (5,6);
+
+    \draw %Capacitor C4
+           (7,1.5) --
+           (8.25,1.5) -- (8.25,3) to[pC,l=$c_4$](8.25,4.5) --
+           (5,4.5);
+
+
+    \draw  %LC output filter &  Output LED string
+            (12,7.5)node[anchor=south west] {$v_x$} to[L=$l_o$] (15.5,7.5)
+            (15,0) to[pC,l=$c_{o}$] (15,7.5) -|
+            (16.5,7.5) -- (16.5,7)  to[leD*] (16.5,5) to[leD*] (16.5,3) to[leD*] (16.5,1)   |- (7,0) ;
+
+            %Mux
+    \draw   (12,7.5) -- (12,8.5) -- (11,9) -- (11,6) -- (12,6.5) -- (12,7.5)
+            (11.5,7.5) node[rotate=90] {$mux$}
+            (11.5,8.75) -- (11.5,9.5) node[anchor=west, rotate=90] {$sel$};
+
+    \draw    %Mux connections
+            (5,9)  --  (10,9) |- (11,8.5)
+            (8.25,7.5)  --  (11,7.5)
+            (5,6) --  (6.5,6) -- ([vs_d]5,7.5 -| 6.5,8 ) arc(270:90:\radius) --  (6.5,8) -- (11,8)
+            (8.25,4.5) -| (9.5,7) -- (11,7)
+            (8.25,1.5) -| (10,6.5) -- (11,6.5);
+
+    %Vout label
+    \draw (17,9) to[open,v^=$v_{out}$] (17,-1);
+
+    \draw %Capacitor C3
+           (5,0) to[pC,l_=$c_5$] (5,3) ;% node[anchor=south east] {$n_{dc}$};
+
      \end{circuitikz}
  \caption[5:1 H-Dickson LED driver 24V-12V-4V 12W LED driver]{ 5:1 H-Dickson LED driver with a multiplexer that enables to connect the different switching nodes with the power inductor.  }
  \label{fig:5_1_hscc_mux}
 \end{figure}
 
+\subsection{Single-stage \emph{dc-dc} with extended conversion range }
 
-\subsection{Single-stage \emph{ac-dc}}
-The H-SCC can be also used in \emph{ac-dc} applications with a few modifications of the original architecture. For \emph{ac-dc} conversion the power converter must be able to cover a substantial range of the mains voltage in order to guarantee a high power factor (PF) and a low total harmonic distortion (THD).
+The reduced voltage swing at $v_x$, on the one hand favors in the reduction of output inductor, but on the other hand shrinks the conversion to a narrow range between $3/5$ and $4/5$. Using the same topology, the conversion ratio of the converter can be extended to the full range between 0 and 1, like in a buck converter, introducing a multiplexer~\cite{WO2015/040517} between the different floating \emph{pwm}-nodes and the power inductor as shown in Figure~\ref{fig:5_1_hscc_mux}. With this enhancement the power inductor can now be connecter to any of the available \emph{pwm}-nodes of the SCC stage.
+%A detailed description of this architecture can be found in the annex X section Y.
 
-It is well-known the use of the boost converter in power factor correction (PFC) converters, due to its smooth input current and the large dynamic range of conversion.  A H-SCC converter can also operate as a boost converter just by swapping the input and the output ports. By adding the previously described multiplexer, the converter can then cover the full range of conversion between 1 and $\infty$ just like a boost converter.
-
-Figure~\ref{fig:hscc_boost} shows a boost 1:3 H-Dickson converter with a multiplexer. The power inductor is connected between the input supply and the switching node $v_x$. The multiplexer enables to interconnect the \emph{pwm}-nodes with the switching node, providing full conversion range. Notice that the converter in this boost-like configuration has two \emph{dc}-nodes available as outputs: $n_{bus}$ and $n_{dc}$. The former input terminals of the 3:1 Dickson are now another output of the converter, supplying the load and the output capacitor $c_o$. The former \emph{dc}-node ($n_{dc}$) provides a voltage conversion of $1/3$ with respect to the output node ($n_{bus}$), maintaining the same input to \emph{dc}-node of a the 3:1 Dickson. As in a bost PFC, the voltage across capacitor $c_o$, bus capacitor,  has to be above the pear input voltage in order to guarantee the proper boost operation of the converter.  Table~\ref{tab:1:3 H-Dick_M} presents the conversion ratios associated to nodes $n_1$ to $_n4$ with respect to the output node $n_{bus}$. Contrary, the conversion ratio for $n_dc$ is given by taking $n_out$ as input and $n_dc$ as output.
-
-\begin{figure}[t]
-\ctikzset { bipoles/length=1cm}
-\centering
-    \begin{circuitikz}[american voltages,scale=0.6]
-
-    \draw
-            %Input Supply
-            (-4,0)--
-            (11,0)  to[pC,l=$c_{o}$]
-            %Draw Switches
-            (11,10)  --
-            (5,10)  to[switch=$s_1$] %S1
-            (5,8)   to[switch=$s_2$] %S2
-            (5,6)   to[switch=$s_3$] %S3
-            (5,4) --
-            %left branch
-            (3,4)   to[switch=$s_7$]
-            (3,2)   to[switch=$s_6$]
-            (3,0);
-
-    \draw   (11,10) -| (13,9) to[leD*] (13,7) to[leD*] (13,5) to[leD*] (13,3) to[leD*] (13,1) |- (7,0) ;
-    \draw    (13.25,12) to[open,v^=$v_{out}$] (13.25,-2);
-
-    \draw   %right branch
-            (5,4) --
-            (7,4)   to[switch,l_=$s_4$]
-            (7,2)   to[switch,l_=$s_5$]
-            (7,0);
-
-    % Nodes
-    \draw   (5,8) node[anchor=west] {$n_1$};
-    \draw   (8.25,6) node[anchor=south] {$n_2$};
-    \draw   (2,2) node[anchor=north] {$n_3$};
-    \draw   (8.25,2) node[anchor=west] {$n_4$};
-    \draw   (5,10) node[anchor=east] {$n_{bus}$};
-
-
-    \draw %Capacitor C1
-           (3,2) -- (2,2)
-            to[pC,l_=$c_1$] (2,8) --
-           (5,8);
-
-    \draw %Capacitor C2
-           (7,2) --
-           (8.25,2)  to[pC,l_=$c_2$](8.25,6) --
-           (5,6);
-
-    %\draw  %Inductor
-    %        (8.25,6) to[L=$l_o$,-o] (12,6);
-
-
-    \draw %Capacitor C3
-           (5,0) to[pC,l_=$c_3$] (5,4) node[anchor=south east] {$n_{dc}$};
-
-     %\draw (7,4) to[short,-o] (10,4) node[anchor=west] {};
-     %Inductor
-     \draw (-4,0) to[rsV=$v_{src}$]
-           (-4,6) to[L=$l_i$] node[anchor=south] {$v_x$} (-1,6);
-
-     %Mux connections
-     \draw (2,8) -|  (1,7) -- (0.25,7) node[anchor=east] {$_3$}%top 1
-           (0.25,6) node[anchor=east] {$_2$} -- ([hs]1,6 -| 2,2 ) arc(180:0:\radius) -- (5,6)%middle
-           (2,2) -| (1,5) -- (0.25,5) node[anchor=east] {${_1}$}; % bottom 1
-     %mux
-     \draw (-1,5) -- (-1,7) -- (0.25,7.5) -- (0.25,4.5) -- (-1,5)
-           (-0.6,6) node[rotate=90] {mux}
-           (-0.6,7.2) -- (-0.6,8) node[anchor=west,rotate=90] {sel};
-
-
-
-     \end{circuitikz}
- \caption{ 1:3 H-Dickson boost topology with a multiplexer.}
- \label{fig:hscc_boost}
-\end{figure}
-
-\begin{table}[h]
-\centering
-\caption{Conversion ratio of the different nodes of a 1:3 H-Dickson converter.}
-\label{tab:1:3 H-Dick_M}
-\renewcommand{\arraystretch}{1.5}% Wider
-\begin{tabular}{l  c | c c c c c }
- Node &  & $n_1$ & $n_2$ & $n_3$ & $n_4$ & $n_{dc}$\footnote{Conversion ratio for the \emph{dc}-node is taken with respect to $v_{out}$} \\
- \midrule
- Conversion ratio & $m_x$ & $\frac{3}{2+D} $    & $\frac{3}{2-D} $ & $\frac{3}{D} $ & $\frac{3}{1-D} $ & $\frac{1}{3}$ \\
- Range of conversion &       & $1 \cdots \frac{3}{2}$ & $\frac{3}{2} \cdots 3 $ & $3 \cdots \infty $ & $ 3 \cdots \infty $ & - \\
- Dynamic conversion range & $\Delta m$ &  $\frac{1}{2}$ &  $\frac{3}{2}$ &  $\infty$ &  $\infty$ &  -
-\end{tabular}
-\end{table}
-
-This architecture converts the rectified mains voltage to a \emph{dc} voltage and enables current regulation of the load. The circuit operates over three sections in order to cover the full range of the input voltage.  Depending on the input voltage and the bus voltage the multiplexer switches channels accordingly. When the input voltage ($v_{src}$) is between $0$  and $ \frac{v_{out}}{3}$, the first channel is selected; when $v_{src}$ is between $\frac{v_{out}}{3}$ and $\frac{2 v_{out}}{3}$, the second channel is selected; and when $v_{src}$ is between $\frac{2 v_{out}}{3}$ and $v_{out}$, the third channel is selected. The current delivered to the load is regulated using the duty cycle of the SCC stage.
-
-High PF and low THD can be achieved with this topology, but similar to other single-stage PF correctors~\cite{1991Kheraluwala,2003AND8124D,2009Yuequan,2012Yuequan} with the storage capacitor connected at the output in parallel to the LEDs, a very large capacitance or a post-regulator is required to guarantee a low voltage ripple at the output.
-
-Further details about the operation of this converter are in annex X, section Y.
-
-\subsection[Dual-Stage PFC]{Dual-Stage power factor correction }
-
-\begin{figure}[t]
-\ctikzset { bipoles/length=1cm}
-\centering
-    \begin{circuitikz}[american voltages,scale=0.6]
-
-        %SCC switch leg
-    \draw
-
-            (5,12)  to[switch=$s_1$] %S1
-            (5,10)  to[switch=$s_2$] %S1
-            (5,8)   to[switch=$s_3$] %S2
-            (5,6)   to[switch=$s_4$] %S3
-            (5,4)   to[switch=$s_5$]
-            (5,2)   to[switch=$s_6$]
-            (5,0);
-
-         %HB switch leg
-       \draw
-            %Input Supply
-            (2.5,12) -- (0,12)  to[switch=$s'_1$] %S1
-            (0,10)  to[switch=$s'_2$] (0,8) -- (2.5,8)%S1
-            (0,8)   to[switch=$s'_3$] %S2
-            (0,6)   to[switch=$s'_4$] (0,4) -- (2.5,4) %S3
-            (0,4)   to[switch=$s'_5$]
-            (0,2)   to[switch=$s'_6$]
-            (0,0);
-
-       %diode routings
-    \draw  (-3,10) to[/tikz/circuitikz/bipoles/length=0.75cm,D*,l=$d_1$] (-1,10) -- (0,10) node[anchor=south east] {$vx_{3}$}
-           (-3,6) to[/tikz/circuitikz/bipoles/length=0.75cm,D*,l=$d_2$] (-1,6) -- (0,6)  node[anchor=south east] {$vx_{2}$}
-           (-3,10) to[switch=$s''_1$] (-3,6) to[switch=$s''_2$] (-3,2) -- (0,2)node[anchor=south east] {$vx_{1}$};
-
-    %Source and input inductor
-    \draw (0,0) -- (-6,0) to[rsV=$v_{src}$] (-6,10) to[L=$l_i$] (-3,10) node[anchor=south] {$vx$};
-
-    %\draw   (11,10) to[short,-o] (12,10) to[open,v^=$v_{out}$] (12,0) to[short,o-] (11,0);
-
-    %DC capacitor leg
-    \draw
-           (5,0) -- (2.5,0) to[pC,l_=$c_1$] (2.5,4) -- (5,4)
-           (2.5,4) to[pC,l_=$c_3$] (2.5,8) -- (5,8)
-           (2.5,8) to[pC,l_=$c_5$] (2.5,12) -- (5,12);
-
-    %flying capacitor leg
-    \draw
-           (5,2) -- (7.5,2) to[pC,l_=$c_2$] (7.5,6) -- (5,6)
-           (7.5,6) to[pC,l_=$c_4$] (7.5,10) -- (5,10);
-
-
-
-    %Output filter leg
-    \draw (7.5,6) -- (8,6) to[L=$l_o$] (11,6) -|
-          (13,5) to[leD*] (13,3.5) to[leD*] (13,1) |- (0,0)
-          (11,6) to[C,l_=$c_o$] (11,0);
-
-    \draw  (13,6.5) to[open,v^=$v_{out}$] (13,0);
-
-
-
-     \end{circuitikz}
- \caption{Off-line \emph{ac-dc} LED driver using the 3:1 Ladder converter as \emph{dc-link}.  }
- \label{fig:hscc_seg_pfc}
-\end{figure}
-
-Generally, unity power factor LED drivers are implemented in two stages. The input stage is an active PFC converter with near unity PF and low THD, while the second stage is used for \emph{dc-dc} conversion. A similar two stage architecture can be implemented with a single Ladder SCC~\cite{segPFC}. This converter is also divided in two stages, which are linked using the \emph{dc}-capacitors of the Ladder converter.  The Ladder converter is composed by the staked switches $s$ and the two legs of capacitors: The odd numbered  capacitors form the \emph{dc}-capacitor leg, and the even numbered capacitors form the flying capacitor leg. The inductor $l_o$ is connected to a \emph{pwm}-node adding a \emph{hybrid} output to the Lader SCC that supplies the LEDs at the output ($v_{out}$). The load is regulated using the duty cycle of the $s$ switches, like in the previous H-SCC \emph{dc-dc} architectures.
-
-The active power factor correction (PFC) stage is implemented with the \emph{segmented}-boost converter~\cite{segPFC} of Figure~\ref{fig:hscc_seg_pfc}. The stage is build around the \emph{dc}-capacitor leg of the Ladder converter, and composed by switches $s'$ and $s''$, inductor $l_i$, and diodes $d_1$ and $d_2$. In such a two stage approach the bus voltage is equally divided among the \emph{dc}-capacitors.
-
-The voltage available in each of the \emph{dc}-capacitors is used to generate a plurality of floating PWM voltages that can excite the input inductor to operate as a boost converter.  Each \emph{dc}-capacitor has a pair of switches in parallel to generate this PWM voltage, thus $c_1$ has $s'5$ and $s'6$; $c_3$ has $s'3$ and $s'4$; and $c_5$ has $s'1$ and $s'2$. The inductor's switching node $vx$ can be connected to any of the floating switching nodes $vx_{1,2,3}$ using the diode-clamped multiplexer formed by switches $s''$ and diodes $d$. Further operation details are explained in annex X, section Y.\\
-
-
-Using H-SCC offers \emph{ac-dc}converters that :
- \begin{enumerate}
-
-   \item Have a reduced size at the input inductor. This is because the voltage swing is a fraction of the input voltage.
-
-   \item Switches and capacitors are rated at a fraction of the peak input voltage.
-
-   \item Only the diodes block high voltage of  maximum the peak mains voltage. At the same time, they operate at the \emph{ac} source frequency, reducing the switching loss.
-
-   \item The voltage of the bus capacitors is reduced, being only a fraction of the peak mains voltage, allowing to use low voltage (LV) capacitors that generally feature higher energy densities.
- \end{enumerate}
 
 \section{Summary}
 
 In this chapter the hybrid switched capacitor converter (H-SCC) was introduced. First, the main operation and performance characteristics of the SCC were presented, with special emphasis on the limitations that these converters have with respect to load  regulation.
 
-Subsequently, the H-SCC was described as a combination of SCC with an inductor. Such a \emph{hybrid} combination makes it possible to achieve a much better regulation than possible with the pure SCCs. In fact, the regulation enhancements in the H-SCC make the converter comparable to an inductive converters, especially to the buck. For that reason, two idealized metrics were presented in order to qualitatively compare the converters with respect to integration. These metrics shown that when using a H-SCC the inductor size and switching losses can be reduced compared to a buck converter.
+Subsequently, the H-SCC was described as a combination of SCC with an inductor. Such a \emph{hybrid} combination makes it possible to achieve a much better regulation than possible with the pure SCCs. In fact, the regulation enhancements in the H-SCC make the converter comparable to an inductive converters, especially to the buck. For that reason, two metrics were presented in order to qualitatively evaluate the benefits of these converters with respect to integration. These metrics shown that when using a H-SCC the inductor size and switching losses can be reduced compared to a buck converter.
 
-Finally, the last section was dedicated to exploring the possibilities of the H-SCCs for LED driving. Different driver architectures for both \emph{dc-dc} and \emph{ac-dc} applications were presented, showing that the \emph{hybrid} structure can be used in a broad range of applications, which go beyond LED drivers.
+Finally, the last section was dedicated to exploring the possibilities of the H-SCCs for LED driving. Different driver architectures for \emph{dc-dc} applications were presented, introducing the architecture that was used in the final demonstrator if this disoperation. 
 
-In conclusion, the H-SCC is a new power converter topology composed of a SCC and an inductor. The SCC implements the power train structure, where the SCC's conversion ratio adds a new variable to the design of the converter. Modifying this variable allows to adjust the voltages stress if the switches, capacitors, and inductors, and favors the integrability of the converter. At the same time, the extra  inductor extends the regulation margins because it allows to control the output voltage with the duty cycle of the SCC stage.
+In conclusion, the H-SCC is a new power converter topology composed of a SCC and an inductor. The SCC implements the power train structure, where the SCC's conversion ratio adds a new variable to the design of the converter. Modifying this variable allows to adjust the voltages stress if the switches, capacitors, and inductors, and favors the integrability of the converter. At the same time, the extra inductor extends the regulation margins because it allows to control the output voltage with the duty cycle of the SCC stage.
 
 
 \clearpage
