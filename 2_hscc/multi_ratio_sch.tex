@@ -1,0 +1,35 @@
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz} [american,scale=0.65]
+    %\draw (0,7) node[anchor=south] {};
+    \draw
+        (0.5,-4) node[sground] {} to[V = $v_{src}$] (0.5,-2)
+        (0.5,3) to[switch=$s_1$]
+        (2.5,3) to[capacitor=${c_1}$]
+        (3.5,3) -- (5,3) to[switch=$s_2$]
+        (6.5,3);
+
+    %Switch s9
+    \draw (4,3) -- (4,1.5) to[switch=$s_9$] (2,1.5) -- (2,-2);
+
+    %Switch s4
+    \draw (5,3)  to[switch=$s_4$] (5,1.5) node[sground] {} ;
+
+    %Switch branch to load
+    \draw (2.25,3) --
+          (2.25,4.5) to[switch=$s_3$]
+          (6.5,4.5) -- (6.5,-2);
+
+    \draw (0.5,3) -- (0.5,-2) to[switch=$s_5$] (2,-2) -- (2.5,-2) to[capacitor=${c_2}$] (3.5,-2) -- (4,-2) to[switch=$s_6$] (6.5,-2);
+
+    %Switch s7
+    \draw (2,-0.5) to[switch,l^=$s_7$] (6.5,-0.5);
+
+    %Switch s8
+    \draw (4,-2)  to[switch,l_=$s_8$] (4,-4) node[sground] {} ;
+
+
+    %Load and capacitor C2
+    \draw (6.5,-4) node[sground]{} to[capacitor,l^=$c_o$] (6.5,-2);
+
+    \draw (6.5,-2) to[short,-o] (7.5,-2) node[anchor=west] {$v_o$};
+\end{circuitikz}

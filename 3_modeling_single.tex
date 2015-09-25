@@ -753,7 +753,6 @@ The rest of the \emph{pumped} charge multipliers can be found solving for the re
 \end{array}
 \end{equation}
 
-
 %\begin{align}
 %\mathbf{b}^1 & = \frac{1}{\beta_1}\irow{ c_1 & -c_2 & -c_3 },\\
 % \beta_1 & = c_1+c_2+c_3 ,\\
@@ -847,7 +846,7 @@ being used in all the presented results of this dissertation.
         (6,3) to[switch,l=$s_2$] (8,3)
         (0,0) -- (8,0) to[V_=$v_{out}$] (8,3) ;
     \end{circuitikz}
-    \caption{Single capacitor converter.}
+    \caption[1:1 SCC]{1:1 SCC used as a reference circuit for the \emph{Makowski} approximation.}
     \label{fig:single_capacitor}
 \end{SCfigure}
 Due to the arbitrarily of the first approximation, \citeauthor{2012Makowski}, in a recent publication~\cite{2012Makowski}, proposed a new approximation using a more rigourous approach, given by
@@ -865,7 +864,6 @@ where $\mu = 2.54$.
 \caption[\emph{Makowski} approximation of the $r_{scc}$]{Graphic demonstration of the \emph{Minkowski distance} $p$ between the two asymptotic limits ($r_{ssl}$ and $r_{fsl}$), and the closed form (CF) of $r_{scc}$. }
 \label{fig:rscc_elbow}
 \end{SCfigure}
-
 As shown in Figure~\ref{fig:rscc_elbow}, the \emph{Makowski} formulation is based on solving the \emph{Minkowski distance} form
 \begin{equation}
 r_{elbow} = \left( {r_x}^{\mu}+{r_x}^{\mu} \right) ^\frac{1}{\mu} = 2^\frac{1}{\mu} r_x = p~r_x
@@ -996,6 +994,6 @@ For instance, we can obtain the conversion ratio of the converter 3:1 H-Dickson 
 m_2= \sum_{j=1}^{2}a_{in}^j= \frac{2-D}{3} + 0 = \frac{2-D}{3},
 \label{eq:m_31dickson}
 \end{equation}
-where the subscript in $m$ refers to the second node of the converter. Notice that the result coincides with the conversion ratio obtained in the previous chapter~\eqref{eq:int_vx_t}, where the same converter was solved using a different approach. 
+where the subscript in $m$ refers to the second node of the converter. Notice that the result coincides with the conversion ratio obtained in the previous chapter~\eqref{eq:int_vx_t}, where the same converter was solved using a different approach.
 
 \afterpage{\clearpage}

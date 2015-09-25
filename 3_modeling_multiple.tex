@@ -1,9 +1,54 @@
 \clearpage
 \section{Multiple Output Converter}
-Another advantage that SCC offers is to provide multiple outputs using a single SCC stage.  \citeauthor{2012Kumar}~\cite{2012Kumar} presented a Triple Output Fixed Ratio Converter (TOFRC) where a 2:1 Ladder converter is combined with two inductors in order to provide three fixed output voltages with a single SCC stage.
+Another advantage that SCC offers is to provide multiple outputs using a single SCC stage. In this multi-port configuration, the energy supply is connected to input port, and the converter provides multiple output ports with different conversion ratios. A clear application was presented by \citeauthor{2012Kumar} in~\cite{2012Kumar} with the Triple Output Fixed Ratio Converter (TOFRC); where a 2:1 Ladder converter combined with two inductors provides three fixed output voltages using a single SCC stage.
+\begin{figure}[!h]
+\centering
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[scale=0.65]
+\draw
+    (1,0) to[short,o-]
+    (0,0) to[V = $V_{supply}$]
+    (0,3) to[short,-o]
+    (1,3) ;
+
+\draw
+    (2,3) --
+    (2.5,3)
+
+    (2,0) --
+    (2.5,0)
+
+    node[ocirc]  (IC)  at (2,0) {}
+    node[ocirc]  (I) at (2,3) {}
+    (I) to[open,v=$v_{i}$] (IC);
+
+
+\draw [thick]
+    (2.5,-0.5) --
+    (2.5,3.5)  --
+    (5.5,3.5)  --
+    (5.5,-0.5) --
+    (2.5,-0.5);
+
+\draw (4,2)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
+\draw
+    (5.5,3) -- (6,3)
+    (5.5,0) -- (6,0)
+    node[ocirc]  (O)  at (6,3) {}
+    node[ocirc]  (OC) at (6,0) {}
+    (O) to[open,v^<=$v_{o}$] (OC);
+
+\draw
+    (7,0) to[short,o-]
+    (8,0) to[ R= $Load$,mirror]
+    (8,3) to[short,-o]
+    (7,3) ;
+\end{circuitikz}
+\label{fig:two_port}
+\caption{General two port configuration of a Switched Capacitor Converter. }
+\end{figure}
 
 \subsection{The Output Trans-Resistance Model}
-
 When considering a converter with multiple outputs, the load effects have to be taken into account for all the outputs. Actually, when the converter is loaded, it produces a voltage drop throughout outputs of the converter. Therefore, the output current of one output node has an influence to the other outputs. In order to model these effects a new model based on trans-resistance parameters is proposed.
 
 \begin{figure}[!h]
@@ -40,10 +85,10 @@ With the proposed model, the converter behavior can be described as
  \mathbf{v_o} = -\mathbf{Z} \cdot \mathbf{i_o} + \mathbf{m} \cdot v_{src},
  \label{eq:admit_sol}
 \end{equation}
-where $\mathbf{Z}$ is the \emph{trans-resistance matrix}. $\mathbf{Z}$ is symmetric for two phase converters.
+where $\mathbf{Z}$ is the \emph{trans-resistance matrix}. %$\mathbf{Z}$ is symmetric for two phase converters.
 
 
-\subsection{Model duality: Power losses and trans-resistance parameters}
+\subsection{Power losses and trans-resistance parameters}
 \begin{figure}[!h]
 \centering
 \ctikzset { bipoles/length=1cm}
@@ -82,7 +127,8 @@ and the total converter losses are
  \label{eq:ploss_3}
 \end{equation}
 %\subsubsection{Slow Switching Limit}
-Using the the charge flow analysis  described in the previous section, the total losses of a two output converter can be computed as well. In order to make the analysis less cumbersome, the phases are eluded and losses are computed in a single capacitor for the SSL. The results can be extended for any converter with any number of phases and capacitors.
+Using the the charge flow analysis  described in the previous section, the total losses of a two output converter can be computed as well. In order to make the analysis less cumbersome, the phases are eluded and losses are computed in a single capacitor for the SSL region. The results can be extended for any converter with any number of phases and capacitors.
+
 
 In the case of a multiple-output converter, each of the individual outputs produces a \emph{redistributed} charge flow through the capacitors that can be individually quantified, being $g_{i,1}$  the \emph{redistributed} cahrge flow multiplier associated to the first output, $g_{i,2}$ associated to the second output. The total \emph{redistributed} charge is the sum of each individual contributions as
 \begin{equation}
@@ -108,8 +154,7 @@ It can be seen that the trans-resistance parameters of~\eqref{eq:ploss_3} can be
 	$z_{12} + z_{21} $ & = & $\raisebox{0.8ex}{$g_{i,1}g_{i,2}$}\big/ \raisebox{-0.6ex}{$ f_{sw} c_i$} $& $ [\Omega]$
     \end{tabular}
 \end{center}
-Therefore the general expression of a trans-resistance parameter for the
-SSL is obtained using the \emph{redistributed charge multipliers} as
+Therefore the general expressions of the SSL trans-resistance parameters are given as a function of the \emph{redistributed charge multipliers} as
 \begin{equation}
   z_{ssl,xx} =  \frac{1}{2 f_{sw}} \sum_{i=1}^{caps.} \sum_{j=1}^{phas.}
   \frac{ \left ( g_{i,x}^j \right )^2 } {c_i}.
@@ -128,12 +173,12 @@ As in the SSL case of a multiple-output converter, each of the individual output
  ar_i =  (ar_{i,1} ~ q_{o,1} +  ar_{i,2} ~ q_{o,2}).
  \label{eq:ar_i_total}
 \end{equation}
-Substituting~\eqref{eq:ar_i_total} in~\eqref{eq:pwr_ssl}, the power dissipated in $r_i$ of the two output converter are
+Substituting~\eqref{eq:ar_i_total} in~\eqref{eq:pwr_ssl}, the power dissipated in $r_i$ of the two output converter results in
 \begin{equation}
  P_{r_{i}} =  \frac{r_i}{D} (i_1^2 ~ar_{i,1}^2  +  i_2^2 ~ ar_{i,2}^2 + 2 ~ i_{1} ~ i_{2} ~ ar_{i,1}~ar_{i,2}),
  \label{eq:ploss_r_1}
 \end{equation}
-leading to a similar polynomial solution of the previous case. Hence the general expression for FSL is
+leading to a similar polynomial solution of the previous case. Hence the general expressions for the FSL trans-resistance parameters are 
 \begin{equation}
   z_{fsl,xx} =   \sum_{i=1}^{swts.} \sum_{j=1}^{phas.}
   \frac{r_{i}}{D^j} \left ( ar_{i,x}^j \right )^2,
@@ -145,9 +190,7 @@ leading to a similar polynomial solution of the previous case. Hence the general
  \label{eq:z_fsl_xy}
 \end{equation}
 
-It can be seen from~\eqref{eq:z_ssl_xy} and ~\eqref{eq:z_fsl_xy} that they are not provided the individual equations for the cross trans-resistance elements $z_{xy}$ and $z_{yx}$. The values of these parameters are related to the order of sequence of the different converter circuit modes for converters with more that two phases.
-
-In the case of a two-phase converters the sequence is irrelevant and the two parameters are equal, thus $Z_{xy} = z_{yx}$, making $\mathbf{Z}$ matrix symmetric.  For a two phase converters the generic expressions of the trans-resistance parameters, are reduced to two:
+Notice that~\eqref{eq:z_ssl_xy} and ~\eqref{eq:z_fsl_xy} do not provide the individual expressions for the cross trans-resistance parameters $z_{xy}$ and $z_{yx}$. Actually, the individual quantification of these parameters is related to the sequence order of the different circuit modes for the converter, but this relation has not yet been founded\footnote{Converters with more than 2 phases are beyond the scope of the H-SCC, and so, this dissertation.}. Fortunately,  two-phase converters do not have cardinality  in the sequence of the switching modes, resulting in symmetry of these parameters , and making $\mathbf{Z}$ matrix to be symmetric. Consequently, the generic expressions of the trans-resistance parameters for two phase converters are reduced to two:
 \begin{equation}
   z_{ssl,xy}  =  \frac{1}{2~f_{sw}} \sum_{i=1}^{caps.} \sum_{j=1}^{phas.}
   \frac{g_{i,x}^j g_{i,y}^j}{c_i}.
@@ -159,10 +202,9 @@ In the case of a two-phase converters the sequence is irrelevant and the two par
  \label{eq:z_fsl_xy_2ph}
 \end{equation}
 
-For converters with more than two phases, the relation between sequentiality of the circuit modes and the cross trans-conductances has not yet been found. Nevertheless, converters with more that 2-phases are beyond the scope of this work.
+%As aforementioned,  for converters with more than two phases, the relation between sequentiality of the circuit modes and the cross trans-conductances has not yet been found, since converters with more that 2-phases are beyond the scope of this work and the H-SCC. 
 
 \subsection{Trans-resistance Parameters Methodology}
-
 Based on the \emph{charge flow analysis} for current-loaded SCCs, each converter output has three associated sets of charge flow vectors per switching phase. Thus, for a given converter, the different vector types can be collected in a matrix, where each column corresponds to a converter output and each row corresponds to a circuit component.
 
 Therefore the \emph{charge flow multipliers} are collected in a matrix as

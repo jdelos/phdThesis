@@ -150,12 +150,11 @@ The plotted graph in Figure~\ref{fig:linear_chr} presents the variation of the d
    \begin{equation}
         m = \frac{v_o}{v_{src}}.
    \end{equation}
-
 The efficiency of the driver is the ratio between the input power and the output power
    \begin{equation}
         \eta = \frac{P_o}{P_i} = \frac{v_o i_o}{v_{src} i_o} = \frac{v_o}{v_{src}},
+        \label{eq:linear_reg}
    \end{equation}
-
 hence for this case the efficiency is indeed equal to the conversion ratio
    \begin{equation}
         \eta = m.
@@ -307,8 +306,8 @@ Hence substituting~\eqref{eq:i_inductor} into~\eqref{eq:e_induct}, it can be com
 \begin{equation}
 E_{l,t_x}= \frac{v_{src}^2{t_x}^2}{2l} .
 \label{eq:e_l_tx}
-\end{equation} 
-On the other hand, the energy delivered by the energy source $v_{src}$ is given 
+\end{equation}
+On the other hand, the energy delivered by the energy source $v_{src}$ is given
 \begin{equation}
 E_{src} = v_{src} q_{src}.
 \label{eq:e_src}
@@ -452,7 +451,7 @@ Capacitor based converter are lossy converter by nature, since the energy transf
         %Markers
         \draw[dotted] (.5,0) -- (0.5,1.75);
         \draw[dotted] (0,2.5) -- (2.5,2.5);
-        
+
         \draw[semithick] (0.5,0) |- (3.25,0.65) ;
         %\draw (1.5,.32) node[font=\footnotesize] {$t_{on}$};
         %\fill[gray!50] (0.5,1.75) -- (2.5,2.75)  -- (2.5,1.75);
@@ -479,12 +478,12 @@ After closing the switch at $t_o$, the capacitor is charged at $v_{src}$.  The c
 q_{src}= c~v_{src},
 \label{eq:q_src_cap}
 \end{equation}
-hence the energy stored in the charged capacitor results in  
+hence the energy stored in the charged capacitor results in
 \begin{equation}
 E_{c^+} = \frac{1}{2} \frac{q_{src}}{v_{src}}  {v_{src}}^2 = \frac{1}{2}q_{src}~v_{src}.
 \label{eq:e_cap+}
 \end{equation}
-On the other hand, the energy delivered by the energy source is just 
+On the other hand, the energy delivered by the energy source is just
 \begin{equation}
 E_{src} = v_{src} q_{src}.
 \label{eq:e_src_c}
