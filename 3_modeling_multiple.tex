@@ -4,10 +4,10 @@ Another advantage that SCC offers is to provide multiple outputs using a single 
 \begin{figure}[!h]
 \centering
 \ctikzset { bipoles/length=1cm}
-\begin{circuitikz}[scale=0.65]
+\begin{circuitikz}[american,scale=0.65]
 \draw
     (1,0) to[short,o-]
-    (0,0) to[V = $V_{supply}$]
+    (0,0) to[V = $V_{src}$]
     (0,3) to[short,-o]
     (1,3) ;
 
@@ -32,20 +32,26 @@ Another advantage that SCC offers is to provide multiple outputs using a single 
 
 \draw (4,2)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
 \draw
-    (5.5,3) -- (6,3)
-    (5.5,0) -- (6,0)
-    node[ocirc]  (O)  at (6,3) {}
-    node[ocirc]  (OC) at (6,0) {}
-    (O) to[open,v^<=$v_{o}$] (OC);
+    (5.5,1.25) to[short,-o](6,1.25)
+    (5.5,-0.25)  to[short,-o] (6,-0.25)
+    (6.25,1) to[open,v^<=$v_{o2}$] (6.25,0);
+\draw
+    (7,-0.25) to[short,o-]
+    (8,-0.25) to[/tikz/circuitikz/bipoles/length=0.5cm,R= Load 2,mirror]
+    (8,1.25) to[short,-o] (7,1.25) ;
+    
+\draw
+    (5.5,3.25) to[short,-o](6,3.25)
+    (5.5,1.75)  to[short,-o] (6,1.75)
+    (6.25,3) to[open,v^<=$v_{o1}$] (6.25,2);
 
 \draw
-    (7,0) to[short,o-]
-    (8,0) to[ R= $Load$,mirror]
-    (8,3) to[short,-o]
-    (7,3) ;
+    (7,1.75) to[short,o-]
+    (8,1.75) to[/tikz/circuitikz/bipoles/length=0.5cm,R= Load $n$,mirror]
+    (8,3.25) to[short,-o] (7,3.25) ;
 \end{circuitikz}
 \label{fig:two_port}
-\caption{General two port configuration of a Switched Capacitor Converter. }
+\caption[Block diagram of a multi-output SCC]{Block diagram of a general multiple output port configuration of a Switched Capacitor Converter. \color{red}{Figure to be updated} }
 \end{figure}
 
 \subsection{The Output Trans-Resistance Model}
@@ -178,7 +184,7 @@ Substituting~\eqref{eq:ar_i_total} in~\eqref{eq:pwr_ssl}, the power dissipated i
  P_{r_{i}} =  \frac{r_i}{D} (i_1^2 ~ar_{i,1}^2  +  i_2^2 ~ ar_{i,2}^2 + 2 ~ i_{1} ~ i_{2} ~ ar_{i,1}~ar_{i,2}),
  \label{eq:ploss_r_1}
 \end{equation}
-leading to a similar polynomial solution of the previous case. Hence the general expressions for the FSL trans-resistance parameters are 
+leading to a similar polynomial solution of the previous case. Hence the general expressions for the FSL trans-resistance parameters are
 \begin{equation}
   z_{fsl,xx} =   \sum_{i=1}^{swts.} \sum_{j=1}^{phas.}
   \frac{r_{i}}{D^j} \left ( ar_{i,x}^j \right )^2,
@@ -202,7 +208,7 @@ Notice that~\eqref{eq:z_ssl_xy} and ~\eqref{eq:z_fsl_xy} do not provide the indi
  \label{eq:z_fsl_xy_2ph}
 \end{equation}
 
-%As aforementioned,  for converters with more than two phases, the relation between sequentiality of the circuit modes and the cross trans-conductances has not yet been found, since converters with more that 2-phases are beyond the scope of this work and the H-SCC. 
+%As aforementioned,  for converters with more than two phases, the relation between sequentiality of the circuit modes and the cross trans-conductances has not yet been found, since converters with more that 2-phases are beyond the scope of this work and the H-SCC.
 
 \subsection{Trans-resistance Parameters Methodology}
 Based on the \emph{charge flow analysis} for current-loaded SCCs, each converter output has three associated sets of charge flow vectors per switching phase. Thus, for a given converter, the different vector types can be collected in a matrix, where each column corresponds to a converter output and each row corresponds to a circuit component.

@@ -2,7 +2,7 @@
 %               CHAPTER 3: H-SCC                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Equal voltage ripple among all \emph{pwm}-nodes. 
+Equal voltage ripple among all \emph{pwm}-nodes.
 
 Actually using the \emph{pwm}-nodes of an SCC reduces the amplitude of the voltage ripple at the filter inductor, what at the same time requires a smaller inductor value for a converter operating under the same frequency and current ripple conditions. The reduction ratio of the inductor can be obtained from eqs. (\ref{eq:buck_l}) and (\ref{eq:hscc_l}) as
 \begin{equation}
@@ -20,6 +20,17 @@ driven by a buck converter. Increasing the voltage in the LED
 string decreases currents through the converter reducing the
 conduction losses.
 
+%%%%%%%%%%%%%%%%%%%%%
+% Voltages L.S. 
+%%%%%%%%%%%%%%%%%%%%%
+\begin{align}
+\begin{split}
+  v_{src} - v_{c_1} - v_{c_2} &=0, \\
+  v_{c_1} - v_{c_2} - v_{c_3} &=0, \\
+  v_{out} - v_{c_2}  &=0,\\
+  v_{out} - v_{c_3}  &=0,
+\end{split}
+\end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Multi-ratio converter
@@ -191,10 +202,12 @@ conduction losses.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%       Power switches 
+%       Power switches
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 $ P_{sw}$ &  $ \frac{4+N}{8 \cdot N^2} \cdot v_{vin}^2 \cdot f_{sw}  \cdot {c_{ds}} $ &  $ \frac{1}{ N} \cdot v_{src}^2 \cdot f_{sw} \cdot {c_{ds}} $  \\
  $ \frac{P_{sw}}{P_{sw,buck}}$ &  $ \frac{4+N}{8 \cdot N^2}  $ &  $ \frac{1}{ N}  $  \\
+
+Table ~\ref{tab:3:1 H-Dick_V_stress} shows the blocking voltages of the switches of the 3:1 H-Dickson of Figure~\ref{fig:3_1_hscc}.
 
 %%%%%%%%%%%%%%
 % LED driver
