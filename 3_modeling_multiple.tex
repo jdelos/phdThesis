@@ -30,33 +30,34 @@ Another advantage that SCC offers is to provide multiple outputs using a single 
     (5.5,-0.5) --
     (2.5,-0.5);
 
-\draw (4,2)node[anchor=north]{$\frac{v_o}{v_{i}}=m$} ;
+\draw (4,2.5)node[]{$\frac{v_{1}}{v_{i}}=m_1$};
+\draw (4,0.5)node[]{$\frac{v_{n}}{v_{i}}=m_n$};
+
 \draw
     (5.5,1.25) to[short,-o](6,1.25)
     (5.5,-0.25)  to[short,-o] (6,-0.25)
-    (6.25,1) to[open,v^<=$v_{o2}$] (6.25,0);
+    (6.25,1) to[open,v^<=$v_{n}$] (6.25,0);
 \draw
     (7,-0.25) to[short,o-]
-    (8,-0.25) to[/tikz/circuitikz/bipoles/length=0.5cm,R= Load 2,mirror]
+    (8,-0.25) to[/tikz/circuitikz/bipoles/length=0.5cm,R= Load $n$,mirror]
     (8,1.25) to[short,-o] (7,1.25) ;
     
 \draw
     (5.5,3.25) to[short,-o](6,3.25)
     (5.5,1.75)  to[short,-o] (6,1.75)
-    (6.25,3) to[open,v^<=$v_{o1}$] (6.25,2);
+    (6.25,3) to[open,v^<=$v_{1}$] (6.25,2);
 
 \draw
     (7,1.75) to[short,o-]
-    (8,1.75) to[/tikz/circuitikz/bipoles/length=0.5cm,R= Load $n$,mirror]
+    (8,1.75) to[/tikz/circuitikz/bipoles/length=0.5cm,R= Load 1,mirror]
     (8,3.25) to[short,-o] (7,3.25) ;
 \end{circuitikz}
 \label{fig:two_port}
-\caption[Block diagram of a multi-output SCC]{Block diagram of a general multiple output port configuration of a Switched Capacitor Converter. \color{red}{Figure to be updated} }
+\caption[Block diagram of a multi-output SCC]{Block diagram of a general multiple output port configuration of a Switched Capacitor Converter. }
 \end{figure}
 
 \subsection{The Output Trans-Resistance Model}
 When considering a converter with multiple outputs, the load effects have to be taken into account for all the outputs. Actually, when the converter is loaded, it produces a voltage drop throughout outputs of the converter. Therefore, the output current of one output node has an influence to the other outputs. In order to model these effects a new model based on trans-resistance parameters is proposed.
-
 \begin{figure}[!h]
 \centering
 \ctikzset { bipoles/length=1cm}
