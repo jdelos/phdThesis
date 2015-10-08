@@ -1,51 +1,25 @@
-\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.1.1}{The LED load}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{Linear Regulators}{chapter.1}% 3
-\BOOKMARK [1][-]{section.1.3}{Inductor Based Converters}{chapter.1}% 4
-\BOOKMARK [2][-]{subsection.1.3.1}{Energy transfer in inductor based converters}{section.1.3}% 5
-\BOOKMARK [1][-]{section.1.4}{Capacitor Based Converters }{chapter.1}% 6
-\BOOKMARK [2][-]{subsection.1.4.1}{Energy transfer in capacitor based converters}{section.1.4}% 7
-\BOOKMARK [1][-]{section.1.5}{State of the art LED Drivers}{chapter.1}% 8
-\BOOKMARK [2][-]{subsection.1.5.1}{Commercial LED drivers }{section.1.5}% 9
-\BOOKMARK [2][-]{subsection.1.5.2}{Linear LED Drivers}{section.1.5}% 10
-\BOOKMARK [2][-]{subsection.1.5.3}{Inductor Based LED Drivers}{section.1.5}% 11
-\BOOKMARK [1][-]{section.1.6}{Conclusions}{chapter.1}% 12
-\BOOKMARK [-1][-]{part.1}{I Hybrid Switched Capacitor LED driver}{}% 13
-\BOOKMARK [0][-]{chapter.2}{Hybrid Switched Capacitor Converter}{part.1}% 14
-\BOOKMARK [1][-]{section.2.1}{State of the Art}{chapter.2}% 15
-\BOOKMARK [1][-]{section.2.2}{Switched Capacitor Converter}{chapter.2}% 16
-\BOOKMARK [2][-]{subsection.2.2.1}{Conversion ratio}{section.2.2}% 17
-\BOOKMARK [2][-]{subsection.2.2.2}{Output voltage regulation}{section.2.2}% 18
-\BOOKMARK [2][-]{subsection.2.2.3}{Multiple conversion ratio converters}{section.2.2}% 19
-\BOOKMARK [2][-]{subsection.2.2.4}{Converter output nodes}{section.2.2}% 20
-\BOOKMARK [1][-]{section.2.3}{Hybrid-Switched Capacitor Converter}{chapter.2}% 21
-\BOOKMARK [2][-]{subsection.2.3.1}{Output Regulation}{section.2.3}% 22
-\BOOKMARK [2][-]{subsection.2.3.2}{Power Inductor}{section.2.3}% 23
-\BOOKMARK [2][-]{subsection.2.3.3}{Power Switches}{section.2.3}% 24
-\BOOKMARK [2][-]{subsection.2.3.4}{Multiple Outputs}{section.2.3}% 25
-\BOOKMARK [1][-]{section.2.4}{DC-DC LED Drivers}{chapter.2}% 26
-\BOOKMARK [2][-]{subsection.2.4.1}{Single-stage dc-dc with auxiliary output voltage}{section.2.4}% 27
-\BOOKMARK [2][-]{subsection.2.4.2}{Single-stage dc-dc with extended conversion range }{section.2.4}% 28
-\BOOKMARK [1][-]{section.2.5}{Summary}{chapter.2}% 29
-\BOOKMARK [0][-]{chapter.3}{Modeling of H-SCC}{part.1}% 30
-\BOOKMARK [1][-]{section.3.1}{Single Output Converters}{chapter.3}% 31
-\BOOKMARK [2][-]{subsection.3.1.1}{The Output Resistance Model}{section.3.1}% 32
-\BOOKMARK [2][-]{subsection.3.1.2}{Revising the charge flow analysis approach}{section.3.1}% 33
-\BOOKMARK [2][-]{subsection.3.1.3}{Load Model: Voltage Sink versus Current Sink}{section.3.1}% 34
-\BOOKMARK [2][-]{subsection.3.1.4}{Re-formulating the charge flow analysis}{section.3.1}% 35
-\BOOKMARK [2][-]{subsection.3.1.5}{Solving the charge flow vectors}{section.3.1}% 36
-\BOOKMARK [2][-]{subsection.3.1.6}{SSL Equivalent Resistance }{section.3.1}% 37
-\BOOKMARK [2][-]{subsection.3.1.7}{FSL Equivalent Resistance}{section.3.1}% 38
-\BOOKMARK [2][-]{subsection.3.1.8}{Equivalent Switched Capacitor Converter Resistance}{section.3.1}% 39
-\BOOKMARK [2][-]{subsection.3.1.9}{Conversion ratio}{section.3.1}% 40
-\BOOKMARK [1][-]{section.3.2}{Multiple Output Converter}{chapter.3}% 41
-\BOOKMARK [2][-]{subsection.3.2.1}{The Output Trans-Resistance Model}{section.3.2}% 42
-\BOOKMARK [2][-]{subsection.3.2.2}{Power losses and trans-resistance parameters}{section.3.2}% 43
-\BOOKMARK [2][-]{subsection.3.2.3}{Trans-resistance Parameters Methodology}{section.3.2}% 44
-\BOOKMARK [2][-]{subsection.3.2.4}{Slow Switching Limit Trans-resistance Matrix}{section.3.2}% 45
-\BOOKMARK [2][-]{subsection.3.2.5}{Fast Switching Limit trans-resistance Matrix}{section.3.2}% 46
-\BOOKMARK [2][-]{subsection.3.2.6}{Converter trans-resistance Matrix}{section.3.2}% 47
-\BOOKMARK [2][-]{subsection.3.2.7}{Conversion Ratio Vector }{section.3.2}% 48
-\BOOKMARK [1][-]{section.3.3}{Summary}{chapter.3}% 49
-\BOOKMARK [0][-]{Appendix.a.A}{Appendix Modeling of Switched Capacitors Converters}{part.1}% 50
-\BOOKMARK [1][-]{section.a.A.1}{3:1 Dickson converter vectors}{Appendix.a.A}% 51
+\BOOKMARK [0][-]{chapter.1}{Modeling of H-SCC}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Single Output Converters}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{The Output Resistance Model}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{Revising the charge flow analysis approach}{section.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.1.3}{Load Model: Voltage Sink versus Current Sink}{section.1.1}% 5
+\BOOKMARK [2][-]{subsection.1.1.4}{Re-formulating the charge flow analysis}{section.1.1}% 6
+\BOOKMARK [2][-]{subsection.1.1.5}{Solving the charge flow vectors}{section.1.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.6}{SSL Equivalent Resistance }{section.1.1}% 8
+\BOOKMARK [2][-]{subsection.1.1.7}{FSL Equivalent Resistance}{section.1.1}% 9
+\BOOKMARK [2][-]{subsection.1.1.8}{Equivalent Switched Capacitor Converter Resistance}{section.1.1}% 10
+\BOOKMARK [2][-]{subsection.1.1.9}{Conversion ratio}{section.1.1}% 11
+\BOOKMARK [1][-]{section.1.2}{Multiple Output Converter}{chapter.1}% 12
+\BOOKMARK [2][-]{subsection.1.2.1}{The Output Trans-Resistance Model}{section.1.2}% 13
+\BOOKMARK [2][-]{subsection.1.2.2}{Power losses and trans-resistance parameters}{section.1.2}% 14
+\BOOKMARK [2][-]{subsection.1.2.3}{Trans-resistance Parameters Methodology}{section.1.2}% 15
+\BOOKMARK [2][-]{subsection.1.2.4}{Slow Switching Limit Trans-resistance Matrix}{section.1.2}% 16
+\BOOKMARK [2][-]{subsection.1.2.5}{Fast Switching Limit trans-resistance Matrix}{section.1.2}% 17
+\BOOKMARK [2][-]{subsection.1.2.6}{Converter trans-resistance Matrix}{section.1.2}% 18
+\BOOKMARK [2][-]{subsection.1.2.7}{Conversion Ratio Vector }{section.1.2}% 19
+\BOOKMARK [1][-]{section.1.3}{Summary}{chapter.1}% 20
+\BOOKMARK [0][-]{chapter.2}{Model validation}{}% 21
+\BOOKMARK [1][-]{section.2.1}{Measuring rscc from a SCC}{chapter.2}% 22
+\BOOKMARK [2][-]{subsection.2.1.1}{Experimental Model Validation}{section.2.1}% 23
+\BOOKMARK [0][-]{Appendix.a.A}{Appendix Modeling of Switched Capacitors Converters}{}% 24
+\BOOKMARK [1][-]{section.a.A.1}{3:1 Dickson converter vectors}{Appendix.a.A}% 25

@@ -14,10 +14,8 @@ Another advantage that SCC offers is to provide multiple outputs using a single 
 \draw
     (2,3) --
     (2.5,3)
-
     (2,0) --
     (2.5,0)
-
     node[ocirc]  (IC)  at (2,0) {}
     node[ocirc]  (I) at (2,3) {}
     (I) to[open,v=$v_{i}$] (IC);
@@ -41,11 +39,11 @@ Another advantage that SCC offers is to provide multiple outputs using a single 
     (7,-0.25) to[short,o-]
     (8,-0.25) to[/tikz/circuitikz/bipoles/length=0.5cm,R= Load $n$,mirror]
     (8,1.25) to[short,-o] (7,1.25) ;
-    
+
 \draw
     (5.5,3.25) to[short,-o](6,3.25)
-    (5.5,1.75)  to[short,-o] (6,1.75)
-    (6.25,3) to[open,v^<=$v_{1}$] (6.25,2);
+    (5.5,1.75) to[short,-o] (6,1.75)
+    (6.25,3)   to[open,v^<=$v_{1}$] (6.25,2);
 
 \draw
     (7,1.75) to[short,o-]

@@ -535,7 +535,7 @@ The nature and effects of the three different charge flow can be better analysed
 
   \item[Redistributed ripple $\Delta vr$ ]is the voltage variation associated to a transient exponential charge or discharge. It is produced by the charge redistribution between capacitors and happens just after each switching event. The \emph{redistribution} ripple can be quantified by the addition of the two previous defined ripple types as
       \begin{equation}
-        \Delta {vr}^j_i  = \Delta {vn}^j_i + \Delta {vp}^j_i .
+        \Delta {vn}^j_i  = \Delta {vp}^j_i + \Delta {vr}^j_i .
       \label{eq:rdst_ripple_I}
       \end{equation}
       Substituting~\eqref{eq:net_voltage_cf} and~\eqref{eq:pumped_voltage_cf} into~\eqref{eq:rdst_ripple_I}, the \emph{redistributed} ripple is formulated in terms of the charge flow analysis, as
@@ -874,7 +874,7 @@ r_{scc} & =  \frac{1}{2~c~f_{sw}} \left[ \frac{\me^{\frac{D}{\tau_1~f_{sw}}}+1}{
 \tau_2 &= r_2c.
 \label{eq:r_scc_CF}
 \end{align}
-A correction of the \citeauthor{2012Makowski} is proposed to cover the variations in the duty cycle by solving $\mu$ is as a function of $D$, as 
+A correction of the \citeauthor{2012Makowski} is proposed to cover the variations in the duty cycle by solving $\mu$ is as a function of $D$, as
 \begin{align}
 p & = \frac{1}{2} \left[ \frac{\me^{\frac{1}{D}+1}}{\me^{\frac{1}{D}-1}} + \frac{\me^{\frac{1}{1-D}+1}}{\me^{\frac{1}{1-D}-1}} \right], \label{eq:p}\\
 \mu &= \frac{1}{\log_2 p}.
