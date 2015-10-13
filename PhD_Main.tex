@@ -12,6 +12,23 @@
   \begin{bmatrix}#1\end{bmatrix}%
 }
 
+\newcount\colveccount
+\newcommand*\colvec[1]{
+        \global\colveccount#1
+        \begin{pmatrix}
+        \colvecnext
+}
+\def\colvecnext#1{
+        #1
+        \global\advance\colveccount-1
+        \ifnum\colveccount>0
+                \\
+                \expandafter\colvecnext
+        \else
+                \end{pmatrix}
+        \fi
+}
+
 \newcommand{\me}{\mathrm{e}}
 \setlength{\jot}{8pt}% tweak
 %% Enable to flush floats without a page break
@@ -136,6 +153,7 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \newcommand{\mcrot}[4]{\multicolumn{#1}{#2}{\rlap{\rotatebox{#3}{#4}~}}}
+
 
 %Euros sing package
 \usepackage[utf8]{inputenc}

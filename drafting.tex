@@ -544,3 +544,14 @@ In both cases, it has been used the same configuration to measure the equivalent
 %
 %Only transient circuit simulations in PLECS have been used for the initial assessment and validation of the modeling work. Actually, the presented modeling has the goal to model losses produced by the charge transfer between capacitors and by conductance through resistive elements , which are the many source of losses in a SCC that mainly determine the values for capacitors and switches. By using a transient circuit simulator, we can simulate a SCC which can produce only these two source of losses, thus only reproducing studied phenomena of the models. Other source of losses such as switching losses, bottom-plate capacitors losses or driving losses, are beyond this works scope since they have been already studied and
 %reported and they can be easily included in the model.
+
+
+
+The model was validated using a 3:1 Dickson converter for the two different scenarios presented in Figure~\ref{fig:3_1_hscc_exp}. In the first scenario, the load is connected to the second \emph{pwm}-node, Figure~\ref{fig:3_1_hscc_exp_a}. In the other scenario, the converter is loaded at the \emph{dc}-node, Figure~\ref{fig:3_1_hscc_exp_b}. In both cases the output impedance values are compared with results obtained from transient PLECS\footnote{\label{fn:PLECS}Behavioral circuit simulator} simulations. Furthermore results from the second scenario are compared with results from previous modeling works.  A detailed example in how to solve the circuits and the charge flow vectors $\mathbf{a}, \mathbf{b} $ and $\mathbf{ar}$ are presented in the Appendix~\ref{apx:31_dick_charge_flows}.
+
+
+%
+%Only transient circuit simulations in PLECS have been used for the initial assessment and validation of the modeling work. Actually, the presented modeling has the goal to model losses produced by the charge transfer between capacitors and by conductance through resistive elements , which are the many source of losses in a SCC that mainly determine the values for capacitors and switches. By using a transient circuit simulator, we can simulate a SCC which can produce only these two source of losses, thus only reproducing studied phenomena of the models. Other source of losses such as switching losses, bottom-plate capacitors losses or driving losses, are beyond this works scope since they have been already studied and
+%reported and they can be easily included in the model.
+
+The values for capacitors $c_1$,$c_2$ and $c_3$ are 100nF and all switches have the same \emph{on}-channel resistance of $100m\Omega$. The circuits were supplied at $10V$ and 

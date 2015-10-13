@@ -49,7 +49,7 @@
 
     \addplot [semithick,smooth,dashed,black!75]
       table [y=y1] {./3_modeling/rm1_ms_sw_dx_O2.dat};\label{pl:95Makw}
-    
+
     \addplot [semithick,smooth,dotted,black!75]
       table [y=y1] {./3_modeling/rx_ST_sw_dx_1Co.dat};\label{pl:Stey}
 
@@ -79,7 +79,7 @@
     \addlegendentry{$\epsilon_r$ \color{white}(Rel. Error) }
 
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hidden}\addlegendentry{\color{white}PLECS}
-    \addlegendimage{/pgfplots/refstyle=pl_Makw rec}\addlegendentry{Mak. rect.}
+    \addlegendimage{/pgfplots/refstyle=pl_Makw rec}\addlegendentry{*Mak. }
     \addplot [semithick,mark=x,only marks,black!60]
       table [y=y1] {./3_modeling/err3_sw_dx_O2.dat};
     \addlegendentry{$\epsilon_r$ \color{white}(Rel. Error)}
@@ -87,7 +87,7 @@
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hidden}\addlegendentry{\color{white}PLECS}
     \addlegendimage{/pgfplots/refstyle=pl:95Makw}\addlegendentry{95Makowski.}
     \addlegendimage{/pgfplots/refstyle=pl:Stey}\addlegendentry{Steyaert}
-    
+
 
 \end{axis}
 \end{tikzpicture}

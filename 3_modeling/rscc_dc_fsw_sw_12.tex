@@ -65,18 +65,18 @@
 
     \addlegendimage{/pgfplots/refstyle=pl_PLECS}\addlegendentry{PLECS}
     \addlegendimage{/pgfplots/refstyle=pl_MDL}\addlegendentry{This work}
-    \addplot [semithick,mark=o,only marks,black!60]
+    \addplot [semithick,mark=o,only marks,black!50]
       table [y=y1]{./3_modeling/err_JD_sw_fsw_10Co.dat};
     \addlegendentry{ $\epsilon_r$}
 
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hid}\addlegendentry{\color{white}PLECS}
-    \addlegendimage{/pgfplots/refstyle=pl_MS}\addlegendentry{Makowski}
+    \addlegendimage{/pgfplots/refstyle=pl_MS}\addlegendentry{95Makowski}
     \addplot [semithick,mark=+,only marks,black!50]
       table [y=y1]{./3_modeling/err_MS_sw_fsw_10Co.dat};
     \addlegendentry{ $\epsilon_r$}
 
     \addlegendimage{/pgfplots/refstyle=pl_PLECS_hid}\addlegendentry{\color{white}PLECS}
-    \addlegendimage{/pgfplots/refstyle=pl_MS}\addlegendentry{Steyaert}
+    \addlegendimage{/pgfplots/refstyle=pl_ST}\addlegendentry{Steyaert}
     \addplot [semithick,mark=x,only marks,black!50]
       table [y=y1]{./3_modeling/err_ST_sw_fsw_10Co.dat};
     \addlegendentry{ $\epsilon_r$}
