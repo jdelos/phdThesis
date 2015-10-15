@@ -36,15 +36,14 @@
 \BOOKMARK [2][-]{subsection.2.2.7}{Conversion Ratio Vector }{section.2.2}% 36
 \BOOKMARK [1][-]{section.2.3}{Summary}{chapter.2}% 37
 \BOOKMARK [0][-]{chapter.3}{Model validation}{part.1}% 38
-\BOOKMARK [1][-]{section.3.1}{Single output SCC}{chapter.3}% 39
-\BOOKMARK [1][-]{section.3.2}{}{chapter.3}% 40
-\BOOKMARK [2][-]{subsection.3.2.1}{Measuring rscc from a SCC}{section.3.2}% 41
-\BOOKMARK [2][-]{subsection.3.2.2}{ Fixed dc-output}{section.3.2}% 42
-\BOOKMARK [2][-]{subsection.3.2.3}{ Floating pwm-output }{section.3.2}% 43
-\BOOKMARK [1][-]{section.3.3}{Multiple output SCC}{chapter.3}% 44
-\BOOKMARK [2][-]{subsection.3.3.1}{Measuring Zscc matrix from a SCC}{section.3.3}% 45
-\BOOKMARK [2][-]{subsection.3.3.2}{Simulation results}{section.3.3}% 46
-\BOOKMARK [2][-]{subsection.3.3.3}{Experimental results}{section.3.3}% 47
-\BOOKMARK [1][-]{section.3.4}{Summary}{chapter.3}% 48
-\BOOKMARK [0][-]{Appendix.a.A}{Appendix Modeling of Switched Capacitors Converters}{part.1}% 49
-\BOOKMARK [1][-]{section.a.A.1}{3:1 Dickson converter vectors}{Appendix.a.A}% 50
+\BOOKMARK [1][-]{section.3.1}{Single output converter}{chapter.3}% 39
+\BOOKMARK [2][-]{subsection.3.1.1}{Measuring rscc from a SCC}{section.3.1}% 40
+\BOOKMARK [2][-]{subsection.3.1.2}{ Fixed dc-output}{section.3.1}% 41
+\BOOKMARK [2][-]{subsection.3.1.3}{ Floating pwm-output }{section.3.1}% 42
+\BOOKMARK [1][-]{section.3.2}{Multiple output SCC}{chapter.3}% 43
+\BOOKMARK [2][-]{subsection.3.2.1}{Measuring Zscc matrix from a SCC}{section.3.2}% 44
+\BOOKMARK [2][-]{subsection.3.2.2}{Simulation results}{section.3.2}% 45
+\BOOKMARK [2][-]{subsection.3.2.3}{Experimental results}{section.3.2}% 46
+\BOOKMARK [1][-]{section.3.3}{Summary}{chapter.3}% 47
+\BOOKMARK [0][-]{Appendix.a.A}{Appendix Modeling of Switched Capacitors Converters}{part.1}% 48
+\BOOKMARK [1][-]{section.a.A.1}{3:1 Dickson converter vectors}{Appendix.a.A}% 49
