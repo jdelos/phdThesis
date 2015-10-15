@@ -1,10 +1,11 @@
 \chapter{Model validation}
-The model was validated comparing the results with either behavioural circuit simulations and experimental circuits.  Because the proposed method has the goal to model losses produced by the charge transfer between capacitors and conductance through resistive elements (switches and parasitics), simulations with a behavioral simulator only take into account these two sources of losses, enabling a fair comparison to validate the proposed model.  Nevertheless, an experimental converter was specifically build with the only propose to validate measure and validate the model. The converter was designed to mitigate any other source of loss not included in the model, such as switching losses, driving losses, etc. These other loss mechanisms can be added to the model as described in~\cite{Seeman:EECS-2009-78}; however, they are out of the scope of the model presented in the previous chapter.
+The model was validated comparing the predicted for $r_{scc}$ with either behavioural circuit simulations and an experimental circuit.  Because the proposed method has the goal to model losses produced by the charge transfer between capacitors and conductance through resistive elements (switches and parasitics), simulations with a behavioral simulator only take into account these two sources of losses, enabling a fair comparison to validate the proposed model.  Nevertheless, an experimental converter was specifically build with the only propose to measure and validate the model parameters. The converter was designed to mitigate any other source of loss not included in the model, such as switching losses, driving losses, etc. These other loss mechanisms can be added to the model as described in~\cite{Seeman:EECS-2009-78}; however including them is out of the scope of the model presented in the previous chapter.
 
-This chapter is divided in two sections. The first section validates the mode for single output SCC, based on simulations the results are presented for both the common \emph{dc}-output and the \emph{pwm}-outputs.  The second section validates the multiple output model using both circuit simulations and an experimental setup.
+This chapter is divided in two sections. The first section validates the model for single output SCC using only transient circuit simulations. Results are presented for both output types, the usual use, loading the converter at a \emph{dc}-output and the \emph{hybrid} use, loading the converter at a \emph{pwm}-output.  The second section validates the multiple output model using both circuit simulations and an experimental setup.
 
 \section{Single output SCC}
-The validation of the modeling for single output SCC has been done for the two types of output nodes: \emph{dc} and \emph{pwm}. In both cases the validation is performed comparing the predicted $r_{scc}$ of the model with the measured values from a the behavioural circuit simulator PLECS. In the case of the case of the \emph{dc}-node the results are also compared with the original charge flow analysis since it was the currently used methodology.
+The accuracy of the model is presented for both output types of the converter:
+\emph{dc} and \emph{pwm}. In both cases, the validation is performed comparing the predicted $r_{scc}$ of the model with the measured values from a the behavioural circuit simulator PLECS. In the case of the \emph{dc}-node the results are also compared with the original charge flow analysis, which it was the currently used methodology.
 
 The same 3:1 Dickson was used as a test circuit. First connecting the load to the \emph{dc}-node as shown in Figure~\ref{fig:3_1_hscc_exp_a}, and second connecting the load to the \emph{pwm}-node as shown in Figure~\ref{fig:3_1_hscc_exp_b}. In both cases the load was emulated with a constant current source. In both simulations the design parameters were kept the same as defied in Table~\ref{tab:sim_values}.
 
@@ -28,13 +29,12 @@ The load current $i_{out}$ was adjusted in each simulation depending on the oper
     i_{out}=m_x~v_{src}\frac{1-\eta}{r_{scc,mdl}},
 \label{eq:iout_eff}
 \end{equation}
-where $m_x$ is the conversion ratio for the given output and $r_{scc,mdl}$ is the predicted output resistance by the model. Fixing the efficiency, guarantees the same average output voltage across all the simulations, since rearranging~\eqref{eq:eff_vo} yields
+where $m_x$ is the conversion ratio for the given output and $r_{scc,mdl}$ is the predicted output resistance by the model. Fixing the efficiency, guarantees the same average output voltage across all the simulations, since rearranging~\eqref{eq:eff_vo} gives
 \begin{equation}
     v_{out}=m_x~v_{src}~\eta.
 \label{eq:vout_eff}
 \end{equation}
-Using high enough efficiency values prevents the load to fully discharge the capacitors of the converter, avoiding to bring the converter in an undesired operating regime.
-
+Thus a high efficiency value guarantees that the voltage at the load is close to the target voltage ($v_{trg}=m_x v_{src}$). And provides a small enough output current that prevents that to fully discharge the converter's capacitors, avoiding to bring the converter in an undesired operating regime.
 
 \subsection{Measuring $r_{scc}$ from a SCC}
 \begin{figure}[!h]
@@ -64,19 +64,19 @@ Using high enough efficiency values prevents the load to fully discharge the cap
     (10.5,0) -- (5.5,0)
     (7,3) to[voltmeter,l^=$v_{out}$] (7,0);
 \end{circuitikz}
-\caption{Experimental arrangement used to test and measure the characteristics of an SCC. }
+\caption{Experimental arrangement used to measure $r_{scc}$ from a SCC.}
 \label{fig:rscc_exp_setup}
 \end{figure}
-Figure~\ref{fig:rscc_exp_setup} shows the configuration used to measure the $r_{scc}$ in the circuit simulator. By measuring the input and outputs currents and voltages the $r_{scc}$ is computed in two steps, operating the converter with the same values of $f_{sw}$ and $D$:
+Figure~\ref{fig:rscc_exp_setup} shows the configuration used to measure $r_{scc}$ in the circuit simulator. The $r_{scc}$ is computed measuring the converter in two states, while  keeping constant the driving signals of the converter( $f_{sw}$ and $D$):
 \begin{enumerate}
-  \item Operating with no load ($s_1$ open), the \emph{target voltage} ($v_{trg}$) and the conversion ration $m$ are determined,
+  \item Under no load condition ($s_1$ open). The target voltage $v_{trg}$ and the conversion ration $m$ are determined,
       \begin{align}
         v_{trg} & = v_{out},\label{eq:vtrg}\\
         m & = \frac{v_{out}}{v_{in}}.
         \label{eq:vtrg_m}
       \end{align}
 
-  \item Loading the converter with constant current ($s_1$ closed),  $r_{scc}$ is computed using~\eqref{eq:vtrg},
+  \item Loading the converter ($s_1$ closed),  $r_{scc}$ is computed using~\eqref{eq:vtrg} as
       \begin{equation}
         r_{scc} = \frac{v_{trg} - v_{out}}{i_{out}}.
         \label{eq:rscc_m}
@@ -129,16 +129,16 @@ Figure~\ref{fig:rscc_exp_setup} shows the configuration used to measure the $r_{
      %\draw (9,6) to[open,v^=$v_{1}$] (9,0);
      \draw (5,4)  --([hs]8.25,4 |- 5,4) arc(180:0:\radius) to[short] (9.5,4) to[I,l^=$i_{out}$] (9.5,0) |- (5,0);
      \end{circuitikz}
-\caption{3:1 Dickson circuit used to validate the model accuracy in the prediction of  $r_{scc}$ for the \emph{dc}-node.}
+\caption{3:1 Dickson circuit used to validate the model accuracy in the prediction of  $r_{scc}$ for the \emph{dc}-node. Odd numbered switches belong to phase 1, even numbered switches belong to phase 2, and $D$ corresponds to the duty cycle of phase 1.}
 \label{fig:3_1_hscc_exp_b}
 \end{SCfigure}
 
-Figure~\ref{fig:exp_rscc_dc_node_dx} shows $r_{scc}$ for a sweep in duty cycle ($D$) between $10\%$ and $9\%$, simulated at four different frequencies: 100kHz, 1MHz, 10MHz and 100MHz; thus operating the converter between the different switching limits (SSL and FSL).
+Figure~\ref{fig:exp_rscc_dc_node_dx} shows $r_{scc}$ for a sweep in duty cycle ($D$) between $10\%$ and $9\%$, simulated at four different frequencies: 100kHz, 1MHz, 10MHz and 100MHz; thus operating the converter from the SSL to the FSL and in between.
 
-The square markers are the measured resistance from the PLECS simulation, the solid black lines with markers: circle, plus and times, are the results of the model using the different approximations respectively: Original, Markowski and modified Markowski previously described in Section~\ref{ch:rscc_apprx}. The grey markers are the relative error between the model results and the PLECS simulation.  The two grey lines belong to the results of the previous modeling methods, the dashed line corresponds to the results of the original charge flow method proposed  by~\citeauthor{95Makowski} in~\citeyear{95Makowski}, and the dotted line is a posterior addition to the method, proposed by~\citeauthor{2013Breussegem:c_out} in~\cite{2013Breussegem:c_out} that includes the effects of the output capacitor.
+The square markers are the measured resistance from the PLECS simulation, the solid black lines with markers: circle, plus and times, are the results of the model using the different approximations respectively: Original, Markowski and modified Markowski. These different approximations were previously described in Section~\ref{ch:rscc_apprx}. The grey markers are the relative error between the model results and the PLECS simulation.  The two grey lines belong to the results of the previous modeling methods. The \emph{gray dashed line}  corresponds to the results of the original charge flow (OCF) method proposed  by~\citeauthor{95Makowski} in~\citeyear{95Makowski}. The dotted line is a posterior addition to the method that includes the effects of the output capacitor, proposed by~\citeauthor{2013Breussegem:c_out} in~\cite{2013Breussegem:c_out}.
+
 
 \begin{figure}[!h]
-
 \centering
     \begin{subfigure}{\textwidth}
         \parbox[c]{.03\linewidth}{\subcaption{}\label{fig:exp_rscc_dc_node_100kHz}}
@@ -172,7 +172,7 @@ The square markers are the measured resistance from the PLECS simulation, the so
         \input{./3_modeling/rscc_dc_node_100MHz.tex}}
     \end{subfigure}
 
-\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b}. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different switching frequencies ($f_{sw}$): $100kHz$ (\emph{a}) , $1MHz$ (\emph{b}), $10MHz$ (\emph{c}) and $100MHz$ (\emph{d}). Plots are obtained using the presented model using  the different analytical $r_{scc}$ approximations (see~\ref{ch:rscc_apprx}): \emph{black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$, and using the original charge flow analysis (\emph{dashed line}).}
+\caption{$r_{scc}$ from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b}. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different $f_{sw}$ \emph{top-to-bottom}: $100kHz$, $1MHz$, $10MHz$ and $100MHz$. The model results are given for the different approximations: \emph{o} - Original,\emph{+} - Makowski , \emph{x} - Makowski modified. The \emph{Gray markers} are the relative error for the different approximations.  The \emph{dashed gray line} corresponds to the original charge flow analysis, and the \emph{dotted gray line} to a posterior enhancement including the effects of the output capacitor.}
 \label{fig:exp_rscc_dc_node_dx}
 \end{figure}
 
@@ -225,9 +225,18 @@ The square markers are the measured resistance from the PLECS simulation, the so
         }
     \end{subfigure}
 
-\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b} as function of the switching frequency ($f_{sw}$). \emph{Left axis} - Experimental points ($\Box$) compared with this work model (\emph{solid black line}) and M. Seeman's model (\emph{solid grey line}). \emph{Right axis} - Relative error between PLECS results and this work model (\emph{black stars}) and Seeman's model (\emph{grey stars}). Plots are presented for different duty cycles: \emph{top-to-bottom}- $D = 23.3\%$, $D = 50\%$ and $D = 76.7\%$; and for different output capacitor ($c_3$) values: \emph{left-to-right}- $c_3 = c_{fly} = 100nF$, $c_2 = 10~c_{fly} = 1\mu F$ and $c_3 = 100~c_{cfly} = 100\mu F$.}
+
+
+\caption{$r_{scc}$ from the \emph{dc}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b} for a sweep of $f_{sw}$. \emph{$\Box$ markers} are the experimental points. The \emph{solid black lines} are the different modeling methods, and the \emph{gray markers} the relative error of each method. Plots are presented for different duty cycles:  \emph{Rows top-to-bottom}- $D = 23.3\%$, $D = 50\%$ and $D = 76.7\%$. And also for different $c_o$ values: \emph{columns left-to-right}- $c_{fly}$ , $10~c_{fly} $ and $100~c_{cfly}$.}
 \label{fig:exp_rscc_dc_node}
 \end{figure}
+
+Looking to the relative error  of the model with respect to the PLECS simulation, it can be seen that on the one hand the two extreme simulations Figures~\ref{fig:exp_rscc_dc_node_100kHz} and~\ref{fig:exp_rscc_dc_node_100MHz} achieve the highest accuracy with a relative error $\epsilon_r$ lower than $1\%$ at $100kHz$ and $4\%$ at $100MHz$. In this two simulations the converter operates in the well-defined switching limits, SSL and FSL, and the losses are precisely described by the model.  On the other hand, the other two simulations, $1MHz$ and $10MHz$,  have an error within $5\%$ to $20\%$. The accuracy is reduced since the converter operates between of two switching limits, hence $r_{scc}$ is approximated from the two asymptotical functions. Looking to the different approximation methods (\emph{gray markers}), we can see that the original approximation for $r_{scc}$ presents the best accuracy in all the simulations.
+
+The plotted results of the current methods (\emph{gray lines}) make evident their  limitations in the prediction of $r_{scc}$. Actually , these limitations come from modeling the load as a voltage sink, as described in Section~\ref{ch:load_model}, which neglects the effects of the duty cycle ($D$) and the output capacitor ($c_o$) in the prediction of $r_{ssl}$. Figures~\ref{fig:exp_rscc_dc_node_100kHz} and~\ref{fig:exp_rscc_dc_node_1MHz} show the converter operating in the SSL region. The ordinal charge flow  method \emph{95Makowski} (\emph{gray dashed line}) only matches the measured value in PLECS when the duty cycle is close to $20\%$ and overestimates its value for the majority of the range. Steyaert proposed a modification of the charge flow method that takes into account the output capacitor in the prediction of $r_{ssc}$, however the predicted $r_{scc}$ (\emph{gray dotted line}) does not show a better trend than the original method. In this case, $r_{scc}$ presents a lower value, only matching the measured value for $D=65\%$.
+Indeed, both plots make evident that predicted $r_{scc}$ is independent to the duty cycle, which is not the case for the new proposed methodology.
+
+When the converter operates in the FSL region, there are no differences between the methods as it can be seen in Figure~\ref{fig:exp_rscc_dc_node_1MHz}.
 
 \begin{figure}[!h]
 \newcommand\pHeigh{5cm}
@@ -237,20 +246,15 @@ The square markers are the measured resistance from the PLECS simulation, the so
      \caption{Equivalent Output Resistance ($r_{scc}$) as function of the relative size of the output capacitor (\emph{dc}-capacitor) with respect to the flying capacitors for the 3:1 Dickson converter of Figure~\ref{fig:3_1_hscc_exp_b}. Results presented for the converter operating at $f_{sw}=100kHz$ with capacitors $c_1=c_2=c_{fly}=100nF$ and all switch resistances $r_{on} = 100m\Omega$.}\label{fig:exp_rscc_pwm_node_fsw}
 \end{figure}
 
-First, looking the accuracy of the model with respect to the PLECS simulation, it can be seen that in the two extreme simulations Figures~\ref{fig:exp_rscc_dc_node_100kHz} and~\ref{fig:exp_rscc_dc_node_100MHz} the model achieves the highest accuracy with a relative error lower than $1\%$ at $100kHz$ and $4\%$ at $100MHz$, where in the other two simulations ($1MHz$ and $10MHz$) is within $5\%$ to $20\%$. The relative error is smaller when the converter operates in the vicinity of the well-defined switching limits (SSL, FSL) and it increases out of these regions, since the value is approximation of the two asymptotes. Looking to the different approximation methods, we can see that the original approximation for $r_{scc}$ presents the best accuracy in all the simulations. The high accuracy in the two extreme simulations is due to the fact that in these two scenarios the converter is operating at the asymptotical limits the SSL and FSL, therefore the losses are associated to only one of the two limits
+The other limitation of the original method is that it leaded to inaccuracies when the output capacitor of the \emph{dc}-output becomes comparable in value to the rest of the capacitors in the converter. The plots in Figure~\ref{fig:exp_rscc_dc_node} present $r_{scc}$ for a sweep in frequency. In the figure, each row is associated to a duty cycle, hence in the top row $D=23.3\%$, middle $D=50\%$ and bottom $D=76.7\%$. Each column is associated to a different size of the output capacitor $c_o$, hence left column $c_o=c_{fly}$, middle $c_o=10c_{fly}$, and right $c_o=100c_{fly}$, being $c_{fly}=c_1=c_2 =100nF$. The square markers present the measured values of $r_{scc}$ using PLECS, the \emph{solid black lines} present the three modeling methods, and the \emph{grey markers} are $\epsilon_r$ with respect to the PLECS results.
 
-Second, looking at the results of the previous models (gray lines), it can be seen a dramatic increase in the accuracy of the new method, specially in the SSL region. The simulations of Figures~\ref{fig:exp_rscc_dc_node_100kHz} and~\ref{fig:exp_rscc_dc_node_1MHz} show a clear improvement in the prediction of the output resistance trends with respect to the duty cycle. It can be seen that the original method  \emph{95Makowski}, gray dashed line, only matches the measured value in PLECS when the duty cycle is close to $20\%$ and overestimates its value for the majority of the range.  This error is caused by that the original method neglected the effects of the output capacitor in the modeling of $r_{scc}$. Steyaert proposed a modification of the original method to include these effects of the output capacitor, gray dotted line, the modification gives a lower value for the $r_{scc}$ what leads an underestimation for values of duty cycle different than $D=65\%$. In addition, it can be see that both lines are totally insensitive to the variations of the duty cycle, caused by assuming the load to be a voltage sink, as described in Section~\ref{ch:load_model}. As the converter operates closer to the FSL, the prediction of the old methods increases matching the curves of the new method for the highest frequency when the converter operates in the FSL.
+Reading the plots from left to right, it can be seen that for the two old methods (star and plus markers) the relative error reduces as $c_o$ increases, achieving a almost the same accuracy of the new proposed method for largest value of $c_o$. Looking in detail, we can see that the highest inaccuracies are in the SSL region (the low frequency range). At the same time, we can see that between the two old methodologies, the original methodology has a higher accuracy for $D=23.3\%$, and in the other cases Steyaert's modification achieves an smaller error. Actually, in the original charge flow method it was assumed $D=50\%$ when operating in the SSL region, therefore Steyaert's modification would be more in this case better. Anyway, the results show clearly that the best accuracy is achieved with the new proposed methodology, keeping the relative error within the same limits for any of the different scenarios. For all plots the lowest accuracy is around the elbow of the $r_{scc}$ curve, since the values are approximated from the two asymptotical limits.
 
-Actually, the original charge flow analysis leaded to inaccuracies when the output capacitor of the \emph{dc}-output becomes comparable in value to the rest of the capacitors in the converter. The plots in Figure~\ref{fig:exp_rscc_dc_node} present $r_{scc}$ for a sweep in frequency. In the figure row is associated to a duty cycle, hence in the top row $D=23.3\%$, middle $D=50\%$ and bottom $D=76.7\%$; and each column is associated to a different size of the output capacitor $c_o$, hence left column $c_o=c_{fly}$, middle $c_o=10c_{fly}$, and right $c_o=100c_{fly}$ (being $c_{fly}=c_1=c_2$. The square markers present the measured values of $r_{scc}$ using PLECS, the solid black lines present the three modeling methods, and the grey markers the relative error $\epsilon_r$ associated to each of the method.
 
-Reading the plots from left to right, it can be seen that for the two old methods (star and plus markers) the relative error reduces as $c_o$ increases, achieving a almost the same accuracy of the new proposed method for largest value of $c_o$. Looking in detail we see that the highest inaccuracies are in the SSL (the low frequency range), since at that region is where has the biggest impact the effects of the output capacitor. At the same time we can see that between the two old methodologies, the original methodology has a higher accuracy for $D=23.3\%$, and in the other cases Steyaert's approx achieves an smaller error. However this tendencies between the two old methods cannot be predicted to be the same for other converters. What it is evident in the results is that the best accuracy is achieved with the new proposed methodology, keeping the relative error within the same limits for any of the different scenarios. In any case the lowest accuracy is around the elbow of the $r_{scc}$ curve, since the values are approximated from the two asymptotical limits.
-
-The effects of the output capacitor $c_o$ in $r_{scc}$ can be better visualized in Figure~\ref{fig:exp_rscc_pwm_node_fsw}. The results are given for a converter operating with $D=50\%$, the square markers are the measured values of $r_{scc}$, and the solid lines the different modeling methodologies. We can see that as the output capacitor reduces, $r_{scc}$ reduces as well till a certain minimum point where it starts increasing again. Again, only the new proposed modeling methodology follows the measured data.
-
-The decrease of the output resistance value is due to the fact that smaller output capacitor values allow the other capacitors in the converter to also pump charge to the load, therefore not all the charge transported by the flying capacitors is redistributed towards the output capacitor. However reducing the output capacitor increases the voltage ripple at the output node. In~\cite{14Andersen} the advantages of reducing the output capacitor are exploded to increase the power density of a SCC and reduce the output ripple by using interleaving.
+The influence of $c_o$ in $r_{scc}$ can be better visualized in the plot of  Figure~\ref{fig:exp_rscc_pwm_node_fsw}. The results are given for a converter operating with $D=50\%$, the square markers are the measured values of $r_{scc}$, and the solid lines the different modeling methodologies. We can see that as the output capacitor reduces, $r_{scc}$ reduces as well till a certain minimum point where it starts increasing again. From the three modeling methodologies, only the  proposed in this work follows the measured data. Actually, the decrease of the output resistance value is because a small output capacitor allows the other capacitors to contribute in delivering charge to the load. However reducing the output capacitor increases the voltage ripple at the output node. In~\cite{14Andersen} are exploited the advantages of reducing the output capacitor in order to increase the power density of a SCC.
 %\clearpage
 \subsection{ Floating \emph{pwm}-output }
-Figures~\ref{fig:exp_rscc_pwm_node_dx} and~\ref{fig:exp_rscc_pwm_node_fsw} present the results of $r_{scc}$ for a sweep of the duty cycle ($D$) and frequency ($f_{sw}$) respectively. In both figures, the results are presented using the new proposed methodology using the different approximations described in Section~\ref{ch:rscc_apprx}.
+Figures~\ref{fig:exp_rscc_pwm_node_dx} and~\ref{fig:exp_rscc_pwm_node_fsw} present the results of $r_{scc}$ for a sweep of the duty cycle ($D$) and frequency ($f_{sw}$) respectively. In both figures, the results are presented using the different approximations described in Section~\ref{ch:rscc_apprx}.
 
 \begin{SCfigure}[][!h]
     \ctikzset { bipoles/length=1cm}
@@ -298,11 +302,11 @@ Figures~\ref{fig:exp_rscc_pwm_node_dx} and~\ref{fig:exp_rscc_pwm_node_fsw} prese
      %\draw (8.25,6) to[short,-o] (9,6) node[anchor=west] {$v_{out}$} ;
      \draw (8.25,6) -- (9.5,6) to[I,l^=$i_{out}$] (9.5,0) |- (5,0);
      \end{circuitikz}
-\caption{3:1 H$^2$-Dickson circuit used to validate the model accuracy in the prediction of  $r_{scc}$ for a \emph{pwm}-node.}
+\caption{3:1 H$^2$-Dickson circuit used to validate the model accuracy in the prediction of  $r_{scc}$ for the \emph{pwm}-node. Odd numbered switches belong to phase 1, even numbered switches belong to phase 2, and $D$ corresponds to the duty cycle of phase 1.}
 \label{fig:3_1_hscc_exp_a}
 \end{SCfigure}
 
-As in the previous section, Figure~\ref{fig:exp_rscc_pwm_node_dx} presents a sweep in duty cycle for different frequencies, respectively: $100kHz$, $1MHz$, $10MHz$ and $100MHz$. The two extreme cases, top and bottom, present the highest accuracy between the model and the simulation results with less than $2\%$ of error, because the converter operate in the deep regions of the two well-defined operation limits: SSL (Figure~\ref{fig:exp_rscc_pwm_node_100kHz}) and FSL (Figure~\ref{fig:exp_rscc_pwm_node_100MHz}). Outside the deep operation limits (Figures~\ref{fig:exp_rscc_pwm_node_1MHz} and~\ref{fig:exp_rscc_pwm_node_10MHz}), the accuracy is decreased, being  up to an order of magnitude higher, since the values are approximated from the two asymptotic limits. Regarding to the different approximation methods the original formulation of $r_{scc} = sqrt{r_{ssl}^2 + r_{fsl}^2}$ achieves the best results.  Independently of the model accuracy, it can be seen that predictive trends (in all fourth plots of Figure~\ref{fig:exp_rscc_pwm_node_dx}) are still consistent for variations in duty cycle.
+Figure~\ref{fig:exp_rscc_pwm_node_dx} presents a sweep in duty cycle for different frequencies, respectively: $100kHz$, $1MHz$, $10MHz$ and $100MHz$. Like in the results for the \emph{dc}-node, the two extreme cases, top and bottom, present the highest accuracy with $\epsilon_r$ below the $2\%$, since the converter operate in the deep regions of the two well-defined operation limits: SSL (Figure~\ref{fig:exp_rscc_pwm_node_100kHz}) and FSL (Figure~\ref{fig:exp_rscc_pwm_node_100MHz}). Outside the deep operation limits (Figures~\ref{fig:exp_rscc_pwm_node_1MHz} and~\ref{fig:exp_rscc_pwm_node_10MHz}), the accuracy is decreased, being  up to an order of magnitude higher, since the values are approximated from the two asymptotic limits. Regarding to the different approximation methods, again the original formulation ( $r_{scc} = \sqrt{r_{ssl}^2 + r_{fsl}^2}$ ) achieves the best results.  Independently of the model accuracy, it can be seen that predictive trends (in all fourth plots of Figure~\ref{fig:exp_rscc_pwm_node_dx}) are still consistent for variations in duty cycle.
 
 Figure~\ref{fig:exp_rscc_pwm_node_fsw} presents $r_{scc}$ for a sweep of the switching frequency $f_{sw}$, showing the well-known characteristic curve of $r_{scc}$. Results are presented  for different duty cycles. Consistent with the previous results, the accuracy is always reduced in the elbow of the curve where the converter operates in between the two limiting regions. At the same time, extreme duty cycles show smaller relative error ($\epsilon_r$). However this smaller values in $\epsilon_r$ are also influenced by the higher values of $r_{scc}$ at these regions.  Looking to the different approximations of $r_{scc}$, as in the previous case, the original formulation still obtains the best accuracy.
 
@@ -340,7 +344,7 @@ Figure~\ref{fig:exp_rscc_pwm_node_fsw} presents $r_{scc}$ for a sweep of the swi
         \input{./3_modeling/rscc_pwm_node_100MHz.tex}}
     \end{subfigure}
 
-\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a}. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different switching frequencies ($f_{sw}$): $100kHz$ (\emph{a}) , $1MHz$ (\emph{b}), $10MHz$ (\emph{c}) and $100MHz$ (\emph{d}). Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:rscc_apprx}): \emph{black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }
+\caption{$r_{scc}$ from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_b}. Experimental results (\emph{square marks}) compared with the model (\emph{solid line}) at different $f_{sw}$ \emph{top-to-bottom}: $100kHz$, $1MHz$, $10MHz$ and $100MHz$. The model results are given for the different approximations: \emph{o} - Original,\emph{+} - Makowski , \emph{x} - Makowski modified. The \emph{Gray markers} are the relative error for the different approximations.  }
 \label{fig:exp_rscc_pwm_node_dx}
 \end{figure}
 
@@ -371,10 +375,12 @@ Figure~\ref{fig:exp_rscc_pwm_node_fsw} presents $r_{scc}$ for a sweep of the swi
         \input{./3_modeling/rscc_pwm_fsw_sweep_32.tex}
     \end{subfigure}
 
-\caption{Equivalent Output Resistance ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a} as function of the switching frequency ($f_{sw}$). \emph{Plots 1-5 top-to-bottom}-  Experimental points ($\Box$ ) compared with the model (\emph{solid line}) and the absolute relative error ($star$)  at different duty cycles ($D$): - $10\%$, $23\%$, $50\%$, $63\%$ and $90\%$. \emph{Bottom-right}- Parametric plot with all the curves. Plots are obtained for the different analytical $r_{scc}$ approximations (see~\ref{ch:an_apprx}): \emph{Black} - Original $u=2$ ,\emph{grey} - Makowski  $u=2.54$, \emph{light grey} - rectified Makowski $u=f(D)$. }\label{fig:exp_rscc_pwm_node_fsw}
+\caption{ ($r_{scc}$) from the \emph{pwm}-node of the converter of Figure~\ref{fig:3_1_hscc_exp_a}. \emph{Plots 1-5 top-to-bottom}- Frequency sweep ($f_{sw}$) for different duty cycles: $10\%$, $23\%$, $50\%$, $63\%$ and $90\%$. \emph{$\Box$ markers} are the PLECS results and the \emph{solid lines} the model results using the different approximations: \emph{o}) Original, \emph{+}) Makowski, \emph{x})  Makowski modified. \emph{Bottom-right plot} - Parametric plot for all the duty cycles using only the original approximation. }\label{fig:exp_rscc_pwm_node_fsw}
 \end{figure}
+
 \clearpage
 \section{Multiple output SCC}
+The 2:1 SCC of Figure~\ref{fig:2_1_two_outs} was used in the validation of the multiple output SCC model. The predicted values of the trans-conductance matrix $\mathbf{Z}$ were compared with measured values in PLECS simulations and in an experimental board.
 \begin{figure}[!h]
 \ctikzset { bipoles/length=1cm}
 \centering
@@ -413,8 +419,6 @@ Figure~\ref{fig:exp_rscc_pwm_node_fsw} presents $r_{scc}$ for a sweep of the swi
 \caption{ Circuit used for the experimental setup, 2:1 SCC, presenting all the available outputs. In the experimental setup the outputs were loaded with constant current sinks. }
 \label{fig:2_1_two_outs}
 \end{figure}
-
-The 2:1 SCC of Figure~\ref{fig:2_1_two_outs} was used in the validation of the multiple output SCC model. The validation was based on comparing the predicted values of the trans-conductance matrix $\mathbf{Z}$ with measured values in PLECS simulations and in an experimental board.
 
 \subsection{Measuring $\mathbf{Z}_{scc}$ matrix from a SCC}
 \begin{figure}[!h]
@@ -464,28 +468,29 @@ The 2:1 SCC of Figure~\ref{fig:2_1_two_outs} was used in the validation of the m
 \caption{Experimental arrangement used to test and measure the $\mathbf{Z}_{scc}$ matrix.}
 \label{fig:Zscc_exp_setup}
 \end{figure}
-Figure~\ref{fig:Zscc_exp_setup} shows the configuration used to measure the $\mathbf{Z}_{scc}$ matrix, both in the circuit simulator and in the experimental setup.  In the case of the experimental setup, the currents where measured using three different Keithley\textsuperscript{\textregistered} \emph{SourceMeter 2440} one for each channel, implementing the switches $s_x$ with the internal
-switch of the instruments.  The voltages were measured with four different Keithley\textsuperscript{\textregistered} \emph{Meters 2000}, one for the input voltage and three for the output channels.  The $\mathbf{Z}_{scc}$ is computed using two measurements, keeping constant the driving signals of the converter( $f_{sw}$ and $D$):
+Figure~\ref{fig:Zscc_exp_setup} shows the configuration used to measure the $\mathbf{Z}_{scc}$ matrix, both in the circuit simulator and in the experimental setup.  In the case of the experimental setup, the currents where measured using three different Keithley\textsuperscript{\textregistered} \emph{SourceMeter 2440} one for each channel.  %, implementing the switches $s_x$ with the internal switch of the instruments. 
+The voltages were measured with four different Keithley\textsuperscript{\textregistered} \emph{Meters 2000}, one for the input voltage and three for the output channels. 
+The $\mathbf {Z_{scc}}$ is computed measuring the converter in two states, while  keeping constant the driving signals $f_{sw}$ and $D$ of the converter:
 \begin{enumerate}
-  \item Operating with no load ($s_1$,$s_2$,$s_3$ open), target voltage $v_{trg}$ and the conversion ration $m$ are determined,
+  \item Operating with no load ($s_1$,$s_2$,$s_3$ open). The Target voltage $v_{trg}$ and the conversion ration $m$ are determined,
       \begin{align}
-        v_{trg,x} & = v_{x},\label{eq:vtrg}\\
+        v_{trg,x} & = v_{x}, \\
         m_x & = \frac{v_{out,x}}{v_{in}}.
-        \label{eq:vtrg_m}
       \end{align}
-      The target voltages of the three outputs are grouped as
+      The measured target voltages are grouped in a column vector as 
       \begin{equation}
         \mathbf{v}_{trg} =
             \colvec{3}{v_{trg,1}}{v_{trg,2}}{v_{trg,3}}
-        \label{eq:vtrg_m}
+        \label{eq:vtrg_vec}
       \end{equation}
 
-  \item Operating the converter with one of the outputs is loaded, by closing one of the $s_x$ switches. All output voltages are measured and the current at the load as well.  The measured voltages are organized in a matrix form ($\mathbf{V}_{out}$), where the first column corresponds of the measured output voltages when \emph{Load 1} is connected, the second column when \emph{Load 2}, etc.  The measured output currents are stored in the vector $\mathbf{i}_{out}$. The operation is performed for the three outputs.
+  \item Loaded measurements. A single output is loaded, by closing one of the $s_x$ switches. All output voltages and the current load current are measured.  The measured voltages are grouped  in the matrix $\mathbf{V_{out}}$, where the first column corresponds of the measured voltages when \emph{Load 1} is connected, the second column when \emph{Load 2} is connected, etc.  The measured output currents are stored in the vector $\mathbf{i}_{out}$. The operation is performed for the three outputs.
       Subsequently the $\mathbf{Z}_{scc}$ is obtained as
       \begin{equation}
-       \mathbf{Z}_{scc} = \frac{\mathbf{v}_{trg} \vec{1} - \mathbf{V}_{out}}{\mathbf{I} ~  \mathbf{i}_{out}}.
-        \label{eq:rscc_m}
+       \mathbf{Z}_{scc} = \frac{\mathbf{v}_{trg} \vec{1} - \mathbf{V}_{out}}{\mathbf{I} ~  \mathbf{i}_{out}},
+        \label{eq:z_scc}
       \end{equation}
+      where $\vec{1}$ is a three ones row vector, and $\emph{I}$ is the identity matrix.
 \end{enumerate}
 
 \subsection{Simulation results}
@@ -534,6 +539,9 @@ In both cases the predicted values compare favorably with the simulation results
 An experimental set-up of the converter in was built. The converter uses four MOSFETs TN0104 from Supertex with typical \emph{on}-resistance of 1.5 $\Omega$. Two tantalum electrolytic capacitors of 10$\mu$F have been used as flying capacitors. The circuit was operated at 5kHz and the trans-resistance parameters are measured at different duty cycles. The results are compared with the model and  presented in Fig. \ref{fig:meas_zscc}, it can be seen that the predictions match the measured values with less than 10\% error. All the trans-impedance values with the exception of  parameters $z_{31}$ and $z_{13}$ follow the trend with the duty cycle predicted by the model. $z_{31}$ and $z_{13}$ have a bigger error since these values are much smaller than the rest of the converter parameters and, therefore, more sensitive to the parasitics of the board.
 
 \input{./4_model_validation/c10uF_bis/text_5k.tex}
+
+\input{./4_model_validation/c10uF_bis_fsw/fsw_sweep_D=50.tex}
+
 %The measured results of the experimental set-up can be improved mounting the circuit in a PCB with less parasitics and operated at higher switching frequencies by using ceramic capacitors instead of the tantalum ones .
 \section{Summary}
 The presented model is a valuable tool for  modeling a broad range of SCCs, from the classical approach of a single output converter to the new architectures where SCCs are combined with inductors. Unlike the previous models, this method allows to model the behaviour of multiple current loaded outputs, including their coupling relations. The model has been verified with simulations and experiments, and for both cases compares favorably. Since the resulting model is based on analytical expressions; the computation time is dramatically faster than any time-domain based simulator.

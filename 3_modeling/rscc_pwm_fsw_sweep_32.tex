@@ -19,7 +19,7 @@
                 legend columns = 1,
                 anchor=north east,
                 %at={(1,1)},
-                %draw=none,
+                draw=none,
                 font=\tiny},
 }
 \begin{loglogaxis}[
@@ -46,12 +46,12 @@
 
 %\addplot [semithick,mark=square,only marks]
 %  table [y=y4]{./3_modeling/r_scc_O1.dat};
-\addplot [semithick,smooth,mark=square]
+\addplot [semithick,smooth,mark=x]
   table [y=y4]{./3_modeling/rm1_sw_fsw_O1.dat};\addlegendentry{ $D = 50\%$}
 
 %\addplot [semithick,mark=star,only marks]
 %  table [y=y5]{./3_modeling/r_scc_O1.dat};
-\addplot [semithick,smooth,mark=star]
+\addplot [semithick,smooth,mark=+]
   table [y=y6]{./3_modeling/rm1_sw_fsw_O1.dat};\addlegendentry{ $D = 77\%$}
 %
 %\addplot [semithick,mark=diamond,only marks]
