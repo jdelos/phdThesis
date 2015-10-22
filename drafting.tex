@@ -1,6 +1,86 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       CHAPTER 2: Miniaturization in LED drivers     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Intro paragraph
+Screen backlighting, Automotive and General Lighting are currently the three main areas of application of LEDs. Based on them we provide a broad overview about the state-of-the-art
+
+Currently there is any commercial IC that solves the challenges of the smart drivers, offering connectivity and power management.
+
+the most innovative approach is taken by the startup \emph{Gooee} that proposes connected lighting platform consisting   of two ICs. The control chip integrates a micro-controller unit (MCU) with to implement the communication and sensing, and the power chip with the LED driver that interfaces with the LED; the platform  is completed with a cloud service that enables from a web application to have access to the lamp fixture data logs. The technical details of the power chip are no yet available~\cite{web:Gooee}.
+
+\begin{figure}[t]
+    \centering
+    \begin{circuitikz} [american voltages,scale=0.65]
+    \ctikzset{bipoles/length=0.85cm}
+   \draw[thick] (2.5,0.25) --
+                (2.5,6.5) --
+                (11.5,6.5) --
+                (11.5,0.25) --
+                (2.5,0.25);
+
+    %Draw SCC block with capacitors
+    \draw (3,1) --
+          (3,6) --
+          (5,6) --
+          (5,1) --
+          (3,1);
+
+    \draw (4,1.25) node[rotate=90,anchor=west] {Regulator SMPS };
+
+    \draw (5,5.5) to[short,-o] (14,5.5);
+    \draw (13,5.5) to[capacitor] (13,4.5) node[sground]{};
+
+    \draw (4,1) -- (4,0) node[sground,scale=0.75]{};
+
+   %Draw linear drivers
+   \draw  (4,0.5) -- (10.5,0.5) -- (10.5,1);
+
+   %First transitor
+   \draw   (10,1) -- (10,1.5) node[npn,anchor=E,scale=0.5](npn1){}
+           (npn1.C) -- (10,2.75) to[short,-o] (12,2.75);
+
+   %Second transitor
+   \draw  (10,1) -- (11,1)
+           node[npn,anchor=E,scale=0.5](npn2){}
+           (npn2.C) -- (11,2.25) to[short,-o] (12,2.25);
+
+   %Controller box
+   \draw (5.5,1) -- (8.5,1) -- (8.5,3) -- (5.5,3) -- (5.5,1);
+   \draw (5.75,2) node[anchor=west, text width = 1.75cm]{Intensity Controller};
+   \draw (npn2.B) -| (8.5,2);
+   \draw (npn1.B) -| (8.5,2);
+
+   %LEDs
+
+   \draw [dotted] (14,5.5) to[short,o-] (15,5.5)
+                  (15,2.75) to[short,-o] (12,2.75);
+
+   \draw (15,5.5) to[leD*] (15,2.75);
+
+   \draw [dotted] (15,5.5) -- (17,5.5)
+                  (17,2.25) to[short,-o] (12,2.25);
+
+   \draw (17,5.5) to[leD*] (17,2.25);
+
+   %Add battery
+
+   \draw (1,0) node[sground,scale=0.75]{};
+   \draw (1,0) to[V = $v_{src}$] (1,5.5)
+         -- (3,5.5);
+
+    \end{circuitikz}
+    \caption{Block diagram of the common architecture used in drivers for backlighting applications.}
+    \label{fig:backlight_LED}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               CHAPTER 3: H-SCC                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ Further details about the state-of-the-art with a broad overview of integrated power supplies can be found in ~\cite{2013Breussegem:int_conv} and ~\cite{2013villar}.
 
 Equal voltage ripple among all \emph{pwm}-nodes.
 
