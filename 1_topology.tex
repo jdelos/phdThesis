@@ -1,17 +1,8 @@
-\chapter{Miniaturization of LED drivers}
+\chapter{LED load and driver trichologies }
 %
 %The challenges in powering LED loads are so relevant that have an impact in functionalities and design of the future \emph{Solid-State-Lighting} (SSL) products. So much, that the user adoption of such a beneficial technology by is far slower than comparable disruptive technologies~\cite{11Voger}. In a part, that could be attributed due to the difficulties in achieving the high miniaturization and performance necessary in the LED drivers, at low cost, in order to outcompete the cheaper old technologies.
 
-The LED driver is the circuit that transforms raw energy from a power source and properly delivers it to the LED load. From the power management standpoint power a LED load is a trivial task, however the different requirements of SSL products make the design of them a complex task. Initially the main driving forces in the driver designs were: manufacturing cost, power quality, light quality. Reducing manufacturing costs can enable to decrease the lamp prices to the entry point for the consumers, while fulfilling the power quality fixed by the legislation and keeping the adequate light quality to do not perturb the human eye~\cite{10Wilkins}.
-
-More recently two other factors are becoming more relevant in the driver: miniaturization and \emph{smartability}\footnote{Provide the abilities/ functionalities to a device in order to be smart}. Currently the volume of the drivers is limited by the old lamp shapes in order to provide retrofit solutions. Although, in many cases the shape and look of the lamps has been modified in order to relax the requirements in terms of miniaturization for the driver. Therefore further the reduction of the driver volume will probably enable higher freedom in the lamp design. On the other hand, the future connected lamps~\cite{14Harbers} (or smart lamps) will require control and connectivity, what challenges the driver to provide multiple color channels and power management for the added control circuitry such as sensors, actuators, communication interfaces and $\mu$Controllers.
-
-Looking at the current designs, we can say that the initial driving forces in driver design, cost, power and light quality, found effective solutions based on discrete components. However discrete drivers cannot easily satisfy the design in terms of miniaturization and \emph{smartability}. Literally, the implications of these two concepts have opposing consequences, providing smart functions to the driver requires to add more components, therefore more volume and costs; while miniaturization requires to make the driver smaller. Actually, such dilemma has its analogy in the mobile phone industry. After the first generations of mobile phones, the requirements in terms of functionalities for the current smart-phones could had only been satisfied by a \emph{System-On-Chip} (SoC), where the maximum number of functionalities were integrated in a single IC package. Based on smart phone analogy, this dissertation brings the research for the future highly miniaturized LED drivers in the context of \emph{Power Systems on-Chip/in-Package}(PSoC/PSiP), where miniaturization and integration of functionalities can be easily achieved. Settling the goal in providing new driver circuits that that are more suitable for integration, than the currently available. And with the vision that integrable drivers will help in further development of more functionalities within the same package.
-
-This chapter starts with an overview of the LED characteristics as a load to give an understanding of the necessary requirements of a LED driver. Subsequently, the current three driver technologies are studied: Linear, Switched inductor converters and Switched capacitor converters. An state-of-the-art for each technology will be provided in order to construct a rational of the technology toward miniaturization, and presenting the facts why switched capacitor converters has been the selected technology in this dissertation.
-
-%Therefore  will be thoroughly studied, since constitute the central conversion technology selected for this dissertation.
-
+This chapter starts with an overview of the LED characteristics as a load to give an understanding of the necessary requirements of a LED driver. Subsequently, an overview for the current three driver technologies is given. Linear, switched inductor and switched capacitor, each technology is described, giving the necessary theoretical fundamentals of energy conversion to understand their advantages and limitations.  With the overview for each technology the rational towards \emph{hybrid} converter is given, settling the bases of the converter topology used in this dissertation.
 
 \section{The LED as a load}
 \label{sc:LED_load}
@@ -130,7 +121,7 @@ Linear drivers place a shunt element between the source and the load(\emph{i.e} 
     \draw
         (0,0) to[V = $v_{src}$]
         (0,3) to[generic=$r_{series}$,i=$i_o$]
-        (5,3) to[leD*,v=$v_{o}$]
+        (5,3) to[R,v=$v_{o}$]
         (5,0) -- (0,0);
     \end{circuitikz}
     \caption{}
@@ -140,7 +131,7 @@ Linear drivers place a shunt element between the source and the load(\emph{i.e} 
 \begin{subfigure}[t]{.45\textwidth}
     \begin{circuitikz} [scale=0.65]
     \begin{scope}%[xshift = 8cm, yshift=0cm]
-        \draw[->] (0,0) -- (4,0) node[anchor=south] {$  m $};
+        \draw[->] (0,0) -- (4,0) node[anchor=south west] {$  v_o/v_{src} $};
         \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
         %Ticks X
@@ -226,7 +217,7 @@ IBCs provide step-up and step-down conversion for large dynamic ranges while kee
 
     \draw (2.5,3) to[gswitch] (2.5,0);
 
-    \draw (6.5,3) to[leD*,v=$v_{o}$] (6.5,0);
+    \draw (6.5,3) to[R,v=$v_{o}$] (6.5,0);
 
     \end{circuitikz}
     \caption{}
@@ -237,7 +228,7 @@ IBCs provide step-up and step-down conversion for large dynamic ranges while kee
     %\centering
     \begin{circuitikz} [scale=0.65]
     \begin{scope}%[xshift = 8cm, yshift=0cm]
-        \draw[->] (0,0) -- (4,0) node[anchor=south] {$  m $};
+        \draw[->] (0,0) -- (4,0) node[anchor=south west] {$ v_o/v_{src} $};
         \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
 
@@ -280,7 +271,7 @@ The main disadvantage is the use of magnetic components due to their volume and 
 
 From the standpoint of view of the switches technology, inductive converters bring yet another disadvantage with respect of the integration of the switches.  Generally, the switches in an inductive converter have to fully block the highest operational voltage of the converter, from the input or the output voltage. Depending on the application, the range is from tens to a few hundreds of volts. Using high voltage devices has three main drawbacks: First, the losses in the devices scale quadratically with the voltage  stress. Second, bad switching performances, because high voltage devices are less efficient and slower switching. Third, the standard VLSI technologies do not offer these \emph{high voltage} (HV) devices and the VLSI technologies that offer them are less performance and more expensive than the dedicated discrete technologies.
 
-\subsection{Energy transfer in inductor based converters}
+\subsection{Energy transfer in switched inductor converters}
 %\begin{wrapfigure}{o}{0.7\textwidth}
 Inductor based converter are ideally lossless, since the transfer of energy between a voltage source  and an inductor is an adiabatic process, which can be demonstrated using the circuit of Figure~\ref{fig:ind_chrg}.
 
@@ -372,7 +363,9 @@ In conclusion, transferring energy between a voltage source and inductor is loss
 \section{Capacitor Based Converters }
 Switched Capacitor Converters (SCCs) are SMPS composed only of switches and capacitors. SCC were initially used for voltage multiplication~\cite{30Cockcroft,44Waidelich,76Dickson} and more recently in applications that need voltage regulation as well~\cite{Ng:EECS-2011-94}. Compared to inductor based converters, the absence of magnetic elements places them in a good position for high density power systems and integrated solutions, such as Power-System-in-Package (PSiP) or Power-System-on-Chip (PSoC).
 
-SCCs have a fixed ratio of conversion between the input and the output determined by the topology. The output voltage of the converter under no load conditions is defined as the \emph{target voltage} ( $v_t$). The converter performs at high efficiency when the load is supplied close to the target voltage. Similar to the linear drivers, the efficiency of the converter drops as the difference between the load and target voltage increases. Also, the converter can not supply the load with an output voltage value above to the target voltage. Figure~\ref{fig:SCC_ckt} shows a step-down converter with a conversion ratio of one half. A common practice to extend the regulation margins of these converters is to have topologies with multiple conversion rations~\cite{2013Ma,2013Breussegem:m_trg}. From Figure~\ref{fig:SCC_chr} it can be seen that the efficiency increases as the ration $m$ gets close to the first fixed conversion ration of the converter $m_1$; right after $m_1$ the efficiency drops again dramatically and it again linearly increases as it approaches the second fixed conversion ratio of the converter $m_2$. Beyond $m_2$ the converter does not work.
+SCCs have a fixed ratio of conversion between the input and the output determined by the topology. The output voltage of the converter under no load conditions is defined as the \emph{target voltage} ($v_t$). The converter performs at high efficiency when the load is supplied close to the target voltage. Similar to the linear drivers, the efficiency of the converter drops as the difference between the load and target voltage increases. The converter cannot supply a voltage above to the target voltage. Figure~\ref{fig:SCC_ckt} shows a step-down converter with a conversion ratio of one half, thus a 2:1 SCC, and Figure~\ref{fig:SCC_chr} shows the efficiency with respect of the conversion ratio. As the ratio between the input and the output voltages becomes smaller than one-half the efficiency drops linearly, similar like in a linear regulator. For values above one-half the converter is not operative.  A common practice to extend the regulation margins of these converters is to have topologies with a \emph{gear box} that provides multiple ratios of conversion~\cite{2013Ma,2013Breussegem:m_trg}, which are also know as multi-target voltages converters.
+
+% From Figure~\ref{fig:SCC_chr} it can be seen that the efficiency increases as the ration $m$ gets close to the first fixed conversion ration of the converter $m_1$; right after $m_1$ the efficiency drops again dramatically and it again linearly increases as it approaches the second fixed conversion ratio of the converter $m_2$. Beyond $m_2$ the converter does not work.
 \begin{figure}[!h]
 %\centering
 \ctikzset { bipoles/length=1cm}
@@ -401,7 +394,7 @@ SCCs have a fixed ratio of conversion between the input and the output determine
 
     %Load and capacitor C2
     \draw (5,0) to[capacitor=$c_2$,-*] (5,3);
-    \draw (6.5,3) to[leD*,v_=$v_{o}$] (6.5,0);
+    \draw (6.5,3) to[R,v^=$v_{o}$] (6.5,0);
 
     \end{circuitikz}
     \caption{}
@@ -414,12 +407,12 @@ SCCs have a fixed ratio of conversion between the input and the output determine
     %\raggedright
     \begin{circuitikz} [scale=0.65]
     \begin{scope}[xshift = 10cm, yshift=0cm]
-            \draw[->] (0,0) -- (4,0) node[anchor=south west] {$  m $};
+            \draw[->] (0,0) -- (4,0) node[anchor=south west] {$  v_o/v_{src} $};
             \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
             %Ticks X
-            \draw  (1.75,5pt) -- (1.75,0pt) node[anchor=south west ] {$m_1$};
-            \draw  (3,5pt) -- (3,0pt)   node[anchor=south west ] {$m_2$};
+            \draw  (2.5,5pt) -- (2.5,0pt) node[anchor=south west ] {$1/2$};
+            %\draw  (3,5pt) -- (3,0pt)   node[anchor=south west ] {$m_2$};
             %\draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
 
             %Ticks Y
@@ -427,14 +420,14 @@ SCCs have a fixed ratio of conversion between the input and the output determine
             \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$90\%$};
 
             %Markers
-            \draw[dotted] (1.75,2.4) -- (1.75,0);
-            \draw[dotted] (3,2.3) -- (3,0);
-            \draw[dotted] (3,2.5) -- (0,2.5);
+            \draw[dotted] (2.5,2.4) -- (2.5,0);
+            %\draw[dotted] (3,2.3) -- (3,0);
+            \draw[dotted] (2.5,2.5) -- (0,2.5);
             %\draw[dotted] (1.5,1.5) -- (1.5,0);
             %\draw[dotted] (1.5,1.5) -- (0,1.5);
 
 
-            \draw[thick] (0.5,1.4) -- (1.75,2.4) -- (1.75,1.6) -- (3,2.3)  node[anchor=south] {};
+            \draw[thick] (0.5,1.4) -- (2.5,2.4); % -- (1.75,1.6) -- (3,2.3)  node[anchor=south] {};
             \draw (10,0)[anchor=north] {};
         \end{scope}
     \end{circuitikz}
@@ -445,13 +438,13 @@ SCCs have a fixed ratio of conversion between the input and the output determine
 \label{fig:SCC_smps}
 \end{figure}
 
-The main limitation of SCCs is that they cannot directly  provide the voltage-to-current regulation, necessary feature of the LED driver. Nevertheless by indirect means to output current can be controlled adding a linear regulator in series with the converter output, compromising the converter efficiency.  Such approach is very popular driver for backlighting LEDs in battery supplied devices, where high  integrability was more relevant than the power efficiency. The backlighint LED driver solution uses a multi-target SCC converter the battery voltage to a voltage above the LED strings, and by means of  linear drivers the output current is adjusted to properly bias the LEDs. Adopting that architecture for general lighting could be a solution, however when scaling the voltages and currents to the requirements of general lighting applications the resulting driver would be infeasible and inefficient.
+The main limitation of SCCs is that they cannot directly  provide the voltage-to-current regulation, necessary feature of the LED driver. Nevertheless by indirect means the output current can be controlled adding a linear regulator in series with the converter output, compromising the converter efficiency.  Such approach is very popular driver for backlighting LEDs in battery supplied devices, where high  integrability was more relevant than the power efficiency. The backlighint LED driver solution uses a multi-target SCC converter the battery voltage to a voltage above the LED strings, and by means of  linear drivers the output current is adjusted to properly bias the LEDs. Adopting that architecture for general lighting could be a solution, however when scaling the voltages and currents to the requirements of general lighting applications the resulting driver would be infeasible and inefficient.
 
-From the standpoint view of integration the main advantage of these converters is the use no inductors. Integrated capacitors have a better energy density than integrated inductors. The mechanical structure of the capacitors, a stack of metal-isolator-metal, is much easier to replicate on a small scale. With respect to the switches technology, SCCs have the advantage of dividing the operational voltages of  the converter among the different components, thus reducing the voltage stress in the switches and capacitors. Actually reducing the voltages in the converter has different advantages. First,  capacitors have higher energy density. Second, lower voltage switches have better switching performances and lower associated losses. Finally, lower voltage devices require less silicon area and have a larger offer in the standard very large integration scale (VLSI) processes.
+From the standpoint view of integration the main advantage of these converters is the use no inductors. Integrated capacitors have a better energy density than integrated inductors. The mechanical structure of the capacitors, a stack of metal-isolator-metal, is much easier to replicate on a small scale. With respect to the switches technology, SCCs have the advantage of dividing the operational voltages of  the converter among the different components, thus reducing the voltage stress in the switches and capacitors. Actually, reducing the voltages in the converter has different advantages. First,  capacitors have higher energy density. Second, lower voltage switches have better switching performances and lower associated losses. Finally, lower voltage devices require less silicon area and have a larger offer in the standard very large integration scale (VLSI) processes.
 
 
 
-\subsection{Energy transfer in capacitor based converters}
+\subsection{Energy transfer in switched capacitor converters}
 %\begin{wrapfigure}{o}{0.7\textwidth}
 SCCs are by nature lossy, since the transfer of energy between a voltage and a capacitor is a non-adiabatic process, which can be demonstrated using the circuit of Figure~\ref{fig:cap_chrg}.
 \begin{figure}[!h]
@@ -539,42 +532,101 @@ In conclusion, transferring energy between a voltage source and a capacitor is a
 
 
 
-\section{Overview in integrated power supplies}
+
+\section{Overview in integration of LED drivers }
 With regard to the integration of power supplies, we can indemnify two clear approaches, Power System on Chip (PSoC), and  Power System in Package (PSiP). PSoCs integrate all converter functions, power train and control, in a single die, using the available in-die reactive components. Currently, the standard VLSI processes offer capacitors and inductors with low energy densities, generally provided for radio frequency (RF) proposes. PSiPs integrate the converter in a single integrated circuit package, allowing to use multiple dies with different technologies and dedicated miniaturized discrete components. Currently there are few commercially available PSiP LED drivers offered by \emph{Linear Technology}.
 
-There is yet another approach in integration of power supplies, where the IC integrates the power train and the control, using off-package  passive components. In reality, this is a widely adopted and dominant solution among the different IC manufacturers that provide LED dedicated drivers for the three main applications: General lighting, screen back-lighting and automotive. In order to fulfil these applications manufacturers offer two possible IC solutions, stand-alone controllers, and integrated power train and controller. These application specific drivers facilitates the development by reducing component count and design time, however the flexibility in the design of the new topologies that help integrability and improve the power density is very limited since the driver topologies are already fixed by the available ICs. 
+There is yet another approach in integration of power supplies, where the IC integrates the power train and the control, using off-package  passive components. In reality, this is a widely adopted and dominant solution among the different IC manufacturers that provide LED dedicated drivers for the three main applications: Screen back-lighting, general lighting and automotive. In order to fulfil these applications manufacturers offer two possible IC solutions, stand-alone controllers, and integrated power train and controller. These application specific drivers facilitates the development by reducing component count and design time, however the flexibility in the design of the new topologies that help integrability and improve the power density is very limited since the driver topologies are already fixed by the available ICs.
+\begin{figure}[!ht]
+\centering
+\ctikzset{bipoles/length=1cm}
+\tikzstyle{hs_s}=[shift={(-0.125,0)}]
+\begin{circuitikz} [american,scale=0.65]
+   \draw[thick,dashed] (2.5,0.25) --
+                (2.5,6.5) --
+                (11.5,6.5) --
+                (11.5,0.25) --
+                (2.5,0.25);
+
+    %Draw SCC block with capacitors
+    \draw (3,1) --
+          (3,6) --
+          (5,6) --
+          (5,1) --
+          (3,1);
+
+    \draw (11.5,6.5) node[anchor=north east] {IC PACKAGE};
+    \draw (3.5,3.5) node[rotate=90] {SMPS};
+    \draw (4.5,3.5) node[rotate=90,font=\footnotesize] {(with off-chip passives)};
+
+    \draw (5,5.5) to[short,-o] (12,5.5)  -- (14,5.5);
+    \draw (12.5,5.5) -- (12.5,5.25)  to[C,/tikz/circuitikz/bipoles/length=0.75cm] (12.5,4.75) node[sground,scale=0.75]{};
+
+    \draw (4,1) to[short,-o] (4,0) -- (4,-0.25)  node[sground,scale=0.75]{};
+
+   %Draw linear drivers
+   \draw  (4,0.5) -- (11,0.5) ;
+
+   %First transitor
+   \draw   (10,0.5) to[R,/tikz/circuitikz/bipoles/length=0.5cm]
+           (10,1.5)-- (10,2.5) node[npn,anchor=E,scale=0.5](npn1){}
+           (npn1.C) -- (10,3.75) to[short] (12,3.75)
+           (8.5,1.5) -- (10,1.5);
 
 
-In general lighting and automotive applications the dedicated commercial ICs implement only inductor based converters such as back, boost, flyback, etc., providing just a solution for the power conversion point of view without integrating other functionalities. In the case of back-lighting, the commercial ICs integrate a power train and control unit and a control interface. 
+   %Second transitor
+   \draw  (11,0.5) to[R,/tikz/circuitikz/bipoles/length=0.5cm]
+          (11,1.5) -- (11,2) node[npn,anchor=E,scale=0.5](npn2){}
+          (npn2.C) -- (11,3.25) to[short] (12,3.25)
+          (8.5,1.75) -- ([hs_s]8.5,1.75 -| 10,1.5 ) arc(180:0:0.125) --   (11,1.75);
 
 
+   %Controller box
+   \draw (5.5,1) -- (8.5,1) -- (8.5,4) -- (5.5,4) -- (5.5,1);
+   \draw (5.75,2.5) node[anchor=west, text width = 1.75cm,font=\footnotesize]{Intensity Controller};
+   \draw (npn2.B) -| (8.5,3);
+   \draw (npn1.B) -| (8.5,3);
+
+   %LEDs
+   \draw (14,5.5) to[short] (14,5.5)
+                    to[leD*,/tikz/circuitikz/bipoles/length=0.75cm] (14,3.75) to[short,-o] (12,3.75);
+
+   \draw (14,5.5) -- (15.5,5.5)
+                    to[leD*,/tikz/circuitikz/bipoles/length=0.75cm] (15.5,3.75) -- (15.5,3.25) to[short,-o] (12,3.25);
+
+   %Add battery
+
+   \draw (-1,-0.25)  node[sground,scale=0.75]{} -- (-1,0) to[V = $v_{src}$] (-1,5.5)
+         to[short,-o] (2,5.5) -- (3,5.5);
+
+  % \draw (3,5) to[short,-o] (2,5) -- (1.25,5) to[C,l_=$c_2$,/tikz/circuitikz/bipoles/length=0.75cm] (1.25,3.5) to[short,-o] (2,3.5) -- (3,3.5);
+%   \draw (3,3) to[short,-o] (2,3) -- (1.25,3) to[C,l_=$c_1$,/tikz/circuitikz/bipoles/length=0.75cm] (1.25,1.5) to[short,-o] (2,1.5) -- (3,1.5);
 
 
+    \end{circuitikz}
+    \caption{Block diagram of a commercial LED driver IC used in back-lighting applications.}
+    \label{fig:backlight_LED}
+\end{figure}
 
-\section{Summary}
-The three main technologies
-
-Based on the aforementioned arguments both SMPS technologies, inductor based and switched capacitor converters,   are
-
-
-
-
-the most suitable  for high efficient LED drivers and miniaturization. On the one hand, inductive converters are the preferred choice due to their high efficiency and regulation capabilities, although they are less suitable to integrate due to the use of
-
-   adopting a SCC based driver as solution for LED lighting applications seems to be, a priori,  not an evident choice. Due to the limitations of SCC  in voltage-to-current conversion would directly disqualify them. However their advantageous characteristics form the standpoint of view of integration, made these circuits very attractive. Actually, if the initial limitations in voltage-to-current conversion could be overcome, such architecture would be an interesting candidate to explore as a solution for a \emph{Power System on-Chip/in-Package} LED driver.  Exploring the possibilities that switched capacitor converters can offer in terms of integrated and miniaturized LED drivers with efficient voltage-to-current conversion was the rational of this dissertation.
-
-The use of a bear SCC can never satisfy the requirements of LED drivers due to the following facts:
-\begin{itemize}
-  \item Only provide voltage-to-voltage conversion
-  \item Fixed conversion ratios
-  \item Regulation is provided by series shunting
-\end{itemize}
-These limitations combined with the abrupt characteristics I-V of the LEDs makes barely impossible to provide high efficient solutions with the single use of SCC. The converters would require to have a large number of conversion ratios with a very large granularity to avoid uncontrolled currents flowing through the LEDs.
-
-The research presented in this work aims to explore the possibilities of the SCC for LED drivers and the conducting path is based in the combination of the with inductors. The overall solution improves the power density and reduced form factor of the present solutions.
+In back-lighting, the commercial ICs integrate a power train, control unit and a communication interface. Back-lighting applications require multiple LED channels, therefore these drivers implement the power train  architecture shown in Figure~\ref{fig:backlight_LED}. A SMPS (inductive or capacitive) converts the supply voltage to a voltage above the LED strings, and a linear regulator is in series with each LED string channel enabling to control individually the currents for each channel~\cite{2008Yuequan,07Feng}. In general lighting and automotive applications the dedicated commercial ICs implement only inductor based converters such as back, boost, flyback, etc., providing just a solution for the power conversion point of view without integrating other functionalities. With an innovative approach and looking towards the future connected lamps, \emph{Gooee}~\cite{web:Gooee} provides a two chip solution a LED driver chip with off-chip passives, and a dedicated $\mu$Controller unit. The final solution enables a LED lamp with smart functionalities such as sensing, data logging and cloud connectivity.
 
 
-This thesis is divided in the four main sections that where necessary to build a switched capacitor LED driver. The first section introduces the new LED driver architecture used during the entire thesis, the \emph{Hybrid-Switched Capacitor Converter}, H-SCC from now on. The second part of this book, the core of the PhD. work, presents the methodology to model H-SCC. The methodology extends the previous works in the topic providing an enhanced modeling for the design of SCCs and H-SCCs. The third section is devoted to the practical use of the new methodology, thus for the design phase of a converter. The modeling is used  to help in the development facilitating the sizing and optimization of the design variables. The last section presents a discrete implementation of 12W H-SCC LED driver and the design procedure. Although is not a regular practice, experimental work is not only presented in the in the last section. The experimental work has been also  used to validate the presented modeling and methodology. The final section is the conclusion of the entire work and the future opportunities that the presented work can offer.
+\section{ Summary}
+
+A background of the different driver technologies and the state-of-the-art of LED driver integration was given in order to contextualize better our research question:
+
+\emph{
+\centering 
+ Could just a SCC drive a High-Brightness LED?
+ }
+
+Based on the aforementioned characteristics, a SCC driver seems to be, a priori, the correct choice, when looking them in terms of regulation and voltage conversion. These converters provide a voltage-to-voltage conversion in discrete steps, and as previously mentioned, a LED load is generally supplied by current due to their abrupt $v-i$ characteristics. On possible solution, would be to design a SCC with enough conversion steps, however the necessary granularity in the conversion steps would make the converter practically infeasible due to the large number of capacitors and switches. Another solution, would be to combine the SCC with a linear regulator, what is indeed currently a commercial solution in screen back-lighting for low-power battery supplied devices, but it the SCC stage is been replaced for an inductive stage in applications using a higher power, and high brightness LEDs. Nevertheless, a SCC based driver would be an interesting candidate in terms of integration, since SCCs allow to address higher-voltages applications using lower-voltages process. What might enable to implement a power converter using standard CMOS low-voltage integration processes
+ 
+In order to overcome limitations of the SCC while keeping a converter with high efficiency and a tight current regulation, an inductive converter seemed to be a more suitable solutions since they excel in both characteristics. However as the voltages addressed by the converter increase, the switches in the converter also scale in voltage, making not possible to implementing converters in a standard CMOS low-voltage process and harming the integrability of the converter. That is why, we found a compromise solution between both SMPS technologies by combining a SCC with an inductor, in what we defined as a \emph{Hybrid-Switched Capacitor Converter} abbreviated in H-SCC. 
+
+The H-SCC implements converter where the power train is a SCC, and the LED is supplied through an inductor connected to one of the internal nodes of the SCC. The proposed solution enables a converter suitable to integration, providing high efficiency and current regulation, and at the same time, reducing the size of the inductor compared to an inductive converter. In conclusion, the H-SCC has been the selected topology for a high-integrated and miniaturized LED driver, and the center of this dissertation.   
+
+
 
 \bibliographystyle{plainnat}
 \bibliography{references} 

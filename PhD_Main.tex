@@ -161,6 +161,7 @@
 \DeclareUnicodeCharacter{20AC}{\EurDig{}}
 
 \usepackage{pdflscape}
+\usepackage[parfill]{parskip}
 
 %Roman numerals
 \newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
@@ -193,11 +194,13 @@
 
 \pagenumbering{arabic}
 %
-%\include{0_intro}
+\include{0_intro}
 \label{ch:h_scc}
 %%%%\bibliographystyle{numerical}
+\part{Highly integrable LED drivers}
 \include{1_topology}
 \include{2_hscc}
+\part{Hybrid-Switched Capacitor LED driver}
 \include{3_modeling}
 %%%\input{3_modeling_multiple}
 %\include{4_validation}

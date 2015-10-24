@@ -1,3 +1,17 @@
+Currently driver architectures are based on discrete implementations. The driver circuits are composed by discrete components all assembled on a single \emph{printed-circuit-board} (PCB), enabling a fast development and cheap costs. Generally the mounted parts are cheap general propose components sold by millions. However this design approach has some limitations. First the mounted performance of old and cheap components restricts the volume reduction of the required  passive components in the drivers filters and magnetics. Second, as the circuit increases in complexity, the \emph{bill of materials} (BOM) and there fore the costs increases, also the costs, therefore reducing the possibilities to offer more functionality in the driver circuit, such as connectivity and controllability at reduced costs. In resume, fulfilling the driver requirements for the second generation of LED lamps will be very challenging using the current discrete driver  architectures.
+
+For the past years cost down reduction has enabled to bring the prices for simple \emph{retrofitted} lamps down to competitive levels. However the chosen circuit architectures for low cost drivers are very cost sensitive towards more intelligent drivers, as it can be seen with the different prices for the \emph{dimmable}, \emph{non-dimmable} and \emph{smart} lamps of  Table~\ref{tab:lighting_tech}. That is why a different approach in the driver architectures must be taken in order to respond to the challenges for the future intelligent and connected LED lamps. In other words, the driver architecture that will provide power management, intelligence and connectivity together, assembled in a reduced volume, and at low cost will be, with no discussion, the key element to carry the future of LED lighting technology.
+
+
+
+
+Besides looking for higher the size reduction that an integrated driver would offer, such an approach would also bring other benefits in terms of control and connectivity.  The power management unit and driver control unit could be integrated together, providing the necessary intelligence for light control and the connectivity optimized for the requirements of the coming connected lighting industry. \emph{Smart lamps} are a clear example of the requirements of the so called \emph{smart drivers}. The \emph{smart lamps} are wireless connected to a network providing remote control for the light intensity level and color from a web interface, a mobile application or a dedicated remote control. The internal electronics has normally four LED drivers - one per each color channel: red, green, blue and amber - and, at the same time, a wireless interface. The electronic board is populated with discrete power drivers and micro-controller units. A solution capable to integrate all the functions in a single IC, or few ICs (one per channel), will definitely reduce packaging and assembling costs and still providing the same functionality. At the same time, the expected market volume for SSL technologies will, with no doubt,  justify costs of a dedicated ASIC design for LED drivers. All-in-all it has been the goal of this PhD thesis with the goal to explore and identify new architectures suitable for  integration that can efficiently power LEDs. The rational to explore the architectures that enable high density highly miniaturized power LED drivers, such as switched capacitor converters, developing a design framework based on a model-centric approach.
+
+
+Settling the goal in providing new driver circuits that that are more suitable for integration, than the currently available. And with the vision that integrable drivers will help in further development of more functionalities within the same package.
+
+ h from the perspective of the integrated power supplies brings the focus of the research to drivers where the power converter can be partially or fully integrated in a single package. There are two approaches of integrated power converters: \emph{Power System on Chip} (PSoC) or  \emph{Power System in Package} (PSiP). The first integrates all required power components, active and passive, on a single die. The second assembles all the components within the same package, keeping the appearance of an unique \emph{Integrated Circuit} (IC), see Figure~\ref{fig:psoc_example}. The advantages of having an integrated power management unit align with the necessities of the LED drivers, therefore the trend of the drivers will be going towards having \emph{Power LED Drivers in Package} (PLDiP).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       CHAPTER 2: Miniaturization in LED drivers     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -9,78 +23,69 @@ Currently there is any commercial IC that solves the challenges of the smart dri
 
 the most innovative approach is taken by the startup \emph{Gooee} that proposes connected lighting platform consisting   of two ICs. The control chip integrates a micro-controller unit (MCU) with to implement the communication and sensing, and the power chip with the LED driver that interfaces with the LED; the platform  is completed with a cloud service that enables from a web application to have access to the lamp fixture data logs. The technical details of the power chip are no yet available~\cite{web:Gooee}.
 
-\begin{figure}[t]
-    \centering
-    \begin{circuitikz} [american voltages,scale=0.65]
-    \ctikzset{bipoles/length=0.85cm}
-   \draw[thick] (2.5,0.25) --
-                (2.5,6.5) --
-                (11.5,6.5) --
-                (11.5,0.25) --
-                (2.5,0.25);
+\begin{circuitikz} [scale=0.65]
+    \begin{scope}[xshift = 10cm, yshift=0cm]
+            \draw[->] (0,0) -- (4,0) node[anchor=south west] {$  m $};
+            \draw[->] (0,0) -- (0,3.2) node[anchor=east] {$\eta $};
 
-    %Draw SCC block with capacitors
-    \draw (3,1) --
-          (3,6) --
-          (5,6) --
-          (5,1) --
-          (3,1);
+            %Ticks X
+            \draw  (1.75,5pt) -- (1.75,0pt) node[anchor=south west ] {$m_1$};
+            \draw  (3,5pt) -- (3,0pt)   node[anchor=south west ] {$m_2$};
+            %\draw (1.5,2pt) -- (1.5,-5pt) node[anchor=north] {$0.7$};
 
-    \draw (4,1.25) node[rotate=90,anchor=west] {Regulator SMPS };
+            %Ticks Y
+            \draw (2pt,2.5) -- (-5pt,2.5) node[anchor=east] {$100\%$};
+            \draw (2pt,1.5) -- (-5pt,1.5) node[anchor=east] {$90\%$};
 
-    \draw (5,5.5) to[short,-o] (14,5.5);
-    \draw (13,5.5) to[capacitor] (13,4.5) node[sground]{};
+            %Markers
+            \draw[dotted] (1.75,2.4) -- (1.75,0);
+            \draw[dotted] (3,2.3) -- (3,0);
+            \draw[dotted] (3,2.5) -- (0,2.5);
+            %\draw[dotted] (1.5,1.5) -- (1.5,0);
+            %\draw[dotted] (1.5,1.5) -- (0,1.5);
 
-    \draw (4,1) -- (4,0) node[sground,scale=0.75]{};
 
-   %Draw linear drivers
-   \draw  (4,0.5) -- (10.5,0.5) -- (10.5,1);
-
-   %First transitor
-   \draw   (10,1) -- (10,1.5) node[npn,anchor=E,scale=0.5](npn1){}
-           (npn1.C) -- (10,2.75) to[short,-o] (12,2.75);
-
-   %Second transitor
-   \draw  (10,1) -- (11,1)
-           node[npn,anchor=E,scale=0.5](npn2){}
-           (npn2.C) -- (11,2.25) to[short,-o] (12,2.25);
-
-   %Controller box
-   \draw (5.5,1) -- (8.5,1) -- (8.5,3) -- (5.5,3) -- (5.5,1);
-   \draw (5.75,2) node[anchor=west, text width = 1.75cm]{Intensity Controller};
-   \draw (npn2.B) -| (8.5,2);
-   \draw (npn1.B) -| (8.5,2);
-
-   %LEDs
-
-   \draw [dotted] (14,5.5) to[short,o-] (15,5.5)
-                  (15,2.75) to[short,-o] (12,2.75);
-
-   \draw (15,5.5) to[leD*] (15,2.75);
-
-   \draw [dotted] (15,5.5) -- (17,5.5)
-                  (17,2.25) to[short,-o] (12,2.25);
-
-   \draw (17,5.5) to[leD*] (17,2.25);
-
-   %Add battery
-
-   \draw (1,0) node[sground,scale=0.75]{};
-   \draw (1,0) to[V = $v_{src}$] (1,5.5)
-         -- (3,5.5);
-
+            \draw[thick] (0.5,1.4) -- (1.75,2.4) -- (1.75,1.6) -- (3,2.3)  node[anchor=south] {};
+            \draw (10,0)[anchor=north] {};
+        \end{scope}
     \end{circuitikz}
-    \caption{Block diagram of the common architecture used in drivers for backlighting applications.}
-    \label{fig:backlight_LED}
-\end{figure}
 
+
+
+
+
+
+
+
+
+
+
+
+to explore as a solution for a \emph{Power System on-Chip/in-Package} LED driver.  Exploring the possibilities that switched capacitor converters can offer in terms of integrated and miniaturized LED drivers with efficient voltage-to-current conversion was the rational of this dissertation.
+
+
+
+  Due to the limitations of SCC  in voltage-to-current conversion would directly disqualify them. However their advantageous characteristics form the standpoint of view of integration, made these circuits very attractive.
+
+Based on the aforementioned arguments both SMPS technologies, inductor based and switched capacitor converters,   are the most suitable  for high efficient LED drivers and miniaturization. On the one hand, inductive converters are the preferred choice due to their high efficiency and regulation capabilities, although they are less suitable to integrate due to the use of adopting a
+
+
+The use of a bear SCC can never satisfy the requirements of LED drivers due to the following facts:
+\begin{itemize}
+  \item Only provide voltage-to-voltage conversion
+  \item Fixed conversion ratios
+  \item Regulation is provided by series shunting
+\end{itemize}
+These limitations combined with the abrupt characteristics I-V of the LEDs makes barely impossible to provide high efficient solutions with the single use of SCC. The converters would require to have a large number of conversion ratios with a very large granularity to avoid uncontrolled currents flowing through the LEDs.
+
+The research presented in this work aims to explore the possibilities of the SCC for LED drivers and the conducting path is based in the combination of the with inductors. The overall solution improves the power density and reduced form factor of the present solutions.
+
+
+This thesis is divided in the four main sections that where necessary to build a switched capacitor LED driver. The first section introduces the new LED driver architecture used during the entire thesis, the \emph{Hybrid-Switched Capacitor Converter}, H-SCC from now on. The second part of this book, the core of the PhD. work, presents the methodology to model H-SCC. The methodology extends the previous works in the topic providing an enhanced modeling for the design of SCCs and H-SCCs. The third section is devoted to the practical use of the new methodology, thus for the design phase of a converter. The modeling is used  to help in the development facilitating the sizing and optimization of the design variables. The last section presents a discrete implementation of 12W H-SCC LED driver and the design procedure. Although is not a regular practice, experimental work is not only presented in the in the last section. The experimental work has been also  used to validate the presented modeling and methodology. The final section is the conclusion of the entire work and the future opportunities that the presented work can offer.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               CHAPTER 3: H-SCC                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
- Further details about the state-of-the-art with a broad overview of integrated power supplies can be found in ~\cite{2013Breussegem:int_conv} and ~\cite{2013villar}.
 
 Equal voltage ripple among all \emph{pwm}-nodes.
 
