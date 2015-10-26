@@ -1,4 +1,3 @@
-
 %\chapter{Hybrid Switched Capacitor Converter}
 \chapter{Hybrid-Switched Capacitor LED driver}
 \label{ch:H-SCC}
@@ -6,7 +5,7 @@ Driving high power LEDs using a switched capacitor converter (SCC) challenges th
 
 The \emph{hybrid} switched capacitor converter (H-SCC), that is introduced in this chapter, is a merge of a switched capacitor and an inductive converter. The first section introduces basic facts about switched capacitor converters (SCC) in order to understand the enhancements, modifications and characteristics of the \emph{hybrid}-SCC. The second section presents the H-SCC topology and  operation. The third section focus in the applications of the H-SCC as a LED driver circuit. Additionally, some driver architectures are described in this section, giving a broader perspective of the possible applications that H-SCC based LED drivers offer.
 
-\section{State of the Art}
+\section{State-of-the-art in SCC based LED drivers}
 In  commercial ICs but also in research the integration and miniaturization characteristics of Switched Capacitor Converters (SCCs) are applied in LED drivers. Commercially there is a large portfolio of available integrated circuits (ICs), designated as Charge-Pumps (CPs), for backlighting in portable devices, \emph{i.e.}  \emph{MAX8930}\footnote{Maxim\textsuperscript{\textregistered} WLED Charge Pump, RGB, OLED Boost, LDOs with ALC and CAI }, \emph{MCP1252/3}\footnote{Microchip\textsuperscript{\textregistered} Low noise, Positive-Regulated Charge Pump}. By merely adding a few external capacitors, these circuits can drive White or RGB LEDs from a Lithium-Ion battery, as shown in the block diagram of Figure~\ref{fig:SCC_backlight_LED}. Generally these chips integrate a SCC with different conversion ratios with a linear regulator for each channel. Various publications ~\cite{07Feng,09Wu,10Yin} propose different modifications of this architecture in order to reduce the parasitic losses, bringing the efficiency close to the theoretical limit. The power ratings of these drivers are below 1$W$ at currents below hundred \emph{milli}-amperes with efficiencies between 70\%-90\% depending on the operation point.
 
 \begin{figure}[!ht]

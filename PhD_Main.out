@@ -1,7 +1,7 @@
 \BOOKMARK [0][-]{chapter.1}{LEDification: Transition towards LED lighting}{}% 1
 \BOOKMARK [1][-]{section.1.1}{Research goal and objectives}{chapter.1}% 2
-\BOOKMARK [-1][-]{part.1}{I Highly integrable LED drivers}{}% 3
-\BOOKMARK [0][-]{chapter.2}{LED load and driver trichologies }{part.1}% 4
+\BOOKMARK [2][-]{subsection.1.1.1}{Thesis outline}{section.1.1}% 3
+\BOOKMARK [0][-]{chapter.2}{LED load and driver trichologies }{}% 4
 \BOOKMARK [1][-]{section.2.1}{The LED as a load}{chapter.2}% 5
 \BOOKMARK [1][-]{section.2.2}{Linear Regulators}{chapter.2}% 6
 \BOOKMARK [1][-]{section.2.3}{Inductor Based Converters}{chapter.2}% 7
@@ -10,8 +10,8 @@
 \BOOKMARK [2][-]{subsection.2.4.1}{Energy transfer in switched capacitor converters}{section.2.4}% 10
 \BOOKMARK [1][-]{section.2.5}{Overview in integration of LED drivers }{chapter.2}% 11
 \BOOKMARK [1][-]{section.2.6}{ Summary}{chapter.2}% 12
-\BOOKMARK [0][-]{chapter.3}{Hybrid-Switched Capacitor LED driver}{part.1}% 13
-\BOOKMARK [1][-]{section.3.1}{State of the Art}{chapter.3}% 14
+\BOOKMARK [0][-]{chapter.3}{Hybrid-Switched Capacitor LED driver}{}% 13
+\BOOKMARK [1][-]{section.3.1}{State-of-the-art in SCC based LED drivers}{chapter.3}% 14
 \BOOKMARK [1][-]{section.3.2}{Switched Capacitor Converter}{chapter.3}% 15
 \BOOKMARK [2][-]{subsection.3.2.1}{Conversion ratio}{section.3.2}% 16
 \BOOKMARK [2][-]{subsection.3.2.2}{Output voltage regulation}{section.3.2}% 17
@@ -26,26 +26,37 @@
 \BOOKMARK [2][-]{subsection.3.4.1}{Single-stage dc-dc with auxiliary output voltage}{section.3.4}% 26
 \BOOKMARK [2][-]{subsection.3.4.2}{Single-stage dc-dc with extended conversion range }{section.3.4}% 27
 \BOOKMARK [1][-]{section.3.5}{Summary}{chapter.3}% 28
-\BOOKMARK [-1][-]{part.2}{II Hybrid-Switched Capacitor LED driver}{}% 29
-\BOOKMARK [0][-]{chapter.4}{Modeling of H-SCC}{part.2}% 30
-\BOOKMARK [1][-]{section.4.1}{Single Output Converters}{chapter.4}% 31
-\BOOKMARK [2][-]{subsection.4.1.1}{The Output Resistance Model}{section.4.1}% 32
-\BOOKMARK [2][-]{subsection.4.1.2}{Revising the charge flow analysis approach}{section.4.1}% 33
-\BOOKMARK [2][-]{subsection.4.1.3}{Load Model: Voltage Sink versus Current Sink}{section.4.1}% 34
-\BOOKMARK [2][-]{subsection.4.1.4}{Re-formulating the charge flow analysis}{section.4.1}% 35
-\BOOKMARK [2][-]{subsection.4.1.5}{Solving the charge flow vectors}{section.4.1}% 36
-\BOOKMARK [2][-]{subsection.4.1.6}{SSL Equivalent Resistance }{section.4.1}% 37
-\BOOKMARK [2][-]{subsection.4.1.7}{FSL Equivalent Resistance}{section.4.1}% 38
-\BOOKMARK [2][-]{subsection.4.1.8}{Equivalent Switched Capacitor Converter Resistance}{section.4.1}% 39
-\BOOKMARK [2][-]{subsection.4.1.9}{Conversion ratio}{section.4.1}% 40
-\BOOKMARK [1][-]{section.4.2}{Multiple Output Converter}{chapter.4}% 41
-\BOOKMARK [2][-]{subsection.4.2.1}{The Output Trans-Resistance Model}{section.4.2}% 42
-\BOOKMARK [2][-]{subsection.4.2.2}{Power losses and trans-resistance parameters}{section.4.2}% 43
-\BOOKMARK [2][-]{subsection.4.2.3}{Trans-resistance Parameters Methodology}{section.4.2}% 44
-\BOOKMARK [2][-]{subsection.4.2.4}{Slow Switching Limit Trans-resistance Matrix}{section.4.2}% 45
-\BOOKMARK [2][-]{subsection.4.2.5}{Fast Switching Limit trans-resistance Matrix}{section.4.2}% 46
-\BOOKMARK [2][-]{subsection.4.2.6}{Converter trans-resistance Matrix}{section.4.2}% 47
-\BOOKMARK [2][-]{subsection.4.2.7}{Conversion Ratio Vector }{section.4.2}% 48
-\BOOKMARK [1][-]{section.4.3}{Summary}{chapter.4}% 49
-\BOOKMARK [0][-]{Appendix.a.A}{Appendix Modeling of Switched Capacitors Converters}{part.2}% 50
-\BOOKMARK [1][-]{section.a.A.1}{3:1 Dickson converter vectors}{Appendix.a.A}% 51
+\BOOKMARK [0][-]{chapter.4}{Modeling of H-SCC}{}% 29
+\BOOKMARK [1][-]{section.4.1}{Single Output Converters}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.1.1}{The Output Resistance Model}{section.4.1}% 31
+\BOOKMARK [2][-]{subsection.4.1.2}{Revising the charge flow analysis approach}{section.4.1}% 32
+\BOOKMARK [2][-]{subsection.4.1.3}{Load Model: Voltage Sink versus Current Sink}{section.4.1}% 33
+\BOOKMARK [2][-]{subsection.4.1.4}{Re-formulating the charge flow analysis}{section.4.1}% 34
+\BOOKMARK [2][-]{subsection.4.1.5}{Solving the charge flow vectors}{section.4.1}% 35
+\BOOKMARK [2][-]{subsection.4.1.6}{SSL Equivalent Resistance }{section.4.1}% 36
+\BOOKMARK [2][-]{subsection.4.1.7}{FSL Equivalent Resistance}{section.4.1}% 37
+\BOOKMARK [2][-]{subsection.4.1.8}{Equivalent Switched Capacitor Converter Resistance}{section.4.1}% 38
+\BOOKMARK [2][-]{subsection.4.1.9}{Conversion ratio}{section.4.1}% 39
+\BOOKMARK [1][-]{section.4.2}{Multiple Output Converter}{chapter.4}% 40
+\BOOKMARK [2][-]{subsection.4.2.1}{The Output Trans-Resistance Model}{section.4.2}% 41
+\BOOKMARK [2][-]{subsection.4.2.2}{Power losses and trans-resistance parameters}{section.4.2}% 42
+\BOOKMARK [2][-]{subsection.4.2.3}{Trans-resistance Parameters Methodology}{section.4.2}% 43
+\BOOKMARK [2][-]{subsection.4.2.4}{Slow Switching Limit Trans-resistance Matrix}{section.4.2}% 44
+\BOOKMARK [2][-]{subsection.4.2.5}{Fast Switching Limit trans-resistance Matrix}{section.4.2}% 45
+\BOOKMARK [2][-]{subsection.4.2.6}{Converter trans-resistance Matrix}{section.4.2}% 46
+\BOOKMARK [2][-]{subsection.4.2.7}{Conversion Ratio Vector }{section.4.2}% 47
+\BOOKMARK [1][-]{section.4.3}{Summary}{chapter.4}% 48
+\BOOKMARK [0][-]{chapter.5}{Model validation}{}% 49
+\BOOKMARK [1][-]{section.5.1}{Single output validation}{chapter.5}% 50
+\BOOKMARK [2][-]{subsection.5.1.1}{Measuring rscc from a SCC}{section.5.1}% 51
+\BOOKMARK [2][-]{subsection.5.1.2}{ Fixed dc-output}{section.5.1}% 52
+\BOOKMARK [2][-]{subsection.5.1.3}{ Floating pwm-output }{section.5.1}% 53
+\BOOKMARK [1][-]{section.5.2}{Multiple output validation}{chapter.5}% 54
+\BOOKMARK [2][-]{subsection.5.2.1}{Measuring Zscc matrix from a SCC}{section.5.2}% 55
+\BOOKMARK [2][-]{subsection.5.2.2}{Simulation results}{section.5.2}% 56
+\BOOKMARK [2][-]{subsection.5.2.3}{Experimental results}{section.5.2}% 57
+\BOOKMARK [1][-]{section.5.3}{Summary}{chapter.5}% 58
+\BOOKMARK [0][-]{chapter.6}{H-SCC LED driver}{}% 59
+\BOOKMARK [0][-]{chapter.7}{Conclusions}{}% 60
+\BOOKMARK [0][-]{Appendix.a.A}{Appendix Modeling of Switched Capacitors Converters}{}% 61
+\BOOKMARK [1][-]{section.a.A.1}{3:1 Dickson converter vectors}{Appendix.a.A}% 62
