@@ -1,9 +1,11 @@
 \documentclass{book}
-
+\usepackage[main=english,dutch]{babel}
 %\usepackage{w-bookps}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Graphicx.sty for Including PostScript .eps files
+
+\usepackage[paperwidth=170mm, paperheight=240mm, inner=20mm, outer=22mm, top=25mm, bottom=28mm]{geometry}
 \usepackage{graphicx}
 \usepackage[cmex10]{amsmath}
 \usepackage{amssymb}
@@ -165,16 +167,18 @@
 
 %Roman numerals
 \newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
-\begin{document}
 
-\title{Towards SC-enabled high density highly miniaturized power LED drivers: A model-centric design framework}
+\def\ThesisTitle {Towards SC-enabled high density highly miniaturized power LED drivers: A model-centric design framework}
+%\def\ThesisSubTitle {}
+
+
+\begin{document}
 
 
 \author{J. Delos Ayllón \\
 }
 
-
-\maketitle
+\include{title_page}
 
 \pagenumbering{roman}
 \tableofcontents
