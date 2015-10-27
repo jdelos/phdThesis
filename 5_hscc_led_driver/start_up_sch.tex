@@ -1,0 +1,81 @@
+
+\ctikzset{bipoles/length=0.75cm}
+\begin{circuitikz} [american,scale=0.65]
+ \draw (0,0) node[sground] {}  to[zD*,n=dz1,l={$d_1$}] (0,3)
+       (-2.5,3) to[R,l={$r_1$},n=r1,-*]
+       (-2.5,6.75) node[anchor=south,font=\tiny] {\textbf{24V\_SUP}}
+       (dz1.s) node[anchor=north,rotate=90,font=\tiny] {BZX84C3V9}
+       (0,3) --
+       (-2.5,3) to[C,l={$c_{10}$},n=c1]
+       (-2.5,0) -- (0,0)
+       (-2.5,3) -- (-3,3) to[D*,n=d1,l={$d_2$},-*]
+       (-5,3) node[anchor=east,font=\tiny] {\textbf{5V\_SUP}}
+       (d1.s) node[anchor=south,font=\tiny] {BAS40}
+       (r1.s) node[anchor=north,rotate=90] {\tiny{${1k\Omega}$}}
+       (c1.s) node[rotate=90] {\tiny{${1\mu F}$}};
+
+ \draw (1.65,4.5) rectangle (2.25,5.5);
+ \draw[dashed] (2.25,5) -- (0.75,5) node[anchor=east,font=\tiny,text width=1.2cm,align=right] {to switches $sw_1$,$sw_2$} ;
+ \draw (2.2,5.7) node[anchor=north east,rotate=90,font=\tiny] {GN200S24};
+ \draw (1.75,5.75) node[] {$k_1$};
+
+
+ \draw  (0,0) --
+        (2,0) to[Tnigfetd,n=m10,mirror]
+        (2,4) to[cute inductor] (2,6)
+        (2,3.5) --
+        (3,3.5) to[D*,n=d2,l_={$d_3$}]
+        (3,6) --
+        (2,6) --
+        (2,6.5) node[rground,yscale=-1](t1){}
+        (t1) node[anchor=south,above=1.2mm,font=\tiny] {\textbf{24V}}
+        (m10.B) node[anchor=east,font=\tiny] {$M_{10}$};
+
+
+ \draw  (6,3) node[op amp,scale=0.75,rotate=180] (oa1) {}
+        (oa1) node[]{$A_1$}
+        (oa1.out) |- (m10.G)
+        (oa1.up) |- ++(-0.25,-.5)  -|
+        ++(-0.75,-1) node[sground] {}  --
+        ++(0.25,0) to[R,l=$r_2$,n=r2]
+        ++(1.5,0) to[pR,n=POT]
+        ++(1.5,0) -|
+        ++(0.25,0.25) node[rground,yscale=-1](t2){}
+        (r2.s) node[anchor=north] {\tiny{$4.78k\Omega$}}
+        (POT.s) node[anchor=north] {\tiny{${10k\Omega}$}}
+        (POT.s) node[above=2mm] {$r_3~~~~$}
+
+        (POT.wiper) |- (oa1.-)
+        (t2) node[anchor=south,above=1.2mm,font=\tiny] {\textbf{24V}}
+
+        (oa1.out) |- ++(0.75,3.75) to[R,l=$r_4$,n=r4]
+        ++(1,0) -|
+        (oa1.+) --
+        ++(3.5,0) to[R,l={$r_5$},n=r5,-*]
+        ++(2,0) node[anchor=west,font=\tiny] {\textbf{V\_CAPS}}
+        (r5.s) node[anchor=north]  {\tiny{${2k\Omega}$}}
+        (oa1.+) --
+        ++(3.5,0) to[C,text width={2em},align=right,l_={$c_{10}$ \tiny{${160nF}$}} ]
+        ++(0,-2) node[sground] {}
+        (r4.s) node[anchor=north] {\tiny{${48k\Omega}$}}
+
+        (oa1.down) -- ++ (0,1.5) node[rground,yscale=-1](t3){}
+        (t3) node[anchor=south,above=1.2mm,font=\tiny] {\textbf{24V}}
+        --  ++(-0.5,0) to[C] ++(0,-1) node[sground]{};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{circuitikz}

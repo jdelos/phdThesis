@@ -1,2 +1,96 @@
 \chapter{H-SCC LED driver}
 \label{ch:hscc_led_driver}
+
+
+\begin{figure}[!h]
+\centering
+\input{./5_hscc_led_driver/block_diagram.tex}
+\caption[H-SCC LED driver block diagram]{H-SCC LED driver block diagram.}
+\label{fig:bd_emerge_drv}
+\end{figure}
+
+
+An experimental converter was built with the goal to validate the performances of a H-SCC as a LED driver. The LED driver, described in the block diagram of Figure~\ref{fig:bd_emerge_drv}, was built using discrete components following the specifications of Table~\ref{tab:dsg_param_drv}. 
+
+\begin{table}[!h]
+ \caption{LED driver design specifications}\label{tab:dsg_param_drv}
+ \centering 
+ \renewcommand{\arraystretch}{1.2}
+ \begin{tabular}{l | cl}
+  Items & Value & Unit \\
+  \midrule
+  $v_{src}$ & 24 & V \\
+  \hline
+  $v_{LED}$ voltage & 11-13 & V \\
+  $v_{LED}$ power & 12 & W \\
+  $i_{LED}$ max & 1 & A \\
+  $\Delta i_{LED}$ & $\pm$ 10 & \% \\
+  \hline
+  $v_{aux}$ voltage & 4.5 & V \\
+  $v_{aux}$ power & 100m & W \\
+  \hline
+  $\eta$  & 85 & \% \\
+  $f_{sw}$ & 2.77 & MHz\\
+\end{tabular}
+\end{table}
+
+The driver was designed to be compliment the 24Vdc e-Merge Alliance standard used in track lighting systems, and featured two outputs. The main output supplies a \emph{LUXENON Altion} LED with a maximum current of 1A with a forward voltage around 12V, thus providing 12W at full load. The secondary output is designed for low-voltage and low-power to supply other auxiliary electronic circuits. The minimum efficiency was fixed to be higher than 85\%, and the switching frequency to be 2.77MHz, taking advantage of a 3dB higher tolerance of the conduced EMI standard X. 
+
+\section{Design procedure}
+The LED driver is composed by two main subsystems, the power train and the close-controller. Therefore the design process is accordingly  divided in three main parts: Power train design, small-signal analysis and close-loop controller design. 
+
+
+\subsection{Power train}
+
+
+
+
+\subsection{Small-signal analysis}
+
+\subsection{Close-loop controller}
+
+
+\section{Power train design}
+\subsection{Capacitors}
+\subsection{Transistors}
+\subsection{Inductor}
+
+\section{Power train circuits}
+\subsection{Full schematic}
+\begin{figure}[!h]
+\centering
+\input{./5_hscc_led_driver/power_train_sch.tex}
+\caption[Power train schematic]{5:1 H$^2$-Dickson power train schematic.}
+\label{fig:pwr_train_sch}
+\end{figure}
+
+%\begin{landscape}
+%\thispagestyle{empty}
+
+%\end{landscape}
+
+%\subsection{Gate driver}
+%\begin{figure}[!h]
+%\centering
+%\input{./5_hscc_led_driver/gate_driver_sch.tex}
+%\caption[Power train schematic]{5:1 H$^2$-Dickson power train schematic.}
+%\label{fig:pwr_train_sch}
+%\end{figure}
+
+\subsection{Start-up helper circuit}
+\begin{figure}[!h]
+\centering
+\input{./5_hscc_led_driver/start_up_sch.tex}
+\caption[Start-up helper schematic]{Start-up helper circuit schematic.}
+\label{fig:pwr_train_sch}
+\end{figure}
+
+
+\subsection{Sensing and signal conditioning}
+
+\section{Close-loop controller circuits}
+\subsection{Full schematic}
+\subsection{Triangle wave generator}
+\subsection{Error amplifier}
+
+

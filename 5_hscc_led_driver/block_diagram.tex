@@ -1,0 +1,25 @@
+
+\ctikzset{bipoles/length=0.75cm}
+\begin{circuitikz} [american,scale=0.65]
+ 
+ \draw (0,0) rectangle (3,6);
+ 
+ \draw (-1,1) to[short,o-] (0,1)
+       (-1,5) to[short,o-] (0,5)
+       (-1,5) to[open,v=$24V$] (-1,1)
+       (-2.75,3) node[rotate=90] {e-Merge Alliance}
+       (1.5,3) node[rotate=90,text width=2cm,align=center] {H-SCC LED DRIVER};
+       
+ \draw (3,5) -- (10,5)  to[leD*] (10,2) node[ground]{}
+       (7,5) node[anchor=south,text width=4cm] {$11-13V$ $10-12W$ Dimmable LED string    };
+
+ \draw (3,2.5) -- (4,2.5)
+       (4,1.5) rectangle (8,3.5)
+       (6,2.5) node[text width=2cm,align=center] {$4.5V 100mW$ Low-Voltage Circuits}
+       (6,1.5) -- ++(0,-0.5)node[ground]{};
+ 
+      
+ 
+ 
+ 
+\end{circuitikz}
