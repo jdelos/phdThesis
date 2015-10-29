@@ -10,11 +10,11 @@
 \end{figure}
 
 
-An experimental converter was built with the goal to validate the performances of a H-SCC as a LED driver. The LED driver, described in the block diagram of Figure~\ref{fig:bd_emerge_drv}, was built using discrete components following the specifications of Table~\ref{tab:dsg_param_drv}. 
+An experimental converter was built with the goal to validate the performances of a H-SCC as a LED driver. The LED driver, described in the block diagram of Figure~\ref{fig:bd_emerge_drv}, was built using discrete components following the specifications of Table~\ref{tab:dsg_param_drv}.
 
 \begin{table}[!h]
  \caption{LED driver design specifications}\label{tab:dsg_param_drv}
- \centering 
+ \centering
  \renewcommand{\arraystretch}{1.2}
  \begin{tabular}{l | cl}
   Items & Value & Unit \\
@@ -34,15 +34,145 @@ An experimental converter was built with the goal to validate the performances o
 \end{tabular}
 \end{table}
 
-The driver was designed to be compliment the 24Vdc e-Merge Alliance standard used in track lighting systems, and featured two outputs. The main output supplies a \emph{LUXENON Altion} LED with a maximum current of 1A with a forward voltage around 12V, thus providing 12W at full load. The secondary output is designed for low-voltage and low-power to supply other auxiliary electronic circuits. The minimum efficiency was fixed to be higher than 85\%, and the switching frequency to be 2.77MHz, taking advantage of a 3dB higher tolerance of the conduced EMI standard X. 
+The driver was designed to be compliment the 24Vdc e-Merge Alliance standard used in track lighting systems, and featured two outputs. The main output supplies a \emph{LUXENON Altion} LED with a maximum current of 1A with a forward voltage around 12V, thus providing 12W at full load. The secondary output is designed for low-voltage and low-power to supply other auxiliary electronic circuits. The converter efficiency was fixed to be higher than 85\%, and for sake of simplicity, the switching frequency was fixed to be 2.77MHz, taking advantage of a 3dB higher tolerance of the conduced EMI standard X.
 
 \section{Design procedure}
-The LED driver is composed by two main subsystems, the power train and the close-controller. Therefore the design process is accordingly  divided in three main parts: Power train design, small-signal analysis and close-loop controller design. 
+The LED driver is composed by two main subsystems, the power train and the close-controller. Therefore the design process is accordingly  divided in three main parts: Power train design, small-signal analysis and close-loop controller design.
+
 
 
 \subsection{Power train}
+\begin{figure}[!h]
+\ctikzset { bipoles/length=1cm}
+\centering
+    \begin{circuitikz}[american voltages,scale=0.6]
+
+    \draw
+            %Input Supply
+            (0,0)  to[V=$v_{src}$]
+            %Draw Switches
+            (0,10.5)  --
+            (5,10.5)  to[gswitch=$s_1$] %node[anchor=west] {$n_1$}%S1
+            (5,9)     to[gswitch=$s_2$] %node[anchor=east] {$n_2$}%S1
+            (5,7.5)   to[gswitch=$s_3$] %node[anchor=east] {$n_3$}%S1
+            (5,6)     to[gswitch=$s_4$] %node[anchor=west] {$n_4$}%S2
+            (5,4.5)   to[gswitch=$s_5$] %node[anchor=west] {$n_5$}%S3
+            (5,3) --
+            %left branch
+            (3,3)    to[gswitch=$s_6$]
+            (3,1.5)  to[gswitch=$s_7$]
+            (3,0);
+
+    \draw   %right branch
+            (5,3) --
+            (7,3)   to[gswitch,l_=$s_9$]
+            (7,1.5) to[gswitch,l_=$s_8$]
+            (7,0) -- (0,0);
 
 
+
+    \draw %Capacitor C1
+           (8.25,6)
+            to[pC,l_=$c_1$] (8.252,9) --
+           (5,9);
+
+    \draw %Capacitor C2
+           (2,4.5)  to[pC,l_=$c_2$] (2,7.5) --
+           (5,7.5);
+
+    \draw %Capacitor C3
+           (7,1.5) -| (8.25,3)
+            to[pC,l_=$c_3$] (8.25,6) --
+           (5,6);
+
+    \draw %Capacitor C4
+           (3,1.5) --
+           (2,1.5) -- (2,3) to[pC,l_=$c_4$](2,4.5) --
+           (5,4.5);
+
+
+    \draw  %LC output filter &  Output LED string
+            (8.25,6) -- (10.25,6)node[anchor=south] {$v_x$} to[cute inductor,l=$l_o$] ++(2,0) -- (14,6)
+            (13.5,0) to[pC,l=$c_{o}$] (13.5,6) -|
+            (16,6) -| (16,5.5)  to[leD*] (16,4) to[leD*] (16,2.5) to[leD*] (16,1)   |- (7,0) ;
+
+    %Vout label
+    \draw (16.75,7) to[open,v^=$v_{out}$] (16.75,-0.5);
+
+    \draw %Capacitor C3
+           (5,0) to[pC,l_=$c_5$] (5,3) ;% node[anchor=south east] {$n_{dc}$};
+
+     %\draw (7,4) to[short,-o] (10,4) node[anchor=west] {};
+     %\draw (7,0) to[short,-o] (12,0) node[anchor=west] {};
+
+
+     \draw (7,3) --([hs]8.25,4 |- 7,3) arc(180:0:\radius) to[short,-o] (10,3) to[open,v^=$v_{aux}$] (10,0) ;
+
+
+     \end{circuitikz}
+ \caption[5:1 H$^3$-Dickosn 12W LED driver]{ 5:1 H$^3$-Dickson LED driver for 24V e-merge track lighting application. The driver has two outputs: A $12V$, $12W$  LED string, and $4V$, $200mW$  to supply low power auxiliary loads. }
+ \label{fig:5_1_hscc_emerge_II}
+\end{figure}
+
+Figure~\ref{fig:5_1_hscc_emerge_II} shows the chosen topology for the LED driver, a 5:1 H$^3$-Dickson driver. The chosen topology satisfies the requirements for the output voltages.
+The \emph{pwm}-node $v_x$ has a conversion ration of $m_3 = \frac{2+D}{5}$, thus providing an output voltage range between $9.6V$ and $14.4V$ considering the full range of the duty cycle $D$. The output regulation margins fit the load variations at maximum currents, 1A, which are between 13.2V and 11.8V for a case temperatures of -40 $^\circ C$ and  130 $^\circ C$ respectively. The \emph{dc}-node has a fixed voltage conversion of $m_{dc} = \frac{1}{5}$, providing target voltage at $v_aux$ of 4.8V.
+
+Once the topology is fixed, the next step is to size the different components, capacitors and switches. A SCC is by nature lossy, therefore the efficiency of the converter is strongly related to the selection of the right values for the components. That is why, it is essential to have an accurate model in design process of the converter. Indeed, using the algebraic expressions of the model, both, capacitors and switches can be determined as a result of an optimization process. However in the presented converter owing to the fact that it was implemented with discrete components, the flexibility in the choice of the used components was restricted to the commercial available values.
+
+The sizing of the components was done following the procedure described in Figure~\ref{fig:design_flow_drv}, for the converter operating at full load. First, using~\eqref{eq:r_scc_trg} a target output resistance ($r_{scc,trg}$) of the converter is computed. $r_{scc,trg}$ was computed for an efficiency $\eta_trg = 90\%$, instead of the $85\%$ given in the specification, since this part of the design process does not take in consideration the switching losses of the transistors. Therefore a $5\%$ overhead was given for other sources of losses, mainly switching losses. Second, the $r_{scc}$ is composed by the output resistance of the two switching limits approximated by~\eqref{eq:r_scc_aprx_dsg}, thus the individual contribution of each term depends on the selected operation point of the $r_{scc}$. In this case, the operation point was fixed in the elbow of the curve, therefore the target equivalent output resistance for both limits, SSL and FSL, was then fixed to $845m\Omega$.
+
+After this point the design process bifurcates, one path is describes the procedure to size the capacitors, and the other path to size the transistors. In either cases it have been used the algebraic expressions defined by the model, $r_{ssl}$ equation:
+\begin{equation}
+r_{ssl}=\frac{P_{ssl}}{{i_o}^2}=\frac{P_{ssl}}{{(f_{sw} {q_{out}})}^2}=\frac{1}{2 f_{sw}}\sum_{i=1}^{caps.}\sum_{j=1}^{phases}\frac{1}{c_i}{\left[a_{i\
+}^j-{D^j} {b_i^j}\right]}^2.
+\label{eq:r_ssl}
+\end{equation}
+is used to determine the size the capacitors, and the $r_{fsl}$ equation:
+\begin{equation}
+r_{fsl}=\sum_{i=1}^{elm.}\sum_{j=1}^{phases}\frac{r_i}{D^j}{ar_i^j}^2
+\label{eq:r_fsl}
+\end{equation}
+to determine the size the transistors.
+
+\begin{landscape}
+\thispagestyle{empty}
+\begin{figure}[!h]
+\centering
+\input{./5_hscc_led_driver/desing_process_flwch.tex}
+\caption[SCC stage design flow]{Design flow for the SCC stage.}
+\label{fig:design_flow_drv}
+\end{figure}
+\end{landscape}
+Actually, as described in~\cite{Seeman:EECS-2009-78} minimizing both expression, results in the optimum capacitor size breakdown and switch-area breakdown, the mathematical details are given in Appendix~\ref{ap:optimitzation}.
+
+The capacitors values were determined using the optimization procedure described in Appendix~\ref{ap:opt_cap}, which resulted in a total capacitance of: 
+\begin{equation}
+c_T = \frac{min(\mathbf{f_{ssl}})}{f_{sw}~r_{ssl}} = \frac{1.51}{2.77MHz~845m\Omega},
+\end{equation}
+and a capacitor breakdown distribution of:
+\begin{equation}
+\frac{c_i}{c_T} = \irow{ 0.3 & 0.4 & 0.28 & 0.01 & 0.01}. 
+\end{equation}
+Hence the optimal values for the capacitor of the converter are given in Table X. 
+\begin{table}[!h]
+    \renewcommand{\arraystretch}{1.2}
+    \begin{threeparttable}
+    \centering
+    \caption{Capacitor breakdowns, optimization results and used values.}
+    \label{tab:caps_results}
+    \begin{tabular}{ l | c  c  c  c  c | c | r }
+                    & $c_1$   & $c_2$ & $c_3$   & $c_4$  & $c_5$ & $c_T$ &  $r_{ssl}$  \\
+                    & multicolumn{6}{ |c } $nF$ &  $m\Omega$  \\
+                    
+    \midrule 
+     Optimizer   & 194  & 258 & 181  & 6  & 6 & 647 &  845  \\
+     Used        & 220  & 330 & 280  & 39  & 78 & 647 &  845  \\               
+      
+    \end{tabular}
+   % \begin{tablenotes}
+%    \item1} Solution for a SCC with $V_{in} = 10, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o = 1A $
+%    \end{tablenotes}
+    \end{threeparttable}
 
 
 \subsection{Small-signal analysis}
@@ -93,4 +223,8 @@ The LED driver is composed by two main subsystems, the power train and the close
 \subsection{Triangle wave generator}
 \subsection{Error amplifier}
 
+
+
+\bibliographystyle{plainnat}
+\bibliography{references} 
 

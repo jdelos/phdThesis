@@ -1,0 +1,269 @@
+\label{ap:optimitzation}
+\section{Optimal Capacitance Breakdown}
+\label{ap:opt_cap}
+The Capacitance breakdown is obtained by minimizing the SSL impedance $R_{ssl}$ in eq. \eqref{eq:rssl}. This expression can be manipulated and rewritten as a function of the total capacitance $C_T$ of the converter
+
+\begin{equation}
+R_{ssl}=\frac{1}{2F_{sw} C_T } f_{ssl}\left(\vec{x}\right),
+\label{eq:rssl_ct}
+\end{equation}
+where:
+\begin{equation}
+X_i = \frac{C_i}{C_T}
+\label{eq:x_ct}
+\end{equation}
+\begin{equation}
+C_T = \sum_{i=1}^n C_i.
+\label{eq:ct}
+\end{equation}
+In \eqref{eq:rssl_ct}, the \emph{specific SSL impedance} $f_{ssl}$ function returns the equivalent output impedance normalized respect to the total capacitance $C_T$ and the switching frequency $F_{sw}$ as a function of the  relative size of each capacitor, contained in $\vec{x}$ as $[X_1,X_2,...]$. Since it is proportional to $R_{ssl}$,  $f_{ssl}$ is the objective function to be minimized. The optimization is constrained with the resulting function obtained from substituting \eqref{eq:x_ct} in \eqref{eq:ct}, resulting in
+\begin{equation}
+g(\vec{x}) \to 1- \sum X_i,
+\label{eq:g_x}
+\end{equation}
+and then the capacitance breakdown is obtained from solving
+\begin{equation}
+\min{f_{ssl}(\vec{x})} \: \text{subject to} \: g(\vec{x}) = 0 \: \text{and} \: 0 < X_i < 1.
+\label{eq:min_ssl}
+\end{equation}
+This optimization reduces the design space for the SSL impedance to only two parameters: the Switching Frequency $F_{sw}$ and the total capacitance $C_{T}$.
+
+\section{Optimal Switch Area Breakdown}
+The Switch Area Breakdown is obtained by minimizing the FSL impedance $R_{fsl}$. Therefore eq. \eqref{eq:rfsl} is manipulated in order to be defined as a function of the switch area $A_{sw}$ instead of the ON-resistance. Owing to the fact that the switch ON-resistance is inversely proportional to the switch area $A_{sw}$ multiplied by the resistance per the unit area $R_{\square}$ for a given switch technology
+\begin{equation}
+R_{on}=\frac{R_\square}{A_{SW}}
+\label{eq:ron}
+\end{equation}
+then $R_{fsl}$ can be rewritten as a function of the total switch area $A_{T}$ as
+\begin{equation}
+R_{fsl}=\frac{1}{A_T } f_{fsl}\left(\vec{x'}\right),
+\label{eq:rfsl_at}
+\end{equation}
+where
+\begin{equation}
+X_i = \frac{A_{sw,i}}{A_T}
+\label{eq:x_at}
+\end{equation}
+\begin{equation}
+A_T = \sum_{i=1}^n A_{sw,i}.
+\label{eq:at}
+\end{equation}
+\\
+ In \eqref{eq:rfsl_at}, the \emph{specific FSL impedance} $f_{fsl}$ function returns the equivalent output impedance normalized respect to the total switch area $A_T$ as a function of the relative size of each switch area, contained in the elements of  $\vec{x'}$  as  $[ \frac{1}{X_1},\frac{1}{X_2},...]$ . Since $f_{fsl}$ is proportional to $R_{fsl}$, minimizing it lead to the solution with the minimum $R_{fsl}$ per unit area. In order to obtain the switch area breakdown, the optimization is restricted to the resulting function of substituting \eqref{eq:x_at} into \eqref{eq:at}
+\begin{equation}
+g(\vec{x}) \to 1- \sum X_i,
+\label{eq:g_x_at}
+\end{equation}
+thus the solution is
+\begin{equation}
+\min{f_{fsl}(\vec{x'})} \: \text{subject to} \: g(\vec{x}) = 0 \: \text{and} \: 0 < X_i < 1.
+\label{eq:min_fsl}
+\end{equation}
+As in the previous case, the optimization reduces the design space for the FSL impedance to a single variable, namely the total switch Area $A_t$.
+
+\section{Design-Oriented Optimization Result}
+
+The two converters in Fig.\ref{fig:4_1sim} have been used to exemplify the optimization results for an SCC and an H-SCC. The presented results are valid for any load condition of the converters because the minimized functions $f_{ssl}$ and $f_{fsl}$  are given by the converter topology and the duty cycle. The results are presented for the two boundary operation modes: SSl and FSL; the first provides the Capacitance breakdown and the second the Switch Area breakdown.
+
+For the SSL operation mode, the circuit has been tested with 4 scenarios. In the two first scenarios the converter has been designed following an Standard design with equal values for the flying capacitors $C_1$ and $C_2$, and the output capacitor $C_3$ 100 times larger than the flying capacitors for one case, and 10 times larger for the other case. In the third scenario the three capacitors have the same value. The last scenario uses the results of the design-oriented optimization presented herein. The results are presented in Tables \ref{tab:scc_results} and \ref{tab:hscc_results} for the SCC and H-SCC respectively. In both cases the optimized solution achieves the lowest value of the specific impedance $f_{ssl}$, thus the highest efficiency for the same total capacitance $C_T$. However this improvement  comes with a higher voltage ripple compared to the other scenarios. Actually in the two first scenarios the output capacitance is fixed, following the general rule of thumb of making them between 10 to 100 times larger than the flying capacitors, and therefore the value of $C_3$ is not accurately optimized and increases the \emph{redistributed charge flow} as described in \cite{Steyaert13}. In the other two cases all the capacitances are in the same order of magnitude a fact which reduces the \emph{charge redistribution} and improves the charge transfer efficiency.
+
+
+\begin{table}[!h]
+    \renewcommand{\arraystretch}{1.3}
+    \begin{threeparttable}
+    \centering
+    \caption{Capacitance Breakdown Results for the 3:1 Dickson operating with
+             $V_{in} = 10V, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o =5mA , \, Duty = 50\% ,\, R_{sw}=1m \Omega$  }
+    \label{tab:scc_results_II}
+    \begin{tabular}{ l | r | r | r || r | r  }
+      % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+      Design              &  $f_{ssl}$        & $C_T$  & $\Delta V_{o,pp}$  & $ MIM\tnote{1} $  & $IPDiA \tnote{2}$  \\
+                          &  $[m\Omega F Hz]$ & $[nF]$ &     $[mV]$       & $[mm^2]$            & $[mm^2]$  \\
+                          \hline \hline
+      Std. $100 x C_{fly}$  &  22400   &  336.60     &   10       & 336.6 &   1.4    \\ \hline
+      Std. $10 x C_{fly}$   &  2430    &   36.40     &   116      & 36.6  &   140E-3 \\ \hline
+      Even $C_{fly}$        &  375     &    5.63     &   892      &  5.6  &   22E-3  \\ \hline
+      Optimized             &  238     &    3.57     &   2237     &  3.6  &   14E-3
+
+    \end{tabular}
+    %\begin{tablenotes}
+%        \item [1] MIM  ON-Semi ONC25 0.25$\mu m$ process, $1nF/ mm^2 $ @ 15V
+%        \item [2] IPDiA trench capacitors process, $250 nF/mm^2 $ @ $11V$
+%    \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+\begin{table}[!h]
+    \renewcommand{\arraystretch}{1.3}
+    \begin{threeparttable}
+    \centering
+    \caption{Capacitor Breakdown Results for 3:1 H-Dickson operating with
+             $V_{in} = 10V, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o =5mA , \, Duty = 25\% , \, R_{sw}=1m \Omega$  }
+    \label{tab:scc_results_II}
+    \begin{tabular}{ l | r | r | r || r | r  }
+      % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+      Design              &  $f_{ssl}$        & $C_T$  & $\Delta V_{o,pp}$  & $ MIM\tnote{1} $  & $IPDiA \tnote{2}$  \\
+                          &  $[m\Omega F Hz]$ & $[nF]$ &     $[mV]$       & $[mm^2]$            & $[mm^2]$  \\
+                          \hline \hline
+      Std. $100 x C_{fly}$  &  22400   &  198.2     &   3.73       & 198.2 &   792E-3    \\ \hline
+      Std. $10 x C_{fly}$   &  2430    &   27.7     &   3.78      & 27.7  &   110E-3 \\ \hline
+      Even $C_{fly}$        &  375     &    5.1     &   4.07      &  5.1  &   20E-3  \\ \hline
+      Optimized             &  238     &    3.5     &   4.45     &  3.5  &   14E-3
+
+    \end{tabular}
+   % \begin{tablenotes}
+%        \item [1] MIM  ON-Semi ONC25 0.25$\mu m$ process, $1nF/ mm^2 $ @ 15V
+%        \item [2] IPDiA trench capacitors process, $250 nF/mm^2 $ @ $11V$
+%    \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+
+
+\begin{table}[!h]
+    \renewcommand{\arraystretch}{1.3}
+    \begin{threeparttable}
+    \centering
+    \caption{Capacitor Breakdown Results for a 3:1 H-Dickson SCC loaded at the 2nd \emph{pwm} node operating with
+             $V_{in} = 10V, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o =5mA , \, Duty = 25\% , \, R_{sw}=1m \Omega$  }
+    \label{tab:hscc_results}
+    \begin{tabular}{ l | c | c | c || c | c | c || r | r }
+      % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+      Design              & $X_1$   & $X_2$ & $X_3$   &  $f_{ssl}$          & $C_T$    & $\Delta V_{o,pp}$ & $ MIM\tnote{1} $  & $IPDiA \tnote{2}$ \\
+                          &  $[\%]$ & $[\%]$ & $[\%]$ &  $[m\Omega F Hz]$  & $[nF]$    &     $[V]$            \\
+                          \hline \hline
+      Std. $100 C_{fly}$  &  1   &   1  &  98   &   23124     &  19820    &   3.73  & 198.2 &   792E-3   \\   \hline
+      Std. $10 C_{fly}$   &  8   &   8  &  83   &    2651     &   2272    &   3.78  & 27.7  &   110E-3   \\    \hline
+      Even $C_{fly}$      &  33  &  33  &  33   &     594     &    508    &   4.07  &  5.1  &   20E-3  \\      \hline
+      Optimized           &  58  &  21  &  1    &     409     &    350    &   4.45  &  3.5  &   14E-3  \\
+
+    \end{tabular}
+   % \begin{tablenotes}
+%    \item1} Solution for a SCC with $V_{in} = 10, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o = 1A $
+%    \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+The total capacitance $C_T$  has been computed for each scenario, keeping the efficiency constant to 90$\%$. The results have been validated with a PLECS\footnote[1]{Behavioral circuit simulator running on Matlab \textsuperscript{\textregistered} \textbackslash Simulink \textsuperscript{\textregistered}} simulation. For the SCC the waveforms of the output voltage are shown in the Fig.\ref{fig:vout_dc}. In Table \ref{tab:scc_results} it can be observed that the optimized solution uses a capacitor two orders of magnitude smaller than compared to the first scenario, although the output ripple is more than two orders of magnitude large. The third scenario shows a compromise between output ripple and total capacitance. From these results we can see that in the design of a SCC loaded at the \emph{dc} node, there is a trade off between the total capacitance and the output voltage ripple. For the case of the H-SCC, the voltage waveforms of the output node -the \emph{pwm} floating switching node - are shown in Fig. \ref{fig:vout_pwm}. The reduction of the total capacitance presents similar behavior to the previous case with two orders of magnitude between the optimization result and the worst case scenario with an output capacitor 100 larger. However, in this case the difference in the voltage ripple is not dramatic, being just $700mV$ larger in the optimized solution. Since the converter supplies a current-load -inductive output - the voltage ripple at this node is less relevant than for the \emph{dc} node.
+
+
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=8cm]{voltage_DC_node}
+%\caption{Circuit-level simulation results: Output voltage of the 3:1 Dickson SCC loaded at the \emph{dc} node}
+%\label{fig:vout_dc}
+%\end{figure}
+%
+%
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=8cm]{pwm_node}
+%\caption{ Circuit-levle simulation results: Output voltage of the 3:1 Dickson SCC loaded at 2nd \emph{pwm} node}
+%\label{fig:vout_pwm}
+%\end{figure}
+
+ For the FSL operation mode, the converters have been compared between the Switch Area breakdown evenly distributed, and the optimized solution, results are shown in Table \ref{tab:fsl_results}. In the case of SCC; the optimized solution coincides with the even distribution. In the case of H-SCC; the optimized solution reduces the specific output impedance $f_{fsl}$  almost 6 points, which would reduce around 20$\%$ the total switch area for a converter with the same efficiency. From the results in Table \ref{tab:fsl_results} it can be observed that the switches that carry the most charge are $S_1$ and $S_7$, consuming almost half of the total area. In a second term comes switches $S_2$, $S_3$ and $S_4$ covering almost the other half of the chip, and finally the remaining surface is splitted between $S_4$ and $S_5$.
+
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=8cm]{Pies_horitzontal}
+%\caption{ Optimization results:a) Capacitance Breakdown for the SCC, b) Capacitance Breakdown for the H-SCC, c) Switch Area Breakdown H-SCC}
+%\label{fig:pies}
+%\end{figure}
+
+\begin{table}[!th]
+    \renewcommand{\arraystretch}{1.3}
+    \setlength{\tabcolsep}{5pt}
+    \begin{threeparttable}
+    \centering
+    \caption{Switch Area Breakdown Results for the 3:1 Dickson SCC loaded at
+             the \emph{dc} node \tnote{1} and the 3:1 Dickson H-SCC\tnote{2} loaded
+              at the 2nd \emph{pwm} node}
+    \label{tab:fsl_results}
+    \begin{tabular}{ l | c | c | c | c | c | c | c | l }
+      % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+      Design              & $X_1$   & $X_2$  & $X_3$  & $X_4$  & $X_5$  & $X_6$  & $X_7$  & $f_{fsl}$       \\
+                          & $[\%]$  & $[\%]$ & $[\%]$ & $[\%]$ & $[\%]$ & $[\%]$ & $[\%]$ &  $[\Omega m^2]$ \\
+                          \hline \hline
+      SCC Opt.            &   14.2  &   14.2 &   14.2 &   14.2 &   14.2 &   14.2 &   14.2 &  10.8 \\
+      \hline \hline
+      H-SCC Even   &   14.2  &   14.2 &   14.2 &   14.2 &   14.2 &   14.2 &   14.2 &  31.3 \\
+      H-SCC Opt.   &   23.1  &   13.4 &   16.5 &   3.8 &   6.6 &     13.4 &   23.1  & 25.4 \\
+
+    \end{tabular}
+     \begin{tablenotes}
+        \item [1] Solution with $Duty = 50\%$
+        \item [2] Solution with $Duty = 25\%$
+    \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+The presented results have been optimized for the two operation limits, nevertheless the combined solutions will also lead to a solution with the minimum total output impedance. Applying the optimization in a separate manner allows us to optimize the Capacitance and the Switch Area independently.
+
+
+\section{Conclusions}
+This work presents a design-oriented optimization for SCCs based on the enhanced model of current-loaded SCCs. On the one hand the results show a reduced output impedance of the converter -therefore a converter with better efficiency for the same area- for the optimized converter. On the other hand, the optimization provides the individual values of each capacitor and switch area, and reduces the design space of the converter to three variables: the switching frequency $F_{sw}$, the total capacitance $C_T$  and the total switch area $A_{sw}$.
+
+The presented methodology must be understood as a first approach to the overall optimization of the converter. The goal is to have a systematic methodology that obtains the minimum output impedance for a given area. This helps to encapsulate the problem of individually sizing capacitors and switches, lifting it to higher optimization level where the three remaining design variables $C_T$, $F_{sw}$ and $A_{sw}$ are based upon other parameters, for instance switching losses, total cost, efficiency, etc.
+
+This work also deals with two possible architectures based on SCCs, covering the stand-alone SCCs and the innovative \emph{hybrid} architectures based on current-loaded converters. The results presented for the classical SCC controvert the current design rules of using very large output capacitors, emphasising the need for an optimal selection of the output capacitor based on a compromise between capacitance breakdown, efficiency and output voltage ripple. Further work can introduce the output ripple of the \emph{dc}  node as another constraint of the optimization. The H-SCC opens a diverse range of possibilities, such as the use of multiple outputs and duty cycle regulation. These additional possibilities lead to new challenges for the design-oriented optimization of SCCs.
+
+
+%
+%\bibliographystyle{IEEEtran}
+%\bibliography{IEEEabrv,ISCAS_ref}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+
+% that's all folks
+
+\begin{table}[!h]
+    \renewcommand{\arraystretch}{1.3}
+    \begin{threeparttable}
+    \centering
+    \caption{Capacitor Breakdown Results for a 3:1 Dickson SCC loaded at the \emph{DC} node operating with
+             $V_{in} = 10V, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o =5mA , \, Duty = 50\% ,\, R_{sw}=1m \Omega$   }
+    \label{tab:hscc_results}
+    \begin{tabular}{ l | r | r | r || r | r | r || r | r }
+      % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+      Design              & $X_1$   & $X_2$ & $X_3$   &  $f_{ssl}$          & $C_T$    & $\Delta V_{o,pp}$ & $ MIM\tnote{1} $  & $IPDiA \tnote{2}$ \\
+                          &  $[\%]$ & $[\%]$ & $[\%]$ &  $[m\Omega F Hz]$  & $[nF]$    &   $[mV]$   & $[mm^2]$   & $[mm^2]$         \\
+                          \hline \hline
+      Std. $100 C_{fly}$  &  1   &   1  &  98   &   22400     &  33660    &    10  & 336.6 &    1.4     \\   \hline
+      Std. $10 C_{fly}$   &  8   &   8  &  83   &    2430     &   3640    &   116  &  36.6  &   140E-3  \\   \hline
+      Even $C_{fly}$      &  33  &  33  &  33   &     375     &    563    &   892  &   5.6  &   22E-3   \\   \hline
+      Optimized           &  43  &  43  &  14   &     238     &    357    &  2237  &   3.6  &   14E-3   \\
+
+    \end{tabular}
+   % \begin{tablenotes}
+%    \item1} Solution for a SCC with $V_{in} = 10, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o = 1A $
+%    \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+
+\begin{table}[!h]
+    \renewcommand{\arraystretch}{1.3}
+    \begin{threeparttable}
+    \centering
+    \caption{Capacitor Breakdown Results for a 3:1 H-Dickson SCC loaded at the 2nd \emph{pwm} node operating with
+             $V_{in} = 10V, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o =5mA , \, Duty = 25\% , \, R_{sw}=1m \Omega$  }
+    \label{tab:hscc_results}
+    \begin{tabular}{ l | r | r | r || r | r | r || r | r }
+      % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+      Design              & $X_1$   & $X_2$ & $X_3$   &  $f_{ssl}$          & $C_T$    & $\Delta V_{o,pp}$ & $ MIM\tnote{1} $  & $IPDiA \tnote{2}$ \\
+                          &  $[\%]$ & $[\%]$ & $[\%]$ &  $[m\Omega F Hz]$  & $[nF]$    &     $[V]$  & $[mm^2]$   & $[mm^2]$           \\
+                          \hline \hline
+      Std. $100 C_{fly}$  &  1   &   1  &  98   &   23124     &  19820    &   3.73  & 198.2 &   792E-3   \\   \hline
+      Std. $10 C_{fly}$   &  8   &   8  &  83   &    2651     &   2272    &   3.78  & 27.7  &   110E-3   \\    \hline
+      Even $C_{fly}$      &  33  &  33  &  33   &     594     &    508    &   4.07  &  5.1  &   20E-3  \\      \hline
+      Optimized           &  58  &  21  &  1    &     409     &    350    &   4.45  &  3.5  &   14E-3  \\
+
+    \end{tabular}
+   % \begin{tablenotes}
+%    \item1} Solution for a SCC with $V_{in} = 10, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o = 1A $
+%    \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+

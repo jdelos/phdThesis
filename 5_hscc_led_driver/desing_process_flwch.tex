@@ -1,0 +1,139 @@
+\newcommand\sHeigh{0.75cm}
+\newcommand\sWidth{2.5cm}
+\newcommand\dWidth{8cm}
+
+\newcommand\dWidthB{6cm}
+
+\newcommand\xShift{4cm}
+\newcommand\xShiftB{3cm}
+
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=\sWidth, minimum height=\sHeigh,text width=\sWidth,text centered, draw=black, fill=black!20,font=\footnotesize]
+\tikzstyle{process} = [rectangle, minimum width=\sWidth, minimum height=\sHeigh, text width=\sWidth,text centered, draw=black, fill=gray!20,font=\footnotesize]
+\tikzstyle{decision} = [diamond, minimum width=\sWidth, minimum height=\sHeigh, text width=\sWidth,text centered, draw=black, fill=gray!20,font=\footnotesize]
+
+\tikzstyle{develop} = [rectangle, rounded corners, minimum width=\dWidth, minimum height=\sHeigh,text width=\dWidth, draw=black,thick,dashed,font=\footnotesize]
+
+\tikzstyle{developB} = [rectangle, rounded corners, minimum width=\dWidthB, minimum height=\sHeigh,text width=\dWidthB, draw=black,thick,dashed,font=\footnotesize]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{connect} = [thick,dashed]
+
+
+
+\begin{tikzpicture} [node distance = 1.75cm]
+\node (start) [startstop, align = left] {
+      $P_{o} ~~= 12W$ \\
+      $i_o ~~~= 1A$\\
+      %\hrule
+      $f_{sw}   ~=  2.77MHz$ \\
+      $\eta_{trg}=  90\% $ \\
+      };
+
+\node (rscc) [process, below of = start,yshift=-0cm] { $r_{scc,trg} = 1.2\Omega$};
+\node (op_point) [process, below of =rscc,yshift=-.5cm] {O.P. in $r_{scc}$ curve?};
+\node (rssl) [process,below of = op_point, left of = op_point, xshift = -.25cm] {$r_{ssl,trg} = 845m\Omega$};
+\node (opssl) [process,below of = rssl,yshift = 0cm] { $ssl$ optimizer};
+\node (sslend) [startstop,below of = opssl, right of = opssl ,yshift=-1.5cm,minimum width = 4cm, text width = 4cm, align=left] {$\mathbf{x} ~=[0.3~0.4~0.28~0.01~ 0.01]$
+\\$c_T = 647nF$};
+\node (aux1) [below of = opssl,yshift=-0.35cm] {};
+
+\node (rfsl) [process,below of = op_point, right of = op_point, xshift = .25cm] {$r_{fsl,trg} = 845m\Omega$};
+\node (opfsl) [process, below of = rfsl,yshift = -0cm] { solve $fsl$ };
+\node (fslend) [startstop, below of = opfsl, yshift=-0.35cm] {$r_{on} = 240m\Omega$};
+
+
+
+\draw [arrow] (start) --   node (x1){}  (rscc);
+\draw [arrow] (rscc) --    node (x2){}  (op_point);
+
+\draw [arrow] (op_point)-| node[yshift=-0.5cm] (x3a){} (rssl);
+\draw [arrow] (rssl) --    node (x4a){} (opssl);
+\draw [arrow] (opssl) |- (aux1) -|   node (x5a){} (sslend);
+
+\draw [arrow] (op_point)-| node[yshift=-0.5cm] (x3b){} (rfsl);
+\draw [arrow] (rfsl) --    node (x4b){} (opfsl);
+\draw [arrow] (opfsl) --   node (x5b){} (fslend);
+
+\node (step1) [develop,left of = x1 , xshift = -\xShift ] {With the fixed specs the target $r_{scc}$ is given by,
+    \begin{equation}
+        r_{scc} = \frac{P_o (1-\eta_{trg})}{i_o ^2} \label{eq:r_scc_trg}
+    \end{equation} };
+\draw [connect] (step1) -- (x1);
+
+\node (step2) [develop,left of = x2 , xshift = -\xShift]
+{The converter is designed to operate in the elbow of the $r_{scc}$ curve, fixing  $r_{ssl} = r_{fsl}$, thus
+    \begin{equation}
+        r_{scc} = \sqrt{r_{ssl}^2 + r_{fsl}^2} = \sqrt{2}r_{ssl} = \sqrt{2}r_{fsl} .
+        \label{eq:r_scc_aprx_dsg}
+    \end{equation}
+ };
+\draw [connect] (step2) -- (x2);
+
+%%%%%%%%%%%%%%%%
+% Step 3
+%%%%%%%%%%%%%%%%
+
+\node (step3a) [developB,left of = x3a , xshift = -\xShiftB]
+{Hence $r_{ssl}$ is then given by
+    \begin{equation}
+        r_{ssl} = \frac{r_{ssc}}{\sqrt{2}}.
+    \end{equation} };
+\draw [connect] (step3a) -- (x3a);
+
+\node (step3b) [developB,right of = x3b , xshift = \xShiftB]
+{Hence $r_{fsl}$ is then given by
+    \begin{equation}
+        r_{fsl} = \frac{r_{ssc}}{\sqrt{2}}.
+    \end{equation} };
+\draw [connect] (step3b) -- (x3b);
+
+%%%%%%%%%%%%%%%%
+% Step 4
+%%%%%%%%%%%%%%%%
+
+\node (step4a) [developB,left of = x4a , xshift = -\xShiftB]
+{Refining the \emph{SSL} function as
+    \begin{align}
+        \begin{split}
+        r_{ssl}  = & \frac{1}{f_{sw} c_{T}} \mathbf{f_{ssl}}(x_1,\cdots,x_n)\\
+        x_i      = & \frac{c_i}{c_T}, ~~ c_T  =  \sum_{i=1}^n c_i.
+        \end{split}
+    \end{align} };
+\draw [connect] (step4a) -- (x4a);
+
+\node (step4b) [developB,right of = x4b , xshift = \xShiftB]
+{The discrete implementation only uses one switch,
+hence all switches have the same $r_{on}$, then for $D=50\%$ \emph{FSL} function results in
+    \begin{align}
+        r_{fsl}  = r_{on} \frac{7}{2} .
+    \end{align} };
+\draw [connect] (step4b) -- (x4b);
+
+%%%%%%%%%%%%%%%%
+% Step 5
+%%%%%%%%%%%%%%%%
+
+\node (step5a) [developB,left of = x5a , xshift = -4.75cm]
+{ The capacitor breakdown is given by solving
+\begin{equation}
+        min( \mathbf{f_{ssl}} )s.t. (1-\sum_{i=1}^n x_i),
+    \end{equation}
+for $D=50\%$, and $c_T$ is then given by
+\begin{equation}
+    c_t= \frac{min( \mathbf{f_{ssl}})}{f_{sw} r_{ssl}}.
+\end{equation}
+
+};
+\draw [connect] (step5a) -- (x5a);
+
+\node (step5b) [developB,right of = x5b , xshift = \xShiftB]
+{Hence $r_{on}$ is given by
+    \begin{align}
+        r_{on}  = r_{fsl} \frac{2}{7}.
+    \end{align} };
+\draw [connect] (step5b) -- (x5b);
+
+\end{tikzpicture}

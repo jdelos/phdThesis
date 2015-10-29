@@ -1351,7 +1351,7 @@ The abrupt $v-i$ characteristics of the LEDs is an advantage for the reduced con
 \begin{figure}[!h]
 \ctikzset { bipoles/length=1cm}
 \centering
-    \begin{circuitikz}[american voltages,scale=0.6]
+\begin{circuitikz}[american voltages,scale=0.6]
 
     \draw
             %Input Supply
@@ -1359,64 +1359,59 @@ The abrupt $v-i$ characteristics of the LEDs is an advantage for the reduced con
             %Draw Switches
             (0,10.5)  --
             (5,10.5)  to[gswitch=$s_1$] %node[anchor=west] {$n_1$}%S1
-            (5,9)  to[gswitch=$s_2$] %node[anchor=east] {$n_2$}%S1
-            (5,7.5)  to[gswitch=$s_3$] %node[anchor=east] {$n_3$}%S1
-            (5,6)   to[gswitch=$s_4$] %node[anchor=west] {$n_4$}%S2
+            (5,9)     to[gswitch=$s_2$] %node[anchor=east] {$n_2$}%S1
+            (5,7.5)   to[gswitch=$s_3$] %node[anchor=east] {$n_3$}%S1
+            (5,6)     to[gswitch=$s_4$] %node[anchor=west] {$n_4$}%S2
             (5,4.5)   to[gswitch=$s_5$] %node[anchor=west] {$n_5$}%S3
             (5,3) --
             %left branch
-            (3,3)   to[gswitch=$s_9$]
-            (3,1.5)   to[gswitch=$s_8$]
+            (3,3)    to[gswitch=$s_6$]
+            (3,1.5)  to[gswitch=$s_7$]
             (3,0);
 
     \draw   %right branch
             (5,3) --
-            (7,3)   to[gswitch,l_=$s_6$]
-            (7,1.5)   to[gswitch,l_=$s_7$]
+            (7,3)   to[gswitch,l_=$s_9$]
+            (7,1.5) to[gswitch,l_=$s_8$]
             (7,0) -- (0,0);
 
 
 
     \draw %Capacitor C1
-           (2,6)
-            to[pC,l_=$c_1$] (2,9) --
+           (8.25,6)
+            to[pC,l_=$c_1$] (8.252,9) --
            (5,9);
 
     \draw %Capacitor C2
-           (8.25,4.5)  to[pC,l_=$c_2$](8.25,7.5) --
+           (2,4.5)  to[pC,l_=$c_2$] (2,7.5) --
            (5,7.5);
 
     \draw %Capacitor C3
-           (3,1.5) -- (2,1.5)
-            to[pC,l_=$c_3$] (2,6) --
+           (7,1.5) -| (8.25,3)
+            to[pC,l_=$c_3$] (8.25,6) --
            (5,6);
 
     \draw %Capacitor C4
-           (7,1.5) --
-           (8.25,1.5) -- (8.25,3) to[pC,l_=$c_4$](8.25,4.5) --
+           (3,1.5) --
+           (2,1.5) -- (2,3) to[pC,l_=$c_4$](2,4.5) --
            (5,4.5);
 
 
     \draw  %LC output filter &  Output LED string
-            (8.25,7.5)node[anchor=south] {$v_x$} to[L=$l_o$] (14,7.5)
-            (13.5,0) to[pC,l=$c_{o}$] (13.5,7.5) -|
-            (16,7.5) -- (16,7)  to[leD*] (16,5) to[leD*] (16,3) to[leD*] (16,1)   |- (7,0) ;
+            (8.25,6) -- (10.25,6)node[anchor=south] {$v_x$} to[cute inductor,l=$l_o$] ++(2,0) -- (14,6)
+            (13.5,0) to[pC,l=$c_{o}$] (13.5,6) -|
+            (16,6) -| (16,5.5)  to[leD*] (16,4) to[leD*] (16,2.5) to[leD*] (16,1)   |- (7,0) ;
 
     %Vout label
-    \draw (16.25,8.5) to[open,v^=$v_{out}$] (16.25,-1);
+    \draw (16.75,7) to[open,v^=$v_{out}$] (16.75,-0.5);
 
     \draw %Capacitor C3
            (5,0) to[pC,l_=$c_5$] (5,3) ;% node[anchor=south east] {$n_{dc}$};
 
-     %\draw (7,4) to[short,-o] (10,4) node[anchor=west] {};
-     %\draw (7,0) to[short,-o] (12,0) node[anchor=west] {};
-
-
      \draw (7,3) --([hs]8.25,4 |- 7,3) arc(180:0:\radius) to[short,-o] (10,3) to[open,v^=$v_{aux}$] (10,0) ;
 
-
      \end{circuitikz}
- \caption[5:1 H$^2$-Dickosn 12W LED driver]{ 5:1 H$^2$-Dickson LED driver for 24V e-merge track lighting application. The driver has two outputs: A $12V$, $12W$  LED string, and $4V$, $200mW$  to supply low power auxiliary loads. }
+ \caption[5:1 H$^3$-Dickosn 12W LED driver]{ 5:1 H$^3$-Dickson LED driver for 24V e-merge track lighting application. The driver has two outputs: A $12V$, $12W$  LED string, and $4V$, $200mW$  to supply low power auxiliary loads. }
  \label{fig:5_1_hscc_emerge}
 \end{figure}
 Figure~\ref{fig:5_1_hscc_emerge} shows the \emph{dc-dc} LED driver with an auxiliary output voltage~\cite{WO2015/040564} used in the experimental set-up as a proof of concept for this dissertation, being presented in Chapter 5. The converter features two outputs: The main output $v_{out}$ supplies the LED load and normally delivers the largest amount of power. The output voltage can be controlled using the duty cycle $D$, thus its value is given by
