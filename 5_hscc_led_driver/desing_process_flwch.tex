@@ -24,30 +24,31 @@
 
 
 \begin{tikzpicture} [node distance = 1.75cm]
-\node (start) [startstop, align = left] {
-      $P_{o} ~~= 12W$ \\
-      $i_o ~~~= 1A$\\
-      %\hrule
-      $f_{sw}   ~=  2.77MHz$ \\
-      $\eta_{trg}=  90\% $ \\
+\node (start) [startstop,  minimum width=4cm,text width=5cm] {
+      $P_{o} = 12W,~ i_o = 1A,~ v_{src} = 24V$\\
+      \vskip 0.5mm
+      \hrule
+      \vskip 0.5mm
+      $v_{o,w.c.} = 13.2V,~ D_{w.c.}=75\%$\\
+      $f_{sw}   ~=  2.77MHz, ~ \eta_{trg}=  90\% $ \\
       };
 
-\node (rscc) [process, below of = start,yshift=-0cm] { $r_{scc,trg} = 1.2\Omega$};
-\node (op_point) [process, below of =rscc,yshift=-.5cm] {O.P. in $r_{scc}$ curve?};
+\node (rscc) [process, below of = start,yshift=-0.75cm] { $r_{scc,trg} = 1.2\Omega$};
+\node (op_point) [process, below of =rscc,yshift=-.25cm] {O.P. in $r_{scc}$ curve?};
 \node (rssl) [process,below of = op_point, left of = op_point, xshift = -.25cm] {$r_{ssl,trg} = 845m\Omega$};
 \node (opssl) [process,below of = rssl,yshift = 0cm] { $ssl$ optimizer};
-\node (sslend) [startstop,below of = opssl, right of = opssl ,yshift=-1.5cm,minimum width = 4cm, text width = 4cm, align=left] {$\mathbf{x} ~=[0.3~0.4~0.28~0.01~ 0.01]$
-\\$c_T = 647nF$};
+\node (sslend) [startstop,below of = opssl, right of = opssl ,yshift=-1.5cm,minimum width = 4cm, text width = 4cm, align=left] {$\mathbf{x} ~=[0.28~0.39~0.23~0.05~0.05]$
+\\$c_T = 810nF$};
 \node (aux1) [below of = opssl,yshift=-0.35cm] {};
 
 \node (rfsl) [process,below of = op_point, right of = op_point, xshift = .25cm] {$r_{fsl,trg} = 845m\Omega$};
 \node (opfsl) [process, below of = rfsl,yshift = -0cm] { solve $fsl$ };
-\node (fslend) [startstop, below of = opfsl, yshift=-0.35cm] {$r_{on} = 240m\Omega$};
+\node (fslend) [startstop, below of = opfsl, yshift=-0.35cm] {$r_{on} = 222m\Omega$};
 
 
 
-\draw [arrow] (start) --   node (x1){}  (rscc);
-\draw [arrow] (rscc) --    node (x2){}  (op_point);
+\draw [arrow] (start) --   node[yshift=-0.1cm] (x1){}  (rscc);
+\draw [arrow] (rscc) --    node[yshift=+0.25cm] (x2){}  (op_point);
 
 \draw [arrow] (op_point)-| node[yshift=-0.5cm] (x3a){} (rssl);
 \draw [arrow] (rssl) --    node (x4a){} (opssl);
@@ -106,9 +107,9 @@
 
 \node (step4b) [developB,right of = x4b , xshift = \xShiftB]
 {The discrete implementation only uses one switch,
-hence all switches have the same $r_{on}$, then for $D=50\%$ \emph{FSL} function results in
+hence all switches have the same $r_{on}$, then for $D=75\%$ \emph{FSL} function results in
     \begin{align}
-        r_{fsl}  = r_{on} \frac{7}{2} .
+        r_{fsl}  = 3.8 r_{on} .
     \end{align} };
 \draw [connect] (step4b) -- (x4b);
 
@@ -121,9 +122,9 @@ hence all switches have the same $r_{on}$, then for $D=50\%$ \emph{FSL} function
 \begin{equation}
         min( \mathbf{f_{ssl}} )s.t. (1-\sum_{i=1}^n x_i),
     \end{equation}
-for $D=50\%$, and $c_T$ is then given by
+for $D=75\%$, and $c_T$ is then given by
 \begin{equation}
-    c_t= \frac{min( \mathbf{f_{ssl}})}{f_{sw} r_{ssl}}.
+    c_t= \frac{min( \mathbf{f_{ssl}})}{f_{sw} r_{ssl,trg}}.
 \end{equation}
 
 };
@@ -132,7 +133,7 @@ for $D=50\%$, and $c_T$ is then given by
 \node (step5b) [developB,right of = x5b , xshift = \xShiftB]
 {Hence $r_{on}$ is given by
     \begin{align}
-        r_{on}  = r_{fsl} \frac{2}{7}.
+        r_{on}  = \frac{r_{fsl,trg}}{3.8}.
     \end{align} };
 \draw [connect] (step5b) -- (x5b);
 

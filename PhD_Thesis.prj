@@ -4,52 +4,97 @@
 0
 1
 PhD_Main.tex
-107
-7
+120
 4
+2
 
 PhD_Main.tex
 TeX
-135278587 1 -1 5663 -1 5680 25 25 1402 432 0 1 387 312 -1 -1 0 0 62 -1 -1 62 1 0 5680 -1  0 -1 0
-6_conclusions.tex
-TeX
-1060859 1 -1 30 -1 44 75 75 1447 594 0 1 322 24 -1 -1 0 0 21 -1 -1 21 1 0 44 -1  0 -1 0
-2_hscc.tex
-TeX
-17838075 1 -1 2975 -1 2814 150 150 1642 588 0 1 49 216 -1 -1 0 0 10642 -1 -1 10642 1 0 2814 -1  0 -1 50 6 8 11 16 18 20 21 23 25 30 33 35 37 38 40 42 44 45 46 47 49 50 51 52 54 59 60 61 66 67 69 74 76 79 81 83 85 90 99 102 104 106 110 111 116 118 122 124 128 132
-3_modeling.tex
-TeX
-17838075 1 -1 1583 -1 1577 25 25 1517 463 0 1 49 -5 -1 -1 0 0 100 -1 -1 100 1 0 1577 -1  0 -1 0
-5_hscc_led_driver\power_train_sch.tex
-TeX
-269496315 0 -1 99 -1 99 125 125 1307 544 0 1 49 120 -1 -1 0 0 -1 -1 -1 -1 1 0 99 -1  0 -1 0
-title_page.tex
-TeX
-1060859 0 -1 43 -1 0 150 150 1547 614 0 1 49 0 -1 -1 0 0 -1 -1 -1 -1 1 0 0 -1  0 -1 0
-drafting.tex
-TeX
-17838075 0 -1 0 -1 1797 175 175 1427 674 0 1 868 480 -1 -1 0 0 12933 -1 -1 12933 1 0 1797 -1  0 -1 0
-3_modeling_single.tex
-TeX
-17838075 1 -1 27476 -1 27093 125 125 1453 562 1 1 122 288 -1 -1 0 0 36 -1 -1 36 1 0 27093 -1  0 -1 13 2 12 25 34 41 49 58 86 87 88 89 90 91
+135278587 0 -1 5556 -1 5556 25 25 1402 432 0 1 49 216 -1 -1 0 0 62 -1 -1 62 1 0 5556 -1  0 -1 0
 5_hscc_led_driver.tex
 TeX
-1060859 0 -1 466 -1 484 100 100 1472 619 0 1 647 456 -1 -1 0 0 26 -1 -1 26 1 0 484 -1  0 -1 0
+17838075 0 -1 13340 -1 13355 100 100 1472 619 1 1 720 288 -1 -1 0 0 26 -1 -1 26 1 0 13355 -1  0 -1 1 7
+5_hscc_led_driver\close_loop_hscc.tex
+TeX
+286273531 0 -1 1041 -1 1041 50 50 1311 414 0 1 569 288 -1 -1 0 0 83 -1 -1 83 1 0 1041 -1  0 -1 0
+5_hscc_led_driver\desing_process_flwch.tex
+TeX
+17838075 0 -1 5327 -1 1996 50 50 1311 414 0 1 179 336 -1 -1 0 0 165 -1 -1 165 1 0 1996 -1  0 -1 0
+5_hscc_led_driver\block_diagram.tex
+TeX
+269496315 0 -1 237 -1 36 50 50 1311 414 0 1 49 48 -1 -1 0 0 0 -1 -1 0 1 0 36 -1  0 -1 0
+title_page.tex
+TeX
+269496315 0 -1 43 -1 0 150 150 1547 614 0 1 49 0 -1 -1 0 0 13 -1 -1 13 1 0 0 -1  0 -1 0
+3_apdx_mdlg.tex
+TeX
+269496315 2 -1 131 -1 97 25 25 1232 424 0 1 49 72 -1 -1 0 0 0 -1 -1 0 1 0 97 -1  0 -1 0
+6_conclusions.tex
+TeX
+269496315 1 -1 30 -1 44 75 75 1447 594 0 1 322 24 -1 -1 0 0 21 -1 -1 21 1 0 44 -1  0 -1 0
+2_hscc.tex
+TeX
+286273531 1 -1 45609 -1 45483 150 150 1642 588 0 1 49 0 -1 -1 0 0 10642 -1 -1 10642 1 0 45483 -1  0 -1 50 6 8 11 16 18 20 21 23 25 30 33 35 37 38 40 42 44 45 46 47 49 50 51 52 54 59 60 61 66 67 69 74 76 79 81 83 85 90 99 102 104 106 110 111 116 118 122 124 127 132
+3_modeling_single.tex
+TeX
+286273531 0 -1 39290 -1 41064 125 125 1453 562 1 1 330 456 -1 -1 0 0 36 -1 -1 36 1 0 41064 -1  0 -1 28 2 12 16 25 34 41 49 50 51 52 53 55 56 57 58 59 61 63 67 69 76 78 81 83 84 87 88 89
+5_apdx_optim.tex
+TeX
+269496315 1 -1 7834 -1 8030 150 150 1626 559 0 1 322 456 -1 -1 0 0 24 -1 -1 24 1 0 8030 -1  0 -1 0
+5_hscc_led_driver\power_train_sch.tex
+TeX
+269496315 0 -1 1522 -1 1649 125 125 1307 544 0 1 569 1200 -1 -1 0 0 29 -1 -1 29 1 0 1649 -1  0 -1 0
+drafting.tex
+TeX
+286273531 0 -1 0 -1 1801 175 175 1427 674 0 1 49 264 -1 -1 0 0 12933 -1 -1 12933 1 0 1801 -1  0 -1 0
+references.bib
+BibTeX
+269485042 1 637 12 637 31 50 50 1271 388 1 1 512 264 -1 -1 0 0 1 51 51 1 1 0 31 637  0 -1 0
 0_intro.tex
 TeX
-269496315 1 -1 14423 -1 14383 100 100 1511 538 0 1 49 336 -1 -1 0 0 54 -1 -1 54 1 0 14383 -1  0 -1 2 22 23
+269496315 1 -1 38270 -1 38212 100 100 1511 538 0 1 49 528 -1 -1 0 0 54 -1 -1 54 1 0 38212 -1  0 -1 2 22 23
+:\Users\300229836\Documents\PhD\Docs\Publications\ISCAS2014\Latex\ISCAS14_Synopsis_v3.tex
+TeX:UNIX
+269594619 0 -1 246 -1 279 175 175 1651 584 0 1 49 -6888 -1 -1 0 0 -1 -1 -1 -1 1 0 279 -1  0 -1 0
+phd_bib.bib
+BibTeX
+269485042 2 350 23 350 29 175 175 1512 693 0 1 413 -3801 -1 -1 0 0 1 114 114 1 1 0 29 350  0 -1 0
+5_hscc_led_driver\start_up_sch.tex
+TeX
+1060859 0 -1 764 -1 968 50 50 1311 414 0 1 49 504 -1 -1 0 0 0 -1 -1 0 1 0 968 -1  0 -1 0
+4_model_validation\c10uF_bis_fsw\c10uF_bis_fsw_D=10_p11.tex
+TeX
+269561851 0 -1 0 -1 0 25 25 1311 333 0 1 49 -216 -1 -1 0 0 -1 -1 -1 -1 1 0 0 -1  0 -1 0
+3_modeling.tex
+TeX
+286273531 0 -1 1583 -1 1633 25 25 1517 463 0 1 49 -24 -1 -1 0 0 100 -1 -1 100 1 0 1633 -1  0 -1 0
+3_modeling.bbl
+TeX:AUX
+269496306 0 0 1 0 1 0 0 1261 364 0 0 29 0 -1 -1 0 0 -1 -1 -1 -1 1 0 1 0  0 0 0
+:\Users\300229836\Desktop\Technical Report\Hybrid SCC_Technical Report_JD.tex
+TeX
+269496315 0 -1 7869 -1 7377 0 0 1261 364 0 1 49 1224 -1 -1 0 0 -1 -1 -1 -1 1 0 7377 -1  0 -1 0
+4_model_validation\c10uF_bis_fsw\fsw_sweep_D=10.tex
+TeX
+269561851 1 -1 19 -1 46 50 50 1336 358 0 1 400 24 -1 -1 0 0 -1 -1 -1 -1 1 0 46 -1  0 -1 0
+2_hscc.bbl
+TeX:AUX
+269496306 0 0 1 0 1 25 25 1286 389 0 0 29 0 -1 -1 0 0 -1 -1 -1 -1 1 0 1 0  0 0 0
+5_hscc_led_driver\gate_driver_sch.tex
+TeX
+269496315 0 -1 16 -1 60 50 50 1311 414 0 1 829 0 -1 -1 0 0 60 -1 -1 60 1 0 60 -1  0 -1 0
+:\Program Files\MiKTeX 2.9\tex\latex\misc\etex.sty
+TeX:STY:UNIX
+269594610 0 0 1 0 1 0 0 1182 419 0 0 29 0 -1 -1 0 0 24 0 0 24 1 0 1 0  0 0 0
+1_topology.tex
+TeX
+286273531 0 911 41 -1 38617 125 125 1536 563 0 1 49 16891 -1 -1 0 0 43 -1 -1 43 1 0 38617 -1  0 -1 2 9 66
 2_hscc\multi_ratio_sch.tex
 TeX
 269496315 0 -1 864 -1 872 200 200 1512 655 0 1 413 672 -1 -1 0 0 31 -1 -1 31 1 0 872 -1  0 -1 0
-1_topology.tex
-TeX
-286273531 0 911 41 -1 38958 125 125 1536 563 0 1 569 0 -1 -1 0 0 43 -1 -1 43 1 0 38958 -1  0 -1 0
 4_validation.tex
 TeX
 286273531 0 -1 49 -1 0 0 0 1026 425 0 1 49 0 -1 -1 0 0 66 210 210 66 1 0 0 -1  0 -1 0
-references.bib
-BibTeX
-269485042 0 49 79 49 81 50 50 1271 388 1 1 1149 288 -1 -1 0 0 1 51 51 1 1 0 81 49  0 -1 0
 1_topology_old.tex
 TeX:UNIX
 269594619 0 -1 34642 -1 34621 175 175 1547 694 0 1 49 -2183 -1 -1 0 0 22 -1 -1 22 1 0 34621 -1  0 -1 1 3
@@ -128,9 +173,6 @@ TeX
 3_modeling\rscc_dc_fsw_sw_21.tex
 TeX
 17838075 0 -1 842 -1 2145 75 75 1403 507 0 1 686 552 -1 -1 0 0 39 -1 -1 39 1 0 2145 -1  0 -1 0
-3_apdx_mdlg.tex
-TeX
-1060859 2 -1 131 -1 97 25 25 1232 424 0 1 49 72 -1 -1 0 0 0 -1 -1 0 1 0 97 -1  0 -1 0
 4_model_validation\c10uF_bis\c10uF_bis_50kHz_p11.tex
 TeX
 269561851 0 -1 0 -1 589 75 75 1387 530 0 1 491 456 -1 -1 0 0 19 -1 -1 19 1 0 589 -1  0 -1 0
@@ -317,9 +359,6 @@ TeX
 drafting.txt
 ASCII
 273688443 0 18 20 80 17 175 175 1427 674 1 0 266 286 -1 -1 0 0 1 0 0 1 1 0 17 80  0 0 0
-phd_bib.bib
-BibTeX
-269485042 2 276 1533 276 1 175 175 1512 693 0 1 47 418 -1 -1 0 0 1 114 114 1 1 0 1 276  0 -1 0
 ch0.bib
 BibTeX
 1049586 2 23 1355 23 1 125 125 1308 517 0 1 40 198 -1 -1 0 0 21 4 4 21 1 0 1 23  0 -1 0
@@ -333,96 +372,21 @@ TeX
 *PhD_Main.tex
 >
 *title_page
-*0_intro
->
-*references
-<
-*1_topology
->
-*references
-<
 *2_hscc
 >
 *./2_hscc/multi_ratio_sch.tex
 *./2_hscc/multi_ratio_plot.tex
 *references
 <
-*3_modeling
->
-*3_modeling_single
->
-*./3_modeling/Delta_vc1.tex
-*./3_modeling/r_scc_elbow.tex
-*./3_modeling/rx_aprox_11.tex
-*./3_modeling/rx_aprox_12.tex
-*./3_modeling/rx_aprox_21.tex
-*./3_modeling/rx_aprox_22.tex
-*./3_modeling/rx_aprox_11_het.tex
-*./3_modeling/rx_aprox_12_het.tex
-*./3_modeling/rx_aprox_21_het.tex
-*./3_modeling/rx_aprox_22_het.tex
-<
-*3_modeling_multiple
-*references
-<
-*4_validation
->
-*./3_modeling/rscc_dc_node_100kHz.tex
-*./3_modeling/rscc_dc_node_1MHz.tex
-*./3_modeling/rscc_dc_node_10MHz.tex
-*./3_modeling/rscc_dc_node_100MHz.tex
-*./3_modeling/rscc_dc_fsw_sw_11.tex
-*./3_modeling/rscc_dc_fsw_sw_12.tex
-*./3_modeling/rscc_dc_fsw_sw_13.tex
-*./3_modeling/rscc_dc_fsw_sw_21.tex
-*./3_modeling/rscc_dc_fsw_sw_22.tex
-*./3_modeling/rscc_dc_fsw_sw_23.tex
-*./3_modeling/rscc_dc_fsw_sw_31.tex
-*./3_modeling/rscc_dc_fsw_sw_32.tex
-*./3_modeling/rscc_dc_fsw_sw_33.tex
-*./3_modeling/rscc_dc_fsw_param_1.tex
-*./3_modeling/rscc_dc_fsw_param_2.tex
-*./3_modeling/rscc_dc_cout_sweep.tex
-*./3_modeling/rscc_pwm_node_100kHz.tex
-*./3_modeling/rscc_pwm_node_1MHz.tex
-*./3_modeling/rscc_pwm_node_10MHz.tex
-*./3_modeling/rscc_pwm_node_100MHz.tex
-*./3_modeling/rscc_pwm_fsw_sweep_11.tex
-*./3_modeling/rscc_pwm_fsw_sweep_12.tex
-*./3_modeling/rscc_pwm_fsw_sweep_21.tex
-*./3_modeling/rscc_pwm_fsw_sweep_22.tex
-*./3_modeling/rscc_pwm_fsw_sweep_31.tex
-*./3_modeling/rscc_pwm_fsw_sweep_32.tex
-*./4_model_validation/c10uF_bis/text_5k.tex
->
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p11.tex
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p12.tex
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p13.tex
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p21.tex
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p22.tex
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p23.tex
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p31.tex
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p32.tex
-*./4_model_validation/c10uF_bis/c10uF_bis_5kHz_p33.tex
-<
-*./4_model_validation/c10uF_bis_fsw/fsw_sweep_D=50.tex
->
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p11.tex
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p12.tex
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p13.tex
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p21.tex
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p22.tex
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p23.tex
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p31.tex
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p32.tex
-*./4_model_validation/c10uF_bis_fsw/c10uF_bis_fsw_D=50_p33.tex
-<
-*references
-<
 *5_hscc_led_driver
 >
+*./5_hscc_led_driver/block_diagram.tex
+*./5_hscc_led_driver/desing_process_flwch.tex
 *./5_hscc_led_driver/power_train_sch.tex
+*./5_hscc_led_driver/start_up_sch.tex
+*references
 <
 *6_conclusions
 *3_apdx_mdlg
+*5_apdx_optim
 <

@@ -1,0 +1,48 @@
+\newcommand\sHeigh{1.5cm}
+\newcommand\sWidth{2cm}
+\newcommand\cHeigh{.75cm}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\tikzstyle{block} = [rectangle, minimum height=\sHeigh,text centered, draw=black,font=\footnotesize]
+\tikzstyle{sp} = [rectangle, minimum width=\sWidth, minimum height=\sHeigh,text width=\sWidth,text centered,font=\footnotesize]
+\tikzstyle{sum} = [circle,minimum width=\cHeigh,font=\footnotesize,draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{tikzpicture} [node distance = 1.5cm]
+
+\node (init){$\widehat{d}$};
+\node (scc) [block,right of = init] 
+    {
+    \ctikzset{bipoles/length=0.5cm}
+    \centering
+    \begin{circuitikz}
+    \draw (0,0) to[gswitch] (0,1);
+    \draw (0.5,0) to[C] (0.5,1);
+    \end{circuitikz}
+    };
+    
+\node (lo) [block, right of = scc,xshift=1cm]
+    {
+    \ctikzset{bipoles/length=0.5cm}
+    \centering
+    \begin{circuitikz}
+    \draw (0,1) to[cute inductor,/tikz/circuitikz/bipoles/length=0.75cm,o-] 
+          (0.75,1) to[short,-o] (1,1);
+    \draw (0.75,0) to[C] (0.75,1);
+    \draw (0,0) to[short,o-o] (1,0);
+    
+    \end{circuitikz}
+    };
+    
+\node (end) [right of = lo] {$\widehat{i_l}$};
+
+\draw[arrow] (init) -- (scc);
+\draw[arrow] (scc)--node[anchor=south]{$\widehat{v_x}$} (lo);
+\draw[arrow] (lo) -- (end);
+
+%\node (scc.south);
+%\node (lo.south)[anchor=north] {Output filter};
+\draw (lo.south) node[anchor=north] {Output filter};
+\draw (scc.south) node[anchor=north] {SCC Stage};
+\end{tikzpicture}

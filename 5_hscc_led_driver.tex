@@ -41,7 +41,7 @@ The LED driver is composed by two main subsystems, the power train and the close
 
 
 
-\subsection{Power train}
+\section{Model based design: Power train}
 \begin{figure}[!h]
 \ctikzset { bipoles/length=1cm}
 \centering
@@ -115,84 +115,198 @@ The LED driver is composed by two main subsystems, the power train and the close
 \end{figure}
 
 Figure~\ref{fig:5_1_hscc_emerge_II} shows the chosen topology for the LED driver, a 5:1 H$^3$-Dickson driver. The chosen topology satisfies the requirements for the output voltages.
-The \emph{pwm}-node $v_x$ has a conversion ration of $m_3 = \frac{2+D}{5}$, thus providing an output voltage range between $9.6V$ and $14.4V$ considering the full range of the duty cycle $D$. The output regulation margins fit the load variations at maximum currents, 1A, which are between 13.2V and 11.8V for a case temperatures of -40 $^\circ C$ and  130 $^\circ C$ respectively. The \emph{dc}-node has a fixed voltage conversion of $m_{dc} = \frac{1}{5}$, providing target voltage at $v_aux$ of 4.8V.
 
-Once the topology is fixed, the next step is to size the different components, capacitors and switches. A SCC is by nature lossy, therefore the efficiency of the converter is strongly related to the selection of the right values for the components. That is why, it is essential to have an accurate model in design process of the converter. Indeed, using the algebraic expressions of the model, both, capacitors and switches can be determined as a result of an optimization process. However in the presented converter owing to the fact that it was implemented with discrete components, the flexibility in the choice of the used components was restricted to the commercial available values.
+The \emph{pwm}-node $v_x$ has a conversion ration of $m_3 = \frac{2+D}{5}$, thus providing an output voltage range between $9.6V$ and $14.4V$ considering the full range of the duty cycle $D$. This dynamic range of regulation is within the  extreme variations of the LED forward voltage, which are defined in the datasheet between 13.2V at 1A with a case temperature of $-40^\circ C$  and 11V at 350mA with a case temperature of $130^\circ C$, thus guaranteeing the operability of the converter a large range of current and temperatures. The converter was design for worst case of 13.2V output voltage and 1A output current.
 
-The sizing of the components was done following the procedure described in Figure~\ref{fig:design_flow_drv}, for the converter operating at full load. First, using~\eqref{eq:r_scc_trg} a target output resistance ($r_{scc,trg}$) of the converter is computed. $r_{scc,trg}$ was computed for an efficiency $\eta_trg = 90\%$, instead of the $85\%$ given in the specification, since this part of the design process does not take in consideration the switching losses of the transistors. Therefore a $5\%$ overhead was given for other sources of losses, mainly switching losses. Second, the $r_{scc}$ is composed by the output resistance of the two switching limits approximated by~\eqref{eq:r_scc_aprx_dsg}, thus the individual contribution of each term depends on the selected operation point of the $r_{scc}$. In this case, the operation point was fixed in the elbow of the curve, therefore the target equivalent output resistance for both limits, SSL and FSL, was then fixed to $845m\Omega$.
+The \emph{dc}-node has a fixed voltage conversion of $m_{dc} = \frac{1}{5}$, providing a maximum output at $v_{aux}$ of 4.8V.
 
-After this point the design process bifurcates, one path is describes the procedure to size the capacitors, and the other path to size the transistors. In either cases it have been used the algebraic expressions defined by the model, $r_{ssl}$ equation:
+With the topology already selected, the next step is to size the different components, capacitors and switches. A SCC is by nature lossy, therefore the efficiency of the converter is strongly related to the selection of the right values for the components. That is why, it is essential to have an accurate model in design process of the converter. Indeed, using the algebraic expressions of the model, both, capacitors and switches can be determined as a result of an optimization process. % However in the presented converter owing to the fact that it was implemented with discrete components, the flexibility in the choice of the used components was restricted to the commercial available values.
+The converter was design at full load 1A and with the worst case output voltage 13.2V, thus requiring $D=75\%$ to provide this output voltage. At the same time, given the fact the model does not quantifies the switching losses, the switch capacitor stage was designed for a target efficiency of $\eta_trg =90\%$ instead of the $85\%$ given in the specification, allowing a $5\%$ overhead for other sources of losses, mainly switching losses.
+
+As described  in the char flow of figure~\ref{fig:design_flow_drv}, the values for the capacitors and the switches $on$-channel resistance are determined by the equivalent output resistance of both switching limits. Based on the converter efficiency, the target values are defined in the following steps:
+\begin{enumerate}
+  \item Using~\eqref{eq:r_scc_trg} a target output resistance of the converter is computed, hence
+      \begin{equation}
+        r_{scc,trg}= \frac{12W (1-0.9)} {1A^2} = 1.2\Omega .
+      \end{equation}
+
+  \item The individual contribution of the two switching limits is determined depending on the operation of the $r_{scc}$ curve, in this case, the elbow of the curve where
+       \begin{equation}
+        r_{ssl} = r_{fsl},
+      \end{equation}
+      hence both limits have a the same target output resistance of \begin{equation}
+        r_{ssl} = r_{fsl} = \frac{1.2}{\sqrt{2}}=845m\Omega.
+      \end{equation}
+
+\end{enumerate}
+
+
+After this point the design process bifurcates, the path on the left describes the procedure to size the capacitors, and the path on the right the procedure to size the transistors. The values for the capacitors are determined in the SSL region, using the $r_{ssl}$ equation of the model:
 \begin{equation}
 r_{ssl}=\frac{P_{ssl}}{{i_o}^2}=\frac{P_{ssl}}{{(f_{sw} {q_{out}})}^2}=\frac{1}{2 f_{sw}}\sum_{i=1}^{caps.}\sum_{j=1}^{phases}\frac{1}{c_i}{\left[a_{i\
 }^j-{D^j} {b_i^j}\right]}^2.
-\label{eq:r_ssl}
+\label{eq:r_ssl_dsg}
 \end{equation}
-is used to determine the size the capacitors, and the $r_{fsl}$ equation:
+The values for $on$-channel resistance of the switches are determined in the FSL region, using the $r_{fsl}$ equation of the model:
 \begin{equation}
-r_{fsl}=\sum_{i=1}^{elm.}\sum_{j=1}^{phases}\frac{r_i}{D^j}{ar_i^j}^2
-\label{eq:r_fsl}
+r_{fsl}=\sum_{i=1}^{elm.}\sum_{j=1}^{phases}\frac{r_i}{D^j}{ar_i^j}^2.
+\label{eq:r_fsl_dsg}
 \end{equation}
-to determine the size the transistors.
+Actually based on the two asymptotical limits~\citeauthor{Seeman:EECS-2009-78} in his PhD dissertation~\cite{Seeman:EECS-2009-78} describes a methodology to optimise capacitor and switch areas, by minimizing the both expression. The results give capacitor value  and switch-area breakdown. Appendix~\ref{ap:optimitzation} revisits the optimization procedure using the new modeling methodology. The mathematical details are given, along with new insights result of applying the new proposed modeling for SCCs.
+
 
 \begin{landscape}
-\thispagestyle{empty}
-\begin{figure}[!h]
-\centering
-\input{./5_hscc_led_driver/desing_process_flwch.tex}
-\caption[SCC stage design flow]{Design flow for the SCC stage.}
-\label{fig:design_flow_drv}
-\end{figure}
+    \thispagestyle{empty}
+    \begin{figure}[!h]
+    \centering
+    \input{./5_hscc_led_driver/desing_process_flwch.tex}
+    \caption[SCC stage design flow]{Design flow for the SCC stage.}
+    \label{fig:design_flow_drv}
+    \end{figure}
 \end{landscape}
-Actually, as described in~\cite{Seeman:EECS-2009-78} minimizing both expression, results in the optimum capacitor size breakdown and switch-area breakdown, the mathematical details are given in Appendix~\ref{ap:optimitzation}.
 
-The capacitors values were determined using the optimization procedure described in Appendix~\ref{ap:opt_cap}, which resulted in a total capacitance of: 
+
+\subsection{Sizing of the capacitors}
+The capacitors values were determined using the optimization procedure described in Appendix~\ref{ap:opt_cap}, which resulted in a total capacitance of:
 \begin{equation}
-c_T = \frac{min(\mathbf{f_{ssl}})}{f_{sw}~r_{ssl}} = \frac{1.51}{2.77MHz~845m\Omega},
+c_T = \frac{min(\mathbf{f_{ssl}})}{f_{sw}~r_{ssl}} = \frac{1.9}{2.77MHz~845m\Omega} =810nF,
 \end{equation}
 and a capacitor breakdown distribution of:
 \begin{equation}
-\frac{c_i}{c_T} = \irow{ 0.3 & 0.4 & 0.28 & 0.01 & 0.01}. 
+\frac{c_i}{c_T} = \irow{ 0.28 & 0.39 & 0.23 & 0.05 & 0.05}.
 \end{equation}
-Hence the optimal values for the capacitor of the converter are given in Table X. 
+Hence the optimal values for the capacitor of the converter are given in Table~\ref{tab:caps_results}, the used values are the best fit to commercial available values. Capacitor $c_5$ was doubled in value to reduce the ripple voltage present at the $v_{aux}$ output.
 \begin{table}[!h]
     \renewcommand{\arraystretch}{1.2}
-    \begin{threeparttable}
+
     \centering
     \caption{Capacitor breakdowns, optimization results and used values.}
     \label{tab:caps_results}
+    \begin{threeparttable}
     \begin{tabular}{ l | c  c  c  c  c | c | r }
-                    & $c_1$   & $c_2$ & $c_3$   & $c_4$  & $c_5$ & $c_T$ &  $r_{ssl}$  \\
-                    & multicolumn{6}{ |c } $nF$ &  $m\Omega$  \\
-                    
-    \midrule 
-     Optimizer   & 194  & 258 & 181  & 6  & 6 & 647 &  845  \\
-     Used        & 220  & 330 & 280  & 39  & 78 & 647 &  845  \\               
-      
+                    & $c_1$   & $c_2$ & $c_3$   & $c_4$  & $c_5$ & $c_T$ &  $r_{ssl}\tnote{1}$  \\
+                    & \multicolumn{6}{ c | }{$nF$} &  $m\Omega$  \\
+
+    \midrule
+  Optimizer $D=75\%$  & 223  & 320 & 181  & 43   & 43  & 810 &  845  \\
+  %Optimizer $D=50\%$  & 194  & 258 & 181  & 6      & 6  & 647 &  845 \\
+  %Optimizer $D=10\cdots90\%$  & 247  & 305 & 230  & 46  & 46 & 875 &  735  \\
+
+  Used        & 220  & 330 & 180  & 39  &  78 & 947 &  716\\
+   \midrule
+   \multirow{2}{*}{Voltages}  & \multicolumn{6}{ c | }{$V$} &  - \\
+              & 9.6  & 9.6 & 9.6  & 4.8 & 4.8 & 9.6 &  -
     \end{tabular}
-   % \begin{tablenotes}
-%    \item1} Solution for a SCC with $V_{in} = 10, \,  F_{sw} = 1MHz, \, \eta=90\%, \, I_o = 1A $
-%    \end{tablenotes}
+    \begin{tablenotes}
+        \item [1] Value computed for a duty cycle $D=75\%$.
+    \end{tablenotes}
     \end{threeparttable}
+\end{table}
 
 
-\subsection{Small-signal analysis}
+\subsection{Sizing of the transistors}
+For sake of simplicity, it was only used a single type of transistors for the prototype, what  simplifies the process to determine $r_{on}$ since it is not necessary to minimize~\eqref{eq:r_fsl_dsg}. Solving~\eqref{eq:r_fsl_dsg} for $D=75\%$ and considering the same $r_{on}$ in all the switches results in
+\begin{equation}
+    r_{fsl}  = 3.8 r_{on}  .
+\end{equation}
+Hence to satisfy the target $r_{fsl,trg}=845m\Omega$, the switches must have a maximum $r_{on}$ of
+\begin{equation}
+    r_{on}  = \frac{r_{fsl,trg}}{3.8} = 222m\Omega,
+\end{equation}
+based on a balance between switching losses and conduction losses we used \emph{ZXMN2B01F} from \emph{ZETEX} featuring $r_{on}=100m\Omega$.
+
+Table~\ref{tab:switchs_results} presents average current and blocking voltage in each device.
+\begin{table}[!h]
+    \renewcommand{\arraystretch}{1.2}
+    \centering
+    \caption{Switches blocking voltages and average currents.}
+    \label{tab:switchs_results}
+    \begin{threeparttable}
+    \begin{tabular}{ l c | c  c  c  c  c  c c c c }
+            & & $s_1$   & $s_2$ & $s_3$   & $s_4$  & $s_5$ & $s_6$ & $s_7$ & $s_8$ & $s_9$  \\
+    \midrule
+            $v_{ds}$ & V & 4.8 & 9.6& 9.6 & 9.6 & 4.8 & 4.8 & 4.8 & 4.8 & 4.8 \\
+            $i_{on}$ & A & 0.2 & 0.2& 0.2 & 0.2 & 0.2 & 0.4 & 0.4 & 0.4 & 0.4 \\
+
+    \end{tabular}
+    \end{threeparttable}
+\end{table}
+
+\subsection{Inductor}
+The inductor was designed for an small ripple of  $\Delta _i \pm10\%$. That allows the current to be dimmed up to $100mA$ without bringing the converter in discontinuous conduction mode (DCM). The value of the output inductor is determined by~\eqref{eq:hscc_l} resulting in
+\begin{equation}
+ l_{o,hscc}  = m_i \frac{ v_{src} D (1-D)}{\Delta i~f_{sw} }= \frac{1}{5} \frac{24V~0.75(1-0.75)}{0.2~1A~2.77MHz} = 1.62\mu H.
+\label{eq:hscc_l_II}
+\end{equation}
+Considering the tolerances the mounted component was the \emph{CVH252009} from \emph{BOURNS} featuring $l_o=2.2\mu H$ in a 1008 SMD case.
+
+\section{Close-loop design}
+The converter required to a close-loop control to properly bias the LED load.  Therefore a second board was build for that purpose, implementing an error amplifier, a close-loop controller, a ramp generator and a dual PWM with dead-band generator. Commercial ICs were not suitable for our application due to its high switching frequency, 2.77MHz.
+\begin{figure}[!h]
+    \centering
+    \input{./5_hscc_led_driver/close_loop_hscc.tex}
+    \caption[]{Close-loop block diagram.}
+    \label{fig:close_loop_diagram}
+\end{figure}
+
+Owing to the fact that the H-SCC has an output inductor, the close-loop control is designed like in an inductive converter. First the transfer function of the power train is obtained, in this case including the SCC stage. Second with the transfer function the close-loop controller is designed to guarantee the stability and minimize the error between the set-point and the output current of the LED.
+
+\subsection{Small signal analysis}
+
+The small signal analysis of a H-SCC is practically the same of a buck converter. Figure~\ref{fig:small_signal_hscc} shows the equivalent circuit of a H-SCC used for the small signal analysis, the SCC stage is modeled with the voltage source controlled by the duty cycle in series with the equivalent output resistance $r_{scc}$. The output filter, composed by inductor $l_o$ and the capacitor $c_o$, is connected to the output of the SCC stage and afterwards the load $r_o$. For sake of simplicity, the equivalent series resistance of $l_o$ and $c_o$ are not included.   
+\begin{figure}[!h]
+    \centering
+    \input{./5_hscc_led_driver/hscc_small_signal_circuit.tex}
+    \caption[]{Equivalent circuit of a \emph{hybrid}-SCC including the output filter.}
+    \label{fig:small_signal_hscc}
+\end{figure}
+
+Compared to the analysis of a buck converter, the SCC stage adds the $r_{scc}$ and modifies the conversion ration of the converter. The conversion ratio provided by the SCC stage has to components, a fixed offset $m_{off}$ added to a variable fraction $m_{\Delta}$ controlled by the duty cycle $D$, thus
+\begin{equation}
+ m_{x}  = m_{off} + m_{\Delta}D.
+\label{eq:m_ratio}
+\end{equation}
+For the case under study the conversion ratio at the third node is 
+\begin{equation}
+ m_{3}  = \frac{2}{5} + \frac{D}{5}.
+\label{eq:m3_ratio}
+\end{equation}
+thus $m_{offset} = \frac{2}{5}$ and $m_{\Delta}=\frac{1}{5}$.
+ 
+Using~\eqref{eq:m_ratio} can be written the equations for the two state variables, inductor current and capacitor voltage, resulting in 
+\begin{align}
+ l_o \frac{i_l}{dt} = &  v_{src} (m_{off} + m_{\Delta} D ) - i_l r_{scc} - v_o \label{eq:il}\\
+ c_o \frac{v_c}{dt} = &  i_l - i_o.
+ \label{eq:vc}
+\end{align}
+
+Applying the small signal analysis into~\eqref{eq:il} and~\eqref{eq:vc}, we can obtain the different transfer functions of the converter.    
+\begin{align}
+ G_{id}(s) =  \frac{\widehat{i_l}}{\widehat{d}} = &
+ \frac{v_{src} m_{\Delta}}{r_o} \frac{s c_o r_o + 1  }
+ { s^2 l_o c_o  + s \left ( \frac{l_o}{r_o}  + c_o r_{scc}  \right )  +  \frac{r_{scc}}{r_o} + 1 } \label{eq:g_id}\\
+ G_{vd}(s) =  \frac{\widehat{v_o}}{\widehat{d}} = &
+ v_{src} m_{\Delta} \frac{ 1  }
+ { s^2 l_o c_o  + s \left ( \frac{l_o}{r_o}  + c_o r_{scc}  \right )  +  \frac{r_{scc}}{r_o} + 1 } \label{eq:g_id}\\
+ G_{od}(s) =  \frac{\widehat{i_o}}{\widehat{d}} = &
+ \frac{v_{src} m_{\Delta}}{r_o} \frac{1  }
+ { s^2 l_o c_o  + s \left ( \frac{l_o}{r_o}  + c_o r_{scc}  \right )  +  \frac{r_{scc}}{r_o} + 1 } \label{eq:g_od}
+\end{align}
+
+Notice that the resulting transfer functions are practically the same of a buck converter, with the exception of two new parameters the output hesitance of the SCC stage ($r_{scc}$), and the gain added by $m_\Delta$. In a Dickson and Ladder converter $m_\Delta$ is equal to the intrinsic conversion ration $m_i$ fixed by the topology. 
 
 \subsection{Close-loop controller}
 
 
-\section{Power train design}
-\subsection{Capacitors}
-\subsection{Transistors}
-\subsection{Inductor}
 
 \section{Power train circuits}
 \subsection{Full schematic}
-\begin{figure}[!h]
-\centering
-\input{./5_hscc_led_driver/power_train_sch.tex}
-\caption[Power train schematic]{5:1 H$^2$-Dickson power train schematic.}
-\label{fig:pwr_train_sch}
-\end{figure}
+%\begin{figure}[!h]
+%\centering
+%\input{./5_hscc_led_driver/power_train_sch.tex}
+%\caption[Power train schematic]{5:1 H$^2$-Dickson power train schematic.}
+%\label{fig:pwr_train_sch}
+%\end{figure}
 
 %\begin{landscape}
 %\thispagestyle{empty}
@@ -226,5 +340,5 @@ Hence the optimal values for the capacitor of the converter are given in Table X
 
 
 \bibliographystyle{plainnat}
-\bibliography{references} 
+\bibliography{references}
 
