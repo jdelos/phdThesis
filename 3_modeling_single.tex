@@ -357,9 +357,20 @@ Looking in detail to the charge flow in a SCC, we can identify two different cha
   \item[Pumped charge] flows from the capacitors to the load, where it is consumed by the load, hence producing useful work.  This charge delivery is associated with a discharge of the capacitors, lasting for the entire phase time.
 
 \end{description}
-Besides these two charge flows, there is a third \emph{theoretical} charge flow that is necessary to analyse and solve a SCC:
+Besides these two charge flows, there we quantify another  charge, necessary for the analysis :
 \begin{description}
-  \item[Net charge] flow is quantified based on the principle of \emph{capacitor charge balance} for a converter in steady state. Based on that principle all \emph{net} charges in the capacitors can be obtained applying Kirchhoff's Currents Law (KCL), but using charges instead of currents. Therefore, the circuit can be solved for \emph{net} charge flow, applying the \emph{capacitor charge balance} as
+  \item[Net charge]  is the difference in charge between the beginning and the end of a switching event. For clarity, in a two phase converter, the \textbf{net charges} are quantified as
+      \begin{equation*}
+        \begin{cases}
+               \text{Net charge, phase 1} \rightarrow q^1 = q(DT_{sw}) - q(0)\\
+               \text{Net charge, phase 2} \rightarrow q^2 = q(T_{sw}) - q(DT_{sw}),
+            \end{cases}
+      \label{eq:net_charges}
+      \end{equation*}
+      where $q(t)$ is the charge in a capacitor at instant $t$, and $q^j$ the \textbf{net charge} of the phase $j$.
+       
+       
+      Based on that principle all \emph{net} charges in the capacitors can be obtained applying Kirchhoff's Currents Law (KCL), but using charges instead of currents. Therefore, the circuit can be solved for \emph{net} charge flow, applying the \emph{capacitor charge balance} as
       \begin{equation}
        \forall~c_{i} : \sum_{j=1}^{phases}q_{i}^j = 0,
       \label{eq:charge_balance}
