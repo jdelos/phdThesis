@@ -1,0 +1,96 @@
+\begin{tikzpicture}
+    \pgfplotsset{
+        width=\pWidth,
+        height=\pHeigh,
+        scale only axis,
+        xlabel near ticks,
+        ylabel near ticks,
+        scaled y ticks= true ,
+        enlarge x limits={0},
+        enlarge y limits={0.1},
+        %xticklabels={,,},
+        every tick label/.append style={font=\footnotesize},
+        }
+
+	\begin{semilogxaxis}[
+		axis y line*=left,
+		axis x line*=bottom,
+		yticklabel style={text width=2.0em,align=right},
+        ylabel = {magnitude $[dB]$},
+        ylabel style = {font=\footnotesize},
+        title = {$Gm =19.6dB$ (at $39.7kHz$), $Pm =95.5dB$ (at $8.8kHz$)},
+        title style = {
+    			font=\footnotesize,
+    			at ={(0.5,0.9)}},
+        xticklabels={,,},
+        name=mag
+		]
+
+		\addplot[thick,black,smooth]
+    		table [y=y1]{./5_hscc_led_driver/OpenLoop.dat};
+
+        \addplot[semithick,dotted,mark=none, black]
+            coordinates { (1e2,0) (1e7,0)};
+        \addplot[semithick,dotted,black] coordinates {(8.81e3,-150)(8.81e3,0) };
+        \addplot[thin,black] coordinates {(3.97e4,0)(3.97e4,-19.6) };
+        \addplot[semithick,dotted,black] coordinates {(3.97e4,-150)(3.97e4,-19.6) };
+
+	\end{semilogxaxis}
+
+    \begin{semilogxaxis}[
+        yshift={-(\pHeigh+0.25cm)},
+		axis y line*=left,
+		axis x line*=bottom,
+		yticklabel style={text width=2.0em,align=right},
+        ylabel = {phase $[deg]$},
+        xlabel = {frequency $[Hz]$},
+        ylabel style = {font=\footnotesize},
+        xlabel style = {font=\footnotesize},
+        ytick = {0,-90,-180,-270},
+        title style = {
+    			font=\footnotesize,
+    			at ={(0.5,0.9)}},
+		]
+
+		\addplot[thick,black,smooth]
+    		table [y=y2]{./5_hscc_led_driver/OpenLoop.dat};
+        \addplot[semithick,dotted,mark=none,black]
+            coordinates { (1e2,-180) (1e7,-180)};
+
+        \addplot[thin,black] coordinates {(8.81e3,-180)(8.81e3,-84.5)};
+        \addplot[semithick,dotted,black] coordinates {(8.81e3,-84.5)(8.81e3,0) };
+
+        \addplot[semithick,dotted,black] coordinates {(3.97e4,0)(3.97e4,-180) };
+
+	\end{semilogxaxis}
+    
+    %\begin{semilogxaxis}[
+%        yshift={-(\pHeigh+0.5cm)},
+%        at=(mag.below south west),
+%		axis y line*=left,
+%		axis x line*=bottom,
+%        ytick = {0,-90,-180,-270},
+%		yticklabel style={text width=2.0em,align=right},
+%        ylabel = {Phase $[deg]$},
+%        xlabel = {Frequency $[Hz]$},
+%        ylabel style = {font=\footnotesize},
+%        xlabel style = {font=\footnotesize},
+%		title style = {
+%    			font=\footnotesize },
+%    			at ={(0.75,0.75)},
+%		]
+%
+%		\addplot[thick,black,smooth]
+%    		table [y=y2]{./5_hscc_led_driver/OpenLoop.dat};
+%        \addplot[semithick,dotted,mark=none,black]
+%            coordinates { (1e2,-180) (1e7,-180)};
+%
+%        \addplot[thin,black] coordinates {(8.81e3,-180)(8.81e3,-84.5)};
+%        \addplot[semithick,dotted,black] coordinates {(8.81e3,-84.5)(8.81e3,0) };
+%
+%        \addplot[semithick,dotted,black] coordinates {(3.97e4,0)(3.97e4,-180) };
+%
+%
+%	\end{semilogxaxis}
+
+\end{tikzpicture}

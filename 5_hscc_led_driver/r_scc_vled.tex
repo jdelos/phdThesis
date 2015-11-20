@@ -1,0 +1,45 @@
+\begin{tikzpicture}
+    \pgfplotsset{
+        width=\pWidth,
+        height=\pHeigh,
+        scale only axis,
+        xlabel near ticks,
+        ylabel near ticks,
+        scaled y ticks= true ,
+        enlarge x limits={0.1},
+        enlarge y limits={0.1},
+        every tick label/.append style={font=\footnotesize},
+        }
+
+    \begin{loglogaxis}[
+		axis y line*=left,
+		axis x line*=bottom,
+        %xticklabels={,,},
+        %ytick = {-90,-180,-270,-360},
+		yticklabel style={text width=1.0em,align=right},
+        ylabel = { $r_{scc}~[\Omega]$},
+        xlabel = { $frequency~[Hz]$},
+        ylabel style = {font=\footnotesize},
+        xlabel style = {font=\footnotesize},
+		legend style = {
+    		font   = \footnotesize,
+            anchor = south,
+            at = {(0.5,1)},
+            draw= none,
+            legend columns = -1,
+            column sep = 1ex,
+            legend cell align = left},
+		]
+
+        \addplot[thick,only marks,mark=x,mark repeat=1]
+    		table [y=y2]{./5_hscc_led_driver/vled_out/vled_rscc_psw.dat};
+
+        \addplot[thick,only marks,mark=o,mark repeat=1]
+    		table [y=y1]{./5_hscc_led_driver/vled_out/vled_rscc_psw.dat};
+
+        \addplot[thick,black,smooth]
+    		table [y=y1]{./5_hscc_led_driver/vled_out/vled_rscc_ideal.dat};
+        \legend{fit $v_{out}$, fit $p_{loss}$,model};
+	\end{loglogaxis}
+
+\end{tikzpicture}

@@ -368,8 +368,8 @@ Besides these two charge flows, there we quantify another  charge, necessary for
       \label{eq:net_charges}
       \end{equation*}
       where $q(t)$ is the charge in a capacitor at instant $t$, and $q^j$ the \textbf{net charge} of the phase $j$.
-       
-       
+
+
       Based on that principle all \emph{net} charges in the capacitors can be obtained applying Kirchhoff's Currents Law (KCL), but using charges instead of currents. Therefore, the circuit can be solved for \emph{net} charge flow, applying the \emph{capacitor charge balance} as
       \begin{equation}
        \forall~c_{i} : \sum_{j=1}^{phases}q_{i}^j = 0,
@@ -611,8 +611,8 @@ The charge flow vectors are solved for the converter of Figure~\ref{fig:3_1_hscc
 \begin{align}
 \label{eqn:ph1_kil}
 \begin{split}
-  q_{in}^1 - q_1^2   &=0, \\
-  q_1^2 - q_2^1 - q_3^1 - q_{out}^1 &=0.
+  q_{in}^1 - q_1^1   &=0, \\
+  q_1^1 - q_2^1 - q_3^1 - q_{out}^1 &=0.
 \end{split}
 \end{align}
 The node equations for second circuit mode (Figure~\ref{fig:hscc_full_p2_slv}) are:
@@ -621,7 +621,7 @@ The node equations for second circuit mode (Figure~\ref{fig:hscc_full_p2_slv}) a
 \begin{split}
   q_{in}^2 & = 0,\\
   q_2^2 - q_3^2    &=0, \\
-  q_1^2 - q_2^2 - q_{out}^2 &=0.
+  q_1^2 + q_2^2 + q_{out}^2 &=0.
 \end{split}
 \end{align}
 Applying~\eqref{eq:q_out} into $q_{out}^1$ and $q_{out}^2$, the phase output charges are expressed as function of the total output charge $q_{out}$, as
@@ -650,8 +650,8 @@ Substituting~\eqref{eqn:qout_CL} and~\eqref{eqn:q_i_NCB} into~\eqref{eqn:ph1_kil
   \systeme{
     a_1  - b_1  = 0,
     a_2 = 0,
-    b_1 - b_2  - b_3  = D q_{out},
-    b_1 + b_2  =  - (1-D) q_{out},
+    b_1 - b_2  - b_3  =    D q_{out},
+    b_1 + b_2         = (1-D) q_{out},
     b_2 - b_3  = 0},
 \end{equation}
 solving the system yields

@@ -1,0 +1,48 @@
+\begin{tikzpicture}
+    \pgfplotsset{
+        width=\pWidth,
+        height=\pHeigh,
+        scale only axis,
+        xlabel near ticks,
+        ylabel near ticks,
+        scaled y ticks= true ,
+        enlarge x limits={0},
+        enlarge y limits={0.1},
+        every tick label/.append style={font=\footnotesize},
+        }
+
+	\begin{semilogxaxis}[
+		axis y line*=left,
+		axis x line*=bottom,
+		yticklabel style={text width=2.00em,align=right},
+        title style = {
+    			font=\footnotesize },
+    			at ={(0.75,0.75)},
+		]
+
+		\addplot[thick,black,smooth]
+    		table [y=y1]{./5_hscc_led_driver/OpenLoop.dat.dat};
+
+	\end{semilogxaxis}
+
+    \begin{semilogxaxis}[
+		axis y line*=right,
+		axis x line*=bottom,
+		xticklabels={,,},
+        ytick = {0,-90,-180,-270},
+		yticklabel style={text width=2.00em,align=left},
+		title style = {
+    			font=\footnotesize },
+    			at ={(0.75,0.75)},
+		]
+
+		\addplot[thick,gray,smooth]
+    		table [y=y2]{./5_hscc_led_driver/OpenLoop.dat.dat};
+
+	\end{semilogxaxis}
+
+
+
+
+
+\end{tikzpicture}

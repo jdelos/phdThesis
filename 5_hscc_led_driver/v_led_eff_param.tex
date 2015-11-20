@@ -1,0 +1,78 @@
+\begin{tikzpicture}
+    \pgfplotsset{
+        width=\pWidth,
+        height=\pHeigh,
+        scale only axis,
+        xlabel near ticks,
+        ylabel near ticks,
+        scaled y ticks= true ,
+        enlarge x limits={0.1},
+        enlarge y limits={0.1},
+        every tick label/.append style={font=\footnotesize},
+        }
+
+    \begin{axis}[
+		axis y line*=left,
+		axis x line*=bottom,
+        xticklabels={,,},
+        %ytick = {-90,-180,-270,-360},
+		yticklabel style={text width=1.0em,align=right},
+        ylabel = {efficiency $[\%]$},
+        ylabel style = {font=\footnotesize},
+        xlabel style = {font=\footnotesize},
+		legend style = {
+    		font   = \footnotesize,
+            anchor = south,
+            at = {(0.5,1)},
+            draw= none,
+            legend columns = 2,
+            column sep = 1ex,
+            legend cell align = left},
+		]
+        \addplot[thick,black,mark=square,mark repeat=4,smooth]
+    		table [y=y1]{./5_hscc_led_driver/vled_out/vled_eff_ploss_2.77MHz.dat};
+        
+        \addplot[thick,black,mark=o,mark repeat=4,smooth]
+    		table [y=y1]{./5_hscc_led_driver/vled_out/vled_eff_ploss_2MHz.dat};
+    
+        \addplot[thick,black,mark=triangle,mark repeat=4,smooth]
+    		table [y=y1]{./5_hscc_led_driver/vled_out/vled_eff_ploss_1MHz.dat};
+    
+        \addplot[thick,black,mark=star,mark repeat=4,smooth]
+    		table [y=y1]{./5_hscc_led_driver/vled_out/vled_eff_ploss_500kHz.dat};       
+        
+        \legend{$f_{sw}=2.77MHz$,$f_{sw}=2MHz$,$f_{sw}=1MHz$,$f_{sw}=500kHz$};
+	\end{axis}
+
+    \begin{axis}[yshift={-(\pHeigh+0.5cm)},
+		axis y line*=left,
+		axis x line*=bottom,
+        yticklabel style={text width=1.0em,align=right},
+        ylabel = {$P_{loss}~ [W]$},
+        xlabel = {load current $[mA]$},
+        ylabel style = {font=\footnotesize},
+        xlabel style = {font=\footnotesize},
+		legend style = {
+    		font   = \footnotesize,
+            anchor = south,
+            at = {(0.5,1)},
+            draw= none,
+            legend columns = 2,
+            column sep = 1ex,
+            legend cell align = left},
+		]
+        \addplot[thick,black,mark=square,mark repeat=4,smooth]
+    		table [y=y2]{./5_hscc_led_driver/vled_out/vled_eff_ploss_2.77MHz.dat};
+
+        \addplot[thick,black,mark=o,mark repeat=4,smooth]
+    		table [y=y2]{./5_hscc_led_driver/vled_out/vled_eff_ploss_2MHz.dat};
+
+        \addplot[thick,black,mark=triangle,mark repeat=4,smooth]
+    		table [y=y2]{./5_hscc_led_driver/vled_out/vled_eff_ploss_1MHz.dat};
+
+        \addplot[thick,black,mark=star,mark repeat=4,smooth]
+    		table [y=y2]{./5_hscc_led_driver/vled_out/vled_eff_ploss_500kHz.dat};
+
+        %\legend{$f_{sw}=2.77MHz$,$f_{sw}=2MHz$,$f_{sw}=1MHz$,$f_{sw}=500kHz$};
+	\end{axis}
+\end{tikzpicture}

@@ -1,7 +1,6 @@
 \chapter{H-SCC LED driver}
 \label{ch:hscc_led_driver}
 
-
 \begin{figure}[!h]
 \centering
 \input{./5_hscc_led_driver/block_diagram.tex}
@@ -36,12 +35,10 @@ An experimental converter was built with the goal to validate the performances o
 
 The driver was designed to be compliment the 24Vdc e-Merge Alliance standard used in track lighting systems, and featured two outputs. The main output supplies a \emph{LUXENON Altion} LED with a maximum current of 1A with a forward voltage around 12V, thus providing 12W at full load. The secondary output is designed for low-voltage and low-power to supply other auxiliary electronic circuits. The converter efficiency was fixed to be higher than 85\%, and for sake of simplicity, the switching frequency was fixed to be 2.77MHz, taking advantage of a 3dB higher tolerance of the conduced EMI standard X.
 
-\section{Design procedure}
+\section{Design}
 The LED driver is composed by two main subsystems, the power train and the close-controller. Therefore the design process is accordingly  divided in three main parts: Power train design, small-signal analysis and close-loop controller design.
 
-
-
-\section{Model based design: Power train}
+\section{Model-centric design}
 \begin{figure}[!h]
 \ctikzset { bipoles/length=1cm}
 \centering
@@ -240,8 +237,8 @@ The inductor was designed for an small ripple of  $\Delta _i \pm10\%$. That allo
 \end{equation}
 Considering the tolerances the mounted component was the \emph{CVH252009} from \emph{BOURNS} featuring $l_o=2.2\mu H$ in a 1008 SMD case.
 
-\section{Close-loop design}
-The converter required to a close-loop control to properly bias the LED load.  Therefore a second board was build for that purpose, implementing an error amplifier, a close-loop controller, a ramp generator and a dual PWM with dead-band generator. Commercial ICs were not suitable for our application due to its high switching frequency, 2.77MHz.
+\section{Close-loop control design}
+The converter requires a close-loop control to properly operate the LED load.  Therefore a second board was build for that purpose, implementing an error amplifier, a close-loop controller, a ramp generator and a dual PWM with dead-band generator. Commercial ICs were not suitable for our application due to its high switching frequency, 2.77MHz.
 \begin{figure}[!h]
     \centering
     \input{./5_hscc_led_driver/close_loop_hscc.tex}
@@ -253,7 +250,7 @@ Owing to the fact that the H-SCC has an output inductor, the close-loop control 
 
 \subsection{Small signal analysis}
 
-The small signal analysis of a H-SCC is practically the same of a buck converter. Figure~\ref{fig:small_signal_hscc} shows the equivalent circuit of a H-SCC used for the small signal analysis, the SCC stage is modeled with the voltage source controlled by the duty cycle in series with the equivalent output resistance $r_{scc}$. The output filter, composed by inductor $l_o$ and the capacitor $c_o$, is connected to the output of the SCC stage and afterwards the load $r_o$. For sake of simplicity, the equivalent series resistance of $l_o$ and $c_o$ are not included.   
+The small signal analysis of a H-SCC is practically the same of a buck converter. Figure~\ref{fig:small_signal_hscc} shows the equivalent circuit of a H-SCC used for the small signal analysis, the SCC stage is modeled with the voltage source controlled by the duty cycle in series with the equivalent output resistance $r_{scc}$. The output filter, composed by inductor $l_o$ and the capacitor $c_o$, is connected to the output of the SCC stage and afterwards the load $r_o$. For sake of simplicity, the equivalent series resistance of $l_o$ and $c_o$ are not included.
 \begin{figure}[!h]
     \centering
     \input{./5_hscc_led_driver/hscc_small_signal_circuit.tex}
@@ -266,79 +263,234 @@ Compared to the analysis of a buck converter, the SCC stage adds the $r_{scc}$ a
  m_{x}  = m_{off} + m_{\Delta}D.
 \label{eq:m_ratio}
 \end{equation}
-For the case under study the conversion ratio at the third node is 
+For the case under study the conversion ratio at the third node is
 \begin{equation}
  m_{3}  = \frac{2}{5} + \frac{D}{5}.
 \label{eq:m3_ratio}
 \end{equation}
 thus $m_{offset} = \frac{2}{5}$ and $m_{\Delta}=\frac{1}{5}$.
- 
-Using~\eqref{eq:m_ratio} can be written the equations for the two state variables, inductor current and capacitor voltage, resulting in 
+
+Using~\eqref{eq:m_ratio} can be written the equations for the two state variables, inductor current and capacitor voltage, resulting in
 \begin{align}
  l_o \frac{i_l}{dt} = &  v_{src} (m_{off} + m_{\Delta} D ) - i_l r_{scc} - v_o \label{eq:il}\\
  c_o \frac{v_c}{dt} = &  i_l - i_o.
  \label{eq:vc}
 \end{align}
 
-Applying the small signal analysis into~\eqref{eq:il} and~\eqref{eq:vc}, we can obtain the different transfer functions of the converter.    
+Applying the small signal analysis into~\eqref{eq:il} and~\eqref{eq:vc}, we can obtain the different transfer functions of the converter.
 \begin{align}
  G_{id}(s) =  \frac{\widehat{i_l}}{\widehat{d}} = &
- \frac{v_{src} m_{\Delta}}{r_o} \frac{s c_o r_o + 1  }
+ \frac{m_{\Delta} v_{src}}{r_o} \frac{s c_o r_o + 1  }
  { s^2 l_o c_o  + s \left ( \frac{l_o}{r_o}  + c_o r_{scc}  \right )  +  \frac{r_{scc}}{r_o} + 1 } \label{eq:g_id}\\
  G_{vd}(s) =  \frac{\widehat{v_o}}{\widehat{d}} = &
- v_{src} m_{\Delta} \frac{ 1  }
+ m_{\Delta} v_{src} \frac{ 1  }
  { s^2 l_o c_o  + s \left ( \frac{l_o}{r_o}  + c_o r_{scc}  \right )  +  \frac{r_{scc}}{r_o} + 1 } \label{eq:g_id}\\
  G_{od}(s) =  \frac{\widehat{i_o}}{\widehat{d}} = &
- \frac{v_{src} m_{\Delta}}{r_o} \frac{1  }
+ \frac{ m_{\Delta}v_{src}}{r_o} \frac{1  }
  { s^2 l_o c_o  + s \left ( \frac{l_o}{r_o}  + c_o r_{scc}  \right )  +  \frac{r_{scc}}{r_o} + 1 } \label{eq:g_od}
 \end{align}
 
-Notice that the resulting transfer functions are practically the same of a buck converter, with the exception of two new parameters the output hesitance of the SCC stage ($r_{scc}$), and the gain added by $m_\Delta$. In a Dickson and Ladder converter $m_\Delta$ is equal to the intrinsic conversion ration $m_i$ fixed by the topology. 
+Notice that the resulting transfer functions are practically the same of a buck converter, with the exception of two new parameters the output resistance of the SCC stage ($r_{scc}$), and the gain added by $m_\Delta$. In a Dickson and Ladder converter $m_\Delta$ is equal to the intrinsic conversion ration $m_i$ fixed by the topology.
 
 \subsection{Close-loop controller}
+\begin{figure}[!h]
+    \newcommand\pHeigh{3cm}
+    \newcommand\pWidth{8cm}
+    \centering
+    \input{./5_hscc_led_driver/ol_bode_mag.tex}
+    \caption[]{Bode plot of the open-loop ($G_{od}G_{pwm}G_s$) system without compensation.}
+    \label{fig:ol_bode}
+\end{figure}
+Figure~\ref{fig:ol_bode} plots the uncompensated gain-loop $G_{ov}G_s G_{pwm}$ of the system. The system is stable without a compensation network, the system has a strong rejection of the high frequency noise with an attenuation the switching frequency, $124dB$ at $2.77MHz$. However the poor gain of $4.5dB$ at low frequencies is not enough to guaranty a small error between the output current and the set point and high rejection to the line variations.
 
+\begin{figure}[!h]
+    \newcommand\pHeigh{3cm}
+    \newcommand\pWidth{8cm}
+    \centering
+    \input{./5_hscc_led_driver/ol_cm_bode_mag.tex}
+    \caption[]{Bode plot of the compensated open-loop ($G_{c}G_{od}G_{pwm}G_s$) system.}
+    \label{fig:ol_cm_bode}
+\end{figure}
 
+The robustness of the system is improved compensating the system with an integrator ($G_c(s) = \frac{5000}{s}$), improving the gain at low frequencies and further attenuating the high frequency noise. The compensated gain-loop plotted in Figure~\ref{fig:ol_cm_bode} has a phase margin of $Pm = 75dB$ and cut-off frequency $f_{c} =1.31kHz$, resulting in a fast and smooth close-loop response of the converter.
 
-\section{Power train circuits}
-\subsection{Full schematic}
-%\begin{figure}[!h]
-%\centering
-%\input{./5_hscc_led_driver/power_train_sch.tex}
-%\caption[Power train schematic]{5:1 H$^2$-Dickson power train schematic.}
-%\label{fig:pwr_train_sch}
-%\end{figure}
+\section{Results}
+The converter was tested under two different scenarios. First the power train was tested operating the converter in open-loop, and loading it with an electronic load in resistive mode. Second the full system was tested operating the converter in close-loop, and loading it with the LED load. In the fist scenario, the efficiency and the output resistance of the converter was measured. The measured results where compared with Spcie circuit simulations.  In the second scenario, the efficiency was measured again but in this case with the electronic load. The close-loop control was also validated.
 
-%\begin{landscape}
-%\thispagestyle{empty}
-
-%\end{landscape}
-
-%\subsection{Gate driver}
-%\begin{figure}[!h]
-%\centering
-%\input{./5_hscc_led_driver/gate_driver_sch.tex}
-%\caption[Power train schematic]{5:1 H$^2$-Dickson power train schematic.}
-%\label{fig:pwr_train_sch}
-%\end{figure}
-
-\subsection{Start-up helper circuit}
+\subsection{Experimental setup configuration}
 \begin{figure}[!h]
 \centering
-\input{./5_hscc_led_driver/start_up_sch.tex}
-\caption[Start-up helper schematic]{Start-up helper circuit schematic.}
-\label{fig:pwr_train_sch}
+\ctikzset { bipoles/length=1cm}
+\begin{circuitikz}[american,scale=0.65]
+\draw [yshift=-1.5cm]
+    (2.5,0) to[short]
+    (-1.5,0) to[V = $v_{src}$] %(-1.5,3) -- (2.5,3)
+    (-1.5,3) to[ammeter,l=$i_{in}$]  (1,3) -- (2.5,3)
+    (1,3) to[voltmeter,l_=$v_{in}$] (1,0);
+
+
+\draw [thick]
+    (2.5,-3.5) --
+    (2.5,3.5)  --
+    (5.5,3.5)  --
+    (5.5,-3.5) --
+    (2.5,-3.5);
+
+\draw (4,0) node[align=center]{5:1 SCC \\ U.T.} ;
+
+
+\draw [yshift=0.5cm]
+    (5.5,2.5) --
+    (7,2.5) to[cute inductor,l=$l_o$]
+    (9.5,2.5) -- (11.5,2.5) to[ammeter,l_=$i_{2}$]  (14,2.5) to[I,l = Load $v_{LED}$]
+    (14,0) -- (5.5,0)
+    (7,2.5) to[voltmeter,l_=$v_{x}$] (7,0)
+    (9.5,2.5) to[C,l_=$c_o$] (9.5,0)
+    (11.5,2.5) to[voltmeter,l_=$v_{2}$] (11.5,0);
+
+
+
+\draw[yshift=-3.5cm]
+    (5.5,2.5) --
+    (7,2.5) to[ammeter,l_=$i_{1}$]
+     (10.5,2.5) to[I,l = Load $v_{aux}$]
+    (10.5,0.5) -- (5.5,0.5)
+    (7,2.5) to[voltmeter,l_=$v_{1}$] (7,0.5);
+
+
+\end{circuitikz}
+\caption{Experimental arrangement for measuring the H-SCC LED Driver.}
+\label{fig:exp_setup}
+\end{figure}
+
+Figure~\ref{fig:exp_setup} shows the experimental setup used to measure the power converter. Voltages were measured with four different Keithley\textsuperscript{\textregistered} \emph{Meter 2000}, and the currents with three different Keithley\textsuperscript{\textregistered} \emph{SourceMeter 2440}.
+
+
+The efficiency of the LED output is given by
+\begin{equation}
+ \eta = \frac{P_{LED}}{P_{in}}= 100 \frac{v_2 i_2}{v_{in} i_{in}},
+\end{equation}
+and the efficiency of the auxiliary output is given by
+\begin{equation}
+ \eta = \frac{P_{aux}}{P_{in}}= 100 \frac{v_1 i_1}{v_{in} i_{in}}.
+\end{equation}
+
+The equivalent output resistance $r_{scc}$ was determined for different switching frequencies. At each frequency, the output load was swept from no load to full load, and  $r_{scc}$ was obtained as a result of a curve fitting. Two different fitting functions were used to validate the obtained results. One fitting function is based on the measured power losses $P_{loss} = P_{in} - P_{out}$, defined by the following function
+\begin{equation}
+ P_{loss}(i_{out}) = r_{rscc} i_{out}^2 + P_{sw}.
+\end{equation}
+%where the power losses are assumed to have two terms. The fix term are the switching losses $P_{sw}$, which are assumed to be independent of the output current $i_{out}$. The conduction losses are proportional to the $r_{scc}$ with respect to the square of $i_{out}$.
+The other fitting function, is based on the measured output voltage of a SCC, defined by the following function
+\begin{equation}
+ v_{out}(i_{out}) = v_{trg} -  r_{rscc} i_{out}.
+\end{equation}
+%where, as in the previous case, the output voltage is described by two terms. The fix terms is the target voltage  $v_{trg}$
+The $r_{scc}$ of the LED output was determined using the measurements from the voltmeter connected to the  switching node $v_x$ instead of  the voltmeter connected to the output  $v_2$, in this way the measured $r_{scc}$ does not include the series resistance of the output inductor $l_o$.
+
+\subsection{Open-loop measurements}
+The open-loop measurements were done connecting the converter to an electronic load in resistive mode and operating the converter at $2.77MHz$ switching frequency with a $50\%$ duty cycle. The measurements were done independently for each individual output, always loading only one of the outputs of the converter. Nevertheless by combining the measured results for each individual output, the total efficiency at full load, $i_{LED}=1A$ and $i_{aux}=400mA$, was predicted to be $87\%$, being this result above the specified $85\%$ minimum efficiency defined in the requirements.
+
+
+\subsubsection{Measurements and results of the LED output}
+The full load efficiency, $i_{LED}=1A$, is $88.8\%$, and the peak efficiency is $91.1\%$ at $i_{LED}=641mA$, as shown in the plot of Figure~\ref{fig:eff_vled}.
+
+\begin{figure}[!h]
+    \newcommand\pHeigh{4.5cm}
+    \newcommand\pWidth{8cm}
+    \centering
+    \input{./5_hscc_led_driver/v_led_eff.tex}
+    \caption[]{Efficiency versus a sweep in the output current at $2.77MHz$.}
+    \label{fig:eff_vled}
+\end{figure}
+Figure~\ref{fig:eff_vled_param} presents the measured efficiency (\emph{top}) and power losses (\emph{bottom}) for a sweep of the output current and parameterized for different switching frequencies. It can be seen that for the high current range ($1A-550mA$), the best efficiencies are obtained operating the converter at high frequency, being indeed the curve corresponding to $f_{sw}=2.77MHz$ the one that achieves the best results. Around $i_{LED}=550mA$, the curve operating with $f_{sw}=2MHz$ achieves the best efficiency, above the $90\%$ for the range between $550-300mA$. Operating with $f_{sw}=1MHz$ achieves the best efficiency for the current range below $100mA$. Hence Figure~\ref{fig:eff_vled_param} presents the measured efficiency (\emph{top}) and power losses (\emph{bottom}) for a sweep of the output current and parameterized for different switching frequencies,  the efficiency is improved by reducing the operating switching frequency.
+
+This tendency is caused by the fact that the two source of losses, switching and conduction losses have opposite trends with the frequency. On the one hand, the switching losses increase with the frequency, since they are given by
+\begin{equation}
+    P_{sw} = v^2 c_{out} f_{sw}
+\end{equation}
+where $v$ is the blocking voltage at the switch and $c_{out}$ is the output switch capacitance. On the other hand, the conduction losses of a SCC decrease with the switching frequency, since they are totally produced by the $r_{scc}$. As it was already described the $r_{scc}$ is inversely proportional to the switching frequency for the SSL region, where these measurements were taken.
+
+\begin{figure}[!h]
+    \newcommand\pHeigh{4.5cm}
+    \newcommand\pWidth{8cm}
+    \centering
+    \input{./5_hscc_led_driver/v_led_eff_param.tex}
+    \caption[]{Efficiency (\emph{top}) and losses (\emph{bottom}) versus a sweep in the output current parameterized for different switching frequencies.}
+    \label{fig:eff_vled_param}
+\end{figure}
+
+\begin{figure}[!h]
+    \newcommand\pHeigh{4.5cm}
+    \newcommand\pWidth{8cm}
+    \centering
+    \input{./5_hscc_led_driver/r_scc_vled.tex}
+    \caption[]{Comparison between the measured $r_{scc}$ and the predicted between the model.}
+    \label{fig:rscc_vled}
 \end{figure}
 
 
-\subsection{Sensing and signal conditioning}
+%%%%%%%%%%%%%%%% Vaux %%%%%%%%%%%%%
 
-\section{Close-loop controller circuits}
-\subsection{Full schematic}
-\subsection{Triangle wave generator}
-\subsection{Error amplifier}
+\begin{figure}[!h]
+    \newcommand\pHeigh{4.5cm}
+    \newcommand\pWidth{8cm}
+    \centering
+    \input{./5_hscc_led_driver/v_aux_eff.tex}
+    \caption[]{Efficiency versus a sweep in the output current at $2.77MHz$.}
+    \label{fig:eff_vled}
+\end{figure}
+
+\begin{figure}[!h]
+    \newcommand\pHeigh{4.5cm}
+    \newcommand\pWidth{8cm}
+    \centering
+    \input{./5_hscc_led_driver/r_scc_vaux.tex}
+    \caption[]{Comparison between the measured $r_{scc}$ and the predicted between the model.}
+    \label{fig:rscc_vled}
+\end{figure}
 
 
+%\section{Power train circuits}
+%\subsection{Full schematic}
+%%\begin{figure}[!h]
+%%\centering
+%%\input{./5_hscc_led_driver/power_train_sch.tex}
+%%\caption[Power train schematic]{5:1 H$^2$-Dickson power train schematic.}
+%%\label{fig:pwr_train_sch}
+%%\end{figure}
+%
+%%\begin{landscape}
+%%\thispagestyle{empty}
+%
+%%\end{landscape}
+%
+%%\subsection{Gate driver}
+%%\begin{figure}[!h]
+%%\centering
+%%\input{./5_hscc_led_driver/gate_driver_sch.tex}
+%%\caption[Power train schematic]{5:1 H$^2$-Dickson power train schematic.}
+%%\label{fig:pwr_train_sch}
+%%\end{figure}
+%
+%\subsection{Start-up helper circuit}
+%\begin{figure}[!h]
+%\centering
+%\input{./5_hscc_led_driver/start_up_sch.tex}
+%\caption[Start-up helper schematic]{Start-up helper circuit schematic.}
+%\label{fig:pwr_train_sch}
+%\end{figure}
+%
+%
+%\subsection{Sensing and signal conditioning}
+%
+%\section{Close-loop controller circuits}
+%\subsection{Full schematic}
+%\subsection{Triangle wave generator}
+%\subsection{Error amplifier}
+%
 
+
+\clearpage
 \bibliographystyle{plainnat}
 \bibliography{references}
 

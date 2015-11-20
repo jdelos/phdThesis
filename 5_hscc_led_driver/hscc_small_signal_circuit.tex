@@ -1,16 +1,13 @@
 \ctikzset { bipoles/length=1cm}
 \centering
 \begin{circuitikz}[american,scale=0.6]
- 
-    \draw 
-          (-1,1)   to[V,l=$v_{src} m_{x}(D)$] 
-          (-1,4) to[short,,i=$i_l$](1,4)   to[R,l=$r_{scc}$] 
-          (3,4) to[cute inductor,l=$l_o$,v=$v_l$] 
+
+    \draw
+          (-1,1)   to[V,l=$v_{src} m_{x}(D)$]
+          (-1,4) to[short,,i=$i_l$](1,4)   to[R,l=$r_{scc}$]
+          (3,4) to[cute inductor,l=$l_o$,v=$v_l$]
           (6,4) to[C,l_=$c_o$,v^=$v_c$] (6,1)
-          (6,4) to[short,i=$i_o$] (8,4) to[R,l=$r_o$] 
+          (6,4) to[short,i=$i_o$] (8,4) to[R,l=$r_o$]
           (8,1) -- (-1,1);
-           
-          
-          
+
 \end{circuitikz}
-    

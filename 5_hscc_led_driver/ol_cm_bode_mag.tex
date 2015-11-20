@@ -1,0 +1,68 @@
+\begin{tikzpicture}
+    \pgfplotsset{
+        width=\pWidth,
+        height=\pHeigh,
+        scale only axis,
+        xlabel near ticks,
+        ylabel near ticks,
+        scaled y ticks= true ,
+        enlarge x limits={0},
+        enlarge y limits={0.1},
+        %xticklabels={,,},
+        every tick label/.append style={font=\footnotesize},
+        }
+
+	\begin{semilogxaxis}[
+		axis y line*=left,
+		axis x line*=bottom,
+		yticklabel style={text width=2.0em,align=right},
+        ylabel = {magnitude $[dB]$},
+        ylabel style = {font=\footnotesize},
+        title = {$Gm =22.3dB$ (at $9.6kHz$), $Pm =75.1^\circ$ (at $1.31kHz$)},
+        title style = {
+    			font=\footnotesize,
+    			at ={(0.5,0.9)}},
+        xticklabels={,,},
+		]
+
+		\addplot[thick,black,smooth]
+    		table [y=y1]{./5_hscc_led_driver/CloseLoop.dat};
+
+        \addplot[semithick,dotted,mark=none, black]
+            coordinates { (1e2,0) (1e7,0)};
+
+        \addplot[semithick,dotted,black] coordinates {(1.31e3,0)(1.31e3,-239) };
+        \addplot[semithick,dotted,black] coordinates {(9.62e3,-22.3)(9.62e3,-239) };
+        \addplot[thin,black] coordinates {(9.62e3,-22.3)(9.62e3,0) };
+
+	\end{semilogxaxis}
+    \begin{semilogxaxis}[
+        yshift={-(\pHeigh+0.25cm)},
+        axis y line*=left,
+		axis x line*=bottom,
+        ytick = {-90,-180,-270,-360},
+		yticklabel style={text width=2.0em,align=right},
+        ylabel = {phase $[deg]$},
+        xlabel = {Frequency $[Hz]$},
+        ylabel style = {font=\footnotesize},
+        xlabel style = {font=\footnotesize},
+        %title = {$Gm =22.3dB$ (at $9.6kHz$), $Pm =75.1^\circ$ (at $1.31kHz$)},
+        title style = {
+    			font=\footnotesize,
+    			at ={(0.5,0.9)}},
+		]
+
+		\addplot[thick,black,smooth]
+    		table [y=y2]{./5_hscc_led_driver/CloseLoop.dat};
+        \addplot[semithick,dotted,mark=none, black]
+            coordinates { (1e2,-180) (1e7,-180)};
+
+        \addplot[thin,black] coordinates {(1.31e3,-180)(1.31e3,-104.9)};
+        \addplot[semithick,dotted,black] coordinates {(1.31e3,-104.9)(1.31e3,-90) };
+
+        \addplot[semithick,dotted,black] coordinates {(9.62e3,-180)(9.62e3,-90) };
+
+
+	\end{semilogxaxis}
+
+\end{tikzpicture}

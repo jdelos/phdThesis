@@ -14,8 +14,8 @@
 \node (error) [sum,right of =sp, xshift=-0.5cm] {};
 \node (comp) [block, right of = error, xshift=-0.5cm] {$G_c(s)$};
 \node (pwm) [block, right of = comp] {$G_{pwm}$ };
-\node (H-SCC) [block,right of = pwm] { $G_p (s)$};
-\node (sens) [block,below of = pwm,yshift=+0.75cm] {$H_s(s)$};
+\node (H-SCC) [block,right of = pwm] { $G_od (s)$};
+\node (sens) [block,below of = pwm,yshift=+0.75cm] {$G_s(s)$};
 \node (out) [right of = H-SCC] {$i_{out}$};
 
 \draw [arrow] (sp) -- (error)node[font=\tiny,xshift=-0.25cm]{\textbf{+}};
